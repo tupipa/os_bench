@@ -4,7 +4,7 @@
 
 #define ARCH_MIPS
 
-int test_priv_x86(){
+unsigned long test_priv_x86(){
 
  unsigned long cr3;
  __asm__ volatile(
@@ -15,11 +15,18 @@ int test_priv_x86(){
 
  printf ("%s: cr3 = %lx", __FUNCTION__, cr3);
 
+ return cr3;
+
 }
 
-int test_priv_mips(){
+unsigned long test_priv_mips(){
+
+ unsigned long cr3;
 
  printf("%s:todo\n", __FUNCTION__);
+
+ return cr3;
+
 }
 
 int main () {
