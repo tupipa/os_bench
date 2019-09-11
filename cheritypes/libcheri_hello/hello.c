@@ -22,6 +22,32 @@ static void *__capability sandbox_creturn_sealcap;
 static void *__capability sandbox_creturn_codecap;
 static void *__capability sandbox_creturn_datacap;
 
+struct sandbox_data{
+  int data;
+  char name[20];
+};
+
+struct sandbox_data shared;
+struct sandbox_data privateA;
+struct sandbox_data privateB;
+
+struct sandbox_data *sharedp;
+struct sandbox_data *privateAp;
+struct sandbox_data *privateBp;
+
+void sandboxA_print(){
+  printf("printing in sandbox A\n");
+  printf("shared data: %d\n", sharedp->data);
+  printf("A private data: %d\n", privateAp->data); 
+  printf("B private data: %d\n", privateBp->data);
+}
+
+void sandboxB_print(){
+  printf("printing in sandbox A\n");
+  printf("shared data: %d\n", sharedp->data);
+  printf("A private data: %d\n", privateAp->data); 
+  printf("B private data: %d\n", privateBp->data);
+}
 
 static void * __capability
 codecap_create(void (*sandbox_base)(void), void *sandbox_end)
@@ -123,6 +149,9 @@ test_nofault_ccall_creturn(const struct cheri_test *ctp __unused)
 int main(void){
 
  printf("hello world\n");
+
+ printf("cheritest setup\n");
+ cheritest_ccall_setup();
 
  printf("now start testing...\n");
 
