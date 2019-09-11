@@ -31,7 +31,7 @@ void
 cheritest_success(void)
 {
 
-	PRINT_BUFFER_IM;
+	printf("cheritest_success: congratulations!\n");
 	//ccsp->ccs_testresult = TESTRESULT_SUCCESS;
 	exit(0);
 }

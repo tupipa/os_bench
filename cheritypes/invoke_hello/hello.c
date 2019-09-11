@@ -13,14 +13,10 @@
 
 #include <machine/sysarch.h>
 
-/* LLM: variable definition for debugging */
-TRACK_HELLO_VAR_DEFINITION
-
 extern void	sandbox_creturn(void);
 extern void	sandbox_creturn_end;
-//extern void __attribute__ ((cheri_ccall)) sandbox_invoke(void * __capability c1, void* __capability c2);
-
-extern void sandbox_invoke(void * __capability c1, void* __capability c2);
+extern void __attribute__ ((cheri_ccall)) sandbox_invoke(void * __capability c1, void* __capability c2);
+//extern void sandbox_invoke(void * __capability c1, void* __capability c2);
 
 
 static void * __capability libcheri_sealing_root;
@@ -35,7 +31,7 @@ static void *__capability sandbox_A_datacap;
 
 struct sandbox_data{
   int data __attribute__ ((aligned(16)));
-  char name[20] __attribute__ ((aligned(16)));
+  char name[32] __attribute__ ((aligned(16)));
 };
 
 struct sandbox_data shared;
@@ -46,9 +42,9 @@ struct sandbox_data *sharedp;
 struct sandbox_data *privateAp;
 struct sandbox_data *privateBp;
 
-void sandboxA_print(){
-  char a[16] __attribute__((aligned(16))) = "hello from sandbox A";
-  printf(a);
+void __attribute__((cheri_ccallee)) sandboxA_print(){
+  char a[32] __attribute__((aligned(16))) = "hello from sandbox A";
+  printf("%s\n", a);
   //printf(("printing in sandbox A\n")__attribute__((aligned(16))));
   //printf("HELLO A A A A A A A A \nA \nA \nA \nA \nA \n");
   //printf("shared data: %d\n", sharedp->data);
@@ -84,7 +80,7 @@ codecap_create(void (*sandbox_base)(void), void *sandbox_end)
 		CHERI_PERM_CCALL | CHERI_PERM_SYSCALL);
 #endif
 
-        printf("code cap created.\n");
+        printf("\tcode cap created.\n");
 
 	return (codecap);
 }
@@ -111,7 +107,8 @@ datacap_create(void *sandbox_base, void *sandbox_end)
 	    CHERI_PERM_STORE_LOCAL_CAP | CHERI_PERM_CCALL | CHERI_PERM_SYSCALL);
 #endif
 
-        printf("data cap created\n");
+
+        printf("\tdata cap created\n");
 
 	return (datacap);
 }
@@ -128,12 +125,12 @@ cheritest_ccall_setup(void)
 	/*
 	 * Create sealing, sealed code, and sealed data capabilities for each
 	 * of the three classes used in these tests.
-	 */
 	sandbox_creturn_sealcap = libcheri_type_alloc();
 	sandbox_creturn_codecap = cheri_seal(codecap_create(&sandbox_creturn,
 	    &sandbox_creturn_end), sandbox_creturn_sealcap);
 	sandbox_creturn_datacap = cheri_seal(datacap_create(&sandbox_creturn,
 	    &sandbox_creturn_end), sandbox_creturn_sealcap);
+	 */
 
   /** sandbox A **/
 	//sandbox_A_sealcap = libcheri_type_alloc();
@@ -157,20 +154,6 @@ cheritest_ccall_setup(void)
 
 	printf("done.");
 }
-
-
-
-/*
- * Trigger a CReturn underflow by trying to return from an unsandboxed
- * context.
- */
-void
-test_fault_creturn(const struct cheri_test *ctp __unused)
-{
-
-	__asm__ __volatile__("creturn" : : : "memory");
-}
-
 
 
 /*
