@@ -233,7 +233,7 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	clcbi	$c4, %captab20(.L__FUNCTION__.cheritest_ccall_setup)($c1)
 	cmove	$c5, $c11
 	csc	$c4, $zero, 0($c5)
-	daddiu	$1, $zero, 99
+	daddiu	$1, $zero, 101
 	csd	$1, $zero, 32($c5)
 	clcbi	$c4, %captab20(.L.str.5)($c1)
 	csc	$c4, $zero, 16($c5)
@@ -279,7 +279,7 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	clcbi	$c2, %captab20(.L__FUNCTION__.cheritest_ccall_setup)($c1)
 	cmove	$c4, $c11
 	csc	$c2, $zero, 0($c4)
-	daddiu	$2, $zero, 99
+	daddiu	$2, $zero, 101
 	csd	$2, $zero, 32($c4)
 	clcbi	$c2, %captab20(.L.str.5)($c1)
 	csc	$c2, $zero, 16($c4)
@@ -326,7 +326,7 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	clcbi	$c2, %captab20(.L__FUNCTION__.cheritest_ccall_setup)($c1)
 	cmove	$c3, $c11
 	csc	$c2, $zero, 0($c3)
-	daddiu	$1, $zero, 99
+	daddiu	$1, $zero, 101
 	csd	$1, $zero, 32($c3)
 	clcbi	$c4, %captab20(.L.str.5)($c1)
 	csc	$c4, $zero, 16($c3)
@@ -468,7 +468,7 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	clcbi	$c4, %captab20(.L__FUNCTION__.cheritest_ccall_setup)($c1)
 	cmove	$c5, $c11
 	csc	$c4, $zero, 0($c5)
-	daddiu	$1, $zero, 113
+	daddiu	$1, $zero, 115
 	csd	$1, $zero, 32($c5)
 	clcbi	$c4, %captab20(.L.str.5)($c1)
 	csc	$c4, $zero, 16($c5)
@@ -514,7 +514,7 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	clcbi	$c2, %captab20(.L__FUNCTION__.cheritest_ccall_setup)($c1)
 	cmove	$c4, $c11
 	csc	$c2, $zero, 0($c4)
-	daddiu	$2, $zero, 113
+	daddiu	$2, $zero, 115
 	csd	$2, $zero, 32($c4)
 	clcbi	$c2, %captab20(.L.str.5)($c1)
 	csc	$c2, $zero, 16($c4)
@@ -561,7 +561,7 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	clcbi	$c2, %captab20(.L__FUNCTION__.cheritest_ccall_setup)($c1)
 	cmove	$c3, $c11
 	csc	$c2, $zero, 0($c3)
-	daddiu	$1, $zero, 113
+	daddiu	$1, $zero, 115
 	csd	$1, $zero, 32($c3)
 	clcbi	$c4, %captab20(.L.str.5)($c1)
 	csc	$c4, $zero, 16($c3)
@@ -772,24 +772,25 @@ test_fault_creturn:                     # @test_fault_creturn
 	.set	nomips16
 	.ent	test_nofault_ccall_creturn
 test_nofault_ccall_creturn:             # @test_nofault_ccall_creturn
-	.frame	$c24,80,$c17
+	.frame	$c24,96,$c17
 	.mask 	0x00000000,0
 	.fmask	0x00000000,0
 	.set	noreorder
 	.set	nomacro
 	.set	noat
 # %bb.0:                                # %entry
-	cincoffset	$c11, $c11, -80
-	csc	$c24, $zero, 64($c11)   # 16-byte Folded Spill
-	csc	$c17, $zero, 48($c11)   # 16-byte Folded Spill
+	cincoffset	$c11, $c11, -96
+	csc	$c24, $zero, 80($c11)   # 16-byte Folded Spill
+	csc	$c17, $zero, 64($c11)   # 16-byte Folded Spill
 	cincoffset	$c24, $c11, $zero
 	lui	$1, %hi(%neg(%captab_rel(test_nofault_ccall_creturn)))
 	daddiu	$1, $1, %lo(%neg(%captab_rel(test_nofault_ccall_creturn)))
 	cincoffset	$c26, $c12, $1
 	cmove	$c1, $c26
-	cincoffset	$c2, $c24, 32
+	cincoffset	$c2, $c24, 48
 	csetbounds	$c2, $c2, 16
-	csetbounds	$c4, $c24, 32
+	cincoffset	$c4, $c24, 16
+	csetbounds	$c4, $c4, 32
 	csc	$c3, $zero, 0($c2)
 	clcbi	$c2, %captab20(sandbox_creturn_codecap)($c1)
 	clc	$c2, $zero, 0($c2)
@@ -797,6 +798,33 @@ test_nofault_ccall_creturn:             # @test_nofault_ccall_creturn
 	clcbi	$c2, %captab20(sandbox_creturn_datacap)($c1)
 	clc	$c2, $zero, 0($c2)
 	csc	$c2, $zero, 16($c4)
+	clc	$c2, $zero, 0($c4)
+	clc	$c3, $zero, 16($c4)
+	clcbi	$c12, %capcall20(sandbox_invoke)($c1)
+	daddiu	$1, $zero, 0
+	csc	$c1, $zero, 0($c24)     # 16-byte Folded Spill
+	cmove	$c1, $c2
+	cmove	$c2, $c3
+	cgetnull	$c3
+	cgetnull	$c13
+	cgetnull	$c4
+	cgetnull	$c5
+	cgetnull	$c6
+	cgetnull	$c7
+	cgetnull	$c8
+	cgetnull	$c9
+	cgetnull	$c10
+	move	$4, $1
+	move	$5, $1
+	move	$6, $1
+	move	$7, $1
+	move	$8, $1
+	move	$9, $1
+	move	$10, $1
+	move	$11, $1
+	cjalr	$c12, $c17
+	nop
+	clc	$c1, $zero, 0($c24)     # 16-byte Folded Reload
 	clcbi	$c12, %capcall20(cheritest_success)($c1)
 	cgetnull	$c13
 	cjalr	$c12, $c17
@@ -1062,6 +1090,7 @@ track_name:
 	.addrsig_sym datacap_create
 	.addrsig_sym test_fault_creturn
 	.addrsig_sym test_nofault_ccall_creturn
+	.addrsig_sym sandbox_invoke
 	.addrsig_sym cheritest_success
 	.addrsig_sym print_size_tmp
 	.addrsig_sym printed_total
