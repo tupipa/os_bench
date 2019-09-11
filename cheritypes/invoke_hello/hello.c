@@ -17,7 +17,7 @@ TRACK_HELLO_VAR_DEFINITION
 
 extern void	sandbox_creturn(void);
 extern void	sandbox_creturn_end;
-void __attribute__ ((cheri_ccall)) sandbox_invoke(struct cheri_object co, void* c2);
+extern void __attribute__ ((cheri_ccall)) sandbox_invoke(void * __capability c1, void* __capability c2);
 
 
 static void *__capability sandbox_creturn_sealcap;
@@ -143,7 +143,7 @@ test_nofault_ccall_creturn(const struct cheri_test *ctp __unused)
 	//(void)libcheri_invoke(co, 0,
 	//    0, 0, 0, 0, 0, 0, 0, 0,
 	//    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-	sandbox_invoke(co,0);
+	sandbox_invoke(co.co_codecap, co.co_datacap);
 
 	cheritest_success();
 }
@@ -161,7 +161,9 @@ int main(void){
 
  test_nofault_ccall_creturn(NULL);
  
- test_fault_creturn(NULL);
+ printf("done no fault ccall creturn.\n");
+
+ //test_fault_creturn(NULL);
 
  printf("done test.\n");
 

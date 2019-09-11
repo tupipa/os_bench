@@ -41,7 +41,7 @@ compile: $(SRC) asm
 
 
 asm:
-	$(CLANG) -v $(OPTS) -S -msoft-float hello.c
+	$(CLANG) -v $(OPTS) -S -msoft-float hello.c -o hello.asm
 
 
 cpp:
