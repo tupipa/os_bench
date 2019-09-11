@@ -11,6 +11,7 @@
 #include <cheri/libcheri_type.h>  // libcheri type alloc()
 #include "cheritest.h"
 
+#include <machine/sysarch.h>
 
 /* LLM: variable definition for debugging */
 TRACK_HELLO_VAR_DEFINITION
@@ -19,6 +20,8 @@ extern void	sandbox_creturn(void);
 extern void	sandbox_creturn_end;
 extern void __attribute__ ((cheri_ccall)) sandbox_invoke(void * __capability c1, void* __capability c2);
 
+
+static void * __capability libcheri_sealing_root;
 
 static void *__capability sandbox_creturn_sealcap;
 static void *__capability sandbox_creturn_codecap;
@@ -43,7 +46,7 @@ struct sandbox_data *privateBp;
 
 void sandboxA_print(){
   printf("printing in sandbox A\n");
-  BUFFER_WRITE("HELLO A A A A A A A A \nA \nA \nA \nA \nA \n");
+  printf("HELLO A A A A A A A A \nA \nA \nA \nA \nA \n");
   //printf("shared data: %d\n", sharedp->data);
   //printf("A private data: %d\n", privateAp->data); 
   //printf("B private data: %d\n", privateBp->data);
@@ -63,6 +66,8 @@ codecap_create(void (*sandbox_base)(void), void *sandbox_end)
 {
 	void * __capability codecap;
 
+        printf("creating code cap...\n");
+
 #ifdef __CHERI_PURE_CAPABILITY__
 	(void)sandbox_end;
 	codecap = cheri_andperm(sandbox_base,
@@ -74,6 +79,9 @@ codecap_create(void (*sandbox_base)(void), void *sandbox_end)
 	    CHERI_PERM_GLOBAL | CHERI_PERM_LOAD | CHERI_PERM_EXECUTE | 
 		CHERI_PERM_CCALL | CHERI_PERM_SYSCALL);
 #endif
+
+        printf("code cap created.\n");
+
 	return (codecap);
 }
 
@@ -82,6 +90,8 @@ static void * __capability
 datacap_create(void *sandbox_base, void *sandbox_end)
 {
 	void * __capability datacap;
+
+        printf("creating data cap...\n");
 
 #ifdef __CHERI_PURE_CAPABILITY__
 	(void)sandbox_end;
@@ -96,6 +106,9 @@ datacap_create(void *sandbox_base, void *sandbox_end)
 	    CHERI_PERM_LOAD_CAP | CHERI_PERM_STORE_CAP |
 	    CHERI_PERM_STORE_LOCAL_CAP | CHERI_PERM_CCALL | CHERI_PERM_SYSCALL);
 #endif
+
+        printf("data cap created\n");
+
 	return (datacap);
 }
 
@@ -107,10 +120,9 @@ void
 cheritest_ccall_setup(void)
 {
 
-	BUFFER_WRITE("begin.");
+	printf("begin.\n");
 	/*
-	 * Create sealing, sealed code, and sealed data capabilities for 
-each
+	 * Create sealing, sealed code, and sealed data capabilities for each
 	 * of the three classes used in these tests.
 	 */
 	sandbox_creturn_sealcap = libcheri_type_alloc();
@@ -120,13 +132,26 @@ each
 	    &sandbox_creturn_end), sandbox_creturn_sealcap);
 
   /** sandbox A **/
-	sandbox_A_sealcap = libcheri_type_alloc();
+	//sandbox_A_sealcap = libcheri_type_alloc();
+	if (sysarch(CHERI_GET_SEALCAP, &libcheri_sealing_root) < 0)
+		libcheri_sealing_root = NULL;
+	assert((cheri_getperm(libcheri_sealing_root) & CHERI_PERM_SEAL) != 0);
+	assert(cheri_getlen(libcheri_sealing_root) != 0);
+	sandbox_A_sealcap = libcheri_sealing_root;
+
 	sandbox_A_codecap = cheri_seal(codecap_create(&sandboxA_print, &sandboxB_print), sandbox_A_sealcap);
         //cheri_seal(codecap_create(&sandboxA_print, &sandboxB_print), sandbox_A_sealcap);
-	//sandbox_A_datacap = cheri_seal(datacap_create(&privateA, &privateB), sandbox_A_sealcap);
-	sandbox_A_datacap = cheri_seal(cheri_getdefault(), sandbox_A_sealcap);
+	sandbox_A_datacap = cheri_seal(datacap_create(&privateA, &privateB), sandbox_A_sealcap);
+	//sandbox_A_datacap = cheri_seal(cheri_getdefault(), sandbox_A_sealcap);
+	//sandbox_A_datacap = cheri_seal(
+	//  datacap_create(
+	//	  (void *)cheri_getbase(cheri_getdefault()), 
+	//	  (void *)(cheri_getbase(cheri_getdefault()) + cheri_getlen(cheri_getdefault()))
+	//	  ), 
+	//  sandbox_A_sealcap
+	//);
 
-	BUFFER_WRITE("done.");
+	printf("done.");
 }
 
 
