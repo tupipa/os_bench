@@ -401,9 +401,9 @@ Disassembly of section .text:
    105ec: 04 17 00 01                  	<unknown>
 
 00000000000105f0 sandboxA_print:
-   105f0: 4a 6b 5f e0                  	cincoffset	$c11, $c11, -32
-   105f4: fb 0b 00 01                  	csc	$c24, $zero, 16($c11)
-   105f8: fa 2b 00 00                  	csc	$c17, $zero, 0($c11)
+   105f0: 4a 6b 5f 30                  	cincoffset	$c11, $c11, -208
+   105f4: fb 0b 00 0c                  	csc	$c24, $zero, 192($c11)
+   105f8: fa 2b 00 0b                  	csc	$c17, $zero, 176($c11)
    105fc: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
    10600: 3c 01 00 02                  	lui	$1, 2
    10604: 64 21 fa 50                  	daddiu	$1, $1, -1456
@@ -412,883 +412,1056 @@ Disassembly of section .text:
    10610: 74 61 00 1c                  	clcbi	$c3, 448($c1)
    10614: 75 81 00 14                  	clcbi	$c12, 320($c1)
    10618: 48 0d 02 bf                  	cgetnull	$c13
-   1061c: 48 11 63 3f                  	cjalr	$c12, $c17
-   10620: 00 00 00 00                  	nop
-   10624: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
-   10628: da 2b 00 00                  	clc	$c17, $zero, 0($c11)
-   1062c: db 0b 00 01                  	clc	$c24, $zero, 16($c11)
-   10630: 4a 6b 58 20                  	cincoffset	$c11, $c11, 32
-   10634: 48 11 1f ff                  	cjr	$c17
-		...
-
-0000000000010640 sandboxB_print:
-   10640: 4a 6b 5f a0                  	cincoffset	$c11, $c11, -96
-   10644: fb 0b 00 05                  	csc	$c24, $zero, 80($c11)
-   10648: fa 2b 00 04                  	csc	$c17, $zero, 64($c11)
-   1064c: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
-   10650: 3c 01 00 02                  	lui	$1, 2
-   10654: 64 21 fa 00                  	daddiu	$1, $1, -1536
-   10658: 48 1a 60 51                  	cincoffset	$c26, $c12, $1
-   1065c: 48 01 d2 bf                  	cmove	$c1, $c26
-   10660: 74 61 00 1d                  	clcbi	$c3, 464($c1)
-   10664: 75 81 00 14                  	clcbi	$c12, 320($c1)
-   10668: 48 0d 02 bf                  	cgetnull	$c13
-   1066c: f8 38 00 03                  	csc	$c1, $zero, 48($c24)
-   10670: 48 11 63 3f                  	cjalr	$c12, $c17
+   1061c: f8 38 00 0a                  	csc	$c1, $zero, 160($c24)
+   10620: 48 11 63 3f                  	cjalr	$c12, $c17
+   10624: 00 00 00 00                  	nop
+   10628: 10 00 00 01                  	b	8 <sandboxA_print+0x40>
+   1062c: 00 00 00 00                  	nop
+   10630: 10 00 00 01                  	b	8 <sandboxA_print+0x48>
+   10634: 00 00 00 00                  	nop
+   10638: 10 00 00 01                  	b	8 <sandboxA_print+0x50>
+   1063c: 00 00 00 00                  	nop
+   10640: d8 38 00 0a                  	clc	$c1, $zero, 160($c24)
+   10644: 74 41 00 1d                  	clcbi	$c2, 464($c1)
+   10648: c8 22 00 06                  	clw	$1, $zero, 0($c2)
+   1064c: 18 20 00 57                  	blez	$1, 352 <sandboxA_print+0x1bc>
+   10650: 00 00 00 00                  	nop
+   10654: 10 00 00 01                  	b	8 <sandboxA_print+0x6c>
+   10658: 00 00 00 00                  	nop
+   1065c: d8 38 00 0a                  	clc	$c1, $zero, 160($c24)
+   10660: 74 41 00 1b                  	clcbi	$c2, 432($c1)
+   10664: c8 22 00 06                  	clw	$1, $zero, 0($c2)
+   10668: 14 20 00 50                  	bnez	$1, 324 <sandboxA_print+0x1bc>
+   1066c: 00 00 00 00                  	nop
+   10670: 10 00 00 01                  	b	8 <sandboxA_print+0x88>
    10674: 00 00 00 00                  	nop
-   10678: d8 38 00 03                  	clc	$c1, $zero, 48($c24)
-   1067c: 74 41 00 1e                  	clcbi	$c2, 480($c1)
-   10680: d8 42 00 00                  	clc	$c2, $zero, 0($c2)
-   10684: c8 22 00 06                  	clw	$1, $zero, 0($c2)
-   10688: 48 02 5a bf                  	cmove	$c2, $c11
-   1068c: e8 22 00 03                  	csd	$1, $zero, 0($c2)
-   10690: 75 81 00 14                  	clcbi	$c12, 320($c1)
-   10694: 4a 82 10 08                  	csetbounds	$c2, $c2, 8
-   10698: 34 01 ff d7                  	ori	$1, $zero, 65495
-   1069c: 48 0d 10 4d                  	candperm	$c13, $c2, $1
-   106a0: 74 61 00 1f                  	clcbi	$c3, 496($c1)
-   106a4: e8 58 00 5a                  	csw	$2, $zero, 44($c24)
-   106a8: e8 38 00 23                  	csd	$1, $zero, 32($c24)
-   106ac: 48 11 63 3f                  	cjalr	$c12, $c17
-   106b0: 00 00 00 00                  	nop
-   106b4: d8 38 00 03                  	clc	$c1, $zero, 48($c24)
-   106b8: 74 41 00 20                  	clcbi	$c2, 512($c1)
-   106bc: d8 42 00 00                  	clc	$c2, $zero, 0($c2)
-   106c0: c8 22 00 06                  	clw	$1, $zero, 0($c2)
-   106c4: 48 02 5a bf                  	cmove	$c2, $c11
-   106c8: e8 22 00 03                  	csd	$1, $zero, 0($c2)
-   106cc: 75 81 00 14                  	clcbi	$c12, 320($c1)
-   106d0: 4a 82 10 08                  	csetbounds	$c2, $c2, 8
-   106d4: c8 38 00 23                  	cld	$1, $zero, 32($c24)
-   106d8: 48 0d 10 4d                  	candperm	$c13, $c2, $1
-   106dc: 74 61 00 21                  	clcbi	$c3, 528($c1)
-   106e0: e8 58 00 3a                  	csw	$2, $zero, 28($c24)
-   106e4: 48 11 63 3f                  	cjalr	$c12, $c17
-   106e8: 00 00 00 00                  	nop
-   106ec: d8 38 00 03                  	clc	$c1, $zero, 48($c24)
-   106f0: 74 41 00 22                  	clcbi	$c2, 544($c1)
-   106f4: d8 42 00 00                  	clc	$c2, $zero, 0($c2)
-   106f8: c8 22 00 06                  	clw	$1, $zero, 0($c2)
-   106fc: 48 02 5a bf                  	cmove	$c2, $c11
-   10700: e8 22 00 03                  	csd	$1, $zero, 0($c2)
-   10704: 75 81 00 14                  	clcbi	$c12, 320($c1)
-   10708: 4a 82 10 08                  	csetbounds	$c2, $c2, 8
-   1070c: c8 38 00 23                  	cld	$1, $zero, 32($c24)
-   10710: 48 0d 10 4d                  	candperm	$c13, $c2, $1
-   10714: 74 61 00 23                  	clcbi	$c3, 560($c1)
-   10718: e8 58 00 32                  	csw	$2, $zero, 24($c24)
-   1071c: 48 11 63 3f                  	cjalr	$c12, $c17
-   10720: 00 00 00 00                  	nop
-   10724: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
-   10728: da 2b 00 04                  	clc	$c17, $zero, 64($c11)
-   1072c: db 0b 00 05                  	clc	$c24, $zero, 80($c11)
-   10730: 4a 6b 58 60                  	cincoffset	$c11, $c11, 96
-   10734: 48 11 1f ff                  	cjr	$c17
+   10678: d8 38 00 0a                  	clc	$c1, $zero, 160($c24)
+   1067c: 74 41 00 10                  	clcbi	$c2, 256($c1)
+   10680: c8 22 00 03                  	cld	$1, $zero, 0($c2)
+   10684: 74 61 00 15                  	clcbi	$c3, 336($c1)
+   10688: 48 03 18 51                  	cincoffset	$c3, $c3, $1
+   1068c: 3c 02 00 40                  	lui	$2, 64
+   10690: 00 41 20 2f                  	dsubu	$4, $2, $1
+   10694: 74 81 00 1e                  	clcbi	$c4, 480($c1)
+   10698: 48 05 5a bf                  	cmove	$c5, $c11
+   1069c: f8 85 00 00                  	csc	$c4, $zero, 0($c5)
+   106a0: 64 01 00 2e                  	daddiu	$1, $zero, 46
+   106a4: e8 25 00 23                  	csd	$1, $zero, 32($c5)
+   106a8: 74 81 00 1f                  	clcbi	$c4, 496($c1)
+   106ac: f8 85 00 01                  	csc	$c4, $zero, 16($c5)
+   106b0: 4a 84 28 28                  	csetbounds	$c4, $c5, 40
+   106b4: 34 01 ff d7                  	ori	$1, $zero, 65495
+   106b8: 48 0d 20 4d                  	candperm	$c13, $c4, $1
+   106bc: 74 81 00 20                  	clcbi	$c4, 512($c1)
+   106c0: 75 81 00 21                  	clcbi	$c12, 528($c1)
+   106c4: f8 58 00 09                  	csc	$c2, $zero, 144($c24)
+   106c8: e8 58 00 8b                  	csd	$2, $zero, 136($c24)
+   106cc: 48 11 63 3f                  	cjalr	$c12, $c17
+   106d0: 00 00 00 00                  	nop
+   106d4: 00 02 08 00                  	sll	$1, $2, 0
+   106d8: d8 38 00 0a                  	clc	$c1, $zero, 160($c24)
+   106dc: 74 41 00 22                  	clcbi	$c2, 544($c1)
+   106e0: e8 22 00 03                  	csd	$1, $zero, 0($c2)
+   106e4: c8 22 00 03                  	cld	$1, $zero, 0($c2)
+   106e8: d8 58 00 09                  	clc	$c2, $zero, 144($c24)
+   106ec: c8 62 00 03                  	cld	$3, $zero, 0($c2)
+   106f0: c8 98 00 8b                  	cld	$4, $zero, 136($c24)
+   106f4: 00 83 18 2f                  	dsubu	$3, $4, $3
+   106f8: 00 23 10 2a                  	slt	$2, $1, $3
+   106fc: 14 40 00 22                  	bnez	$2, 140 <sandboxA_print+0x198>
+   10700: 00 00 00 00                  	nop
+   10704: 10 00 00 01                  	b	8 <sandboxA_print+0x11c>
+   10708: 00 00 00 00                  	nop
+   1070c: d8 38 00 0a                  	clc	$c1, $zero, 160($c24)
+   10710: 74 41 00 1b                  	clcbi	$c2, 432($c1)
+   10714: 24 01 00 01                  	addiu	$1, $zero, 1
+   10718: e8 22 00 02                  	csw	$1, $zero, 0($c2)
+   1071c: 74 41 00 22                  	clcbi	$c2, 544($c1)
+   10720: c8 42 00 03                  	cld	$2, $zero, 0($c2)
+   10724: 64 03 00 00                  	daddiu	$3, $zero, 0
+   10728: 00 02 20 2f                  	dnegu	$4, $2
+   1072c: 74 41 00 15                  	clcbi	$c2, 336($c1)
+   10730: 3c 05 00 40                  	lui	$5, 64
+   10734: 48 02 11 51                  	cincoffset	$c2, $c2, $5
+   10738: 48 02 11 11                  	cincoffset	$c2, $c2, $4
+   1073c: 4a 63 17 f9                  	cincoffset	$c3, $c2, -7
+   10740: 64 44 00 06                  	daddiu	$4, $2, 6
+   10744: 74 41 00 1e                  	clcbi	$c2, 480($c1)
+   10748: 48 04 5a bf                  	cmove	$c4, $c11
+   1074c: f8 44 00 00                  	csc	$c2, $zero, 0($c4)
+   10750: 64 02 00 2e                  	daddiu	$2, $zero, 46
+   10754: e8 44 00 23                  	csd	$2, $zero, 32($c4)
+   10758: 74 41 00 1f                  	clcbi	$c2, 496($c1)
+   1075c: f8 44 00 01                  	csc	$c2, $zero, 16($c4)
+   10760: 4a 82 20 28                  	csetbounds	$c2, $c4, 40
+   10764: 34 02 ff d7                  	ori	$2, $zero, 65495
+   10768: 48 0d 10 8d                  	candperm	$c13, $c2, $2
+   1076c: 74 81 00 23                  	clcbi	$c4, 560($c1)
+   10770: 75 81 00 21                  	clcbi	$c12, 528($c1)
+   10774: e8 78 00 83                  	csd	$3, $zero, 128($c24)
+   10778: 48 11 63 3f                  	cjalr	$c12, $c17
+   1077c: 00 00 00 00                  	nop
+   10780: 10 00 00 01                  	b	8 <sandboxA_print+0x198>
+   10784: 00 00 00 00                  	nop
+   10788: d8 38 00 0a                  	clc	$c1, $zero, 160($c24)
+   1078c: 74 41 00 22                  	clcbi	$c2, 544($c1)
+   10790: c8 22 00 03                  	cld	$1, $zero, 0($c2)
+   10794: 74 41 00 10                  	clcbi	$c2, 256($c1)
+   10798: c8 42 00 03                  	cld	$2, $zero, 0($c2)
+   1079c: 00 41 08 2d                  	daddu	$1, $2, $1
+   107a0: e8 22 00 03                  	csd	$1, $zero, 0($c2)
+   107a4: 10 00 00 4e                  	b	316 <sandboxA_print+0x2f0>
+   107a8: 00 00 00 00                  	nop
+   107ac: d8 38 00 0a                  	clc	$c1, $zero, 160($c24)
+   107b0: 74 41 00 1d                  	clcbi	$c2, 464($c1)
+   107b4: c8 22 00 06                  	clw	$1, $zero, 0($c2)
+   107b8: 18 20 00 47                  	blez	$1, 288 <sandboxA_print+0x2e8>
+   107bc: 00 00 00 00                  	nop
+   107c0: 10 00 00 01                  	b	8 <sandboxA_print+0x1d8>
+   107c4: 00 00 00 00                  	nop
+   107c8: d8 38 00 0a                  	clc	$c1, $zero, 160($c24)
+   107cc: 74 41 00 1b                  	clcbi	$c2, 432($c1)
+   107d0: c8 22 00 06                  	clw	$1, $zero, 0($c2)
+   107d4: 10 20 00 40                  	beqz	$1, 260 <sandboxA_print+0x2e8>
+   107d8: 00 00 00 00                  	nop
+   107dc: 10 00 00 01                  	b	8 <sandboxA_print+0x1f4>
+   107e0: 00 00 00 00                  	nop
+   107e4: d8 38 00 0a                  	clc	$c1, $zero, 160($c24)
+   107e8: 74 41 00 1e                  	clcbi	$c2, 480($c1)
+   107ec: 48 03 5a bf                  	cmove	$c3, $c11
+   107f0: f8 43 00 00                  	csc	$c2, $zero, 0($c3)
+   107f4: 64 01 00 2e                  	daddiu	$1, $zero, 46
+   107f8: e8 23 00 23                  	csd	$1, $zero, 32($c3)
+   107fc: 74 81 00 1f                  	clcbi	$c4, 496($c1)
+   10800: f8 83 00 01                  	csc	$c4, $zero, 16($c3)
+   10804: 4a 83 18 28                  	csetbounds	$c3, $c3, 40
+   10808: 34 02 ff d7                  	ori	$2, $zero, 65495
+   1080c: 48 0d 18 8d                  	candperm	$c13, $c3, $2
+   10810: 74 61 00 20                  	clcbi	$c3, 512($c1)
+   10814: 75 81 00 21                  	clcbi	$c12, 528($c1)
+   10818: 64 04 00 00                  	daddiu	$4, $zero, 0
+   1081c: f8 78 00 07                  	csc	$c3, $zero, 112($c24)
+   10820: 48 03 02 bf                  	cgetnull	$c3
+   10824: d8 b8 00 07                  	clc	$c5, $zero, 112($c24)
+   10828: f8 98 00 06                  	csc	$c4, $zero, 96($c24)
+   1082c: 48 04 2a bf                  	cmove	$c4, $c5
+   10830: f8 58 00 05                  	csc	$c2, $zero, 80($c24)
+   10834: e8 38 00 4b                  	csd	$1, $zero, 72($c24)
+   10838: e8 58 00 43                  	csd	$2, $zero, 64($c24)
+   1083c: 48 11 63 3f                  	cjalr	$c12, $c17
+   10840: 00 00 00 00                  	nop
+   10844: 00 02 08 00                  	sll	$1, $2, 0
+   10848: d8 38 00 0a                  	clc	$c1, $zero, 160($c24)
+   1084c: 74 41 00 22                  	clcbi	$c2, 544($c1)
+   10850: e8 22 00 03                  	csd	$1, $zero, 0($c2)
+   10854: c8 22 00 03                  	cld	$1, $zero, 0($c2)
+   10858: 48 03 5a bf                  	cmove	$c3, $c11
+   1085c: d8 98 00 05                  	clc	$c4, $zero, 80($c24)
+   10860: f8 83 00 00                  	csc	$c4, $zero, 0($c3)
+   10864: c8 78 00 4b                  	cld	$3, $zero, 72($c24)
+   10868: e8 63 00 23                  	csd	$3, $zero, 32($c3)
+   1086c: d8 b8 00 06                  	clc	$c5, $zero, 96($c24)
+   10870: f8 a3 00 01                  	csc	$c5, $zero, 16($c3)
+   10874: 75 81 00 21                  	clcbi	$c12, 528($c1)
+   10878: 00 01 20 2f                  	dnegu	$4, $1
+   1087c: 74 c1 00 15                  	clcbi	$c6, 336($c1)
+   10880: 3c 05 00 40                  	lui	$5, 64
+   10884: 48 06 31 51                  	cincoffset	$c6, $c6, $5
+   10888: 48 06 31 11                  	cincoffset	$c6, $c6, $4
+   1088c: 4a 66 37 f9                  	cincoffset	$c6, $c6, -7
+   10890: 64 24 00 06                  	daddiu	$4, $1, 6
+   10894: 4a 83 18 28                  	csetbounds	$c3, $c3, 40
+   10898: c8 38 00 43                  	cld	$1, $zero, 64($c24)
+   1089c: 48 0d 18 4d                  	candperm	$c13, $c3, $1
+   108a0: 74 81 00 24                  	clcbi	$c4, 576($c1)
+   108a4: 48 03 32 bf                  	cmove	$c3, $c6
+   108a8: f8 58 00 03                  	csc	$c2, $zero, 48($c24)
+   108ac: 48 11 63 3f                  	cjalr	$c12, $c17
+   108b0: 00 00 00 00                  	nop
+   108b4: d8 38 00 03                  	clc	$c1, $zero, 48($c24)
+   108b8: c8 21 00 03                  	cld	$1, $zero, 0($c1)
+   108bc: d8 58 00 0a                  	clc	$c2, $zero, 160($c24)
+   108c0: 74 62 00 10                  	clcbi	$c3, 256($c2)
+   108c4: c8 63 00 03                  	cld	$3, $zero, 0($c3)
+   108c8: 00 61 08 2d                  	daddu	$1, $3, $1
+   108cc: e8 23 00 03                  	csd	$1, $zero, 0($c3)
+   108d0: 10 00 00 01                  	b	8 <sandboxA_print+0x2e8>
+   108d4: 00 00 00 00                  	nop
+   108d8: 10 00 00 01                  	b	8 <sandboxA_print+0x2f0>
+   108dc: 00 00 00 00                  	nop
+   108e0: 10 00 00 01                  	b	8 <sandboxA_print+0x2f8>
+   108e4: 00 00 00 00                  	nop
+   108e8: 10 00 00 01                  	b	8 <sandboxA_print+0x300>
+   108ec: 00 00 00 00                  	nop
+   108f0: 10 00 00 01                  	b	8 <sandboxA_print+0x308>
+   108f4: 00 00 00 00                  	nop
+   108f8: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
+   108fc: da 2b 00 0b                  	clc	$c17, $zero, 176($c11)
+   10900: db 0b 00 0c                  	clc	$c24, $zero, 192($c11)
+   10904: 4a 6b 58 d0                  	cincoffset	$c11, $c11, 208
+   10908: 48 11 1f ff                  	cjr	$c17
+   1090c: 00 00 00 00                  	nop
+
+0000000000010910 sandboxB_print:
+   10910: 4a 6b 5f a0                  	cincoffset	$c11, $c11, -96
+   10914: fb 0b 00 05                  	csc	$c24, $zero, 80($c11)
+   10918: fa 2b 00 04                  	csc	$c17, $zero, 64($c11)
+   1091c: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
+   10920: 3c 01 00 02                  	lui	$1, 2
+   10924: 64 21 f7 30                  	daddiu	$1, $1, -2256
+   10928: 48 1a 60 51                  	cincoffset	$c26, $c12, $1
+   1092c: 48 01 d2 bf                  	cmove	$c1, $c26
+   10930: 74 61 00 25                  	clcbi	$c3, 592($c1)
+   10934: 75 81 00 14                  	clcbi	$c12, 320($c1)
+   10938: 48 0d 02 bf                  	cgetnull	$c13
+   1093c: f8 38 00 03                  	csc	$c1, $zero, 48($c24)
+   10940: 48 11 63 3f                  	cjalr	$c12, $c17
+   10944: 00 00 00 00                  	nop
+   10948: d8 38 00 03                  	clc	$c1, $zero, 48($c24)
+   1094c: 74 41 00 26                  	clcbi	$c2, 608($c1)
+   10950: d8 42 00 00                  	clc	$c2, $zero, 0($c2)
+   10954: c8 22 00 06                  	clw	$1, $zero, 0($c2)
+   10958: 48 02 5a bf                  	cmove	$c2, $c11
+   1095c: e8 22 00 03                  	csd	$1, $zero, 0($c2)
+   10960: 75 81 00 14                  	clcbi	$c12, 320($c1)
+   10964: 4a 82 10 08                  	csetbounds	$c2, $c2, 8
+   10968: 34 01 ff d7                  	ori	$1, $zero, 65495
+   1096c: 48 0d 10 4d                  	candperm	$c13, $c2, $1
+   10970: 74 61 00 27                  	clcbi	$c3, 624($c1)
+   10974: e8 58 00 5a                  	csw	$2, $zero, 44($c24)
+   10978: e8 38 00 23                  	csd	$1, $zero, 32($c24)
+   1097c: 48 11 63 3f                  	cjalr	$c12, $c17
+   10980: 00 00 00 00                  	nop
+   10984: d8 38 00 03                  	clc	$c1, $zero, 48($c24)
+   10988: 74 41 00 28                  	clcbi	$c2, 640($c1)
+   1098c: d8 42 00 00                  	clc	$c2, $zero, 0($c2)
+   10990: c8 22 00 06                  	clw	$1, $zero, 0($c2)
+   10994: 48 02 5a bf                  	cmove	$c2, $c11
+   10998: e8 22 00 03                  	csd	$1, $zero, 0($c2)
+   1099c: 75 81 00 14                  	clcbi	$c12, 320($c1)
+   109a0: 4a 82 10 08                  	csetbounds	$c2, $c2, 8
+   109a4: c8 38 00 23                  	cld	$1, $zero, 32($c24)
+   109a8: 48 0d 10 4d                  	candperm	$c13, $c2, $1
+   109ac: 74 61 00 29                  	clcbi	$c3, 656($c1)
+   109b0: e8 58 00 3a                  	csw	$2, $zero, 28($c24)
+   109b4: 48 11 63 3f                  	cjalr	$c12, $c17
+   109b8: 00 00 00 00                  	nop
+   109bc: d8 38 00 03                  	clc	$c1, $zero, 48($c24)
+   109c0: 74 41 00 2a                  	clcbi	$c2, 672($c1)
+   109c4: d8 42 00 00                  	clc	$c2, $zero, 0($c2)
+   109c8: c8 22 00 06                  	clw	$1, $zero, 0($c2)
+   109cc: 48 02 5a bf                  	cmove	$c2, $c11
+   109d0: e8 22 00 03                  	csd	$1, $zero, 0($c2)
+   109d4: 75 81 00 14                  	clcbi	$c12, 320($c1)
+   109d8: 4a 82 10 08                  	csetbounds	$c2, $c2, 8
+   109dc: c8 38 00 23                  	cld	$1, $zero, 32($c24)
+   109e0: 48 0d 10 4d                  	candperm	$c13, $c2, $1
+   109e4: 74 61 00 2b                  	clcbi	$c3, 688($c1)
+   109e8: e8 58 00 32                  	csw	$2, $zero, 24($c24)
+   109ec: 48 11 63 3f                  	cjalr	$c12, $c17
+   109f0: 00 00 00 00                  	nop
+   109f4: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
+   109f8: da 2b 00 04                  	clc	$c17, $zero, 64($c11)
+   109fc: db 0b 00 05                  	clc	$c24, $zero, 80($c11)
+   10a00: 4a 6b 58 60                  	cincoffset	$c11, $c11, 96
+   10a04: 48 11 1f ff                  	cjr	$c17
 		...
 
-0000000000010740 cheritest_ccall_setup:
-   10740: 4a 6b 5e 70                  	cincoffset	$c11, $c11, -400
-   10744: fb 0b 00 18                  	csc	$c24, $zero, 384($c11)
-   10748: fa 2b 00 17                  	csc	$c17, $zero, 368($c11)
-   1074c: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
-   10750: 3c 01 00 02                  	lui	$1, 2
-   10754: 64 21 f9 00                  	daddiu	$1, $1, -1792
-   10758: 48 1a 60 51                  	cincoffset	$c26, $c12, $1
-   1075c: 48 01 d2 bf                  	cmove	$c1, $c26
-   10760: f8 38 00 16                  	csc	$c1, $zero, 352($c24)
-   10764: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x2c>
-   10768: 00 00 00 00                  	nop
-   1076c: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x34>
-   10770: 00 00 00 00                  	nop
-   10774: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x3c>
-   10778: 00 00 00 00                  	nop
-   1077c: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   10780: 74 41 00 24                  	clcbi	$c2, 576($c1)
-   10784: c8 22 00 06                  	clw	$1, $zero, 0($c2)
-   10788: 18 20 00 57                  	blez	$1, 352 <cheritest_ccall_setup+0x1a8>
-   1078c: 00 00 00 00                  	nop
-   10790: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x58>
-   10794: 00 00 00 00                  	nop
-   10798: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   1079c: 74 41 00 1b                  	clcbi	$c2, 432($c1)
-   107a0: c8 22 00 06                  	clw	$1, $zero, 0($c2)
-   107a4: 14 20 00 50                  	bnez	$1, 324 <cheritest_ccall_setup+0x1a8>
-   107a8: 00 00 00 00                  	nop
-   107ac: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x74>
-   107b0: 00 00 00 00                  	nop
-   107b4: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   107b8: 74 41 00 10                  	clcbi	$c2, 256($c1)
-   107bc: c8 22 00 03                  	cld	$1, $zero, 0($c2)
-   107c0: 74 61 00 15                  	clcbi	$c3, 336($c1)
-   107c4: 48 03 18 51                  	cincoffset	$c3, $c3, $1
-   107c8: 3c 02 00 40                  	lui	$2, 64
-   107cc: 00 41 20 2f                  	dsubu	$4, $2, $1
-   107d0: 74 81 00 25                  	clcbi	$c4, 592($c1)
-   107d4: 48 05 5a bf                  	cmove	$c5, $c11
-   107d8: f8 85 00 00                  	csc	$c4, $zero, 0($c5)
-   107dc: 64 01 00 6d                  	daddiu	$1, $zero, 109
-   107e0: e8 25 00 23                  	csd	$1, $zero, 32($c5)
-   107e4: 74 81 00 26                  	clcbi	$c4, 608($c1)
-   107e8: f8 85 00 01                  	csc	$c4, $zero, 16($c5)
-   107ec: 4a 84 28 28                  	csetbounds	$c4, $c5, 40
-   107f0: 34 01 ff d7                  	ori	$1, $zero, 65495
-   107f4: 48 0d 20 4d                  	candperm	$c13, $c4, $1
-   107f8: 74 81 00 27                  	clcbi	$c4, 624($c1)
-   107fc: 75 81 00 28                  	clcbi	$c12, 640($c1)
-   10800: f8 58 00 15                  	csc	$c2, $zero, 336($c24)
-   10804: e8 58 01 4b                  	csd	$2, $zero, 328($c24)
-   10808: 48 11 63 3f                  	cjalr	$c12, $c17
-   1080c: 00 00 00 00                  	nop
-   10810: 00 02 08 00                  	sll	$1, $2, 0
-   10814: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   10818: 74 41 00 29                  	clcbi	$c2, 656($c1)
-   1081c: e8 22 00 03                  	csd	$1, $zero, 0($c2)
-   10820: c8 22 00 03                  	cld	$1, $zero, 0($c2)
-   10824: d8 58 00 15                  	clc	$c2, $zero, 336($c24)
-   10828: c8 62 00 03                  	cld	$3, $zero, 0($c2)
-   1082c: c8 98 01 4b                  	cld	$4, $zero, 328($c24)
-   10830: 00 83 18 2f                  	dsubu	$3, $4, $3
-   10834: 00 23 10 2a                  	slt	$2, $1, $3
-   10838: 14 40 00 22                  	bnez	$2, 140 <cheritest_ccall_setup+0x184>
-   1083c: 00 00 00 00                  	nop
-   10840: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x108>
-   10844: 00 00 00 00                  	nop
-   10848: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   1084c: 74 41 00 1b                  	clcbi	$c2, 432($c1)
-   10850: 24 01 00 01                  	addiu	$1, $zero, 1
-   10854: e8 22 00 02                  	csw	$1, $zero, 0($c2)
-   10858: 74 41 00 29                  	clcbi	$c2, 656($c1)
-   1085c: c8 42 00 03                  	cld	$2, $zero, 0($c2)
-   10860: 64 03 00 00                  	daddiu	$3, $zero, 0
-   10864: 00 02 20 2f                  	dnegu	$4, $2
-   10868: 74 41 00 15                  	clcbi	$c2, 336($c1)
-   1086c: 3c 05 00 40                  	lui	$5, 64
-   10870: 48 02 11 51                  	cincoffset	$c2, $c2, $5
-   10874: 48 02 11 11                  	cincoffset	$c2, $c2, $4
-   10878: 4a 63 17 f9                  	cincoffset	$c3, $c2, -7
-   1087c: 64 44 00 06                  	daddiu	$4, $2, 6
-   10880: 74 41 00 25                  	clcbi	$c2, 592($c1)
-   10884: 48 04 5a bf                  	cmove	$c4, $c11
-   10888: f8 44 00 00                  	csc	$c2, $zero, 0($c4)
-   1088c: 64 02 00 6d                  	daddiu	$2, $zero, 109
-   10890: e8 44 00 23                  	csd	$2, $zero, 32($c4)
-   10894: 74 41 00 26                  	clcbi	$c2, 608($c1)
-   10898: f8 44 00 01                  	csc	$c2, $zero, 16($c4)
-   1089c: 4a 82 20 28                  	csetbounds	$c2, $c4, 40
-   108a0: 34 02 ff d7                  	ori	$2, $zero, 65495
-   108a4: 48 0d 10 8d                  	candperm	$c13, $c2, $2
-   108a8: 74 81 00 2a                  	clcbi	$c4, 672($c1)
-   108ac: 75 81 00 28                  	clcbi	$c12, 640($c1)
-   108b0: e8 78 01 43                  	csd	$3, $zero, 320($c24)
-   108b4: 48 11 63 3f                  	cjalr	$c12, $c17
-   108b8: 00 00 00 00                  	nop
-   108bc: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x184>
-   108c0: 00 00 00 00                  	nop
-   108c4: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   108c8: 74 41 00 29                  	clcbi	$c2, 656($c1)
-   108cc: c8 22 00 03                  	cld	$1, $zero, 0($c2)
-   108d0: 74 41 00 10                  	clcbi	$c2, 256($c1)
-   108d4: c8 42 00 03                  	cld	$2, $zero, 0($c2)
-   108d8: 00 41 08 2d                  	daddu	$1, $2, $1
-   108dc: e8 22 00 03                  	csd	$1, $zero, 0($c2)
-   108e0: 10 00 00 4e                  	b	316 <cheritest_ccall_setup+0x2dc>
-   108e4: 00 00 00 00                  	nop
-   108e8: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   108ec: 74 41 00 24                  	clcbi	$c2, 576($c1)
-   108f0: c8 22 00 06                  	clw	$1, $zero, 0($c2)
-   108f4: 18 20 00 47                  	blez	$1, 288 <cheritest_ccall_setup+0x2d4>
-   108f8: 00 00 00 00                  	nop
-   108fc: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x1c4>
-   10900: 00 00 00 00                  	nop
-   10904: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   10908: 74 41 00 1b                  	clcbi	$c2, 432($c1)
-   1090c: c8 22 00 06                  	clw	$1, $zero, 0($c2)
-   10910: 10 20 00 40                  	beqz	$1, 260 <cheritest_ccall_setup+0x2d4>
-   10914: 00 00 00 00                  	nop
-   10918: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x1e0>
-   1091c: 00 00 00 00                  	nop
-   10920: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   10924: 74 41 00 25                  	clcbi	$c2, 592($c1)
-   10928: 48 03 5a bf                  	cmove	$c3, $c11
-   1092c: f8 43 00 00                  	csc	$c2, $zero, 0($c3)
-   10930: 64 01 00 6d                  	daddiu	$1, $zero, 109
-   10934: e8 23 00 23                  	csd	$1, $zero, 32($c3)
-   10938: 74 81 00 26                  	clcbi	$c4, 608($c1)
-   1093c: f8 83 00 01                  	csc	$c4, $zero, 16($c3)
-   10940: 4a 83 18 28                  	csetbounds	$c3, $c3, 40
-   10944: 34 02 ff d7                  	ori	$2, $zero, 65495
-   10948: 48 0d 18 8d                  	candperm	$c13, $c3, $2
-   1094c: 74 61 00 27                  	clcbi	$c3, 624($c1)
-   10950: 75 81 00 28                  	clcbi	$c12, 640($c1)
-   10954: 64 04 00 00                  	daddiu	$4, $zero, 0
-   10958: f8 78 00 13                  	csc	$c3, $zero, 304($c24)
-   1095c: 48 03 02 bf                  	cgetnull	$c3
-   10960: d8 b8 00 13                  	clc	$c5, $zero, 304($c24)
-   10964: f8 98 00 12                  	csc	$c4, $zero, 288($c24)
-   10968: 48 04 2a bf                  	cmove	$c4, $c5
-   1096c: f8 58 00 11                  	csc	$c2, $zero, 272($c24)
-   10970: e8 38 01 0b                  	csd	$1, $zero, 264($c24)
-   10974: e8 58 01 03                  	csd	$2, $zero, 256($c24)
-   10978: 48 11 63 3f                  	cjalr	$c12, $c17
-   1097c: 00 00 00 00                  	nop
-   10980: 00 02 08 00                  	sll	$1, $2, 0
-   10984: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   10988: 74 41 00 29                  	clcbi	$c2, 656($c1)
-   1098c: e8 22 00 03                  	csd	$1, $zero, 0($c2)
-   10990: c8 22 00 03                  	cld	$1, $zero, 0($c2)
-   10994: 48 03 5a bf                  	cmove	$c3, $c11
-   10998: d8 98 00 11                  	clc	$c4, $zero, 272($c24)
-   1099c: f8 83 00 00                  	csc	$c4, $zero, 0($c3)
-   109a0: c8 78 01 0b                  	cld	$3, $zero, 264($c24)
-   109a4: e8 63 00 23                  	csd	$3, $zero, 32($c3)
-   109a8: d8 b8 00 12                  	clc	$c5, $zero, 288($c24)
-   109ac: f8 a3 00 01                  	csc	$c5, $zero, 16($c3)
-   109b0: 75 81 00 28                  	clcbi	$c12, 640($c1)
-   109b4: 00 01 20 2f                  	dnegu	$4, $1
-   109b8: 74 c1 00 15                  	clcbi	$c6, 336($c1)
-   109bc: 3c 05 00 40                  	lui	$5, 64
-   109c0: 48 06 31 51                  	cincoffset	$c6, $c6, $5
-   109c4: 48 06 31 11                  	cincoffset	$c6, $c6, $4
-   109c8: 4a 66 37 f9                  	cincoffset	$c6, $c6, -7
-   109cc: 64 24 00 06                  	daddiu	$4, $1, 6
-   109d0: 4a 83 18 28                  	csetbounds	$c3, $c3, 40
-   109d4: c8 38 01 03                  	cld	$1, $zero, 256($c24)
-   109d8: 48 0d 18 4d                  	candperm	$c13, $c3, $1
-   109dc: 74 81 00 2b                  	clcbi	$c4, 688($c1)
-   109e0: 48 03 32 bf                  	cmove	$c3, $c6
-   109e4: f8 58 00 0f                  	csc	$c2, $zero, 240($c24)
-   109e8: 48 11 63 3f                  	cjalr	$c12, $c17
-   109ec: 00 00 00 00                  	nop
-   109f0: d8 38 00 0f                  	clc	$c1, $zero, 240($c24)
-   109f4: c8 21 00 03                  	cld	$1, $zero, 0($c1)
-   109f8: d8 58 00 16                  	clc	$c2, $zero, 352($c24)
-   109fc: 74 62 00 10                  	clcbi	$c3, 256($c2)
-   10a00: c8 63 00 03                  	cld	$3, $zero, 0($c3)
-   10a04: 00 61 08 2d                  	daddu	$1, $3, $1
-   10a08: e8 23 00 03                  	csd	$1, $zero, 0($c3)
-   10a0c: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x2d4>
-   10a10: 00 00 00 00                  	nop
-   10a14: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x2dc>
-   10a18: 00 00 00 00                  	nop
-   10a1c: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x2e4>
-   10a20: 00 00 00 00                  	nop
-   10a24: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x2ec>
-   10a28: 00 00 00 00                  	nop
-   10a2c: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x2f4>
-   10a30: 00 00 00 00                  	nop
-   10a34: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   10a38: 75 81 00 2c                  	clcbi	$c12, 704($c1)
-   10a3c: 48 0d 02 bf                  	cgetnull	$c13
-   10a40: 48 11 63 3f                  	cjalr	$c12, $c17
-   10a44: 00 00 00 00                  	nop
-   10a48: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   10a4c: 74 41 00 2d                  	clcbi	$c2, 720($c1)
-   10a50: f8 62 00 00                  	csc	$c3, $zero, 0($c2)
-   10a54: 74 61 00 2e                  	clcbi	$c3, 736($c1)
-   10a58: 74 81 00 2f                  	clcbi	$c4, 752($c1)
-   10a5c: 75 81 00 30                  	clcbi	$c12, 768($c1)
-   10a60: f8 78 00 0e                  	csc	$c3, $zero, 224($c24)
-   10a64: f8 98 00 0d                  	csc	$c4, $zero, 208($c24)
-   10a68: 48 0d 02 bf                  	cgetnull	$c13
-   10a6c: f8 58 00 0c                  	csc	$c2, $zero, 192($c24)
-   10a70: 48 11 63 3f                  	cjalr	$c12, $c17
-   10a74: 00 00 00 00                  	nop
-   10a78: d8 38 00 0c                  	clc	$c1, $zero, 192($c24)
-   10a7c: d8 41 00 00                  	clc	$c2, $zero, 0($c1)
-   10a80: 48 02 18 8b                  	cseal	$c2, $c3, $c2
-   10a84: d8 78 00 16                  	clc	$c3, $zero, 352($c24)
-   10a88: 74 83 00 31                  	clcbi	$c4, 784($c3)
-   10a8c: f8 44 00 00                  	csc	$c2, $zero, 0($c4)
-   10a90: 75 83 00 32                  	clcbi	$c12, 800($c3)
-   10a94: d8 78 00 0e                  	clc	$c3, $zero, 224($c24)
-   10a98: d8 98 00 0d                  	clc	$c4, $zero, 208($c24)
-   10a9c: 48 0d 02 bf                  	cgetnull	$c13
-   10aa0: 48 11 63 3f                  	cjalr	$c12, $c17
-   10aa4: 00 00 00 00                  	nop
-   10aa8: d8 38 00 0c                  	clc	$c1, $zero, 192($c24)
-   10aac: d8 41 00 00                  	clc	$c2, $zero, 0($c1)
-   10ab0: 48 02 18 8b                  	cseal	$c2, $c3, $c2
-   10ab4: d8 78 00 16                  	clc	$c3, $zero, 352($c24)
-   10ab8: 74 83 00 33                  	clcbi	$c4, 816($c3)
-   10abc: f8 44 00 00                  	csc	$c2, $zero, 0($c4)
-   10ac0: 75 83 00 2c                  	clcbi	$c12, 704($c3)
-   10ac4: 48 0d 02 bf                  	cgetnull	$c13
-   10ac8: 48 11 63 3f                  	cjalr	$c12, $c17
-   10acc: 00 00 00 00                  	nop
-   10ad0: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   10ad4: 74 41 00 34                  	clcbi	$c2, 832($c1)
-   10ad8: f8 62 00 00                  	csc	$c3, $zero, 0($c2)
-   10adc: 75 81 00 30                  	clcbi	$c12, 768($c1)
-   10ae0: 74 61 00 35                  	clcbi	$c3, 848($c1)
-   10ae4: 74 81 00 36                  	clcbi	$c4, 864($c1)
-   10ae8: 48 0d 02 bf                  	cgetnull	$c13
-   10aec: f8 58 00 0b                  	csc	$c2, $zero, 176($c24)
-   10af0: 48 11 63 3f                  	cjalr	$c12, $c17
-   10af4: 00 00 00 00                  	nop
-   10af8: d8 38 00 0b                  	clc	$c1, $zero, 176($c24)
-   10afc: d8 41 00 00                  	clc	$c2, $zero, 0($c1)
-   10b00: 48 02 18 8b                  	cseal	$c2, $c3, $c2
-   10b04: d8 78 00 16                  	clc	$c3, $zero, 352($c24)
-   10b08: 74 83 00 37                  	clcbi	$c4, 880($c3)
-   10b0c: f8 44 00 00                  	csc	$c2, $zero, 0($c4)
-   10b10: 75 83 00 32                  	clcbi	$c12, 800($c3)
-   10b14: 74 63 00 38                  	clcbi	$c3, 896($c3)
-   10b18: d8 58 00 16                  	clc	$c2, $zero, 352($c24)
-   10b1c: 74 82 00 39                  	clcbi	$c4, 912($c2)
-   10b20: 48 0d 02 bf                  	cgetnull	$c13
-   10b24: 48 11 63 3f                  	cjalr	$c12, $c17
-   10b28: 00 00 00 00                  	nop
-   10b2c: d8 38 00 0b                  	clc	$c1, $zero, 176($c24)
-   10b30: d8 41 00 00                  	clc	$c2, $zero, 0($c1)
-   10b34: 48 02 18 8b                  	cseal	$c2, $c3, $c2
-   10b38: d8 78 00 16                  	clc	$c3, $zero, 352($c24)
-   10b3c: 74 83 00 3a                  	clcbi	$c4, 928($c3)
-   10b40: f8 44 00 00                  	csc	$c2, $zero, 0($c4)
-   10b44: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x40c>
-   10b48: 00 00 00 00                  	nop
-   10b4c: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x414>
-   10b50: 00 00 00 00                  	nop
-   10b54: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x41c>
-   10b58: 00 00 00 00                  	nop
-   10b5c: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   10b60: 74 41 00 24                  	clcbi	$c2, 576($c1)
-   10b64: c8 22 00 06                  	clw	$1, $zero, 0($c2)
-   10b68: 18 20 00 57                  	blez	$1, 352 <cheritest_ccall_setup+0x588>
-   10b6c: 00 00 00 00                  	nop
-   10b70: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x438>
-   10b74: 00 00 00 00                  	nop
-   10b78: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   10b7c: 74 41 00 1b                  	clcbi	$c2, 432($c1)
-   10b80: c8 22 00 06                  	clw	$1, $zero, 0($c2)
-   10b84: 14 20 00 50                  	bnez	$1, 324 <cheritest_ccall_setup+0x588>
+0000000000010a10 cheritest_ccall_setup:
+   10a10: 4a 6b 5e 70                  	cincoffset	$c11, $c11, -400
+   10a14: fb 0b 00 18                  	csc	$c24, $zero, 384($c11)
+   10a18: fa 2b 00 17                  	csc	$c17, $zero, 368($c11)
+   10a1c: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
+   10a20: 3c 01 00 02                  	lui	$1, 2
+   10a24: 64 21 f6 30                  	daddiu	$1, $1, -2512
+   10a28: 48 1a 60 51                  	cincoffset	$c26, $c12, $1
+   10a2c: 48 01 d2 bf                  	cmove	$c1, $c26
+   10a30: f8 38 00 16                  	csc	$c1, $zero, 352($c24)
+   10a34: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x2c>
+   10a38: 00 00 00 00                  	nop
+   10a3c: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x34>
+   10a40: 00 00 00 00                  	nop
+   10a44: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x3c>
+   10a48: 00 00 00 00                  	nop
+   10a4c: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10a50: 74 41 00 1d                  	clcbi	$c2, 464($c1)
+   10a54: c8 22 00 06                  	clw	$1, $zero, 0($c2)
+   10a58: 18 20 00 57                  	blez	$1, 352 <cheritest_ccall_setup+0x1a8>
+   10a5c: 00 00 00 00                  	nop
+   10a60: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x58>
+   10a64: 00 00 00 00                  	nop
+   10a68: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10a6c: 74 41 00 1b                  	clcbi	$c2, 432($c1)
+   10a70: c8 22 00 06                  	clw	$1, $zero, 0($c2)
+   10a74: 14 20 00 50                  	bnez	$1, 324 <cheritest_ccall_setup+0x1a8>
+   10a78: 00 00 00 00                  	nop
+   10a7c: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x74>
+   10a80: 00 00 00 00                  	nop
+   10a84: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10a88: 74 41 00 10                  	clcbi	$c2, 256($c1)
+   10a8c: c8 22 00 03                  	cld	$1, $zero, 0($c2)
+   10a90: 74 61 00 15                  	clcbi	$c3, 336($c1)
+   10a94: 48 03 18 51                  	cincoffset	$c3, $c3, $1
+   10a98: 3c 02 00 40                  	lui	$2, 64
+   10a9c: 00 41 20 2f                  	dsubu	$4, $2, $1
+   10aa0: 74 81 00 2c                  	clcbi	$c4, 704($c1)
+   10aa4: 48 05 5a bf                  	cmove	$c5, $c11
+   10aa8: f8 85 00 00                  	csc	$c4, $zero, 0($c5)
+   10aac: 64 01 00 6e                  	daddiu	$1, $zero, 110
+   10ab0: e8 25 00 23                  	csd	$1, $zero, 32($c5)
+   10ab4: 74 81 00 1f                  	clcbi	$c4, 496($c1)
+   10ab8: f8 85 00 01                  	csc	$c4, $zero, 16($c5)
+   10abc: 4a 84 28 28                  	csetbounds	$c4, $c5, 40
+   10ac0: 34 01 ff d7                  	ori	$1, $zero, 65495
+   10ac4: 48 0d 20 4d                  	candperm	$c13, $c4, $1
+   10ac8: 74 81 00 2d                  	clcbi	$c4, 720($c1)
+   10acc: 75 81 00 21                  	clcbi	$c12, 528($c1)
+   10ad0: f8 58 00 15                  	csc	$c2, $zero, 336($c24)
+   10ad4: e8 58 01 4b                  	csd	$2, $zero, 328($c24)
+   10ad8: 48 11 63 3f                  	cjalr	$c12, $c17
+   10adc: 00 00 00 00                  	nop
+   10ae0: 00 02 08 00                  	sll	$1, $2, 0
+   10ae4: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10ae8: 74 41 00 22                  	clcbi	$c2, 544($c1)
+   10aec: e8 22 00 03                  	csd	$1, $zero, 0($c2)
+   10af0: c8 22 00 03                  	cld	$1, $zero, 0($c2)
+   10af4: d8 58 00 15                  	clc	$c2, $zero, 336($c24)
+   10af8: c8 62 00 03                  	cld	$3, $zero, 0($c2)
+   10afc: c8 98 01 4b                  	cld	$4, $zero, 328($c24)
+   10b00: 00 83 18 2f                  	dsubu	$3, $4, $3
+   10b04: 00 23 10 2a                  	slt	$2, $1, $3
+   10b08: 14 40 00 22                  	bnez	$2, 140 <cheritest_ccall_setup+0x184>
+   10b0c: 00 00 00 00                  	nop
+   10b10: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x108>
+   10b14: 00 00 00 00                  	nop
+   10b18: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10b1c: 74 41 00 1b                  	clcbi	$c2, 432($c1)
+   10b20: 24 01 00 01                  	addiu	$1, $zero, 1
+   10b24: e8 22 00 02                  	csw	$1, $zero, 0($c2)
+   10b28: 74 41 00 22                  	clcbi	$c2, 544($c1)
+   10b2c: c8 42 00 03                  	cld	$2, $zero, 0($c2)
+   10b30: 64 03 00 00                  	daddiu	$3, $zero, 0
+   10b34: 00 02 20 2f                  	dnegu	$4, $2
+   10b38: 74 41 00 15                  	clcbi	$c2, 336($c1)
+   10b3c: 3c 05 00 40                  	lui	$5, 64
+   10b40: 48 02 11 51                  	cincoffset	$c2, $c2, $5
+   10b44: 48 02 11 11                  	cincoffset	$c2, $c2, $4
+   10b48: 4a 63 17 f9                  	cincoffset	$c3, $c2, -7
+   10b4c: 64 44 00 06                  	daddiu	$4, $2, 6
+   10b50: 74 41 00 2c                  	clcbi	$c2, 704($c1)
+   10b54: 48 04 5a bf                  	cmove	$c4, $c11
+   10b58: f8 44 00 00                  	csc	$c2, $zero, 0($c4)
+   10b5c: 64 02 00 6e                  	daddiu	$2, $zero, 110
+   10b60: e8 44 00 23                  	csd	$2, $zero, 32($c4)
+   10b64: 74 41 00 1f                  	clcbi	$c2, 496($c1)
+   10b68: f8 44 00 01                  	csc	$c2, $zero, 16($c4)
+   10b6c: 4a 82 20 28                  	csetbounds	$c2, $c4, 40
+   10b70: 34 02 ff d7                  	ori	$2, $zero, 65495
+   10b74: 48 0d 10 8d                  	candperm	$c13, $c2, $2
+   10b78: 74 81 00 2e                  	clcbi	$c4, 736($c1)
+   10b7c: 75 81 00 21                  	clcbi	$c12, 528($c1)
+   10b80: e8 78 01 43                  	csd	$3, $zero, 320($c24)
+   10b84: 48 11 63 3f                  	cjalr	$c12, $c17
    10b88: 00 00 00 00                  	nop
-   10b8c: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x454>
+   10b8c: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x184>
    10b90: 00 00 00 00                  	nop
    10b94: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   10b98: 74 41 00 10                  	clcbi	$c2, 256($c1)
+   10b98: 74 41 00 22                  	clcbi	$c2, 544($c1)
    10b9c: c8 22 00 03                  	cld	$1, $zero, 0($c2)
-   10ba0: 74 61 00 15                  	clcbi	$c3, 336($c1)
-   10ba4: 48 03 18 51                  	cincoffset	$c3, $c3, $1
-   10ba8: 3c 02 00 40                  	lui	$2, 64
-   10bac: 00 41 20 2f                  	dsubu	$4, $2, $1
-   10bb0: 74 81 00 25                  	clcbi	$c4, 592($c1)
-   10bb4: 48 05 5a bf                  	cmove	$c5, $c11
-   10bb8: f8 85 00 00                  	csc	$c4, $zero, 0($c5)
-   10bbc: 64 01 00 7f                  	daddiu	$1, $zero, 127
-   10bc0: e8 25 00 23                  	csd	$1, $zero, 32($c5)
-   10bc4: 74 81 00 26                  	clcbi	$c4, 608($c1)
-   10bc8: f8 85 00 01                  	csc	$c4, $zero, 16($c5)
-   10bcc: 4a 84 28 28                  	csetbounds	$c4, $c5, 40
-   10bd0: 34 01 ff d7                  	ori	$1, $zero, 65495
-   10bd4: 48 0d 20 4d                  	candperm	$c13, $c4, $1
-   10bd8: 74 81 00 3b                  	clcbi	$c4, 944($c1)
-   10bdc: 75 81 00 28                  	clcbi	$c12, 640($c1)
-   10be0: f8 58 00 0a                  	csc	$c2, $zero, 160($c24)
-   10be4: e8 58 00 9b                  	csd	$2, $zero, 152($c24)
-   10be8: 48 11 63 3f                  	cjalr	$c12, $c17
+   10ba0: 74 41 00 10                  	clcbi	$c2, 256($c1)
+   10ba4: c8 42 00 03                  	cld	$2, $zero, 0($c2)
+   10ba8: 00 41 08 2d                  	daddu	$1, $2, $1
+   10bac: e8 22 00 03                  	csd	$1, $zero, 0($c2)
+   10bb0: 10 00 00 4e                  	b	316 <cheritest_ccall_setup+0x2dc>
+   10bb4: 00 00 00 00                  	nop
+   10bb8: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10bbc: 74 41 00 1d                  	clcbi	$c2, 464($c1)
+   10bc0: c8 22 00 06                  	clw	$1, $zero, 0($c2)
+   10bc4: 18 20 00 47                  	blez	$1, 288 <cheritest_ccall_setup+0x2d4>
+   10bc8: 00 00 00 00                  	nop
+   10bcc: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x1c4>
+   10bd0: 00 00 00 00                  	nop
+   10bd4: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10bd8: 74 41 00 1b                  	clcbi	$c2, 432($c1)
+   10bdc: c8 22 00 06                  	clw	$1, $zero, 0($c2)
+   10be0: 10 20 00 40                  	beqz	$1, 260 <cheritest_ccall_setup+0x2d4>
+   10be4: 00 00 00 00                  	nop
+   10be8: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x1e0>
    10bec: 00 00 00 00                  	nop
-   10bf0: 00 02 08 00                  	sll	$1, $2, 0
-   10bf4: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   10bf8: 74 41 00 29                  	clcbi	$c2, 656($c1)
-   10bfc: e8 22 00 03                  	csd	$1, $zero, 0($c2)
-   10c00: c8 22 00 03                  	cld	$1, $zero, 0($c2)
-   10c04: d8 58 00 0a                  	clc	$c2, $zero, 160($c24)
-   10c08: c8 62 00 03                  	cld	$3, $zero, 0($c2)
-   10c0c: c8 98 00 9b                  	cld	$4, $zero, 152($c24)
-   10c10: 00 83 18 2f                  	dsubu	$3, $4, $3
-   10c14: 00 23 10 2a                  	slt	$2, $1, $3
-   10c18: 14 40 00 22                  	bnez	$2, 140 <cheritest_ccall_setup+0x564>
-   10c1c: 00 00 00 00                  	nop
-   10c20: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x4e8>
-   10c24: 00 00 00 00                  	nop
-   10c28: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   10c2c: 74 41 00 1b                  	clcbi	$c2, 432($c1)
-   10c30: 24 01 00 01                  	addiu	$1, $zero, 1
-   10c34: e8 22 00 02                  	csw	$1, $zero, 0($c2)
-   10c38: 74 41 00 29                  	clcbi	$c2, 656($c1)
-   10c3c: c8 42 00 03                  	cld	$2, $zero, 0($c2)
-   10c40: 64 03 00 00                  	daddiu	$3, $zero, 0
-   10c44: 00 02 20 2f                  	dnegu	$4, $2
-   10c48: 74 41 00 15                  	clcbi	$c2, 336($c1)
-   10c4c: 3c 05 00 40                  	lui	$5, 64
-   10c50: 48 02 11 51                  	cincoffset	$c2, $c2, $5
-   10c54: 48 02 11 11                  	cincoffset	$c2, $c2, $4
-   10c58: 4a 63 17 f9                  	cincoffset	$c3, $c2, -7
-   10c5c: 64 44 00 06                  	daddiu	$4, $2, 6
-   10c60: 74 41 00 25                  	clcbi	$c2, 592($c1)
-   10c64: 48 04 5a bf                  	cmove	$c4, $c11
-   10c68: f8 44 00 00                  	csc	$c2, $zero, 0($c4)
-   10c6c: 64 02 00 7f                  	daddiu	$2, $zero, 127
-   10c70: e8 44 00 23                  	csd	$2, $zero, 32($c4)
-   10c74: 74 41 00 26                  	clcbi	$c2, 608($c1)
-   10c78: f8 44 00 01                  	csc	$c2, $zero, 16($c4)
-   10c7c: 4a 82 20 28                  	csetbounds	$c2, $c4, 40
-   10c80: 34 02 ff d7                  	ori	$2, $zero, 65495
-   10c84: 48 0d 10 8d                  	candperm	$c13, $c2, $2
-   10c88: 74 81 00 3c                  	clcbi	$c4, 960($c1)
-   10c8c: 75 81 00 28                  	clcbi	$c12, 640($c1)
-   10c90: e8 78 00 93                  	csd	$3, $zero, 144($c24)
-   10c94: 48 11 63 3f                  	cjalr	$c12, $c17
-   10c98: 00 00 00 00                  	nop
-   10c9c: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x564>
-   10ca0: 00 00 00 00                  	nop
-   10ca4: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   10ca8: 74 41 00 29                  	clcbi	$c2, 656($c1)
-   10cac: c8 22 00 03                  	cld	$1, $zero, 0($c2)
-   10cb0: 74 41 00 10                  	clcbi	$c2, 256($c1)
-   10cb4: c8 42 00 03                  	cld	$2, $zero, 0($c2)
-   10cb8: 00 41 08 2d                  	daddu	$1, $2, $1
-   10cbc: e8 22 00 03                  	csd	$1, $zero, 0($c2)
-   10cc0: 10 00 00 4e                  	b	316 <cheritest_ccall_setup+0x6bc>
-   10cc4: 00 00 00 00                  	nop
-   10cc8: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   10ccc: 74 41 00 24                  	clcbi	$c2, 576($c1)
-   10cd0: c8 22 00 06                  	clw	$1, $zero, 0($c2)
-   10cd4: 18 20 00 47                  	blez	$1, 288 <cheritest_ccall_setup+0x6b4>
-   10cd8: 00 00 00 00                  	nop
-   10cdc: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x5a4>
+   10bf0: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10bf4: 74 41 00 2c                  	clcbi	$c2, 704($c1)
+   10bf8: 48 03 5a bf                  	cmove	$c3, $c11
+   10bfc: f8 43 00 00                  	csc	$c2, $zero, 0($c3)
+   10c00: 64 01 00 6e                  	daddiu	$1, $zero, 110
+   10c04: e8 23 00 23                  	csd	$1, $zero, 32($c3)
+   10c08: 74 81 00 1f                  	clcbi	$c4, 496($c1)
+   10c0c: f8 83 00 01                  	csc	$c4, $zero, 16($c3)
+   10c10: 4a 83 18 28                  	csetbounds	$c3, $c3, 40
+   10c14: 34 02 ff d7                  	ori	$2, $zero, 65495
+   10c18: 48 0d 18 8d                  	candperm	$c13, $c3, $2
+   10c1c: 74 61 00 2d                  	clcbi	$c3, 720($c1)
+   10c20: 75 81 00 21                  	clcbi	$c12, 528($c1)
+   10c24: 64 04 00 00                  	daddiu	$4, $zero, 0
+   10c28: f8 78 00 13                  	csc	$c3, $zero, 304($c24)
+   10c2c: 48 03 02 bf                  	cgetnull	$c3
+   10c30: d8 b8 00 13                  	clc	$c5, $zero, 304($c24)
+   10c34: f8 98 00 12                  	csc	$c4, $zero, 288($c24)
+   10c38: 48 04 2a bf                  	cmove	$c4, $c5
+   10c3c: f8 58 00 11                  	csc	$c2, $zero, 272($c24)
+   10c40: e8 38 01 0b                  	csd	$1, $zero, 264($c24)
+   10c44: e8 58 01 03                  	csd	$2, $zero, 256($c24)
+   10c48: 48 11 63 3f                  	cjalr	$c12, $c17
+   10c4c: 00 00 00 00                  	nop
+   10c50: 00 02 08 00                  	sll	$1, $2, 0
+   10c54: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10c58: 74 41 00 22                  	clcbi	$c2, 544($c1)
+   10c5c: e8 22 00 03                  	csd	$1, $zero, 0($c2)
+   10c60: c8 22 00 03                  	cld	$1, $zero, 0($c2)
+   10c64: 48 03 5a bf                  	cmove	$c3, $c11
+   10c68: d8 98 00 11                  	clc	$c4, $zero, 272($c24)
+   10c6c: f8 83 00 00                  	csc	$c4, $zero, 0($c3)
+   10c70: c8 78 01 0b                  	cld	$3, $zero, 264($c24)
+   10c74: e8 63 00 23                  	csd	$3, $zero, 32($c3)
+   10c78: d8 b8 00 12                  	clc	$c5, $zero, 288($c24)
+   10c7c: f8 a3 00 01                  	csc	$c5, $zero, 16($c3)
+   10c80: 75 81 00 21                  	clcbi	$c12, 528($c1)
+   10c84: 00 01 20 2f                  	dnegu	$4, $1
+   10c88: 74 c1 00 15                  	clcbi	$c6, 336($c1)
+   10c8c: 3c 05 00 40                  	lui	$5, 64
+   10c90: 48 06 31 51                  	cincoffset	$c6, $c6, $5
+   10c94: 48 06 31 11                  	cincoffset	$c6, $c6, $4
+   10c98: 4a 66 37 f9                  	cincoffset	$c6, $c6, -7
+   10c9c: 64 24 00 06                  	daddiu	$4, $1, 6
+   10ca0: 4a 83 18 28                  	csetbounds	$c3, $c3, 40
+   10ca4: c8 38 01 03                  	cld	$1, $zero, 256($c24)
+   10ca8: 48 0d 18 4d                  	candperm	$c13, $c3, $1
+   10cac: 74 81 00 2f                  	clcbi	$c4, 752($c1)
+   10cb0: 48 03 32 bf                  	cmove	$c3, $c6
+   10cb4: f8 58 00 0f                  	csc	$c2, $zero, 240($c24)
+   10cb8: 48 11 63 3f                  	cjalr	$c12, $c17
+   10cbc: 00 00 00 00                  	nop
+   10cc0: d8 38 00 0f                  	clc	$c1, $zero, 240($c24)
+   10cc4: c8 21 00 03                  	cld	$1, $zero, 0($c1)
+   10cc8: d8 58 00 16                  	clc	$c2, $zero, 352($c24)
+   10ccc: 74 62 00 10                  	clcbi	$c3, 256($c2)
+   10cd0: c8 63 00 03                  	cld	$3, $zero, 0($c3)
+   10cd4: 00 61 08 2d                  	daddu	$1, $3, $1
+   10cd8: e8 23 00 03                  	csd	$1, $zero, 0($c3)
+   10cdc: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x2d4>
    10ce0: 00 00 00 00                  	nop
-   10ce4: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   10ce8: 74 41 00 1b                  	clcbi	$c2, 432($c1)
-   10cec: c8 22 00 06                  	clw	$1, $zero, 0($c2)
-   10cf0: 10 20 00 40                  	beqz	$1, 260 <cheritest_ccall_setup+0x6b4>
-   10cf4: 00 00 00 00                  	nop
-   10cf8: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x5c0>
-   10cfc: 00 00 00 00                  	nop
-   10d00: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   10d04: 74 41 00 25                  	clcbi	$c2, 592($c1)
-   10d08: 48 03 5a bf                  	cmove	$c3, $c11
-   10d0c: f8 43 00 00                  	csc	$c2, $zero, 0($c3)
-   10d10: 64 01 00 7f                  	daddiu	$1, $zero, 127
-   10d14: e8 23 00 23                  	csd	$1, $zero, 32($c3)
-   10d18: 74 81 00 26                  	clcbi	$c4, 608($c1)
-   10d1c: f8 83 00 01                  	csc	$c4, $zero, 16($c3)
-   10d20: 4a 83 18 28                  	csetbounds	$c3, $c3, 40
-   10d24: 34 02 ff d7                  	ori	$2, $zero, 65495
-   10d28: 48 0d 18 8d                  	candperm	$c13, $c3, $2
-   10d2c: 74 61 00 3b                  	clcbi	$c3, 944($c1)
-   10d30: 75 81 00 28                  	clcbi	$c12, 640($c1)
-   10d34: 64 04 00 00                  	daddiu	$4, $zero, 0
-   10d38: f8 78 00 08                  	csc	$c3, $zero, 128($c24)
-   10d3c: 48 03 02 bf                  	cgetnull	$c3
-   10d40: d8 b8 00 08                  	clc	$c5, $zero, 128($c24)
-   10d44: f8 98 00 07                  	csc	$c4, $zero, 112($c24)
-   10d48: 48 04 2a bf                  	cmove	$c4, $c5
-   10d4c: f8 58 00 06                  	csc	$c2, $zero, 96($c24)
-   10d50: e8 38 00 5b                  	csd	$1, $zero, 88($c24)
-   10d54: e8 58 00 53                  	csd	$2, $zero, 80($c24)
-   10d58: 48 11 63 3f                  	cjalr	$c12, $c17
-   10d5c: 00 00 00 00                  	nop
-   10d60: 00 02 08 00                  	sll	$1, $2, 0
-   10d64: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
-   10d68: 74 41 00 29                  	clcbi	$c2, 656($c1)
-   10d6c: e8 22 00 03                  	csd	$1, $zero, 0($c2)
-   10d70: c8 22 00 03                  	cld	$1, $zero, 0($c2)
-   10d74: 48 03 5a bf                  	cmove	$c3, $c11
-   10d78: d8 98 00 06                  	clc	$c4, $zero, 96($c24)
-   10d7c: f8 83 00 00                  	csc	$c4, $zero, 0($c3)
-   10d80: c8 78 00 5b                  	cld	$3, $zero, 88($c24)
-   10d84: e8 63 00 23                  	csd	$3, $zero, 32($c3)
-   10d88: d8 b8 00 07                  	clc	$c5, $zero, 112($c24)
-   10d8c: f8 a3 00 01                  	csc	$c5, $zero, 16($c3)
-   10d90: 75 81 00 28                  	clcbi	$c12, 640($c1)
-   10d94: 00 01 20 2f                  	dnegu	$4, $1
-   10d98: 74 c1 00 15                  	clcbi	$c6, 336($c1)
-   10d9c: 3c 05 00 40                  	lui	$5, 64
-   10da0: 48 06 31 51                  	cincoffset	$c6, $c6, $5
-   10da4: 48 06 31 11                  	cincoffset	$c6, $c6, $4
-   10da8: 4a 66 37 f9                  	cincoffset	$c6, $c6, -7
-   10dac: 64 24 00 06                  	daddiu	$4, $1, 6
-   10db0: 4a 83 18 28                  	csetbounds	$c3, $c3, 40
-   10db4: c8 38 00 53                  	cld	$1, $zero, 80($c24)
-   10db8: 48 0d 18 4d                  	candperm	$c13, $c3, $1
-   10dbc: 74 81 00 3d                  	clcbi	$c4, 976($c1)
-   10dc0: 48 03 32 bf                  	cmove	$c3, $c6
-   10dc4: f8 58 00 04                  	csc	$c2, $zero, 64($c24)
-   10dc8: 48 11 63 3f                  	cjalr	$c12, $c17
-   10dcc: 00 00 00 00                  	nop
-   10dd0: d8 38 00 04                  	clc	$c1, $zero, 64($c24)
-   10dd4: c8 21 00 03                  	cld	$1, $zero, 0($c1)
-   10dd8: d8 58 00 16                  	clc	$c2, $zero, 352($c24)
-   10ddc: 74 62 00 10                  	clcbi	$c3, 256($c2)
-   10de0: c8 63 00 03                  	cld	$3, $zero, 0($c3)
-   10de4: 00 61 08 2d                  	daddu	$1, $3, $1
-   10de8: e8 23 00 03                  	csd	$1, $zero, 0($c3)
-   10dec: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x6b4>
-   10df0: 00 00 00 00                  	nop
-   10df4: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x6bc>
+   10ce4: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x2dc>
+   10ce8: 00 00 00 00                  	nop
+   10cec: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x2e4>
+   10cf0: 00 00 00 00                  	nop
+   10cf4: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x2ec>
+   10cf8: 00 00 00 00                  	nop
+   10cfc: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x2f4>
+   10d00: 00 00 00 00                  	nop
+   10d04: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10d08: 75 81 00 30                  	clcbi	$c12, 768($c1)
+   10d0c: 48 0d 02 bf                  	cgetnull	$c13
+   10d10: 48 11 63 3f                  	cjalr	$c12, $c17
+   10d14: 00 00 00 00                  	nop
+   10d18: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10d1c: 74 41 00 31                  	clcbi	$c2, 784($c1)
+   10d20: f8 62 00 00                  	csc	$c3, $zero, 0($c2)
+   10d24: 74 61 00 32                  	clcbi	$c3, 800($c1)
+   10d28: 74 81 00 33                  	clcbi	$c4, 816($c1)
+   10d2c: 75 81 00 34                  	clcbi	$c12, 832($c1)
+   10d30: f8 78 00 0e                  	csc	$c3, $zero, 224($c24)
+   10d34: f8 98 00 0d                  	csc	$c4, $zero, 208($c24)
+   10d38: 48 0d 02 bf                  	cgetnull	$c13
+   10d3c: f8 58 00 0c                  	csc	$c2, $zero, 192($c24)
+   10d40: 48 11 63 3f                  	cjalr	$c12, $c17
+   10d44: 00 00 00 00                  	nop
+   10d48: d8 38 00 0c                  	clc	$c1, $zero, 192($c24)
+   10d4c: d8 41 00 00                  	clc	$c2, $zero, 0($c1)
+   10d50: 48 02 18 8b                  	cseal	$c2, $c3, $c2
+   10d54: d8 78 00 16                  	clc	$c3, $zero, 352($c24)
+   10d58: 74 83 00 35                  	clcbi	$c4, 848($c3)
+   10d5c: f8 44 00 00                  	csc	$c2, $zero, 0($c4)
+   10d60: 75 83 00 36                  	clcbi	$c12, 864($c3)
+   10d64: d8 78 00 0e                  	clc	$c3, $zero, 224($c24)
+   10d68: d8 98 00 0d                  	clc	$c4, $zero, 208($c24)
+   10d6c: 48 0d 02 bf                  	cgetnull	$c13
+   10d70: 48 11 63 3f                  	cjalr	$c12, $c17
+   10d74: 00 00 00 00                  	nop
+   10d78: d8 38 00 0c                  	clc	$c1, $zero, 192($c24)
+   10d7c: d8 41 00 00                  	clc	$c2, $zero, 0($c1)
+   10d80: 48 02 18 8b                  	cseal	$c2, $c3, $c2
+   10d84: d8 78 00 16                  	clc	$c3, $zero, 352($c24)
+   10d88: 74 83 00 37                  	clcbi	$c4, 880($c3)
+   10d8c: f8 44 00 00                  	csc	$c2, $zero, 0($c4)
+   10d90: 75 83 00 30                  	clcbi	$c12, 768($c3)
+   10d94: 48 0d 02 bf                  	cgetnull	$c13
+   10d98: 48 11 63 3f                  	cjalr	$c12, $c17
+   10d9c: 00 00 00 00                  	nop
+   10da0: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10da4: 74 41 00 38                  	clcbi	$c2, 896($c1)
+   10da8: f8 62 00 00                  	csc	$c3, $zero, 0($c2)
+   10dac: 75 81 00 34                  	clcbi	$c12, 832($c1)
+   10db0: 74 61 00 39                  	clcbi	$c3, 912($c1)
+   10db4: 74 81 00 3a                  	clcbi	$c4, 928($c1)
+   10db8: 48 0d 02 bf                  	cgetnull	$c13
+   10dbc: f8 58 00 0b                  	csc	$c2, $zero, 176($c24)
+   10dc0: 48 11 63 3f                  	cjalr	$c12, $c17
+   10dc4: 00 00 00 00                  	nop
+   10dc8: d8 38 00 0b                  	clc	$c1, $zero, 176($c24)
+   10dcc: d8 41 00 00                  	clc	$c2, $zero, 0($c1)
+   10dd0: 48 02 18 8b                  	cseal	$c2, $c3, $c2
+   10dd4: d8 78 00 16                  	clc	$c3, $zero, 352($c24)
+   10dd8: 74 83 00 3b                  	clcbi	$c4, 944($c3)
+   10ddc: f8 44 00 00                  	csc	$c2, $zero, 0($c4)
+   10de0: 48 02 03 7f                  	creadhwr	$c2, $chwr_ddc
+   10de4: d8 81 00 00                  	clc	$c4, $zero, 0($c1)
+   10de8: 48 02 11 0b                  	cseal	$c2, $c2, $c4
+   10dec: 74 83 00 3c                  	clcbi	$c4, 960($c3)
+   10df0: f8 44 00 00                  	csc	$c2, $zero, 0($c4)
+   10df4: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x3ec>
    10df8: 00 00 00 00                  	nop
-   10dfc: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x6c4>
+   10dfc: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x3f4>
    10e00: 00 00 00 00                  	nop
-   10e04: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x6cc>
+   10e04: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x3fc>
    10e08: 00 00 00 00                  	nop
-   10e0c: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x6d4>
-   10e10: 00 00 00 00                  	nop
-   10e14: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
-   10e18: da 2b 00 17                  	clc	$c17, $zero, 368($c11)
-   10e1c: db 0b 00 18                  	clc	$c24, $zero, 384($c11)
-   10e20: 4a 6b 59 90                  	cincoffset	$c11, $c11, 400
-   10e24: 48 11 1f ff                  	cjr	$c17
-		...
-
-0000000000010e30 codecap_create:
-   10e30: 4a 6b 5f c0                  	cincoffset	$c11, $c11, -64
-   10e34: fb 0b 00 03                  	csc	$c24, $zero, 48($c11)
-   10e38: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
-   10e3c: 4a 61 c0 20                  	cincoffset	$c1, $c24, 32
-   10e40: 4a 81 08 10                  	csetbounds	$c1, $c1, 16
-   10e44: 4a 62 c0 10                  	cincoffset	$c2, $c24, 16
-   10e48: 4a 82 10 10                  	csetbounds	$c2, $c2, 16
-   10e4c: 4a 85 c0 10                  	csetbounds	$c5, $c24, 16
-   10e50: f8 61 00 00                  	csc	$c3, $zero, 0($c1)
-   10e54: f8 82 00 00                  	csc	$c4, $zero, 0($c2)
-   10e58: d8 21 00 00                  	clc	$c1, $zero, 0($c1)
-   10e5c: 34 01 81 07                  	ori	$1, $zero, 33031
-   10e60: 48 01 08 4d                  	candperm	$c1, $c1, $1
-   10e64: f8 25 00 00                  	csc	$c1, $zero, 0($c5)
-   10e68: d8 65 00 00                  	clc	$c3, $zero, 0($c5)
-   10e6c: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
-   10e70: db 0b 00 03                  	clc	$c24, $zero, 48($c11)
-   10e74: 4a 6b 58 40                  	cincoffset	$c11, $c11, 64
-   10e78: 48 11 1f ff                  	cjr	$c17
-   10e7c: 00 00 00 00                  	nop
-
-0000000000010e80 datacap_create:
-   10e80: 4a 6b 5f c0                  	cincoffset	$c11, $c11, -64
-   10e84: fb 0b 00 03                  	csc	$c24, $zero, 48($c11)
-   10e88: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
-   10e8c: 4a 61 c0 20                  	cincoffset	$c1, $c24, 32
-   10e90: 4a 81 08 10                  	csetbounds	$c1, $c1, 16
-   10e94: 4a 62 c0 10                  	cincoffset	$c2, $c24, 16
-   10e98: 4a 82 10 10                  	csetbounds	$c2, $c2, 16
-   10e9c: 4a 85 c0 10                  	csetbounds	$c5, $c24, 16
-   10ea0: f8 61 00 00                  	csc	$c3, $zero, 0($c1)
-   10ea4: f8 82 00 00                  	csc	$c4, $zero, 0($c2)
-   10ea8: d8 21 00 00                  	clc	$c1, $zero, 0($c1)
-   10eac: 34 01 81 7d                  	ori	$1, $zero, 33149
-   10eb0: 48 01 08 4d                  	candperm	$c1, $c1, $1
-   10eb4: f8 25 00 00                  	csc	$c1, $zero, 0($c5)
-   10eb8: d8 65 00 00                  	clc	$c3, $zero, 0($c5)
-   10ebc: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
-   10ec0: db 0b 00 03                  	clc	$c24, $zero, 48($c11)
-   10ec4: 4a 6b 58 40                  	cincoffset	$c11, $c11, 64
-   10ec8: 48 11 1f ff                  	cjr	$c17
+   10e0c: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10e10: 74 41 00 1d                  	clcbi	$c2, 464($c1)
+   10e14: c8 22 00 06                  	clw	$1, $zero, 0($c2)
+   10e18: 18 20 00 57                  	blez	$1, 352 <cheritest_ccall_setup+0x568>
+   10e1c: 00 00 00 00                  	nop
+   10e20: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x418>
+   10e24: 00 00 00 00                  	nop
+   10e28: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10e2c: 74 41 00 1b                  	clcbi	$c2, 432($c1)
+   10e30: c8 22 00 06                  	clw	$1, $zero, 0($c2)
+   10e34: 14 20 00 50                  	bnez	$1, 324 <cheritest_ccall_setup+0x568>
+   10e38: 00 00 00 00                  	nop
+   10e3c: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x434>
+   10e40: 00 00 00 00                  	nop
+   10e44: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10e48: 74 41 00 10                  	clcbi	$c2, 256($c1)
+   10e4c: c8 22 00 03                  	cld	$1, $zero, 0($c2)
+   10e50: 74 61 00 15                  	clcbi	$c3, 336($c1)
+   10e54: 48 03 18 51                  	cincoffset	$c3, $c3, $1
+   10e58: 3c 02 00 40                  	lui	$2, 64
+   10e5c: 00 41 20 2f                  	dsubu	$4, $2, $1
+   10e60: 74 81 00 2c                  	clcbi	$c4, 704($c1)
+   10e64: 48 05 5a bf                  	cmove	$c5, $c11
+   10e68: f8 85 00 00                  	csc	$c4, $zero, 0($c5)
+   10e6c: 64 01 00 81                  	daddiu	$1, $zero, 129
+   10e70: e8 25 00 23                  	csd	$1, $zero, 32($c5)
+   10e74: 74 81 00 1f                  	clcbi	$c4, 496($c1)
+   10e78: f8 85 00 01                  	csc	$c4, $zero, 16($c5)
+   10e7c: 4a 84 28 28                  	csetbounds	$c4, $c5, 40
+   10e80: 34 01 ff d7                  	ori	$1, $zero, 65495
+   10e84: 48 0d 20 4d                  	candperm	$c13, $c4, $1
+   10e88: 74 81 00 3d                  	clcbi	$c4, 976($c1)
+   10e8c: 75 81 00 21                  	clcbi	$c12, 528($c1)
+   10e90: f8 58 00 0a                  	csc	$c2, $zero, 160($c24)
+   10e94: e8 58 00 9b                  	csd	$2, $zero, 152($c24)
+   10e98: 48 11 63 3f                  	cjalr	$c12, $c17
+   10e9c: 00 00 00 00                  	nop
+   10ea0: 00 02 08 00                  	sll	$1, $2, 0
+   10ea4: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10ea8: 74 41 00 22                  	clcbi	$c2, 544($c1)
+   10eac: e8 22 00 03                  	csd	$1, $zero, 0($c2)
+   10eb0: c8 22 00 03                  	cld	$1, $zero, 0($c2)
+   10eb4: d8 58 00 0a                  	clc	$c2, $zero, 160($c24)
+   10eb8: c8 62 00 03                  	cld	$3, $zero, 0($c2)
+   10ebc: c8 98 00 9b                  	cld	$4, $zero, 152($c24)
+   10ec0: 00 83 18 2f                  	dsubu	$3, $4, $3
+   10ec4: 00 23 10 2a                  	slt	$2, $1, $3
+   10ec8: 14 40 00 22                  	bnez	$2, 140 <cheritest_ccall_setup+0x544>
    10ecc: 00 00 00 00                  	nop
-
-0000000000010ed0 test_fault_creturn:
-   10ed0: 4a 6b 5f e0                  	cincoffset	$c11, $c11, -32
-   10ed4: fb 0b 00 01                  	csc	$c24, $zero, 16($c11)
-   10ed8: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
-   10edc: 4a 81 c0 10                  	csetbounds	$c1, $c24, 16
-   10ee0: f8 61 00 00                  	csc	$c3, $zero, 0($c1)
-   10ee4: 48 a0 07 ff                  	creturn
-   10ee8: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
-   10eec: db 0b 00 01                  	clc	$c24, $zero, 16($c11)
-   10ef0: 4a 6b 58 20                  	cincoffset	$c11, $c11, 32
-   10ef4: 48 11 1f ff                  	cjr	$c17
-		...
-
-0000000000010f00 test_nofault_ccall_creturn:
-   10f00: 4a 6b 5f a0                  	cincoffset	$c11, $c11, -96
-   10f04: fb 0b 00 05                  	csc	$c24, $zero, 80($c11)
-   10f08: fa 2b 00 04                  	csc	$c17, $zero, 64($c11)
-   10f0c: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
-   10f10: 3c 01 00 02                  	lui	$1, 2
-   10f14: 64 21 f1 40                  	daddiu	$1, $1, -3776
-   10f18: 48 1a 60 51                  	cincoffset	$c26, $c12, $1
-   10f1c: 48 01 d2 bf                  	cmove	$c1, $c26
-   10f20: 4a 62 c0 30                  	cincoffset	$c2, $c24, 48
-   10f24: 4a 82 10 10                  	csetbounds	$c2, $c2, 16
-   10f28: 4a 64 c0 10                  	cincoffset	$c4, $c24, 16
-   10f2c: 4a 84 20 20                  	csetbounds	$c4, $c4, 32
-   10f30: f8 62 00 00                  	csc	$c3, $zero, 0($c2)
-   10f34: 74 41 00 31                  	clcbi	$c2, 784($c1)
-   10f38: d8 42 00 00                  	clc	$c2, $zero, 0($c2)
-   10f3c: f8 44 00 00                  	csc	$c2, $zero, 0($c4)
-   10f40: 74 41 00 33                  	clcbi	$c2, 816($c1)
-   10f44: d8 42 00 00                  	clc	$c2, $zero, 0($c2)
-   10f48: f8 44 00 01                  	csc	$c2, $zero, 16($c4)
-   10f4c: d8 44 00 00                  	clc	$c2, $zero, 0($c4)
-   10f50: d8 64 00 01                  	clc	$c3, $zero, 16($c4)
-   10f54: 75 81 00 3e                  	clcbi	$c12, 992($c1)
-   10f58: 64 01 00 00                  	daddiu	$1, $zero, 0
-   10f5c: f8 38 00 00                  	csc	$c1, $zero, 0($c24)
-   10f60: 48 01 12 bf                  	cmove	$c1, $c2
-   10f64: 48 02 1a bf                  	cmove	$c2, $c3
-   10f68: 48 0d 02 bf                  	cgetnull	$c13
-   10f6c: 48 03 02 bf                  	cgetnull	$c3
-   10f70: 48 04 02 bf                  	cgetnull	$c4
-   10f74: 48 05 02 bf                  	cgetnull	$c5
-   10f78: 48 06 02 bf                  	cgetnull	$c6
-   10f7c: 48 07 02 bf                  	cgetnull	$c7
-   10f80: 48 08 02 bf                  	cgetnull	$c8
-   10f84: 48 09 02 bf                  	cgetnull	$c9
-   10f88: 48 0a 02 bf                  	cgetnull	$c10
-   10f8c: 00 20 20 25                  	move	$4, $1
-   10f90: 00 20 28 25                  	move	$5, $1
-   10f94: 00 20 30 25                  	move	$6, $1
-   10f98: 00 20 38 25                  	move	$7, $1
-   10f9c: 00 20 40 25                  	move	$8, $1
-   10fa0: 00 20 48 25                  	move	$9, $1
-   10fa4: 00 20 50 25                  	move	$10, $1
-   10fa8: 00 20 58 25                  	move	$11, $1
-   10fac: 48 11 63 3f                  	cjalr	$c12, $c17
-   10fb0: 00 00 00 00                  	nop
-   10fb4: d8 38 00 00                  	clc	$c1, $zero, 0($c24)
-   10fb8: 75 81 00 3f                  	clcbi	$c12, 1008($c1)
-   10fbc: 48 0d 02 bf                  	cgetnull	$c13
-   10fc0: 48 11 63 3f                  	cjalr	$c12, $c17
-   10fc4: 00 00 00 00                  	nop
-
-0000000000010fc8 test_sandboxA:
-   10fc8: 4a 6b 5f d0                  	cincoffset	$c11, $c11, -48
-   10fcc: fb 0b 00 02                  	csc	$c24, $zero, 32($c11)
-   10fd0: fa 2b 00 01                  	csc	$c17, $zero, 16($c11)
-   10fd4: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
-   10fd8: 3c 01 00 02                  	lui	$1, 2
-   10fdc: 64 21 f0 78                  	daddiu	$1, $1, -3976
-   10fe0: 48 1a 60 51                  	cincoffset	$c26, $c12, $1
-   10fe4: 48 01 d2 bf                  	cmove	$c1, $c26
-   10fe8: 74 41 00 37                  	clcbi	$c2, 880($c1)
-   10fec: d8 42 00 00                  	clc	$c2, $zero, 0($c2)
-   10ff0: 74 61 00 3a                  	clcbi	$c3, 928($c1)
-   10ff4: d8 63 00 00                  	clc	$c3, $zero, 0($c3)
-   10ff8: 75 81 00 3e                  	clcbi	$c12, 992($c1)
-   10ffc: 64 01 00 00                  	daddiu	$1, $zero, 0
-   11000: f8 38 00 00                  	csc	$c1, $zero, 0($c24)
-   11004: 48 01 12 bf                  	cmove	$c1, $c2
-   11008: 48 02 1a bf                  	cmove	$c2, $c3
-   1100c: 48 0d 02 bf                  	cgetnull	$c13
-   11010: 48 03 02 bf                  	cgetnull	$c3
-   11014: 48 04 02 bf                  	cgetnull	$c4
-   11018: 48 05 02 bf                  	cgetnull	$c5
-   1101c: 48 06 02 bf                  	cgetnull	$c6
-   11020: 48 07 02 bf                  	cgetnull	$c7
-   11024: 48 08 02 bf                  	cgetnull	$c8
-   11028: 48 09 02 bf                  	cgetnull	$c9
-   1102c: 48 0a 02 bf                  	cgetnull	$c10
-   11030: 00 20 20 25                  	move	$4, $1
-   11034: 00 20 28 25                  	move	$5, $1
-   11038: 00 20 30 25                  	move	$6, $1
-   1103c: 00 20 38 25                  	move	$7, $1
-   11040: 00 20 40 25                  	move	$8, $1
-   11044: 00 20 48 25                  	move	$9, $1
-   11048: 00 20 50 25                  	move	$10, $1
-   1104c: 00 20 58 25                  	move	$11, $1
-   11050: 48 11 63 3f                  	cjalr	$c12, $c17
-   11054: 00 00 00 00                  	nop
-   11058: d8 38 00 00                  	clc	$c1, $zero, 0($c24)
-   1105c: 75 81 00 3f                  	clcbi	$c12, 1008($c1)
-   11060: 48 0d 02 bf                  	cgetnull	$c13
-   11064: 48 11 63 3f                  	cjalr	$c12, $c17
-		...
-
-0000000000011070 main:
-   11070: 4a 6b 5f a0                  	cincoffset	$c11, $c11, -96
-   11074: fb 0b 00 05                  	csc	$c24, $zero, 80($c11)
-   11078: fa 2b 00 04                  	csc	$c17, $zero, 64($c11)
-   1107c: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
-   11080: 3c 01 00 02                  	lui	$1, 2
-   11084: 64 21 ef d0                  	daddiu	$1, $1, -4144
-   11088: 48 1a 60 51                  	cincoffset	$c26, $c12, $1
-   1108c: 48 01 d2 bf                  	cmove	$c1, $c26
-   11090: 4a 62 c0 3c                  	cincoffset	$c2, $c24, 60
-   11094: 4a 82 10 04                  	csetbounds	$c2, $c2, 4
-   11098: 24 02 00 00                  	addiu	$2, $zero, 0
-   1109c: e8 02 00 02                  	csw	$zero, $zero, 0($c2)
-   110a0: 74 61 00 40                  	clcbi	$c3, 1024($c1)
-   110a4: 75 81 00 14                  	clcbi	$c12, 320($c1)
-   110a8: 48 0d 02 bf                  	cgetnull	$c13
-   110ac: f8 38 00 02                  	csc	$c1, $zero, 32($c24)
-   110b0: e8 58 00 3a                  	csw	$2, $zero, 28($c24)
-   110b4: 48 11 63 3f                  	cjalr	$c12, $c17
+   10ed0: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x4c8>
+   10ed4: 00 00 00 00                  	nop
+   10ed8: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10edc: 74 41 00 1b                  	clcbi	$c2, 432($c1)
+   10ee0: 24 01 00 01                  	addiu	$1, $zero, 1
+   10ee4: e8 22 00 02                  	csw	$1, $zero, 0($c2)
+   10ee8: 74 41 00 22                  	clcbi	$c2, 544($c1)
+   10eec: c8 42 00 03                  	cld	$2, $zero, 0($c2)
+   10ef0: 64 03 00 00                  	daddiu	$3, $zero, 0
+   10ef4: 00 02 20 2f                  	dnegu	$4, $2
+   10ef8: 74 41 00 15                  	clcbi	$c2, 336($c1)
+   10efc: 3c 05 00 40                  	lui	$5, 64
+   10f00: 48 02 11 51                  	cincoffset	$c2, $c2, $5
+   10f04: 48 02 11 11                  	cincoffset	$c2, $c2, $4
+   10f08: 4a 63 17 f9                  	cincoffset	$c3, $c2, -7
+   10f0c: 64 44 00 06                  	daddiu	$4, $2, 6
+   10f10: 74 41 00 2c                  	clcbi	$c2, 704($c1)
+   10f14: 48 04 5a bf                  	cmove	$c4, $c11
+   10f18: f8 44 00 00                  	csc	$c2, $zero, 0($c4)
+   10f1c: 64 02 00 81                  	daddiu	$2, $zero, 129
+   10f20: e8 44 00 23                  	csd	$2, $zero, 32($c4)
+   10f24: 74 41 00 1f                  	clcbi	$c2, 496($c1)
+   10f28: f8 44 00 01                  	csc	$c2, $zero, 16($c4)
+   10f2c: 4a 82 20 28                  	csetbounds	$c2, $c4, 40
+   10f30: 34 02 ff d7                  	ori	$2, $zero, 65495
+   10f34: 48 0d 10 8d                  	candperm	$c13, $c2, $2
+   10f38: 74 81 00 3e                  	clcbi	$c4, 992($c1)
+   10f3c: 75 81 00 21                  	clcbi	$c12, 528($c1)
+   10f40: e8 78 00 93                  	csd	$3, $zero, 144($c24)
+   10f44: 48 11 63 3f                  	cjalr	$c12, $c17
+   10f48: 00 00 00 00                  	nop
+   10f4c: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x544>
+   10f50: 00 00 00 00                  	nop
+   10f54: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10f58: 74 41 00 22                  	clcbi	$c2, 544($c1)
+   10f5c: c8 22 00 03                  	cld	$1, $zero, 0($c2)
+   10f60: 74 41 00 10                  	clcbi	$c2, 256($c1)
+   10f64: c8 42 00 03                  	cld	$2, $zero, 0($c2)
+   10f68: 00 41 08 2d                  	daddu	$1, $2, $1
+   10f6c: e8 22 00 03                  	csd	$1, $zero, 0($c2)
+   10f70: 10 00 00 4e                  	b	316 <cheritest_ccall_setup+0x69c>
+   10f74: 00 00 00 00                  	nop
+   10f78: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10f7c: 74 41 00 1d                  	clcbi	$c2, 464($c1)
+   10f80: c8 22 00 06                  	clw	$1, $zero, 0($c2)
+   10f84: 18 20 00 47                  	blez	$1, 288 <cheritest_ccall_setup+0x694>
+   10f88: 00 00 00 00                  	nop
+   10f8c: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x584>
+   10f90: 00 00 00 00                  	nop
+   10f94: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10f98: 74 41 00 1b                  	clcbi	$c2, 432($c1)
+   10f9c: c8 22 00 06                  	clw	$1, $zero, 0($c2)
+   10fa0: 10 20 00 40                  	beqz	$1, 260 <cheritest_ccall_setup+0x694>
+   10fa4: 00 00 00 00                  	nop
+   10fa8: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x5a0>
+   10fac: 00 00 00 00                  	nop
+   10fb0: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   10fb4: 74 41 00 2c                  	clcbi	$c2, 704($c1)
+   10fb8: 48 03 5a bf                  	cmove	$c3, $c11
+   10fbc: f8 43 00 00                  	csc	$c2, $zero, 0($c3)
+   10fc0: 64 01 00 81                  	daddiu	$1, $zero, 129
+   10fc4: e8 23 00 23                  	csd	$1, $zero, 32($c3)
+   10fc8: 74 81 00 1f                  	clcbi	$c4, 496($c1)
+   10fcc: f8 83 00 01                  	csc	$c4, $zero, 16($c3)
+   10fd0: 4a 83 18 28                  	csetbounds	$c3, $c3, 40
+   10fd4: 34 02 ff d7                  	ori	$2, $zero, 65495
+   10fd8: 48 0d 18 8d                  	candperm	$c13, $c3, $2
+   10fdc: 74 61 00 3d                  	clcbi	$c3, 976($c1)
+   10fe0: 75 81 00 21                  	clcbi	$c12, 528($c1)
+   10fe4: 64 04 00 00                  	daddiu	$4, $zero, 0
+   10fe8: f8 78 00 08                  	csc	$c3, $zero, 128($c24)
+   10fec: 48 03 02 bf                  	cgetnull	$c3
+   10ff0: d8 b8 00 08                  	clc	$c5, $zero, 128($c24)
+   10ff4: f8 98 00 07                  	csc	$c4, $zero, 112($c24)
+   10ff8: 48 04 2a bf                  	cmove	$c4, $c5
+   10ffc: f8 58 00 06                  	csc	$c2, $zero, 96($c24)
+   11000: e8 38 00 5b                  	csd	$1, $zero, 88($c24)
+   11004: e8 58 00 53                  	csd	$2, $zero, 80($c24)
+   11008: 48 11 63 3f                  	cjalr	$c12, $c17
+   1100c: 00 00 00 00                  	nop
+   11010: 00 02 08 00                  	sll	$1, $2, 0
+   11014: d8 38 00 16                  	clc	$c1, $zero, 352($c24)
+   11018: 74 41 00 22                  	clcbi	$c2, 544($c1)
+   1101c: e8 22 00 03                  	csd	$1, $zero, 0($c2)
+   11020: c8 22 00 03                  	cld	$1, $zero, 0($c2)
+   11024: 48 03 5a bf                  	cmove	$c3, $c11
+   11028: d8 98 00 06                  	clc	$c4, $zero, 96($c24)
+   1102c: f8 83 00 00                  	csc	$c4, $zero, 0($c3)
+   11030: c8 78 00 5b                  	cld	$3, $zero, 88($c24)
+   11034: e8 63 00 23                  	csd	$3, $zero, 32($c3)
+   11038: d8 b8 00 07                  	clc	$c5, $zero, 112($c24)
+   1103c: f8 a3 00 01                  	csc	$c5, $zero, 16($c3)
+   11040: 75 81 00 21                  	clcbi	$c12, 528($c1)
+   11044: 00 01 20 2f                  	dnegu	$4, $1
+   11048: 74 c1 00 15                  	clcbi	$c6, 336($c1)
+   1104c: 3c 05 00 40                  	lui	$5, 64
+   11050: 48 06 31 51                  	cincoffset	$c6, $c6, $5
+   11054: 48 06 31 11                  	cincoffset	$c6, $c6, $4
+   11058: 4a 66 37 f9                  	cincoffset	$c6, $c6, -7
+   1105c: 64 24 00 06                  	daddiu	$4, $1, 6
+   11060: 4a 83 18 28                  	csetbounds	$c3, $c3, 40
+   11064: c8 38 00 53                  	cld	$1, $zero, 80($c24)
+   11068: 48 0d 18 4d                  	candperm	$c13, $c3, $1
+   1106c: 74 81 00 3f                  	clcbi	$c4, 1008($c1)
+   11070: 48 03 32 bf                  	cmove	$c3, $c6
+   11074: f8 58 00 04                  	csc	$c2, $zero, 64($c24)
+   11078: 48 11 63 3f                  	cjalr	$c12, $c17
+   1107c: 00 00 00 00                  	nop
+   11080: d8 38 00 04                  	clc	$c1, $zero, 64($c24)
+   11084: c8 21 00 03                  	cld	$1, $zero, 0($c1)
+   11088: d8 58 00 16                  	clc	$c2, $zero, 352($c24)
+   1108c: 74 62 00 10                  	clcbi	$c3, 256($c2)
+   11090: c8 63 00 03                  	cld	$3, $zero, 0($c3)
+   11094: 00 61 08 2d                  	daddu	$1, $3, $1
+   11098: e8 23 00 03                  	csd	$1, $zero, 0($c3)
+   1109c: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x694>
+   110a0: 00 00 00 00                  	nop
+   110a4: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x69c>
+   110a8: 00 00 00 00                  	nop
+   110ac: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x6a4>
+   110b0: 00 00 00 00                  	nop
+   110b4: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x6ac>
    110b8: 00 00 00 00                  	nop
-   110bc: d8 38 00 02                  	clc	$c1, $zero, 32($c24)
-   110c0: 75 81 00 14                  	clcbi	$c12, 320($c1)
-   110c4: 74 61 00 41                  	clcbi	$c3, 1040($c1)
-   110c8: 48 0d 02 bf                  	cgetnull	$c13
-   110cc: e8 58 00 32                  	csw	$2, $zero, 24($c24)
-   110d0: 48 11 63 3f                  	cjalr	$c12, $c17
-   110d4: 00 00 00 00                  	nop
-   110d8: d8 38 00 02                  	clc	$c1, $zero, 32($c24)
-   110dc: 75 81 00 42                  	clcbi	$c12, 1056($c1)
-   110e0: 48 0d 02 bf                  	cgetnull	$c13
-   110e4: e8 58 00 2a                  	csw	$2, $zero, 20($c24)
-   110e8: 48 11 63 3f                  	cjalr	$c12, $c17
-   110ec: 00 00 00 00                  	nop
-   110f0: d8 38 00 02                  	clc	$c1, $zero, 32($c24)
-   110f4: 75 81 00 14                  	clcbi	$c12, 320($c1)
-   110f8: 74 61 00 43                  	clcbi	$c3, 1072($c1)
-   110fc: 48 0d 02 bf                  	cgetnull	$c13
-   11100: 48 11 63 3f                  	cjalr	$c12, $c17
-   11104: 00 00 00 00                  	nop
-   11108: d8 38 00 02                  	clc	$c1, $zero, 32($c24)
-   1110c: 75 81 00 44                  	clcbi	$c12, 1088($c1)
-   11110: 48 0d 02 bf                  	cgetnull	$c13
-   11114: e8 58 00 22                  	csw	$2, $zero, 16($c24)
-   11118: 48 11 63 3f                  	cjalr	$c12, $c17
-   1111c: 00 00 00 00                  	nop
-   11120: d8 38 00 02                  	clc	$c1, $zero, 32($c24)
-   11124: 75 81 00 14                  	clcbi	$c12, 320($c1)
-   11128: 74 61 00 45                  	clcbi	$c3, 1104($c1)
-   1112c: 48 0d 02 bf                  	cgetnull	$c13
-   11130: 48 11 63 3f                  	cjalr	$c12, $c17
-   11134: 00 00 00 00                  	nop
-   11138: d8 38 00 02                  	clc	$c1, $zero, 32($c24)
-   1113c: 75 81 00 14                  	clcbi	$c12, 320($c1)
-   11140: 74 61 00 46                  	clcbi	$c3, 1120($c1)
-   11144: 48 0d 02 bf                  	cgetnull	$c13
-   11148: e8 58 00 1a                  	csw	$2, $zero, 12($c24)
-   1114c: 48 11 63 3f                  	cjalr	$c12, $c17
-   11150: 00 00 00 00                  	nop
-   11154: 64 01 00 00                  	daddiu	$1, $zero, 0
-   11158: e8 58 00 12                  	csw	$2, $zero, 8($c24)
-   1115c: 00 20 10 25                  	move	$2, $1
-   11160: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
-   11164: da 2b 00 04                  	clc	$c17, $zero, 64($c11)
-   11168: db 0b 00 05                  	clc	$c24, $zero, 80($c11)
-   1116c: 4a 6b 58 60                  	cincoffset	$c11, $c11, 96
-   11170: 48 11 1f ff                  	cjr	$c17
-   11174: 00 00 00 00                  	nop
-   11178: 04 17 00 01                  	<unknown>
-   1117c: 04 17 00 01                  	<unknown>
+   110bc: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x6b4>
+   110c0: 00 00 00 00                  	nop
+   110c4: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
+   110c8: da 2b 00 17                  	clc	$c17, $zero, 368($c11)
+   110cc: db 0b 00 18                  	clc	$c24, $zero, 384($c11)
+   110d0: 4a 6b 59 90                  	cincoffset	$c11, $c11, 400
+   110d4: 48 11 1f ff                  	cjr	$c17
+		...
 
-0000000000011180 libcheri_type_alloc:
-   11180: 4a 6b 5f b0                  	cincoffset	$c11, $c11, -80
-   11184: ea 0b 00 4b                  	csd	$16, $zero, 72($c11)
-   11188: fb 0b 00 03                  	csc	$c24, $zero, 48($c11)
-   1118c: fa 6b 00 02                  	csc	$c19, $zero, 32($c11)
-   11190: fa 4b 00 01                  	csc	$c18, $zero, 16($c11)
-   11194: fa 2b 00 00                  	csc	$c17, $zero, 0($c11)
-   11198: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
-   1119c: 3c 01 00 02                  	lui	$1, 2
-   111a0: 64 21 ee c0                  	daddiu	$1, $1, -4416
-   111a4: 48 13 60 51                  	cincoffset	$c19, $c12, $1
-   111a8: 74 33 00 47                  	clcbi	$c1, 1136($c19)
-   111ac: 64 01 00 01                  	daddiu	$1, $zero, 1
-   111b0: 4a 10 08 0b                  	clld	$16, $c1
-   111b4: 02 01 10 2d                  	daddu	$2, $16, $1
-   111b8: 4a 02 08 83                  	cscd	$2, $2, $c1
-   111bc: 10 40 ff fc                  	beqz	$2, -12 <libcheri_type_alloc+0x30>
-   111c0: 00 00 00 00                  	nop
-   111c4: 3c 01 00 40                  	lui	$1, 64
-   111c8: 00 30 08 2b                  	sltu	$1, $1, $16
-   111cc: 14 20 00 1c                  	bnez	$1, 116 <libcheri_type_alloc+0xc0>
-   111d0: 48 03 02 bf                  	cgetnull	$c3
-   111d4: 76 53 00 48                  	clcbi	$c18, 1152($c19)
-   111d8: d8 32 00 00                  	clc	$c1, $zero, 0($c18)
-   111dc: 48 01 08 3f                  	cgetperm	$1, $c1
-   111e0: 30 21 00 80                  	andi	$1, $1, 128
-   111e4: 14 20 00 12                  	bnez	$1, 76 <libcheri_type_alloc+0xb0>
-   111e8: 00 00 00 00                  	nop
-   111ec: 75 93 00 49                  	clcbi	$c12, 1168($c19)
-   111f0: 64 04 00 06                  	daddiu	$4, $zero, 6
-   111f4: 48 11 63 3f                  	cjalr	$c12, $c17
-   111f8: 48 03 92 bf                  	cmove	$c3, $c18
-   111fc: 04 40 00 03                  	bltz	$2, 16 <libcheri_type_alloc+0x8c>
-   11200: 00 00 00 00                  	nop
-   11204: 10 00 00 03                  	b	16 <libcheri_type_alloc+0x94>
-   11208: d8 32 00 00                  	clc	$c1, $zero, 0($c18)
-   1120c: 48 01 02 bf                  	cgetnull	$c1
-   11210: f8 12 00 00                  	csc	$cnull, $zero, 0($c18)
-   11214: 48 01 08 3f                  	cgetperm	$1, $c1
-   11218: 30 21 00 80                  	andi	$1, $1, 128
-   1121c: 10 20 00 10                  	beqz	$1, 68 <libcheri_type_alloc+0xe0>
-   11220: 00 00 00 00                  	nop
-   11224: 48 01 08 ff                  	cgetlen	$1, $c1
-   11228: 10 20 00 13                  	beqz	$1, 80 <libcheri_type_alloc+0xf8>
-   1122c: 00 00 00 00                  	nop
-   11230: 48 01 0c 0f                  	csetoffset	$c1, $c1, $16
-   11234: 4a 81 08 01                  	csetbounds	$c1, $c1, 1
-   11238: 64 01 00 81                  	daddiu	$1, $zero, 129
-   1123c: 48 03 08 4d                  	candperm	$c3, $c1, $1
-   11240: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
-   11244: da 2b 00 00                  	clc	$c17, $zero, 0($c11)
-   11248: da 4b 00 01                  	clc	$c18, $zero, 16($c11)
-   1124c: da 6b 00 02                  	clc	$c19, $zero, 32($c11)
-   11250: db 0b 00 03                  	clc	$c24, $zero, 48($c11)
-   11254: ca 0b 00 4b                  	cld	$16, $zero, 72($c11)
-   11258: 48 11 1f ff                  	cjr	$c17
-   1125c: 4a 6b 58 50                  	cincoffset	$c11, $c11, 80
-   11260: 74 73 00 4a                  	clcbi	$c3, 1184($c19)
-   11264: 74 93 00 4b                  	clcbi	$c4, 1200($c19)
-   11268: 74 b3 00 4c                  	clcbi	$c5, 1216($c19)
-   1126c: 75 93 00 4d                  	clcbi	$c12, 1232($c19)
+00000000000110e0 codecap_create:
+   110e0: 4a 6b 5f c0                  	cincoffset	$c11, $c11, -64
+   110e4: fb 0b 00 03                  	csc	$c24, $zero, 48($c11)
+   110e8: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
+   110ec: 4a 61 c0 20                  	cincoffset	$c1, $c24, 32
+   110f0: 4a 81 08 10                  	csetbounds	$c1, $c1, 16
+   110f4: 4a 62 c0 10                  	cincoffset	$c2, $c24, 16
+   110f8: 4a 82 10 10                  	csetbounds	$c2, $c2, 16
+   110fc: 4a 85 c0 10                  	csetbounds	$c5, $c24, 16
+   11100: f8 61 00 00                  	csc	$c3, $zero, 0($c1)
+   11104: f8 82 00 00                  	csc	$c4, $zero, 0($c2)
+   11108: d8 21 00 00                  	clc	$c1, $zero, 0($c1)
+   1110c: 34 01 81 07                  	ori	$1, $zero, 33031
+   11110: 48 01 08 4d                  	candperm	$c1, $c1, $1
+   11114: f8 25 00 00                  	csc	$c1, $zero, 0($c5)
+   11118: d8 65 00 00                  	clc	$c3, $zero, 0($c5)
+   1111c: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
+   11120: db 0b 00 03                  	clc	$c24, $zero, 48($c11)
+   11124: 4a 6b 58 40                  	cincoffset	$c11, $c11, 64
+   11128: 48 11 1f ff                  	cjr	$c17
+   1112c: 00 00 00 00                  	nop
+
+0000000000011130 datacap_create:
+   11130: 4a 6b 5f c0                  	cincoffset	$c11, $c11, -64
+   11134: fb 0b 00 03                  	csc	$c24, $zero, 48($c11)
+   11138: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
+   1113c: 4a 61 c0 20                  	cincoffset	$c1, $c24, 32
+   11140: 4a 81 08 10                  	csetbounds	$c1, $c1, 16
+   11144: 4a 62 c0 10                  	cincoffset	$c2, $c24, 16
+   11148: 4a 82 10 10                  	csetbounds	$c2, $c2, 16
+   1114c: 4a 85 c0 10                  	csetbounds	$c5, $c24, 16
+   11150: f8 61 00 00                  	csc	$c3, $zero, 0($c1)
+   11154: f8 82 00 00                  	csc	$c4, $zero, 0($c2)
+   11158: d8 21 00 00                  	clc	$c1, $zero, 0($c1)
+   1115c: 34 01 81 7d                  	ori	$1, $zero, 33149
+   11160: 48 01 08 4d                  	candperm	$c1, $c1, $1
+   11164: f8 25 00 00                  	csc	$c1, $zero, 0($c5)
+   11168: d8 65 00 00                  	clc	$c3, $zero, 0($c5)
+   1116c: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
+   11170: db 0b 00 03                  	clc	$c24, $zero, 48($c11)
+   11174: 4a 6b 58 40                  	cincoffset	$c11, $c11, 64
+   11178: 48 11 1f ff                  	cjr	$c17
+   1117c: 00 00 00 00                  	nop
+
+0000000000011180 test_fault_creturn:
+   11180: 4a 6b 5f e0                  	cincoffset	$c11, $c11, -32
+   11184: fb 0b 00 01                  	csc	$c24, $zero, 16($c11)
+   11188: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
+   1118c: 4a 81 c0 10                  	csetbounds	$c1, $c24, 16
+   11190: f8 61 00 00                  	csc	$c3, $zero, 0($c1)
+   11194: 48 a0 07 ff                  	creturn
+   11198: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
+   1119c: db 0b 00 01                  	clc	$c24, $zero, 16($c11)
+   111a0: 4a 6b 58 20                  	cincoffset	$c11, $c11, 32
+   111a4: 48 11 1f ff                  	cjr	$c17
+		...
+
+00000000000111b0 test_nofault_ccall_creturn:
+   111b0: 4a 6b 5f a0                  	cincoffset	$c11, $c11, -96
+   111b4: fb 0b 00 05                  	csc	$c24, $zero, 80($c11)
+   111b8: fa 2b 00 04                  	csc	$c17, $zero, 64($c11)
+   111bc: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
+   111c0: 3c 01 00 02                  	lui	$1, 2
+   111c4: 64 21 ee 90                  	daddiu	$1, $1, -4464
+   111c8: 48 1a 60 51                  	cincoffset	$c26, $c12, $1
+   111cc: 48 01 d2 bf                  	cmove	$c1, $c26
+   111d0: 4a 62 c0 30                  	cincoffset	$c2, $c24, 48
+   111d4: 4a 82 10 10                  	csetbounds	$c2, $c2, 16
+   111d8: 4a 64 c0 10                  	cincoffset	$c4, $c24, 16
+   111dc: 4a 84 20 20                  	csetbounds	$c4, $c4, 32
+   111e0: f8 62 00 00                  	csc	$c3, $zero, 0($c2)
+   111e4: 74 41 00 35                  	clcbi	$c2, 848($c1)
+   111e8: d8 42 00 00                  	clc	$c2, $zero, 0($c2)
+   111ec: f8 44 00 00                  	csc	$c2, $zero, 0($c4)
+   111f0: 74 41 00 37                  	clcbi	$c2, 880($c1)
+   111f4: d8 42 00 00                  	clc	$c2, $zero, 0($c2)
+   111f8: f8 44 00 01                  	csc	$c2, $zero, 16($c4)
+   111fc: d8 44 00 00                  	clc	$c2, $zero, 0($c4)
+   11200: d8 64 00 01                  	clc	$c3, $zero, 16($c4)
+   11204: 75 81 00 40                  	clcbi	$c12, 1024($c1)
+   11208: 64 01 00 00                  	daddiu	$1, $zero, 0
+   1120c: f8 38 00 00                  	csc	$c1, $zero, 0($c24)
+   11210: 48 01 12 bf                  	cmove	$c1, $c2
+   11214: 48 02 1a bf                  	cmove	$c2, $c3
+   11218: 48 0d 02 bf                  	cgetnull	$c13
+   1121c: 48 03 02 bf                  	cgetnull	$c3
+   11220: 48 04 02 bf                  	cgetnull	$c4
+   11224: 48 05 02 bf                  	cgetnull	$c5
+   11228: 48 06 02 bf                  	cgetnull	$c6
+   1122c: 48 07 02 bf                  	cgetnull	$c7
+   11230: 48 08 02 bf                  	cgetnull	$c8
+   11234: 48 09 02 bf                  	cgetnull	$c9
+   11238: 48 0a 02 bf                  	cgetnull	$c10
+   1123c: 00 20 20 25                  	move	$4, $1
+   11240: 00 20 28 25                  	move	$5, $1
+   11244: 00 20 30 25                  	move	$6, $1
+   11248: 00 20 38 25                  	move	$7, $1
+   1124c: 00 20 40 25                  	move	$8, $1
+   11250: 00 20 48 25                  	move	$9, $1
+   11254: 00 20 50 25                  	move	$10, $1
+   11258: 00 20 58 25                  	move	$11, $1
+   1125c: 48 11 63 3f                  	cjalr	$c12, $c17
+   11260: 00 00 00 00                  	nop
+   11264: d8 38 00 00                  	clc	$c1, $zero, 0($c24)
+   11268: 75 81 00 41                  	clcbi	$c12, 1040($c1)
+   1126c: 48 0d 02 bf                  	cgetnull	$c13
    11270: 48 11 63 3f                  	cjalr	$c12, $c17
-   11274: 64 04 00 50                  	daddiu	$4, $zero, 80
-   11278: 74 73 00 4a                  	clcbi	$c3, 1184($c19)
-   1127c: 74 93 00 4b                  	clcbi	$c4, 1200($c19)
-   11280: 74 b3 00 4e                  	clcbi	$c5, 1248($c19)
-   11284: 75 93 00 4d                  	clcbi	$c12, 1232($c19)
-   11288: 48 11 63 3f                  	cjalr	$c12, $c17
-   1128c: 64 04 00 51                  	daddiu	$4, $zero, 81
+   11274: 00 00 00 00                  	nop
 
-0000000000011290 libcheri_system_type_alloc:
-   11290: 4a 6b 5f b0                  	cincoffset	$c11, $c11, -80
-   11294: ea 0b 00 4b                  	csd	$16, $zero, 72($c11)
-   11298: fb 0b 00 03                  	csc	$c24, $zero, 48($c11)
-   1129c: fa 6b 00 02                  	csc	$c19, $zero, 32($c11)
-   112a0: fa 4b 00 01                  	csc	$c18, $zero, 16($c11)
-   112a4: fa 2b 00 00                  	csc	$c17, $zero, 0($c11)
-   112a8: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
-   112ac: 3c 01 00 02                  	lui	$1, 2
-   112b0: 64 21 ed b0                  	daddiu	$1, $1, -4688
-   112b4: 48 13 60 51                  	cincoffset	$c19, $c12, $1
-   112b8: 74 33 00 4f                  	clcbi	$c1, 1264($c19)
-   112bc: 64 01 00 01                  	daddiu	$1, $zero, 1
-   112c0: 4a 10 08 0b                  	clld	$16, $c1
-   112c4: 02 01 10 2d                  	daddu	$2, $16, $1
-   112c8: 4a 02 08 83                  	cscd	$2, $2, $c1
-   112cc: 10 40 ff fc                  	beqz	$2, -12 <libcheri_system_type_alloc+0x30>
-   112d0: 00 00 00 00                  	nop
-   112d4: 3c 01 00 80                  	lui	$1, 128
-   112d8: 00 30 08 2b                  	sltu	$1, $1, $16
-   112dc: 14 20 00 1c                  	bnez	$1, 116 <libcheri_system_type_alloc+0xc0>
-   112e0: 48 03 02 bf                  	cgetnull	$c3
-   112e4: 76 53 00 48                  	clcbi	$c18, 1152($c19)
-   112e8: d8 32 00 00                  	clc	$c1, $zero, 0($c18)
-   112ec: 48 01 08 3f                  	cgetperm	$1, $c1
-   112f0: 30 21 00 80                  	andi	$1, $1, 128
-   112f4: 14 20 00 12                  	bnez	$1, 76 <libcheri_system_type_alloc+0xb0>
-   112f8: 00 00 00 00                  	nop
-   112fc: 75 93 00 49                  	clcbi	$c12, 1168($c19)
-   11300: 64 04 00 06                  	daddiu	$4, $zero, 6
-   11304: 48 11 63 3f                  	cjalr	$c12, $c17
-   11308: 48 03 92 bf                  	cmove	$c3, $c18
-   1130c: 04 40 00 03                  	bltz	$2, 16 <libcheri_system_type_alloc+0x8c>
-   11310: 00 00 00 00                  	nop
-   11314: 10 00 00 03                  	b	16 <libcheri_system_type_alloc+0x94>
-   11318: d8 32 00 00                  	clc	$c1, $zero, 0($c18)
-   1131c: 48 01 02 bf                  	cgetnull	$c1
-   11320: f8 12 00 00                  	csc	$cnull, $zero, 0($c18)
-   11324: 48 01 08 3f                  	cgetperm	$1, $c1
-   11328: 30 21 00 80                  	andi	$1, $1, 128
-   1132c: 10 20 00 10                  	beqz	$1, 68 <libcheri_system_type_alloc+0xe0>
-   11330: 00 00 00 00                  	nop
-   11334: 48 01 08 ff                  	cgetlen	$1, $c1
-   11338: 10 20 00 13                  	beqz	$1, 80 <libcheri_system_type_alloc+0xf8>
-   1133c: 00 00 00 00                  	nop
-   11340: 48 01 0c 0f                  	csetoffset	$c1, $c1, $16
-   11344: 4a 81 08 01                  	csetbounds	$c1, $c1, 1
-   11348: 64 01 00 81                  	daddiu	$1, $zero, 129
-   1134c: 48 03 08 4d                  	candperm	$c3, $c1, $1
-   11350: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
-   11354: da 2b 00 00                  	clc	$c17, $zero, 0($c11)
-   11358: da 4b 00 01                  	clc	$c18, $zero, 16($c11)
-   1135c: da 6b 00 02                  	clc	$c19, $zero, 32($c11)
-   11360: db 0b 00 03                  	clc	$c24, $zero, 48($c11)
-   11364: ca 0b 00 4b                  	cld	$16, $zero, 72($c11)
-   11368: 48 11 1f ff                  	cjr	$c17
-   1136c: 4a 6b 58 50                  	cincoffset	$c11, $c11, 80
-   11370: 74 73 00 4a                  	clcbi	$c3, 1184($c19)
-   11374: 74 93 00 4b                  	clcbi	$c4, 1200($c19)
-   11378: 74 b3 00 4c                  	clcbi	$c5, 1216($c19)
-   1137c: 75 93 00 4d                  	clcbi	$c12, 1232($c19)
+0000000000011278 test_sandboxA:
+   11278: 4a 6b 5f d0                  	cincoffset	$c11, $c11, -48
+   1127c: fb 0b 00 02                  	csc	$c24, $zero, 32($c11)
+   11280: fa 2b 00 01                  	csc	$c17, $zero, 16($c11)
+   11284: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
+   11288: 3c 01 00 02                  	lui	$1, 2
+   1128c: 64 21 ed c8                  	daddiu	$1, $1, -4664
+   11290: 48 1a 60 51                  	cincoffset	$c26, $c12, $1
+   11294: 48 01 d2 bf                  	cmove	$c1, $c26
+   11298: 74 41 00 3b                  	clcbi	$c2, 944($c1)
+   1129c: d8 42 00 00                  	clc	$c2, $zero, 0($c2)
+   112a0: 74 61 00 3c                  	clcbi	$c3, 960($c1)
+   112a4: d8 63 00 00                  	clc	$c3, $zero, 0($c3)
+   112a8: 75 81 00 40                  	clcbi	$c12, 1024($c1)
+   112ac: 64 01 00 00                  	daddiu	$1, $zero, 0
+   112b0: f8 38 00 00                  	csc	$c1, $zero, 0($c24)
+   112b4: 48 01 12 bf                  	cmove	$c1, $c2
+   112b8: 48 02 1a bf                  	cmove	$c2, $c3
+   112bc: 48 0d 02 bf                  	cgetnull	$c13
+   112c0: 48 03 02 bf                  	cgetnull	$c3
+   112c4: 48 04 02 bf                  	cgetnull	$c4
+   112c8: 48 05 02 bf                  	cgetnull	$c5
+   112cc: 48 06 02 bf                  	cgetnull	$c6
+   112d0: 48 07 02 bf                  	cgetnull	$c7
+   112d4: 48 08 02 bf                  	cgetnull	$c8
+   112d8: 48 09 02 bf                  	cgetnull	$c9
+   112dc: 48 0a 02 bf                  	cgetnull	$c10
+   112e0: 00 20 20 25                  	move	$4, $1
+   112e4: 00 20 28 25                  	move	$5, $1
+   112e8: 00 20 30 25                  	move	$6, $1
+   112ec: 00 20 38 25                  	move	$7, $1
+   112f0: 00 20 40 25                  	move	$8, $1
+   112f4: 00 20 48 25                  	move	$9, $1
+   112f8: 00 20 50 25                  	move	$10, $1
+   112fc: 00 20 58 25                  	move	$11, $1
+   11300: 48 11 63 3f                  	cjalr	$c12, $c17
+   11304: 00 00 00 00                  	nop
+   11308: d8 38 00 00                  	clc	$c1, $zero, 0($c24)
+   1130c: 75 81 00 41                  	clcbi	$c12, 1040($c1)
+   11310: 48 0d 02 bf                  	cgetnull	$c13
+   11314: 48 11 63 3f                  	cjalr	$c12, $c17
+		...
+
+0000000000011320 main:
+   11320: 4a 6b 5f a0                  	cincoffset	$c11, $c11, -96
+   11324: fb 0b 00 05                  	csc	$c24, $zero, 80($c11)
+   11328: fa 2b 00 04                  	csc	$c17, $zero, 64($c11)
+   1132c: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
+   11330: 3c 01 00 02                  	lui	$1, 2
+   11334: 64 21 ed 20                  	daddiu	$1, $1, -4832
+   11338: 48 1a 60 51                  	cincoffset	$c26, $c12, $1
+   1133c: 48 01 d2 bf                  	cmove	$c1, $c26
+   11340: 4a 62 c0 3c                  	cincoffset	$c2, $c24, 60
+   11344: 4a 82 10 04                  	csetbounds	$c2, $c2, 4
+   11348: 24 02 00 00                  	addiu	$2, $zero, 0
+   1134c: e8 02 00 02                  	csw	$zero, $zero, 0($c2)
+   11350: 74 61 00 42                  	clcbi	$c3, 1056($c1)
+   11354: 75 81 00 14                  	clcbi	$c12, 320($c1)
+   11358: 48 0d 02 bf                  	cgetnull	$c13
+   1135c: f8 38 00 02                  	csc	$c1, $zero, 32($c24)
+   11360: e8 58 00 3a                  	csw	$2, $zero, 28($c24)
+   11364: 48 11 63 3f                  	cjalr	$c12, $c17
+   11368: 00 00 00 00                  	nop
+   1136c: d8 38 00 02                  	clc	$c1, $zero, 32($c24)
+   11370: 75 81 00 14                  	clcbi	$c12, 320($c1)
+   11374: 74 61 00 43                  	clcbi	$c3, 1072($c1)
+   11378: 48 0d 02 bf                  	cgetnull	$c13
+   1137c: e8 58 00 32                  	csw	$2, $zero, 24($c24)
    11380: 48 11 63 3f                  	cjalr	$c12, $c17
-   11384: 64 04 00 50                  	daddiu	$4, $zero, 80
-   11388: 74 73 00 4a                  	clcbi	$c3, 1184($c19)
-   1138c: 74 93 00 4b                  	clcbi	$c4, 1200($c19)
-   11390: 74 b3 00 4e                  	clcbi	$c5, 1248($c19)
-   11394: 75 93 00 4d                  	clcbi	$c12, 1232($c19)
+   11384: 00 00 00 00                  	nop
+   11388: d8 38 00 02                  	clc	$c1, $zero, 32($c24)
+   1138c: 75 81 00 44                  	clcbi	$c12, 1088($c1)
+   11390: 48 0d 02 bf                  	cgetnull	$c13
+   11394: e8 58 00 2a                  	csw	$2, $zero, 20($c24)
    11398: 48 11 63 3f                  	cjalr	$c12, $c17
-   1139c: 64 04 00 51                  	daddiu	$4, $zero, 81
+   1139c: 00 00 00 00                  	nop
+   113a0: d8 38 00 02                  	clc	$c1, $zero, 32($c24)
+   113a4: 75 81 00 14                  	clcbi	$c12, 320($c1)
+   113a8: 74 61 00 45                  	clcbi	$c3, 1104($c1)
+   113ac: 48 0d 02 bf                  	cgetnull	$c13
+   113b0: 48 11 63 3f                  	cjalr	$c12, $c17
+   113b4: 00 00 00 00                  	nop
+   113b8: d8 38 00 02                  	clc	$c1, $zero, 32($c24)
+   113bc: 75 81 00 46                  	clcbi	$c12, 1120($c1)
+   113c0: 48 0d 02 bf                  	cgetnull	$c13
+   113c4: e8 58 00 22                  	csw	$2, $zero, 16($c24)
+   113c8: 48 11 63 3f                  	cjalr	$c12, $c17
+   113cc: 00 00 00 00                  	nop
+   113d0: d8 38 00 02                  	clc	$c1, $zero, 32($c24)
+   113d4: 75 81 00 14                  	clcbi	$c12, 320($c1)
+   113d8: 74 61 00 47                  	clcbi	$c3, 1136($c1)
+   113dc: 48 0d 02 bf                  	cgetnull	$c13
+   113e0: 48 11 63 3f                  	cjalr	$c12, $c17
+   113e4: 00 00 00 00                  	nop
+   113e8: d8 38 00 02                  	clc	$c1, $zero, 32($c24)
+   113ec: 75 81 00 14                  	clcbi	$c12, 320($c1)
+   113f0: 74 61 00 48                  	clcbi	$c3, 1152($c1)
+   113f4: 48 0d 02 bf                  	cgetnull	$c13
+   113f8: e8 58 00 1a                  	csw	$2, $zero, 12($c24)
+   113fc: 48 11 63 3f                  	cjalr	$c12, $c17
+   11400: 00 00 00 00                  	nop
+   11404: 64 01 00 00                  	daddiu	$1, $zero, 0
+   11408: e8 58 00 12                  	csw	$2, $zero, 8($c24)
+   1140c: 00 20 10 25                  	move	$2, $1
+   11410: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
+   11414: da 2b 00 04                  	clc	$c17, $zero, 64($c11)
+   11418: db 0b 00 05                  	clc	$c24, $zero, 80($c11)
+   1141c: 4a 6b 58 60                  	cincoffset	$c11, $c11, 96
+   11420: 48 11 1f ff                  	cjr	$c17
+   11424: 00 00 00 00                  	nop
+   11428: 04 17 00 01                  	<unknown>
+   1142c: 04 17 00 01                  	<unknown>
+
+0000000000011430 libcheri_type_alloc:
+   11430: 4a 6b 5f b0                  	cincoffset	$c11, $c11, -80
+   11434: ea 0b 00 4b                  	csd	$16, $zero, 72($c11)
+   11438: fb 0b 00 03                  	csc	$c24, $zero, 48($c11)
+   1143c: fa 6b 00 02                  	csc	$c19, $zero, 32($c11)
+   11440: fa 4b 00 01                  	csc	$c18, $zero, 16($c11)
+   11444: fa 2b 00 00                  	csc	$c17, $zero, 0($c11)
+   11448: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
+   1144c: 3c 01 00 02                  	lui	$1, 2
+   11450: 64 21 ec 10                  	daddiu	$1, $1, -5104
+   11454: 48 13 60 51                  	cincoffset	$c19, $c12, $1
+   11458: 74 33 00 49                  	clcbi	$c1, 1168($c19)
+   1145c: 64 01 00 01                  	daddiu	$1, $zero, 1
+   11460: 4a 10 08 0b                  	clld	$16, $c1
+   11464: 02 01 10 2d                  	daddu	$2, $16, $1
+   11468: 4a 02 08 83                  	cscd	$2, $2, $c1
+   1146c: 10 40 ff fc                  	beqz	$2, -12 <libcheri_type_alloc+0x30>
+   11470: 00 00 00 00                  	nop
+   11474: 3c 01 00 40                  	lui	$1, 64
+   11478: 00 30 08 2b                  	sltu	$1, $1, $16
+   1147c: 14 20 00 1c                  	bnez	$1, 116 <libcheri_type_alloc+0xc0>
+   11480: 48 03 02 bf                  	cgetnull	$c3
+   11484: 76 53 00 4a                  	clcbi	$c18, 1184($c19)
+   11488: d8 32 00 00                  	clc	$c1, $zero, 0($c18)
+   1148c: 48 01 08 3f                  	cgetperm	$1, $c1
+   11490: 30 21 00 80                  	andi	$1, $1, 128
+   11494: 14 20 00 12                  	bnez	$1, 76 <libcheri_type_alloc+0xb0>
+   11498: 00 00 00 00                  	nop
+   1149c: 75 93 00 4b                  	clcbi	$c12, 1200($c19)
+   114a0: 64 04 00 06                  	daddiu	$4, $zero, 6
+   114a4: 48 11 63 3f                  	cjalr	$c12, $c17
+   114a8: 48 03 92 bf                  	cmove	$c3, $c18
+   114ac: 04 40 00 03                  	bltz	$2, 16 <libcheri_type_alloc+0x8c>
+   114b0: 00 00 00 00                  	nop
+   114b4: 10 00 00 03                  	b	16 <libcheri_type_alloc+0x94>
+   114b8: d8 32 00 00                  	clc	$c1, $zero, 0($c18)
+   114bc: 48 01 02 bf                  	cgetnull	$c1
+   114c0: f8 12 00 00                  	csc	$cnull, $zero, 0($c18)
+   114c4: 48 01 08 3f                  	cgetperm	$1, $c1
+   114c8: 30 21 00 80                  	andi	$1, $1, 128
+   114cc: 10 20 00 10                  	beqz	$1, 68 <libcheri_type_alloc+0xe0>
+   114d0: 00 00 00 00                  	nop
+   114d4: 48 01 08 ff                  	cgetlen	$1, $c1
+   114d8: 10 20 00 13                  	beqz	$1, 80 <libcheri_type_alloc+0xf8>
+   114dc: 00 00 00 00                  	nop
+   114e0: 48 01 0c 0f                  	csetoffset	$c1, $c1, $16
+   114e4: 4a 81 08 01                  	csetbounds	$c1, $c1, 1
+   114e8: 64 01 00 81                  	daddiu	$1, $zero, 129
+   114ec: 48 03 08 4d                  	candperm	$c3, $c1, $1
+   114f0: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
+   114f4: da 2b 00 00                  	clc	$c17, $zero, 0($c11)
+   114f8: da 4b 00 01                  	clc	$c18, $zero, 16($c11)
+   114fc: da 6b 00 02                  	clc	$c19, $zero, 32($c11)
+   11500: db 0b 00 03                  	clc	$c24, $zero, 48($c11)
+   11504: ca 0b 00 4b                  	cld	$16, $zero, 72($c11)
+   11508: 48 11 1f ff                  	cjr	$c17
+   1150c: 4a 6b 58 50                  	cincoffset	$c11, $c11, 80
+   11510: 74 73 00 4c                  	clcbi	$c3, 1216($c19)
+   11514: 74 93 00 4d                  	clcbi	$c4, 1232($c19)
+   11518: 74 b3 00 4e                  	clcbi	$c5, 1248($c19)
+   1151c: 75 93 00 4f                  	clcbi	$c12, 1264($c19)
+   11520: 48 11 63 3f                  	cjalr	$c12, $c17
+   11524: 64 04 00 50                  	daddiu	$4, $zero, 80
+   11528: 74 73 00 4c                  	clcbi	$c3, 1216($c19)
+   1152c: 74 93 00 4d                  	clcbi	$c4, 1232($c19)
+   11530: 74 b3 00 50                  	clcbi	$c5, 1280($c19)
+   11534: 75 93 00 4f                  	clcbi	$c12, 1264($c19)
+   11538: 48 11 63 3f                  	cjalr	$c12, $c17
+   1153c: 64 04 00 51                  	daddiu	$4, $zero, 81
+
+0000000000011540 libcheri_system_type_alloc:
+   11540: 4a 6b 5f b0                  	cincoffset	$c11, $c11, -80
+   11544: ea 0b 00 4b                  	csd	$16, $zero, 72($c11)
+   11548: fb 0b 00 03                  	csc	$c24, $zero, 48($c11)
+   1154c: fa 6b 00 02                  	csc	$c19, $zero, 32($c11)
+   11550: fa 4b 00 01                  	csc	$c18, $zero, 16($c11)
+   11554: fa 2b 00 00                  	csc	$c17, $zero, 0($c11)
+   11558: 48 18 58 11                  	cincoffset	$c24, $c11, $zero
+   1155c: 3c 01 00 02                  	lui	$1, 2
+   11560: 64 21 eb 00                  	daddiu	$1, $1, -5376
+   11564: 48 13 60 51                  	cincoffset	$c19, $c12, $1
+   11568: 74 33 00 51                  	clcbi	$c1, 1296($c19)
+   1156c: 64 01 00 01                  	daddiu	$1, $zero, 1
+   11570: 4a 10 08 0b                  	clld	$16, $c1
+   11574: 02 01 10 2d                  	daddu	$2, $16, $1
+   11578: 4a 02 08 83                  	cscd	$2, $2, $c1
+   1157c: 10 40 ff fc                  	beqz	$2, -12 <libcheri_system_type_alloc+0x30>
+   11580: 00 00 00 00                  	nop
+   11584: 3c 01 00 80                  	lui	$1, 128
+   11588: 00 30 08 2b                  	sltu	$1, $1, $16
+   1158c: 14 20 00 1c                  	bnez	$1, 116 <libcheri_system_type_alloc+0xc0>
+   11590: 48 03 02 bf                  	cgetnull	$c3
+   11594: 76 53 00 4a                  	clcbi	$c18, 1184($c19)
+   11598: d8 32 00 00                  	clc	$c1, $zero, 0($c18)
+   1159c: 48 01 08 3f                  	cgetperm	$1, $c1
+   115a0: 30 21 00 80                  	andi	$1, $1, 128
+   115a4: 14 20 00 12                  	bnez	$1, 76 <libcheri_system_type_alloc+0xb0>
+   115a8: 00 00 00 00                  	nop
+   115ac: 75 93 00 4b                  	clcbi	$c12, 1200($c19)
+   115b0: 64 04 00 06                  	daddiu	$4, $zero, 6
+   115b4: 48 11 63 3f                  	cjalr	$c12, $c17
+   115b8: 48 03 92 bf                  	cmove	$c3, $c18
+   115bc: 04 40 00 03                  	bltz	$2, 16 <libcheri_system_type_alloc+0x8c>
+   115c0: 00 00 00 00                  	nop
+   115c4: 10 00 00 03                  	b	16 <libcheri_system_type_alloc+0x94>
+   115c8: d8 32 00 00                  	clc	$c1, $zero, 0($c18)
+   115cc: 48 01 02 bf                  	cgetnull	$c1
+   115d0: f8 12 00 00                  	csc	$cnull, $zero, 0($c18)
+   115d4: 48 01 08 3f                  	cgetperm	$1, $c1
+   115d8: 30 21 00 80                  	andi	$1, $1, 128
+   115dc: 10 20 00 10                  	beqz	$1, 68 <libcheri_system_type_alloc+0xe0>
+   115e0: 00 00 00 00                  	nop
+   115e4: 48 01 08 ff                  	cgetlen	$1, $c1
+   115e8: 10 20 00 13                  	beqz	$1, 80 <libcheri_system_type_alloc+0xf8>
+   115ec: 00 00 00 00                  	nop
+   115f0: 48 01 0c 0f                  	csetoffset	$c1, $c1, $16
+   115f4: 4a 81 08 01                  	csetbounds	$c1, $c1, 1
+   115f8: 64 01 00 81                  	daddiu	$1, $zero, 129
+   115fc: 48 03 08 4d                  	candperm	$c3, $c1, $1
+   11600: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
+   11604: da 2b 00 00                  	clc	$c17, $zero, 0($c11)
+   11608: da 4b 00 01                  	clc	$c18, $zero, 16($c11)
+   1160c: da 6b 00 02                  	clc	$c19, $zero, 32($c11)
+   11610: db 0b 00 03                  	clc	$c24, $zero, 48($c11)
+   11614: ca 0b 00 4b                  	cld	$16, $zero, 72($c11)
+   11618: 48 11 1f ff                  	cjr	$c17
+   1161c: 4a 6b 58 50                  	cincoffset	$c11, $c11, 80
+   11620: 74 73 00 4c                  	clcbi	$c3, 1216($c19)
+   11624: 74 93 00 4d                  	clcbi	$c4, 1232($c19)
+   11628: 74 b3 00 4e                  	clcbi	$c5, 1248($c19)
+   1162c: 75 93 00 4f                  	clcbi	$c12, 1264($c19)
+   11630: 48 11 63 3f                  	cjalr	$c12, $c17
+   11634: 64 04 00 50                  	daddiu	$4, $zero, 80
+   11638: 74 73 00 4c                  	clcbi	$c3, 1216($c19)
+   1163c: 74 93 00 4d                  	clcbi	$c4, 1232($c19)
+   11640: 74 b3 00 50                  	clcbi	$c5, 1280($c19)
+   11644: 75 93 00 4f                  	clcbi	$c12, 1264($c19)
+   11648: 48 11 63 3f                  	cjalr	$c12, $c17
+   1164c: 64 04 00 51                  	daddiu	$4, $zero, 81
