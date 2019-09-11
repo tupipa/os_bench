@@ -26,7 +26,16 @@ OPTS += $(OPT_COMPILE)
 
 SRC = util.c sandboxes.S hello.c
 
-all: $(SRC) asm
+SSH_PORT = 8023
+SSH_SERVER = root@localhost
+
+all: compile run
+
+run:
+	scp -P $(SSH_PORT) hello.exe $(SSH_SERVER):/root/
+	ssh $(SSH_SERVER) -p $(SSH_PORT) /root/hello.exe
+
+compile: $(SRC) asm
 	$(CLANG) -v $(OPTS) $(SRC) -o hello.exe
 
 
