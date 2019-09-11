@@ -8,6 +8,8 @@ CHERIBSD_ROOT128 = $(CHERI_OUTPUT)/rootfs-purecap128
 
 CLANG = $(SDK_DIR)/bin/clang
 CXX = $(SDK_DIR)/bin/clang++
+OBJDUMP = $(SDK_DIR)/bin/cheri-unknown-freebsd-objdump
+
 SYSROOT = $(CHERIBSD_ROOT128)
 
 OPT_SYSROOT = --sysroot=$(SYSROOT)
@@ -45,6 +47,8 @@ asm:
 cpp:
 	$(CLANG) -v $(OPTS) -E -msoft-float hello.c
 
+disas:
+	$(OBJDUMP) --arch-name=cheri --arch=cheri -d hello.exe > hello.exe.disas
 clean:
 	rm *.exe *.s
 
