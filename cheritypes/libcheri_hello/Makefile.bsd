@@ -11,20 +11,16 @@ CXX = $(SDK_DIR)/bin/clang++
 SYSROOT = $(CHERIBSD_ROOT128)
 
 OPT_SYSROOT = --sysroot=$(SYSROOT)
-OPT_TARGET = -target cheri-unknown-freebsd -msoft-float -Wl,-z,notext -fPIC
+OPT_TARGET = -target cheri-unknown-freebsd -msoft-float
 OPT_TOOLCHAIN = -B$(SDK_DIR)
-#OPT_INC = -I./cheritest
+OPT_INC = -I./cheritest
 
-OPT_LIBS = -lcheri
+OPTS = $(OPT_SYSROOT) $(OPT_TOOLCHAIN) $(OPT_TARGET) -mabi=sandbox
 
-OPTS = $(OPT_SYSROOT) $(OPT_TOOLCHAIN) $(OPT_TARGET) -mabi=purecap
 OPTS += $(OPT_INC)
-OPTS += $(OPT_LIBS)
 
-SRC = util.c sandboxes.S hello.c
-
-all: $(SRC) asm
-	$(CLANG) -v $(OPTS) $(SRC) -o hello.exe
+all:
+	$(CLANG) -v $(OPTS) hello.c -o hello.exe
 
 
 asm:
@@ -38,4 +34,14 @@ clean:
 	rm *.exe *.s
 
 
+
+SRCDIR=	${.CURDIR}/../cheritest
+.PATH:	${SRCDIR}
+
+PROG=	cheriabitest
+
+CHERIABI_TESTS=	yes
+CHERI_C_TESTS=	yes
+
+.include <cheritest/Makefile.bsd>
 
