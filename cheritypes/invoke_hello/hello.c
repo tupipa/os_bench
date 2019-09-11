@@ -24,6 +24,10 @@ static void *__capability sandbox_creturn_sealcap;
 static void *__capability sandbox_creturn_codecap;
 static void *__capability sandbox_creturn_datacap;
 
+static void *__capability sandbox_A_sealcap;
+static void *__capability sandbox_A_codecap;
+static void *__capability sandbox_A_datacap;
+
 struct sandbox_data{
   int data;
   char name[20];
@@ -39,16 +43,18 @@ struct sandbox_data *privateBp;
 
 void sandboxA_print(){
   printf("printing in sandbox A\n");
-  printf("shared data: %d\n", sharedp->data);
-  printf("A private data: %d\n", privateAp->data); 
-  printf("B private data: %d\n", privateBp->data);
+  //printf("shared data: %d\n", sharedp->data);
+  //printf("A private data: %d\n", privateAp->data); 
+  //printf("B private data: %d\n", privateBp->data);
+  //sandboxA_end:
 }
 
 void sandboxB_print(){
-  printf("printing in sandbox A\n");
+  printf("printing in sandbox B\n");
   printf("shared data: %d\n", sharedp->data);
   printf("A private data: %d\n", privateAp->data); 
   printf("B private data: %d\n", privateBp->data);
+  //sandboxB_end:
 }
 
 static void * __capability
@@ -105,12 +111,16 @@ each
 	 * of the three classes used in these tests.
 	 */
 	sandbox_creturn_sealcap = libcheri_type_alloc();
-	sandbox_creturn_codecap = 
-cheri_seal(codecap_create(&sandbox_creturn,
+	sandbox_creturn_codecap = cheri_seal(codecap_create(&sandbox_creturn,
 	    &sandbox_creturn_end), sandbox_creturn_sealcap);
-	sandbox_creturn_datacap = 
-cheri_seal(datacap_create(&sandbox_creturn,
+	sandbox_creturn_datacap = cheri_seal(datacap_create(&sandbox_creturn,
 	    &sandbox_creturn_end), sandbox_creturn_sealcap);
+
+  /** sandbox A **/
+	sandbox_A_sealcap = libcheri_type_alloc();
+	sandbox_A_codecap = cheri_seal(codecap_create(&sandboxA_print, &sandboxB_print), sandbox_A_sealcap);
+        //cheri_seal(codecap_create(&sandboxA_print, &sandboxB_print), sandbox_A_sealcap);
+	sandbox_A_datacap = cheri_seal(datacap_create(&privateA, &privateB), sandbox_creturn_sealcap);
 
 	BUFFER_WRITE("done.");
 }
@@ -148,6 +158,12 @@ test_nofault_ccall_creturn(const struct cheri_test *ctp __unused)
 	cheritest_success();
 }
 
+void test_sandboxA( void )
+{
+	sandbox_invoke(sandbox_A_codecap, sandbox_A_datacap);
+	cheritest_success();
+}
+
 
 
 int main(void){
@@ -159,9 +175,11 @@ int main(void){
 
  printf("now start testing...\n");
 
- test_nofault_ccall_creturn(NULL);
- 
- printf("done no fault ccall creturn.\n");
+ //test_nofault_ccall_creturn(NULL);
+ //printf("done no fault ccall creturn.\n");
+
+ test_sandboxA();
+ printf("done test with sandboxA.\n");
 
  //test_fault_creturn(NULL);
 
