@@ -526,7 +526,7 @@ Disassembly of section .text:
    107d0: 74 81 00 25                  	clcbi	$c4, 592($c1)
    107d4: 48 05 5a bf                  	cmove	$c5, $c11
    107d8: f8 85 00 00                  	csc	$c4, $zero, 0($c5)
-   107dc: 64 01 00 6b                  	daddiu	$1, $zero, 107
+   107dc: 64 01 00 6d                  	daddiu	$1, $zero, 109
    107e0: e8 25 00 23                  	csd	$1, $zero, 32($c5)
    107e4: 74 81 00 26                  	clcbi	$c4, 608($c1)
    107e8: f8 85 00 01                  	csc	$c4, $zero, 16($c5)
@@ -570,7 +570,7 @@ Disassembly of section .text:
    10880: 74 41 00 25                  	clcbi	$c2, 592($c1)
    10884: 48 04 5a bf                  	cmove	$c4, $c11
    10888: f8 44 00 00                  	csc	$c2, $zero, 0($c4)
-   1088c: 64 02 00 6b                  	daddiu	$2, $zero, 107
+   1088c: 64 02 00 6d                  	daddiu	$2, $zero, 109
    10890: e8 44 00 23                  	csd	$2, $zero, 32($c4)
    10894: 74 41 00 26                  	clcbi	$c2, 608($c1)
    10898: f8 44 00 01                  	csc	$c2, $zero, 16($c4)
@@ -611,7 +611,7 @@ Disassembly of section .text:
    10924: 74 41 00 25                  	clcbi	$c2, 592($c1)
    10928: 48 03 5a bf                  	cmove	$c3, $c11
    1092c: f8 43 00 00                  	csc	$c2, $zero, 0($c3)
-   10930: 64 01 00 6b                  	daddiu	$1, $zero, 107
+   10930: 64 01 00 6d                  	daddiu	$1, $zero, 109
    10934: e8 23 00 23                  	csd	$1, $zero, 32($c3)
    10938: 74 81 00 26                  	clcbi	$c4, 608($c1)
    1093c: f8 83 00 01                  	csc	$c4, $zero, 16($c3)
@@ -774,7 +774,7 @@ Disassembly of section .text:
    10bb0: 74 81 00 25                  	clcbi	$c4, 592($c1)
    10bb4: 48 05 5a bf                  	cmove	$c5, $c11
    10bb8: f8 85 00 00                  	csc	$c4, $zero, 0($c5)
-   10bbc: 64 01 00 7d                  	daddiu	$1, $zero, 125
+   10bbc: 64 01 00 7f                  	daddiu	$1, $zero, 127
    10bc0: e8 25 00 23                  	csd	$1, $zero, 32($c5)
    10bc4: 74 81 00 26                  	clcbi	$c4, 608($c1)
    10bc8: f8 85 00 01                  	csc	$c4, $zero, 16($c5)
@@ -818,7 +818,7 @@ Disassembly of section .text:
    10c60: 74 41 00 25                  	clcbi	$c2, 592($c1)
    10c64: 48 04 5a bf                  	cmove	$c4, $c11
    10c68: f8 44 00 00                  	csc	$c2, $zero, 0($c4)
-   10c6c: 64 02 00 7d                  	daddiu	$2, $zero, 125
+   10c6c: 64 02 00 7f                  	daddiu	$2, $zero, 127
    10c70: e8 44 00 23                  	csd	$2, $zero, 32($c4)
    10c74: 74 41 00 26                  	clcbi	$c2, 608($c1)
    10c78: f8 44 00 01                  	csc	$c2, $zero, 16($c4)
@@ -859,7 +859,7 @@ Disassembly of section .text:
    10d04: 74 41 00 25                  	clcbi	$c2, 592($c1)
    10d08: 48 03 5a bf                  	cmove	$c3, $c11
    10d0c: f8 43 00 00                  	csc	$c2, $zero, 0($c3)
-   10d10: 64 01 00 7d                  	daddiu	$1, $zero, 125
+   10d10: 64 01 00 7f                  	daddiu	$1, $zero, 127
    10d14: e8 23 00 23                  	csd	$1, $zero, 32($c3)
    10d18: 74 81 00 26                  	clcbi	$c4, 608($c1)
    10d1c: f8 83 00 01                  	csc	$c4, $zero, 16($c3)
@@ -943,7 +943,7 @@ Disassembly of section .text:
    10e50: f8 61 00 00                  	csc	$c3, $zero, 0($c1)
    10e54: f8 82 00 00                  	csc	$c4, $zero, 0($c2)
    10e58: d8 21 00 00                  	clc	$c1, $zero, 0($c1)
-   10e5c: 64 01 01 07                  	daddiu	$1, $zero, 263
+   10e5c: 34 01 81 07                  	ori	$1, $zero, 33031
    10e60: 48 01 08 4d                  	candperm	$c1, $c1, $1
    10e64: f8 25 00 00                  	csc	$c1, $zero, 0($c5)
    10e68: d8 65 00 00                  	clc	$c3, $zero, 0($c5)
@@ -965,7 +965,7 @@ Disassembly of section .text:
    10ea0: f8 61 00 00                  	csc	$c3, $zero, 0($c1)
    10ea4: f8 82 00 00                  	csc	$c4, $zero, 0($c2)
    10ea8: d8 21 00 00                  	clc	$c1, $zero, 0($c1)
-   10eac: 64 01 01 7d                  	daddiu	$1, $zero, 381
+   10eac: 34 01 81 7d                  	ori	$1, $zero, 33149
    10eb0: 48 01 08 4d                  	candperm	$c1, $c1, $1
    10eb4: f8 25 00 00                  	csc	$c1, $zero, 0($c5)
    10eb8: d8 65 00 00                  	clc	$c3, $zero, 0($c5)
