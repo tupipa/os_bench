@@ -738,7 +738,7 @@ Disassembly of section .text:
    10b20: 48 0d 02 bf                  	cgetnull	$c13
    10b24: 48 11 63 3f                  	cjalr	$c12, $c17
    10b28: 00 00 00 00                  	nop
-   10b2c: d8 38 00 0c                  	clc	$c1, $zero, 192($c24)
+   10b2c: d8 38 00 0b                  	clc	$c1, $zero, 176($c24)
    10b30: d8 41 00 00                  	clc	$c2, $zero, 0($c1)
    10b34: 48 02 18 8b                  	cseal	$c2, $c3, $c2
    10b38: d8 78 00 16                  	clc	$c3, $zero, 352($c24)

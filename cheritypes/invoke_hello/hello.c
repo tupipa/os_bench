@@ -120,7 +120,7 @@ each
 	sandbox_A_sealcap = libcheri_type_alloc();
 	sandbox_A_codecap = cheri_seal(codecap_create(&sandboxA_print, &sandboxB_print), sandbox_A_sealcap);
         //cheri_seal(codecap_create(&sandboxA_print, &sandboxB_print), sandbox_A_sealcap);
-	sandbox_A_datacap = cheri_seal(datacap_create(&privateA, &privateB), sandbox_creturn_sealcap);
+	sandbox_A_datacap = cheri_seal(datacap_create(&privateA, &privateB), sandbox_A_sealcap);
 
 	BUFFER_WRITE("done.");
 }
