@@ -11,7 +11,7 @@ CXX = $(SDK_DIR)/bin/clang++
 SYSROOT = $(CHERIBSD_ROOT128)
 
 OPT_SYSROOT = --sysroot=$(SYSROOT)
-OPT_TARGET = -target cheri-unknown-freebsd -msoft-float -Wl,-z,notext -fPIC
+OPT_TARGET = -target cheri-unknown-freebsd -msoft-float
 OPT_TOOLCHAIN = -B$(SDK_DIR)
 #OPT_INC = -I./cheritest
 
@@ -20,6 +20,9 @@ OPT_LIBS = -lcheri
 OPTS = $(OPT_SYSROOT) $(OPT_TOOLCHAIN) $(OPT_TARGET) -mabi=purecap
 OPTS += $(OPT_INC)
 OPTS += $(OPT_LIBS)
+
+#OPT_COMPILE = -Wl,-z,notext -fPIC
+OPTS += $(OPT_COMPILE)
 
 SRC = util.c sandboxes.S hello.c
 
