@@ -13,7 +13,6 @@ SYSROOT = $(CHERIBSD_ROOT128)
 OPT_SYSROOT = --sysroot=$(SYSROOT)
 OPT_TARGET = -target cheri-unknown-freebsd -msoft-float
 OPT_TOOLCHAIN = -B$(SDK_DIR)
-#OPT_INC = -I./cheritest
 
 OPT_LIBS = -lcheri
 
