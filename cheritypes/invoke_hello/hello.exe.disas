@@ -1026,8 +1026,8 @@ Disassembly of section .text:
    10f84: f8 38 00 00                  	csc	$c1, $zero, 0($c24)
    10f88: 48 01 12 bf                  	cmove	$c1, $c2
    10f8c: 48 02 1a bf                  	cmove	$c2, $c3
-   10f90: 48 03 02 bf                  	cgetnull	$c3
-   10f94: 48 0d 02 bf                  	cgetnull	$c13
+   10f90: 48 0d 02 bf                  	cgetnull	$c13
+   10f94: 48 03 02 bf                  	cgetnull	$c3
    10f98: 48 04 02 bf                  	cgetnull	$c4
    10f9c: 48 05 02 bf                  	cgetnull	$c5
    10fa0: 48 06 02 bf                  	cgetnull	$c6
@@ -1098,8 +1098,8 @@ Disassembly of section .text:
    1109c: 48 11 63 3f                  	cjalr	$c12, $c17
    110a0: 00 00 00 00                  	nop
    110a4: d8 38 00 02                  	clc	$c1, $zero, 32($c24)
-   110a8: 75 81 00 3d                  	clcbi	$c12, 976($c1)
-   110ac: 48 03 02 bf                  	cgetnull	$c3
+   110a8: 75 81 00 14                  	clcbi	$c12, 320($c1)
+   110ac: 74 61 00 3d                  	clcbi	$c3, 976($c1)
    110b0: 48 0d 02 bf                  	cgetnull	$c13
    110b4: 48 11 63 3f                  	cjalr	$c12, $c17
    110b8: 00 00 00 00                  	nop
@@ -1107,18 +1107,18 @@ Disassembly of section .text:
    110c0: 75 81 00 14                  	clcbi	$c12, 320($c1)
    110c4: 74 61 00 3e                  	clcbi	$c3, 992($c1)
    110c8: 48 0d 02 bf                  	cgetnull	$c13
-   110cc: 48 11 63 3f                  	cjalr	$c12, $c17
-   110d0: 00 00 00 00                  	nop
-   110d4: 64 01 00 00                  	daddiu	$1, $zero, 0
-   110d8: e8 58 00 1a                  	csw	$2, $zero, 12($c24)
-   110dc: 00 20 10 25                  	move	$2, $1
-   110e0: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
-   110e4: da 2b 00 04                  	clc	$c17, $zero, 64($c11)
-   110e8: db 0b 00 05                  	clc	$c24, $zero, 80($c11)
-   110ec: 4a 6b 58 60                  	cincoffset	$c11, $c11, 96
-   110f0: 48 11 1f ff                  	cjr	$c17
-   110f4: 00 00 00 00                  	nop
-   110f8: 04 17 00 01                  	<unknown>
+   110cc: e8 58 00 1a                  	csw	$2, $zero, 12($c24)
+   110d0: 48 11 63 3f                  	cjalr	$c12, $c17
+   110d4: 00 00 00 00                  	nop
+   110d8: 64 01 00 00                  	daddiu	$1, $zero, 0
+   110dc: e8 58 00 12                  	csw	$2, $zero, 8($c24)
+   110e0: 00 20 10 25                  	move	$2, $1
+   110e4: 48 0b c0 11                  	cincoffset	$c11, $c24, $zero
+   110e8: da 2b 00 04                  	clc	$c17, $zero, 64($c11)
+   110ec: db 0b 00 05                  	clc	$c24, $zero, 80($c11)
+   110f0: 4a 6b 58 60                  	cincoffset	$c11, $c11, 96
+   110f4: 48 11 1f ff                  	cjr	$c17
+   110f8: 00 00 00 00                  	nop
    110fc: 04 17 00 01                  	<unknown>
 
 0000000000011100 libcheri_type_alloc:

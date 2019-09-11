@@ -30,11 +30,12 @@ SRC = util.c sandboxes.S hello.c
 SSH_PORT = 8023
 SSH_SERVER = root@localhost
 
-all: compile run
+all: compile disas send
 
-run:
+send:
 	scp -P $(SSH_PORT) hello.exe $(SSH_SERVER):/root/
-	ssh $(SSH_SERVER) -p $(SSH_PORT) /root/hello.exe
+run:
+	#ssh $(SSH_SERVER) -p $(SSH_PORT) /root/hello.exe
 
 compile: $(SRC) asm
 	$(CLANG) -v $(OPTS) $(SRC) -o hello.exe
