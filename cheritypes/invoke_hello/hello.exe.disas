@@ -954,7 +954,7 @@ Disassembly of section .text:
    10e78: f8 61 00 00                  	csc	$c3, $zero, 0($c1)
    10e7c: f8 82 00 00                  	csc	$c4, $zero, 0($c2)
    10e80: d8 21 00 00                  	clc	$c1, $zero, 0($c1)
-   10e84: 64 01 00 07                  	daddiu	$1, $zero, 7
+   10e84: 64 01 01 07                  	daddiu	$1, $zero, 263
    10e88: 48 01 08 4d                  	candperm	$c1, $c1, $1
    10e8c: f8 25 00 00                  	csc	$c1, $zero, 0($c5)
    10e90: d8 65 00 00                  	clc	$c3, $zero, 0($c5)
@@ -976,7 +976,7 @@ Disassembly of section .text:
    10ec8: f8 61 00 00                  	csc	$c3, $zero, 0($c1)
    10ecc: f8 82 00 00                  	csc	$c4, $zero, 0($c2)
    10ed0: d8 21 00 00                  	clc	$c1, $zero, 0($c1)
-   10ed4: 64 01 00 7d                  	daddiu	$1, $zero, 125
+   10ed4: 64 01 01 7d                  	daddiu	$1, $zero, 381
    10ed8: 48 01 08 4d                  	candperm	$c1, $c1, $1
    10edc: f8 25 00 00                  	csc	$c1, $zero, 0($c5)
    10ee0: d8 65 00 00                  	clc	$c3, $zero, 0($c5)
