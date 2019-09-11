@@ -18,7 +18,9 @@ TRACK_HELLO_VAR_DEFINITION
 
 extern void	sandbox_creturn(void);
 extern void	sandbox_creturn_end;
-extern void __attribute__ ((cheri_ccall)) sandbox_invoke(void * __capability c1, void* __capability c2);
+//extern void __attribute__ ((cheri_ccall)) sandbox_invoke(void * __capability c1, void* __capability c2);
+
+extern void sandbox_invoke(void * __capability c1, void* __capability c2);
 
 
 static void * __capability libcheri_sealing_root;
@@ -32,8 +34,8 @@ static void *__capability sandbox_A_codecap;
 static void *__capability sandbox_A_datacap;
 
 struct sandbox_data{
-  int data;
-  char name[20];
+  int data __attribute__ ((aligned(16)));
+  char name[20] __attribute__ ((aligned(16)));
 };
 
 struct sandbox_data shared;
@@ -45,8 +47,10 @@ struct sandbox_data *privateAp;
 struct sandbox_data *privateBp;
 
 void sandboxA_print(){
-  printf("printing in sandbox A\n");
-  printf("HELLO A A A A A A A A \nA \nA \nA \nA \nA \n");
+  char a[16] __attribute__((aligned(16))) = "hello from sandbox A";
+  printf(a);
+  //printf(("printing in sandbox A\n")__attribute__((aligned(16))));
+  //printf("HELLO A A A A A A A A \nA \nA \nA \nA \nA \n");
   //printf("shared data: %d\n", sharedp->data);
   //printf("A private data: %d\n", privateAp->data); 
   //printf("B private data: %d\n", privateBp->data);
