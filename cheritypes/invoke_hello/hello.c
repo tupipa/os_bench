@@ -9,6 +9,7 @@
 #include <cheri/cheri.h>
 #include <cheri/cheric.h>  // builtin wrappers
 #include <cheri/libcheri_type.h>  // libcheri type alloc()
+#include <cheri/libcheri_invoke.h>  // libcheri invoke prototype
 #include "cheritest.h"
 
 #include <machine/sysarch.h>
@@ -190,7 +191,14 @@ test_nofault_ccall_creturn(const struct cheri_test *ctp __unused)
 
 void test_sandboxA( void )
 {
-	sandbox_invoke(sandbox_A_codecap, sandbox_A_datacap);
+	struct cheri_object co;
+
+	co.co_codecap = sandbox_A_codecap;
+	co.co_datacap = sandbox_A_datacap;
+	(void)libcheri_invoke(co, 0,
+	    0, 0, 0, 0, 0, 0, 0, 0,
+	    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+	//sandbox_invoke(sandbox_A_codecap, sandbox_A_datacap);
 	cheritest_success();
 }
 
