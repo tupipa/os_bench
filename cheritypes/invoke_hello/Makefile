@@ -18,40 +18,57 @@ OPT_TOOLCHAIN = -B$(SDK_DIR)
 
 OPT_LIBS = -lcheri
 
-OPTS = $(OPT_SYSROOT) $(OPT_TOOLCHAIN) $(OPT_TARGET) -mabi=purecap
+OPTS = $(OPT_SYSROOT) $(OPT_TOOLCHAIN) $(OPT_TARGET) 
 OPTS += $(OPT_INC)
 OPTS += $(OPT_LIBS)
 
 #OPT_COMPILE = -Wl,-z,notext -fPIC
 OPTS += $(OPT_COMPILE)
 
+OPTS_PURE = $(OPTS) -mabi=purecap
+#OPTS_PURE = $(OPTS)
+OPTS_HYB = $(OPTS)
+
 SRC = util.c sandboxes.S hello.c
 
-SSH_PORT = 8023
+SSH_PORT_PURE = 8023
+SSH_PORT_HYB = 8022
 SSH_SERVER = root@localhost
 
-all: compile disas send
+all: compile-pure disas-pure send-pure
 
-send:
-	scp -P $(SSH_PORT) hello.exe $(SSH_SERVER):/root/
+hyb: compile-hyb disas-hyb send-hyb
+
+send-pure:
+	scp -P $(SSH_PORT_PURE) hello.exe $(SSH_SERVER):/root/
+
+send-hyb:
+	scp -P $(SSH_PORT_HYB) hello.exe $(SSH_SERVER):/root/
 run:
-	#ssh $(SSH_SERVER) -p $(SSH_PORT) /root/hello.exe
+	#ssh $(SSH_SERVER) -p $(SSH_PORT_PURE) /root/hello.exe
 
-compile: $(SRC) asm
-	$(CLANG) -v $(OPTS) $(SRC) -o hello.exe
+compile-pure: $(SRC) asm-pure
+	$(CLANG) -v $(OPTS_PURE) $(SRC) -o hello.exe
+
+compile-hyb: $(SRC) asm-hyb
+	$(CLANG) -v $(OPTS_HYB) $(SRC) -o hello.exe
 
 
-asm:
-	$(CLANG) -v $(OPTS) -S -msoft-float hello.c -o hello.asm
+asm-pure:
+	$(CLANG) -v $(OPTS) -S -msoft-float hello.c -o hello-pure.asm
+asm-hyb:
+	$(CLANG) -v $(OPTS) -S -msoft-float hello.c -o hello-hyb.asm
 
 
 cpp:
 	$(CLANG) -v $(OPTS) -E -msoft-float hello.c
 
-disas:
-	$(OBJDUMP) --arch-name=cheri --arch=cheri -d hello.exe > hello.exe.disas
+disas-pure:
+	$(OBJDUMP) --arch-name=cheri --arch=cheri -d hello.exe > hello.exe-pure.disas
+disas-hyb:
+	$(OBJDUMP) --arch-name=cheri --arch=cheri -d hello.exe > hello.exe-hyb.disas
 clean:
-	rm *.exe *.s
+	rm *.exe *.asm *.disas
 
 
 

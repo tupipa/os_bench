@@ -44,8 +44,8 @@ sandbox_creturn_end:
 #define _FRAME_STACK_REG        $c11
 #define _FRAME_RETURN_REG       $c17
 #else
-#define _FRAME_STACK_REG        sp
-#define _FRAME_RETURN_REG       ra
+#define _FRAME_STACK_REG        $sp
+#define _FRAME_RETURN_REG       $ra
 #endif
 
 #define LIBCHERI_INVOKE_FRAME_SIZE (11*CHERICAP_SIZE + 96)

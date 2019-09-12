@@ -15,6 +15,7 @@
 
 extern void	sandbox_creturn(void);
 extern void	sandbox_creturn_end;
+//extern void __attribute__ ((cheri_ccallee)) sandbox_invoke(void * __capability c1, void* __capability c2);
 extern void __attribute__ ((cheri_ccall)) sandbox_invoke(void * __capability c1, void* __capability c2);
 //extern void sandbox_invoke(void * __capability c1, void* __capability c2);
 
@@ -125,14 +126,14 @@ cheritest_ccall_setup(void)
 	/*
 	 * Create sealing, sealed code, and sealed data capabilities for each
 	 * of the three classes used in these tests.
-	 */
+	 *//*
 	sandbox_creturn_sealcap = libcheri_type_alloc();
 	sandbox_creturn_codecap = cheri_seal(codecap_create(&sandbox_creturn,
 	    &sandbox_creturn_end), sandbox_creturn_sealcap);
 	sandbox_creturn_datacap = cheri_seal(datacap_create(&sandbox_creturn,
 	    &sandbox_creturn_end), sandbox_creturn_sealcap);
-
-  /** sandbox A 
+	*/
+  /** sandbox A **/
 	//sandbox_A_sealcap = libcheri_type_alloc();
 	if (sysarch(CHERI_GET_SEALCAP, &libcheri_sealing_root) < 0)
 		libcheri_sealing_root = NULL;
@@ -152,7 +153,7 @@ cheritest_ccall_setup(void)
 	//  sandbox_A_sealcap
 	//);
 
-  **/
+  /**/
 
 	printf("done.");
 }
@@ -193,11 +194,11 @@ int main(void){
 
  printf("now start testing...\n");
 
- test_nofault_ccall_creturn(NULL);
- printf("done no fault ccall creturn.\n");
+ //test_nofault_ccall_creturn(NULL);
+ //printf("done no fault ccall creturn.\n");
 
- //test_sandboxA();
- //printf("done test with sandboxA.\n");
+ test_sandboxA();
+ printf("done test with sandboxA.\n");
 
  //test_fault_creturn(NULL);
 
