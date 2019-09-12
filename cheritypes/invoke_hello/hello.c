@@ -43,6 +43,7 @@ struct sandbox_data *privateBp;
 
 void sandboxA_print(){
   printf("printing in sandbox A\n");
+  BUFFER_WRITE("HELLO A A A A A A A A \nA \nA \nA \nA \nA \n");
   //printf("shared data: %d\n", sharedp->data);
   //printf("A private data: %d\n", privateAp->data); 
   //printf("B private data: %d\n", privateBp->data);
@@ -122,7 +123,8 @@ each
 	sandbox_A_sealcap = libcheri_type_alloc();
 	sandbox_A_codecap = cheri_seal(codecap_create(&sandboxA_print, &sandboxB_print), sandbox_A_sealcap);
         //cheri_seal(codecap_create(&sandboxA_print, &sandboxB_print), sandbox_A_sealcap);
-	sandbox_A_datacap = cheri_seal(datacap_create(&privateA, &privateB), sandbox_A_sealcap);
+	//sandbox_A_datacap = cheri_seal(datacap_create(&privateA, &privateB), sandbox_A_sealcap);
+	sandbox_A_datacap = cheri_seal(cheri_getdefault(), sandbox_A_sealcap);
 
 	BUFFER_WRITE("done.");
 }
