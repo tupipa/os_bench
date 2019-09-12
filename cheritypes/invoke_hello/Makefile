@@ -35,7 +35,9 @@ SSH_PORT_PURE = 8023
 SSH_PORT_HYB = 8022
 SSH_SERVER = root@localhost
 
-all: compile-pure disas-pure send-pure
+all: hyb
+
+pure: compile-pure disas-pure send-pure
 
 hyb: compile-hyb disas-hyb send-hyb
 
