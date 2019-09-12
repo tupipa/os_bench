@@ -70,18 +70,22 @@ codecap_create(void (*sandbox_base)(void), void *sandbox_end)
         printf("creating code cap...\n");
 
 #ifdef __CHERI_PURE_CAPABILITY__
+        printf("\tpure cap...\n");
 	(void)sandbox_end;
 	codecap = cheri_andperm(sandbox_base,
 	    CHERI_PERM_GLOBAL | CHERI_PERM_LOAD | CHERI_PERM_EXECUTE | 
 		CHERI_PERM_CCALL | CHERI_PERM_SYSCALL);
 #else
+        printf("\thyb cap...\n");
 	codecap = cheri_codeptrperm(sandbox_base,
 	    (size_t)sandbox_end - (size_t)sandbox_base,
 	    CHERI_PERM_GLOBAL | CHERI_PERM_LOAD | CHERI_PERM_EXECUTE | 
 		CHERI_PERM_CCALL | CHERI_PERM_SYSCALL);
 #endif
 
-        printf("\tcode cap created.\n");
+        printf("\tcode cap created as:\n");
+
+	CHERI_CAP_PRINT(codecap);
 
 	return (codecap);
 }
@@ -95,12 +99,14 @@ datacap_create(void *sandbox_base, void *sandbox_end)
         printf("creating data cap...\n");
 
 #ifdef __CHERI_PURE_CAPABILITY__
+        printf("\tpure cap...\n");
 	(void)sandbox_end;
 	datacap = cheri_andperm(sandbox_base,
 	    CHERI_PERM_GLOBAL | CHERI_PERM_LOAD | CHERI_PERM_STORE |
 	    CHERI_PERM_LOAD_CAP | CHERI_PERM_STORE_CAP |
 	    CHERI_PERM_STORE_LOCAL_CAP | CHERI_PERM_CCALL | CHERI_PERM_SYSCALL);
 #else
+        printf("\thyb cap:\n");
 	datacap = cheri_ptrperm(sandbox_base,
 	    (size_t)sandbox_end - (size_t)sandbox_base,
 	    CHERI_PERM_GLOBAL | CHERI_PERM_LOAD | CHERI_PERM_STORE |
@@ -109,7 +115,8 @@ datacap_create(void *sandbox_base, void *sandbox_end)
 #endif
 
 
-        printf("\tdata cap created\n");
+        printf("\tdata cap created as:\n");
+	CHERI_CAP_PRINT(datacap);
 
 	return (datacap);
 }
@@ -134,13 +141,17 @@ cheritest_ccall_setup(void)
 	    &sandbox_creturn_end), sandbox_creturn_sealcap);
 	*/
   /** sandbox A **/
-	//sandbox_A_sealcap = libcheri_type_alloc();
+#ifdef __CHERI_PURE_CAPABILITY__
 	if (sysarch(CHERI_GET_SEALCAP, &libcheri_sealing_root) < 0)
 		libcheri_sealing_root = NULL;
 	assert((cheri_getperm(libcheri_sealing_root) & CHERI_PERM_SEAL) != 0);
 	assert(cheri_getlen(libcheri_sealing_root) != 0);
 	sandbox_A_sealcap = libcheri_sealing_root;
+#else
 
+	sandbox_A_sealcap = libcheri_type_alloc();
+
+#endif
 	sandbox_A_codecap = cheri_seal(codecap_create(&sandboxA_print, &sandboxB_print), sandbox_A_sealcap);
         //cheri_seal(codecap_create(&sandboxA_print, &sandboxB_print), sandbox_A_sealcap);
 	sandbox_A_datacap = cheri_seal(datacap_create(&privateA, &privateB), sandbox_A_sealcap);
