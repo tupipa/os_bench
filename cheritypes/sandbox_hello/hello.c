@@ -85,8 +85,7 @@ cheritest_ccall_setup(void)
 
 #endif
 	sandbox_A_codecap = cheri_getpcc();
-	sandbox_A_codecap = cheri_setaddress(sandbox_A_codecap, 
-	   (vaddr_t)&sandboxA_print);
+	sandbox_A_codecap = cheri_setaddress(sandbox_A_codecap, (vaddr_t)&sandboxA_print);
 	sandbox_A_codecap = cheri_seal(sandbox_A_codecap, sandbox_A_sealcap);
 
 	sandbox_A_datacap = cheri_getdefault();
@@ -101,14 +100,19 @@ cheritest_ccall_setup(void)
 
 void test_sandboxA( void )
 {
-	struct cheri_object co;
 
+#ifdef __CHERI_PURE_CAPABILITY__
+
+	sandbox_invoke(sandbox_A_codecap, sandbox_A_datacap);
+
+#else
+	struct cheri_object co;
 	co.co_codecap = sandbox_A_codecap;
 	co.co_datacap = sandbox_A_datacap;
 	(void)libcheri_invoke(co, 0,
 	    0, 0, 0, 0, 0, 0, 0, 0,
 	    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-	//sandbox_invoke(sandbox_A_codecap, sandbox_A_datacap);
+#endif
 	cheritest_success();
 }
 
