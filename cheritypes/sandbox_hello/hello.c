@@ -86,11 +86,28 @@ cheritest_ccall_setup(void)
 #endif
 	sandbox_A_codecap = cheri_getpcc();
 	sandbox_A_codecap = cheri_setaddress(sandbox_A_codecap, (vaddr_t)&sandboxA_print);
+
+
+    printf("\t code cap created as:\n");
+	CHERI_CAP_PRINT(sandbox_A_codecap);
+
 	sandbox_A_codecap = cheri_seal(sandbox_A_codecap, sandbox_A_sealcap);
+
+
+    printf("\t code cap sealed as:\n");
+	CHERI_CAP_PRINT(sandbox_A_codecap);
+
 
 	sandbox_A_datacap = cheri_getdefault();
 	sandbox_A_datacap = cheri_setaddress(sandbox_A_datacap, (vaddr_t)&privateA);
+
+    printf("\t data cap created as:\n");
+	CHERI_CAP_PRINT(sandbox_A_datacap);
+
 	sandbox_A_datacap = cheri_seal(sandbox_A_datacap, sandbox_A_sealcap);
+
+    printf("\t data cap sealed as:\n");
+	CHERI_CAP_PRINT(sandbox_A_datacap);
 
   /**/
 
