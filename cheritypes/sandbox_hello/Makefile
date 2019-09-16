@@ -57,9 +57,10 @@ compile-hyb: $(SRC) asm-hyb
 
 
 asm-pure:
-	$(CLANG) -v $(OPTS) -S -msoft-float hello.c -o hello-pure.asm
+	$(CLANG) -v $(OPTS_PURE) -S -msoft-float hello.c -o hello-pure.asm
+
 asm-hyb:
-	$(CLANG) -v $(OPTS) -S -msoft-float hello.c -o hello-hyb.asm
+	$(CLANG) -v $(OPTS_HYB) -S -msoft-float hello.c -o hello-hyb.asm
 
 
 cpp:
