@@ -308,7 +308,7 @@ Disassembly of section .text:
    20468: 00 39 08 2d                  	daddu	$1, $1, $25
    2046c: 64 21 7b d0                  	daddiu	$1, $1, 31696
    20470: dc 22 80 50                  	ld	$2, -32688($1)
-   20474: 64 42 08 d0                  	daddiu	$2, $2, 2256
+   20474: 64 42 09 80                  	daddiu	$2, $2, 2432
    20478: d8 20 10 00                  	clc	$c1, $2, 0($ddc)
    2047c: 67 c3 00 10                  	daddiu	$3, $fp, 16
    20480: f8 20 18 00                  	csc	$c1, $3, 0($ddc)
@@ -317,7 +317,7 @@ Disassembly of section .text:
    2048c: d8 20 10 00                  	clc	$c1, $2, 0($ddc)
    20490: f8 20 20 00                  	csc	$c1, $4, 0($ddc)
    20494: dc 22 80 50                  	ld	$2, -32688($1)
-   20498: 64 44 08 cc                  	daddiu	$4, $2, 2252
+   20498: 64 44 09 51                  	daddiu	$4, $2, 2385
    2049c: dc 39 81 a8                  	ld	$25, -32344($1)
    204a0: 00 60 28 25                  	move	$5, $3
    204a4: 00 20 e0 25                  	move	$gp, $1
@@ -346,7 +346,7 @@ Disassembly of section .text:
    204f8: 00 39 08 2d                  	daddu	$1, $1, $25
    204fc: 64 21 7b 40                  	daddiu	$1, $1, 31552
    20500: dc 22 80 50                  	ld	$2, -32688($1)
-   20504: 64 44 08 9e                  	daddiu	$4, $2, 2206
+   20504: 64 44 09 0c                  	daddiu	$4, $2, 2316
    20508: dc 39 81 a8                  	ld	$25, -32344($1)
    2050c: 00 20 e0 25                  	move	$gp, $1
    20510: ff c1 00 10                  	sd	$1, 16($fp)
@@ -357,7 +357,7 @@ Disassembly of section .text:
    20524: dc 63 00 00                  	ld	$3, 0($3)
    20528: 8c 65 00 00                  	lw	$5, 0($3)
    2052c: dc 23 80 50                  	ld	$3, -32688($1)
-   20530: 64 64 07 68                  	daddiu	$4, $3, 1896
+   20530: 64 64 07 80                  	daddiu	$4, $3, 1920
    20534: dc 39 81 a8                  	ld	$25, -32344($1)
    20538: 00 20 e0 25                  	move	$gp, $1
    2053c: af c2 00 0c                  	sw	$2, 12($fp)
@@ -368,7 +368,7 @@ Disassembly of section .text:
    20550: dc 63 00 00                  	ld	$3, 0($3)
    20554: 8c 65 00 00                  	lw	$5, 0($3)
    20558: dc 23 80 50                  	ld	$3, -32688($1)
-   2055c: 64 64 07 c5                  	daddiu	$4, $3, 1989
+   2055c: 64 64 08 04                  	daddiu	$4, $3, 2052
    20560: dc 39 81 a8                  	ld	$25, -32344($1)
    20564: 00 20 e0 25                  	move	$gp, $1
    20568: af c2 00 08                  	sw	$2, 8($fp)
@@ -379,7 +379,7 @@ Disassembly of section .text:
    2057c: dc 63 00 00                  	ld	$3, 0($3)
    20580: 8c 65 00 00                  	lw	$5, 0($3)
    20584: dc 23 80 50                  	ld	$3, -32688($1)
-   20588: 64 64 07 d9                  	daddiu	$4, $3, 2009
+   20588: 64 64 08 18                  	daddiu	$4, $3, 2072
    2058c: dc 39 81 a8                  	ld	$25, -32344($1)
    20590: 00 20 e0 25                  	move	$gp, $1
    20594: af c2 00 04                  	sw	$2, 4($fp)
@@ -394,41 +394,41 @@ Disassembly of section .text:
 		...
 
 00000000000205c0 cheritest_ccall_setup:
-   205c0: 67 bd ff d0                  	daddiu	$sp, $sp, -48
-   205c4: ff bf 00 28                  	sd	$ra, 40($sp)
-   205c8: ff be 00 20                  	sd	$fp, 32($sp)
-   205cc: ff bc 00 18                  	sd	$gp, 24($sp)
+   205c0: 67 bd ff 90                  	daddiu	$sp, $sp, -112
+   205c4: ff bf 00 68                  	sd	$ra, 104($sp)
+   205c8: ff be 00 60                  	sd	$fp, 96($sp)
+   205cc: ff bc 00 58                  	sd	$gp, 88($sp)
    205d0: 03 a0 f0 25                  	move	$fp, $sp
    205d4: 3c 01 00 02                  	lui	$1, 2
    205d8: 00 39 08 2d                  	daddu	$1, $1, $25
    205dc: 64 21 7a 60                  	daddiu	$1, $1, 31328
    205e0: dc 22 80 50                  	ld	$2, -32688($1)
-   205e4: 64 44 07 7f                  	daddiu	$4, $2, 1919
+   205e4: 64 44 07 be                  	daddiu	$4, $2, 1982
    205e8: dc 39 81 a8                  	ld	$25, -32344($1)
    205ec: 00 20 e0 25                  	move	$gp, $1
-   205f0: ff c1 00 10                  	sd	$1, 16($fp)
+   205f0: ff c1 00 50                  	sd	$1, 80($fp)
    205f4: 03 20 f8 09                  	jalr	$25
    205f8: 00 00 00 00                  	nop
-   205fc: df c1 00 10                  	ld	$1, 16($fp)
+   205fc: df c1 00 50                  	ld	$1, 80($fp)
    20600: dc 23 80 60                  	ld	$3, -32672($1)
    20604: 64 65 02 20                  	daddiu	$5, $3, 544
    20608: dc 39 81 b0                  	ld	$25, -32336($1)
    2060c: 64 04 00 06                  	daddiu	$4, $zero, 6
    20610: 00 20 e0 25                  	move	$gp, $1
-   20614: af c2 00 0c                  	sw	$2, 12($fp)
+   20614: af c2 00 4c                  	sw	$2, 76($fp)
    20618: 03 20 f8 09                  	jalr	$25
    2061c: 00 00 00 00                  	nop
    20620: 04 41 00 09                  	bgez	$2, 40 <cheritest_ccall_setup+0x88>
    20624: 00 00 00 00                  	nop
    20628: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x70>
    2062c: 00 00 00 00                  	nop
-   20630: df c1 00 10                  	ld	$1, 16($fp)
+   20630: df c1 00 50                  	ld	$1, 80($fp)
    20634: dc 22 80 60                  	ld	$2, -32672($1)
    20638: 64 42 02 20                  	daddiu	$2, $2, 544
    2063c: f8 00 10 00                  	csc	$cnull, $2, 0($ddc)
    20640: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x88>
    20644: 00 00 00 00                  	nop
-   20648: df c1 00 10                  	ld	$1, 16($fp)
+   20648: df c1 00 50                  	ld	$1, 80($fp)
    2064c: dc 22 80 60                  	ld	$2, -32672($1)
    20650: 64 42 02 20                  	daddiu	$2, $2, 544
    20654: d8 20 10 00                  	clc	$c1, $2, 0($ddc)
@@ -440,19 +440,19 @@ Disassembly of section .text:
    2066c: 00 00 00 00                  	nop
    20670: 10 00 00 0d                  	b	56 <cheritest_ccall_setup+0xe8>
    20674: 00 00 00 00                  	nop
-   20678: df c1 00 10                  	ld	$1, 16($fp)
+   20678: df c1 00 50                  	ld	$1, 80($fp)
    2067c: dc 22 80 50                  	ld	$2, -32688($1)
-   20680: 64 44 08 b6                  	daddiu	$4, $2, 2230
+   20680: 64 44 09 24                  	daddiu	$4, $2, 2340
    20684: dc 22 80 50                  	ld	$2, -32688($1)
-   20688: 64 45 08 96                  	daddiu	$5, $2, 2198
+   20688: 64 45 09 04                  	daddiu	$5, $2, 2308
    2068c: dc 22 80 50                  	ld	$2, -32688($1)
-   20690: 64 47 07 87                  	daddiu	$7, $2, 1927
+   20690: 64 47 07 c6                  	daddiu	$7, $2, 1990
    20694: dc 39 81 b8                  	ld	$25, -32328($1)
    20698: 64 06 00 4c                  	daddiu	$6, $zero, 76
    2069c: 00 20 e0 25                  	move	$gp, $1
    206a0: 03 20 f8 09                  	jalr	$25
    206a4: 00 00 00 00                  	nop
-   206a8: df c1 00 10                  	ld	$1, 16($fp)
+   206a8: df c1 00 50                  	ld	$1, 80($fp)
    206ac: dc 22 80 60                  	ld	$2, -32672($1)
    206b0: 64 42 02 20                  	daddiu	$2, $2, 544
    206b4: d8 20 10 00                  	clc	$c1, $2, 0($ddc)
@@ -463,535 +463,695 @@ Disassembly of section .text:
    206c8: 00 00 00 00                  	nop
    206cc: 10 00 00 0d                  	b	56 <cheritest_ccall_setup+0x144>
    206d0: 00 00 00 00                  	nop
-   206d4: df c1 00 10                  	ld	$1, 16($fp)
+   206d4: df c1 00 50                  	ld	$1, 80($fp)
    206d8: dc 22 80 50                  	ld	$2, -32688($1)
-   206dc: 64 44 08 b6                  	daddiu	$4, $2, 2230
+   206dc: 64 44 09 24                  	daddiu	$4, $2, 2340
    206e0: dc 22 80 50                  	ld	$2, -32688($1)
-   206e4: 64 45 08 96                  	daddiu	$5, $2, 2198
+   206e4: 64 45 09 04                  	daddiu	$5, $2, 2308
    206e8: dc 22 80 50                  	ld	$2, -32688($1)
-   206ec: 64 47 07 ed                  	daddiu	$7, $2, 2029
+   206ec: 64 47 08 2c                  	daddiu	$7, $2, 2092
    206f0: dc 39 81 b8                  	ld	$25, -32328($1)
    206f4: 64 06 00 4d                  	daddiu	$6, $zero, 77
    206f8: 00 20 e0 25                  	move	$gp, $1
    206fc: 03 20 f8 09                  	jalr	$25
    20700: 00 00 00 00                  	nop
-   20704: df c1 00 10                  	ld	$1, 16($fp)
+   20704: df c1 00 50                  	ld	$1, 80($fp)
    20708: dc 39 81 08                  	ld	$25, -32504($1)
    2070c: 00 20 e0 25                  	move	$gp, $1
    20710: 03 20 f8 09                  	jalr	$25
    20714: 00 00 00 00                  	nop
-   20718: df c1 00 10                  	ld	$1, 16($fp)
+   20718: df c1 00 50                  	ld	$1, 80($fp)
    2071c: dc 22 80 60                  	ld	$2, -32672($1)
    20720: 64 42 02 30                  	daddiu	$2, $2, 560
    20724: f8 60 10 00                  	csc	$c3, $2, 0($ddc)
    20728: 48 01 07 ff                  	cgetpcc	$c1
-   2072c: dc 23 80 60                  	ld	$3, -32672($1)
-   20730: 64 63 02 40                  	daddiu	$3, $3, 576
-   20734: f8 20 18 00                  	csc	$c1, $3, 0($ddc)
-   20738: d8 20 18 00                  	clc	$c1, $3, 0($ddc)
-   2073c: dc 24 81 10                  	ld	$4, -32496($1)
-   20740: 48 01 09 22                  	csetaddr	$c1, $c1, $4
-   20744: f8 20 18 00                  	csc	$c1, $3, 0($ddc)
-   20748: d8 20 18 00                  	clc	$c1, $3, 0($ddc)
-   2074c: d8 40 10 00                  	clc	$c2, $2, 0($ddc)
-   20750: 48 01 08 8b                  	cseal	$c1, $c1, $c2
-   20754: f8 20 18 00                  	csc	$c1, $3, 0($ddc)
-   20758: 48 01 03 7f                  	creadhwr	$c1, $chwr_ddc
-   2075c: dc 23 80 60                  	ld	$3, -32672($1)
-   20760: 64 63 02 50                  	daddiu	$3, $3, 592
-   20764: f8 20 18 00                  	csc	$c1, $3, 0($ddc)
-   20768: d8 20 18 00                  	clc	$c1, $3, 0($ddc)
-   2076c: dc 24 81 18                  	ld	$4, -32488($1)
-   20770: 48 01 09 22                  	csetaddr	$c1, $c1, $4
-   20774: f8 20 18 00                  	csc	$c1, $3, 0($ddc)
-   20778: d8 20 18 00                  	clc	$c1, $3, 0($ddc)
-   2077c: d8 40 10 00                  	clc	$c2, $2, 0($ddc)
-   20780: 48 01 08 8b                  	cseal	$c1, $c1, $c2
-   20784: f8 20 18 00                  	csc	$c1, $3, 0($ddc)
-   20788: dc 22 80 50                  	ld	$2, -32688($1)
-   2078c: 64 44 07 79                  	daddiu	$4, $2, 1913
+   2072c: dc 22 80 60                  	ld	$2, -32672($1)
+   20730: 64 42 02 40                  	daddiu	$2, $2, 576
+   20734: f8 20 10 00                  	csc	$c1, $2, 0($ddc)
+   20738: d8 20 10 00                  	clc	$c1, $2, 0($ddc)
+   2073c: dc 23 81 10                  	ld	$3, -32496($1)
+   20740: 48 01 08 e2                  	csetaddr	$c1, $c1, $3
+   20744: f8 20 10 00                  	csc	$c1, $2, 0($ddc)
+   20748: dc 22 80 50                  	ld	$2, -32688($1)
+   2074c: 64 44 08 ba                  	daddiu	$4, $2, 2234
+   20750: dc 39 81 a8                  	ld	$25, -32344($1)
+   20754: 00 20 e0 25                  	move	$gp, $1
+   20758: 03 20 f8 09                  	jalr	$25
+   2075c: 00 00 00 00                  	nop
+   20760: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x1a8>
+   20764: 00 00 00 00                  	nop
+   20768: df c1 00 50                  	ld	$1, 80($fp)
+   2076c: dc 22 80 60                  	ld	$2, -32672($1)
+   20770: 64 42 02 40                  	daddiu	$2, $2, 576
+   20774: d8 20 10 00                  	clc	$c1, $2, 0($ddc)
+   20778: 48 05 09 3f                  	cgettag	$5, $c1
+   2077c: 48 06 09 7f                  	cgetsealed	$6, $c1
+   20780: 48 07 08 3f                  	cgetperm	$7, $c1
+   20784: 48 08 08 7f                  	cgettype	$8, $c1
+   20788: dc 23 80 50                  	ld	$3, -32688($1)
+   2078c: 64 64 07 97                  	daddiu	$4, $3, 1943
    20790: dc 39 81 a8                  	ld	$25, -32344($1)
    20794: 00 20 e0 25                  	move	$gp, $1
-   20798: 03 20 f8 09                  	jalr	$25
-   2079c: 00 00 00 00                  	nop
-   207a0: 03 c0 e8 25                  	move	$sp, $fp
-   207a4: df bc 00 18                  	ld	$gp, 24($sp)
-   207a8: df be 00 20                  	ld	$fp, 32($sp)
-   207ac: df bf 00 28                  	ld	$ra, 40($sp)
-   207b0: 67 bd 00 30                  	daddiu	$sp, $sp, 48
-   207b4: 03 e0 00 08                  	jr	$ra
-		...
-
-00000000000207c0 test_sandboxA:
-   207c0: 67 bd ff a0                  	daddiu	$sp, $sp, -96
-   207c4: ff bf 00 58                  	sd	$ra, 88($sp)
-   207c8: ff be 00 50                  	sd	$fp, 80($sp)
-   207cc: ff bc 00 48                  	sd	$gp, 72($sp)
-   207d0: 03 a0 f0 25                  	move	$fp, $sp
-   207d4: 3c 01 00 02                  	lui	$1, 2
-   207d8: 00 39 08 2d                  	daddu	$1, $1, $25
-   207dc: 64 21 78 60                  	daddiu	$1, $1, 30816
+   20798: ff c2 00 40                  	sd	$2, 64($fp)
+   2079c: 03 20 f8 09                  	jalr	$25
+   207a0: 00 00 00 00                  	nop
+   207a4: df c1 00 40                  	ld	$1, 64($fp)
+   207a8: d8 20 08 00                  	clc	$c1, $1, 0($ddc)
+   207ac: 48 05 08 bf                  	cgetbase	$5, $c1
+   207b0: 48 06 08 ff                  	cgetlen	$6, $c1
+   207b4: df c3 00 50                  	ld	$3, 80($fp)
+   207b8: dc 64 80 50                  	ld	$4, -32688($3)
+   207bc: 64 84 09 55                  	daddiu	$4, $4, 2389
+   207c0: dc 79 81 a8                  	ld	$25, -32344($3)
+   207c4: 00 60 e0 25                  	move	$gp, $3
+   207c8: af c2 00 3c                  	sw	$2, 60($fp)
+   207cc: 03 20 f8 09                  	jalr	$25
+   207d0: 00 00 00 00                  	nop
+   207d4: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x21c>
+   207d8: 00 00 00 00                  	nop
+   207dc: df c1 00 50                  	ld	$1, 80($fp)
    207e0: dc 22 80 60                  	ld	$2, -32672($1)
    207e4: 64 42 02 40                  	daddiu	$2, $2, 576
    207e8: d8 20 10 00                  	clc	$c1, $2, 0($ddc)
-   207ec: 67 c2 00 20                  	daddiu	$2, $fp, 32
-   207f0: f8 20 10 00                  	csc	$c1, $2, 0($ddc)
-   207f4: dc 23 80 60                  	ld	$3, -32672($1)
-   207f8: 64 63 02 50                  	daddiu	$3, $3, 592
-   207fc: d8 20 18 00                  	clc	$c1, $3, 0($ddc)
-   20800: 64 43 00 10                  	daddiu	$3, $2, 16
-   20804: f8 20 18 00                  	csc	$c1, $3, 0($ddc)
-   20808: d8 20 10 00                  	clc	$c1, $2, 0($ddc)
-   2080c: d8 40 18 00                  	clc	$c2, $3, 0($ddc)
-   20810: dc 39 81 20                  	ld	$25, -32480($1)
-   20814: 64 02 00 00                  	daddiu	$2, $zero, 0
-   20818: ff c2 00 18                  	sd	$2, 24($fp)
-   2081c: df c4 00 18                  	ld	$4, 24($fp)
-   20820: df c5 00 18                  	ld	$5, 24($fp)
-   20824: df c6 00 18                  	ld	$6, 24($fp)
-   20828: df c7 00 18                  	ld	$7, 24($fp)
-   2082c: df c8 00 18                  	ld	$8, 24($fp)
-   20830: df c9 00 18                  	ld	$9, 24($fp)
-   20834: df ca 00 18                  	ld	$10, 24($fp)
-   20838: df cb 00 18                  	ld	$11, 24($fp)
-   2083c: 48 03 02 bf                  	cgetnull	$c3
-   20840: 48 04 02 bf                  	cgetnull	$c4
-   20844: 48 05 02 bf                  	cgetnull	$c5
-   20848: 48 06 02 bf                  	cgetnull	$c6
-   2084c: 48 07 02 bf                  	cgetnull	$c7
-   20850: 48 08 02 bf                  	cgetnull	$c8
-   20854: 48 09 02 bf                  	cgetnull	$c9
-   20858: 48 0a 02 bf                  	cgetnull	$c10
-   2085c: 00 20 e0 25                  	move	$gp, $1
-   20860: ff c1 00 10                  	sd	$1, 16($fp)
-   20864: 03 20 f8 09                  	jalr	$25
-   20868: 00 00 00 00                  	nop
-   2086c: df c1 00 10                  	ld	$1, 16($fp)
-   20870: dc 39 81 28                  	ld	$25, -32472($1)
-   20874: 00 20 e0 25                  	move	$gp, $1
-   20878: ff c2 00 08                  	sd	$2, 8($fp)
-   2087c: 03 20 f8 09                  	jalr	$25
+   207ec: dc 23 80 60                  	ld	$3, -32672($1)
+   207f0: 64 63 02 30                  	daddiu	$3, $3, 560
+   207f4: d8 40 18 00                  	clc	$c2, $3, 0($ddc)
+   207f8: 48 01 08 8b                  	cseal	$c1, $c1, $c2
+   207fc: f8 20 10 00                  	csc	$c1, $2, 0($ddc)
+   20800: dc 22 80 50                  	ld	$2, -32688($1)
+   20804: 64 44 09 3a                  	daddiu	$4, $2, 2362
+   20808: dc 39 81 a8                  	ld	$25, -32344($1)
+   2080c: 00 20 e0 25                  	move	$gp, $1
+   20810: 03 20 f8 09                  	jalr	$25
+   20814: 00 00 00 00                  	nop
+   20818: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x260>
+   2081c: 00 00 00 00                  	nop
+   20820: df c1 00 50                  	ld	$1, 80($fp)
+   20824: dc 22 80 60                  	ld	$2, -32672($1)
+   20828: 64 42 02 40                  	daddiu	$2, $2, 576
+   2082c: d8 20 10 00                  	clc	$c1, $2, 0($ddc)
+   20830: 48 05 09 3f                  	cgettag	$5, $c1
+   20834: 48 06 09 7f                  	cgetsealed	$6, $c1
+   20838: 48 07 08 3f                  	cgetperm	$7, $c1
+   2083c: 48 08 08 7f                  	cgettype	$8, $c1
+   20840: dc 23 80 50                  	ld	$3, -32688($1)
+   20844: 64 64 07 97                  	daddiu	$4, $3, 1943
+   20848: dc 39 81 a8                  	ld	$25, -32344($1)
+   2084c: 00 20 e0 25                  	move	$gp, $1
+   20850: ff c2 00 30                  	sd	$2, 48($fp)
+   20854: 03 20 f8 09                  	jalr	$25
+   20858: 00 00 00 00                  	nop
+   2085c: df c1 00 30                  	ld	$1, 48($fp)
+   20860: d8 20 08 00                  	clc	$c1, $1, 0($ddc)
+   20864: 48 05 08 bf                  	cgetbase	$5, $c1
+   20868: 48 06 08 ff                  	cgetlen	$6, $c1
+   2086c: df c3 00 50                  	ld	$3, 80($fp)
+   20870: dc 64 80 50                  	ld	$4, -32688($3)
+   20874: 64 84 09 55                  	daddiu	$4, $4, 2389
+   20878: dc 79 81 a8                  	ld	$25, -32344($3)
+   2087c: 00 60 e0 25                  	move	$gp, $3
+   20880: af c2 00 2c                  	sw	$2, 44($fp)
+   20884: 03 20 f8 09                  	jalr	$25
+   20888: 00 00 00 00                  	nop
+   2088c: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x2d4>
+   20890: 00 00 00 00                  	nop
+   20894: 48 01 03 7f                  	creadhwr	$c1, $chwr_ddc
+   20898: df c1 00 50                  	ld	$1, 80($fp)
+   2089c: dc 22 80 60                  	ld	$2, -32672($1)
+   208a0: 64 42 02 50                  	daddiu	$2, $2, 592
+   208a4: f8 20 10 00                  	csc	$c1, $2, 0($ddc)
+   208a8: d8 20 10 00                  	clc	$c1, $2, 0($ddc)
+   208ac: dc 23 81 18                  	ld	$3, -32488($1)
+   208b0: 48 01 08 e2                  	csetaddr	$c1, $c1, $3
+   208b4: f8 20 10 00                  	csc	$c1, $2, 0($ddc)
+   208b8: dc 22 80 50                  	ld	$2, -32688($1)
+   208bc: 64 44 07 55                  	daddiu	$4, $2, 1877
+   208c0: dc 39 81 a8                  	ld	$25, -32344($1)
+   208c4: 00 20 e0 25                  	move	$gp, $1
+   208c8: 03 20 f8 09                  	jalr	$25
+   208cc: 00 00 00 00                  	nop
+   208d0: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x318>
+   208d4: 00 00 00 00                  	nop
+   208d8: df c1 00 50                  	ld	$1, 80($fp)
+   208dc: dc 22 80 60                  	ld	$2, -32672($1)
+   208e0: 64 42 02 50                  	daddiu	$2, $2, 592
+   208e4: d8 20 10 00                  	clc	$c1, $2, 0($ddc)
+   208e8: 48 05 09 3f                  	cgettag	$5, $c1
+   208ec: 48 06 09 7f                  	cgetsealed	$6, $c1
+   208f0: 48 07 08 3f                  	cgetperm	$7, $c1
+   208f4: 48 08 08 7f                  	cgettype	$8, $c1
+   208f8: dc 23 80 50                  	ld	$3, -32688($1)
+   208fc: 64 64 07 97                  	daddiu	$4, $3, 1943
+   20900: dc 39 81 a8                  	ld	$25, -32344($1)
+   20904: 00 20 e0 25                  	move	$gp, $1
+   20908: ff c2 00 20                  	sd	$2, 32($fp)
+   2090c: 03 20 f8 09                  	jalr	$25
+   20910: 00 00 00 00                  	nop
+   20914: df c1 00 20                  	ld	$1, 32($fp)
+   20918: d8 20 08 00                  	clc	$c1, $1, 0($ddc)
+   2091c: 48 05 08 bf                  	cgetbase	$5, $c1
+   20920: 48 06 08 ff                  	cgetlen	$6, $c1
+   20924: df c3 00 50                  	ld	$3, 80($fp)
+   20928: dc 64 80 50                  	ld	$4, -32688($3)
+   2092c: 64 84 09 55                  	daddiu	$4, $4, 2389
+   20930: dc 79 81 a8                  	ld	$25, -32344($3)
+   20934: 00 60 e0 25                  	move	$gp, $3
+   20938: af c2 00 1c                  	sw	$2, 28($fp)
+   2093c: 03 20 f8 09                  	jalr	$25
+   20940: 00 00 00 00                  	nop
+   20944: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x38c>
+   20948: 00 00 00 00                  	nop
+   2094c: df c1 00 50                  	ld	$1, 80($fp)
+   20950: dc 22 80 60                  	ld	$2, -32672($1)
+   20954: 64 42 02 50                  	daddiu	$2, $2, 592
+   20958: d8 20 10 00                  	clc	$c1, $2, 0($ddc)
+   2095c: dc 23 80 60                  	ld	$3, -32672($1)
+   20960: 64 63 02 30                  	daddiu	$3, $3, 560
+   20964: d8 40 18 00                  	clc	$c2, $3, 0($ddc)
+   20968: 48 01 08 8b                  	cseal	$c1, $c1, $c2
+   2096c: f8 20 10 00                  	csc	$c1, $2, 0($ddc)
+   20970: dc 22 80 50                  	ld	$2, -32688($1)
+   20974: 64 44 08 8d                  	daddiu	$4, $2, 2189
+   20978: dc 39 81 a8                  	ld	$25, -32344($1)
+   2097c: 00 20 e0 25                  	move	$gp, $1
+   20980: 03 20 f8 09                  	jalr	$25
+   20984: 00 00 00 00                  	nop
+   20988: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x3d0>
+   2098c: 00 00 00 00                  	nop
+   20990: df c1 00 50                  	ld	$1, 80($fp)
+   20994: dc 22 80 60                  	ld	$2, -32672($1)
+   20998: 64 42 02 50                  	daddiu	$2, $2, 592
+   2099c: d8 20 10 00                  	clc	$c1, $2, 0($ddc)
+   209a0: 48 05 09 3f                  	cgettag	$5, $c1
+   209a4: 48 06 09 7f                  	cgetsealed	$6, $c1
+   209a8: 48 07 08 3f                  	cgetperm	$7, $c1
+   209ac: 48 08 08 7f                  	cgettype	$8, $c1
+   209b0: dc 23 80 50                  	ld	$3, -32688($1)
+   209b4: 64 64 07 97                  	daddiu	$4, $3, 1943
+   209b8: dc 39 81 a8                  	ld	$25, -32344($1)
+   209bc: 00 20 e0 25                  	move	$gp, $1
+   209c0: ff c2 00 10                  	sd	$2, 16($fp)
+   209c4: 03 20 f8 09                  	jalr	$25
+   209c8: 00 00 00 00                  	nop
+   209cc: df c1 00 10                  	ld	$1, 16($fp)
+   209d0: d8 20 08 00                  	clc	$c1, $1, 0($ddc)
+   209d4: 48 05 08 bf                  	cgetbase	$5, $c1
+   209d8: 48 06 08 ff                  	cgetlen	$6, $c1
+   209dc: df c3 00 50                  	ld	$3, 80($fp)
+   209e0: dc 64 80 50                  	ld	$4, -32688($3)
+   209e4: 64 84 09 55                  	daddiu	$4, $4, 2389
+   209e8: dc 79 81 a8                  	ld	$25, -32344($3)
+   209ec: 00 60 e0 25                  	move	$gp, $3
+   209f0: af c2 00 0c                  	sw	$2, 12($fp)
+   209f4: 03 20 f8 09                  	jalr	$25
+   209f8: 00 00 00 00                  	nop
+   209fc: 10 00 00 01                  	b	8 <cheritest_ccall_setup+0x444>
+   20a00: 00 00 00 00                  	nop
+   20a04: df c1 00 50                  	ld	$1, 80($fp)
+   20a08: dc 22 80 50                  	ld	$2, -32688($1)
+   20a0c: 64 44 07 91                  	daddiu	$4, $2, 1937
+   20a10: dc 39 81 a8                  	ld	$25, -32344($1)
+   20a14: 00 20 e0 25                  	move	$gp, $1
+   20a18: 03 20 f8 09                  	jalr	$25
+   20a1c: 00 00 00 00                  	nop
+   20a20: 03 c0 e8 25                  	move	$sp, $fp
+   20a24: df bc 00 58                  	ld	$gp, 88($sp)
+   20a28: df be 00 60                  	ld	$fp, 96($sp)
+   20a2c: df bf 00 68                  	ld	$ra, 104($sp)
+   20a30: 67 bd 00 70                  	daddiu	$sp, $sp, 112
+   20a34: 03 e0 00 08                  	jr	$ra
 		...
 
-0000000000020888 main:
-   20888: 67 bd ff c0                  	daddiu	$sp, $sp, -64
-   2088c: ff bf 00 38                  	sd	$ra, 56($sp)
-   20890: ff be 00 30                  	sd	$fp, 48($sp)
-   20894: ff bc 00 28                  	sd	$gp, 40($sp)
-   20898: 03 a0 f0 25                  	move	$fp, $sp
-   2089c: 3c 01 00 02                  	lui	$1, 2
-   208a0: 00 39 08 2d                  	daddu	$1, $1, $25
-   208a4: 64 21 77 98                  	daddiu	$1, $1, 30616
-   208a8: af c0 00 24                  	sw	$zero, 36($fp)
-   208ac: dc 22 80 50                  	ld	$2, -32688($1)
-   208b0: 64 44 08 30                  	daddiu	$4, $2, 2096
-   208b4: dc 39 81 a8                  	ld	$25, -32344($1)
-   208b8: 00 20 e0 25                  	move	$gp, $1
-   208bc: ff c1 00 18                  	sd	$1, 24($fp)
-   208c0: 03 20 f8 09                  	jalr	$25
-   208c4: 00 00 00 00                  	nop
-   208c8: df c1 00 18                  	ld	$1, 24($fp)
-   208cc: dc 23 80 50                  	ld	$3, -32688($1)
-   208d0: 64 64 08 3d                  	daddiu	$4, $3, 2109
-   208d4: dc 39 81 a8                  	ld	$25, -32344($1)
-   208d8: 00 20 e0 25                  	move	$gp, $1
-   208dc: af c2 00 14                  	sw	$2, 20($fp)
-   208e0: 03 20 f8 09                  	jalr	$25
-   208e4: 00 00 00 00                  	nop
-   208e8: df c1 00 18                  	ld	$1, 24($fp)
-   208ec: dc 39 81 30                  	ld	$25, -32464($1)
-   208f0: 00 20 e0 25                  	move	$gp, $1
-   208f4: af c2 00 10                  	sw	$2, 16($fp)
-   208f8: 03 20 f8 09                  	jalr	$25
-   208fc: 00 00 00 00                  	nop
-   20900: df c1 00 18                  	ld	$1, 24($fp)
-   20904: dc 23 80 50                  	ld	$3, -32688($1)
-   20908: 64 64 08 4e                  	daddiu	$4, $3, 2126
-   2090c: dc 39 81 a8                  	ld	$25, -32344($1)
-   20910: 00 20 e0 25                  	move	$gp, $1
-   20914: 03 20 f8 09                  	jalr	$25
-   20918: 00 00 00 00                  	nop
-   2091c: df c1 00 18                  	ld	$1, 24($fp)
-   20920: dc 39 81 38                  	ld	$25, -32456($1)
-   20924: 00 20 e0 25                  	move	$gp, $1
-   20928: af c2 00 0c                  	sw	$2, 12($fp)
-   2092c: 03 20 f8 09                  	jalr	$25
-   20930: 00 00 00 00                  	nop
-   20934: df c1 00 18                  	ld	$1, 24($fp)
-   20938: dc 23 80 50                  	ld	$3, -32688($1)
-   2093c: 64 64 08 16                  	daddiu	$4, $3, 2070
-   20940: dc 39 81 a8                  	ld	$25, -32344($1)
-   20944: 00 20 e0 25                  	move	$gp, $1
-   20948: 03 20 f8 09                  	jalr	$25
-   2094c: 00 00 00 00                  	nop
-   20950: 64 01 00 00                  	daddiu	$1, $zero, 0
-   20954: af c2 00 08                  	sw	$2, 8($fp)
-   20958: 00 20 10 25                  	move	$2, $1
-   2095c: 03 c0 e8 25                  	move	$sp, $fp
-   20960: df bc 00 28                  	ld	$gp, 40($sp)
-   20964: df be 00 30                  	ld	$fp, 48($sp)
-   20968: df bf 00 38                  	ld	$ra, 56($sp)
-   2096c: 67 bd 00 40                  	daddiu	$sp, $sp, 64
-   20970: 03 e0 00 08                  	jr	$ra
-   20974: 00 00 00 00                  	nop
-   20978: 04 17 00 01                  	<unknown>
-   2097c: 04 17 00 01                  	<unknown>
+0000000000020a40 test_sandboxA:
+   20a40: 67 bd ff a0                  	daddiu	$sp, $sp, -96
+   20a44: ff bf 00 58                  	sd	$ra, 88($sp)
+   20a48: ff be 00 50                  	sd	$fp, 80($sp)
+   20a4c: ff bc 00 48                  	sd	$gp, 72($sp)
+   20a50: 03 a0 f0 25                  	move	$fp, $sp
+   20a54: 3c 01 00 02                  	lui	$1, 2
+   20a58: 00 39 08 2d                  	daddu	$1, $1, $25
+   20a5c: 64 21 75 e0                  	daddiu	$1, $1, 30176
+   20a60: dc 22 80 60                  	ld	$2, -32672($1)
+   20a64: 64 42 02 40                  	daddiu	$2, $2, 576
+   20a68: d8 20 10 00                  	clc	$c1, $2, 0($ddc)
+   20a6c: 67 c2 00 20                  	daddiu	$2, $fp, 32
+   20a70: f8 20 10 00                  	csc	$c1, $2, 0($ddc)
+   20a74: dc 23 80 60                  	ld	$3, -32672($1)
+   20a78: 64 63 02 50                  	daddiu	$3, $3, 592
+   20a7c: d8 20 18 00                  	clc	$c1, $3, 0($ddc)
+   20a80: 64 43 00 10                  	daddiu	$3, $2, 16
+   20a84: f8 20 18 00                  	csc	$c1, $3, 0($ddc)
+   20a88: d8 20 10 00                  	clc	$c1, $2, 0($ddc)
+   20a8c: d8 40 18 00                  	clc	$c2, $3, 0($ddc)
+   20a90: dc 39 81 20                  	ld	$25, -32480($1)
+   20a94: 64 02 00 00                  	daddiu	$2, $zero, 0
+   20a98: ff c2 00 18                  	sd	$2, 24($fp)
+   20a9c: df c4 00 18                  	ld	$4, 24($fp)
+   20aa0: df c5 00 18                  	ld	$5, 24($fp)
+   20aa4: df c6 00 18                  	ld	$6, 24($fp)
+   20aa8: df c7 00 18                  	ld	$7, 24($fp)
+   20aac: df c8 00 18                  	ld	$8, 24($fp)
+   20ab0: df c9 00 18                  	ld	$9, 24($fp)
+   20ab4: df ca 00 18                  	ld	$10, 24($fp)
+   20ab8: df cb 00 18                  	ld	$11, 24($fp)
+   20abc: 48 03 02 bf                  	cgetnull	$c3
+   20ac0: 48 04 02 bf                  	cgetnull	$c4
+   20ac4: 48 05 02 bf                  	cgetnull	$c5
+   20ac8: 48 06 02 bf                  	cgetnull	$c6
+   20acc: 48 07 02 bf                  	cgetnull	$c7
+   20ad0: 48 08 02 bf                  	cgetnull	$c8
+   20ad4: 48 09 02 bf                  	cgetnull	$c9
+   20ad8: 48 0a 02 bf                  	cgetnull	$c10
+   20adc: 00 20 e0 25                  	move	$gp, $1
+   20ae0: ff c1 00 10                  	sd	$1, 16($fp)
+   20ae4: 03 20 f8 09                  	jalr	$25
+   20ae8: 00 00 00 00                  	nop
+   20aec: df c1 00 10                  	ld	$1, 16($fp)
+   20af0: dc 39 81 28                  	ld	$25, -32472($1)
+   20af4: 00 20 e0 25                  	move	$gp, $1
+   20af8: ff c2 00 08                  	sd	$2, 8($fp)
+   20afc: 03 20 f8 09                  	jalr	$25
+		...
 
-0000000000020980 libcheri_invoke_save_regs:
-   20980: 67 bd ff a0                  	daddiu	$sp, $sp, -96
-   20984: ff b0 00 00                  	sd	$16, 0($sp)
-   20988: ff b1 00 08                  	sd	$17, 8($sp)
-   2098c: ff b2 00 10                  	sd	$18, 16($sp)
-   20990: ff b3 00 18                  	sd	$19, 24($sp)
-   20994: ff b4 00 20                  	sd	$20, 32($sp)
-   20998: ff b5 00 28                  	sd	$21, 40($sp)
-   2099c: ff b6 00 30                  	sd	$22, 48($sp)
-   209a0: ff b7 00 38                  	sd	$23, 56($sp)
-   209a4: ff bc 00 40                  	sd	$gp, 64($sp)
-   209a8: ff be 00 48                  	sd	$fp, 72($sp)
-   209ac: ff bf 00 50                  	sd	$ra, 80($sp)
-   209b0: ff b9 00 58                  	sd	$25, 88($sp)
-
-00000000000209b4 libcheri_invoke_save_caps:
-   209b4: 48 0b 03 7f                  	creadhwr	$c11, $chwr_ddc
-   209b8: 67 bd ff 60                  	daddiu	$sp, $sp, -160
-   209bc: fa 2b e8 00                  	csc	$c17, $sp, 0($c11)
-   209c0: fa 4b e8 01                  	csc	$c18, $sp, 16($c11)
-   209c4: fa 6b e8 02                  	csc	$c19, $sp, 32($c11)
-   209c8: fa 8b e8 03                  	csc	$c20, $sp, 48($c11)
-   209cc: fa ab e8 04                  	csc	$c21, $sp, 64($c11)
-   209d0: fa cb e8 05                  	csc	$c22, $sp, 80($c11)
-   209d4: fa eb e8 06                  	csc	$c23, $sp, 96($c11)
-   209d8: fb 0b e8 07                  	csc	$c24, $sp, 112($c11)
-   209dc: fb 2b e8 08                  	csc	$c25, $sp, 128($c11)
-   209e0: fb 4b e8 09                  	csc	$c26, $sp, 144($c11)
-   209e4: 48 0b 5f 4f                  	csetoffset	$c11, $c11, $sp
-   209e8: df 8c 81 40                  	ld	$12, -32448($gp)
-   209ec: 48 11 07 ff                  	cgetpcc	$c17
-   209f0: 48 11 8b 0f                  	csetoffset	$c17, $c17, $12
-
-00000000000209f4 libcheri_invoke_ccall:
-   209f4: 48 a1 10 01                  	dmtc2	$1, $2, 1
-   209f8: 00 00 00 00                  	nop
-
-00000000000209fc libcheri_invoke_ccall_linkaddr:
-   209fc: 48 1d 59 bf                  	cgetoffset	$sp, $c11
-   20a00: 48 0b 58 0f                  	csetoffset	$c11, $c11, $zero
-   20a04: 48 0b 03 bf                  	cwritehwr	$c11, $chwr_ddc
-
-0000000000020a08 libcheri_invoke_restore_caps:
-   20a08: da 2b e8 00                  	clc	$c17, $sp, 0($c11)
-   20a0c: da 4b e8 01                  	clc	$c18, $sp, 16($c11)
-   20a10: da 6b e8 02                  	clc	$c19, $sp, 32($c11)
-   20a14: da 8b e8 03                  	clc	$c20, $sp, 48($c11)
-   20a18: da ab e8 04                  	clc	$c21, $sp, 64($c11)
-   20a1c: da cb e8 05                  	clc	$c22, $sp, 80($c11)
-   20a20: da eb e8 06                  	clc	$c23, $sp, 96($c11)
-   20a24: db 0b e8 07                  	clc	$c24, $sp, 112($c11)
-   20a28: db 2b e8 08                  	clc	$c25, $sp, 128($c11)
-   20a2c: db 4b e8 09                  	clc	$c26, $sp, 144($c11)
-
-0000000000020a30 libcheri_invoke_set_errno:
-   20a30: 14 80 00 0f                  	bnez	$4, 64 <libcheri_set_errno>
-   20a34: 67 bd 00 a0                  	daddiu	$sp, $sp, 160
-
-0000000000020a38 libcheri_invoke_restore_regs:
-   20a38: df b0 00 00                  	ld	$16, 0($sp)
-   20a3c: df b1 00 08                  	ld	$17, 8($sp)
-   20a40: df b2 00 10                  	ld	$18, 16($sp)
-   20a44: df b3 00 18                  	ld	$19, 24($sp)
-   20a48: df b4 00 20                  	ld	$20, 32($sp)
-   20a4c: df b5 00 28                  	ld	$21, 40($sp)
-   20a50: df b6 00 30                  	ld	$22, 48($sp)
-   20a54: df b7 00 38                  	ld	$23, 56($sp)
-   20a58: df bc 00 40                  	ld	$gp, 64($sp)
-   20a5c: df be 00 48                  	ld	$fp, 72($sp)
-   20a60: df bf 00 50                  	ld	$ra, 80($sp)
-   20a64: 67 bd 00 60                  	daddiu	$sp, $sp, 96
-
-0000000000020a68 libcheri_invoke_return:
-   20a68: 03 e0 00 08                  	jr	$ra
-   20a6c: 00 00 00 00                  	nop
-
-0000000000020a70 libcheri_set_errno:
-   20a70: df b9 00 58                  	ld	$25, 88($sp)
-   20a74: ff a4 00 58                  	sd	$4, 88($sp)
-   20a78: 3c 01 00 02                  	lui	$1, 2
-   20a7c: 00 39 08 2d                  	daddu	$1, $1, $25
-   20a80: 64 3c 76 a0                  	daddiu	$gp, $1, 30368
-   20a84: 3c 01 00 00                  	lui	$1, 0
-   20a88: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20a8c: dc 39 81 c0                  	ld	$25, -32320($1)
-   20a90: 03 20 f8 09                  	jalr	$25
-   20a94: 67 84 81 c8                  	daddiu	$4, $gp, -32312
-   20a98: df a4 00 58                  	ld	$4, 88($sp)
-   20a9c: ac 44 00 00                  	sw	$4, 0($2)
-   20aa0: 64 02 ff ff                  	daddiu	$2, $zero, -1
-   20aa4: 10 00 ff e4                  	b	-108 <libcheri_invoke_restore_regs>
-   20aa8: 00 80 18 25                  	move	$3, $4
-   20aac: 04 17 00 01                  	<unknown>
-
-0000000000020ab0 libcheri_type_alloc:
-   20ab0: 67 bd ff e0                  	daddiu	$sp, $sp, -32
-   20ab4: ff bf 00 18                  	sd	$ra, 24($sp)
-   20ab8: ff be 00 10                  	sd	$fp, 16($sp)
-   20abc: ff bc 00 08                  	sd	$gp, 8($sp)
-   20ac0: ff b0 00 00                  	sd	$16, 0($sp)
-   20ac4: 03 a0 f0 25                  	move	$fp, $sp
-   20ac8: 3c 01 00 02                  	lui	$1, 2
-   20acc: 00 39 08 2d                  	daddu	$1, $1, $25
-   20ad0: 64 3c 75 70                  	daddiu	$gp, $1, 30064
-   20ad4: 3c 01 00 00                  	lui	$1, 0
-   20ad8: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20adc: dc 21 81 48                  	ld	$1, -32440($1)
-   20ae0: 64 02 00 01                  	daddiu	$2, $zero, 1
-   20ae4: d0 30 00 00                  	lld	$16, 0($1)
-   20ae8: 02 02 18 2d                  	daddu	$3, $16, $2
-   20aec: f0 23 00 00                  	scd	$3, 0($1)
-   20af0: 10 60 ff fc                  	beqz	$3, -12 <libcheri_type_alloc+0x34>
-   20af4: 00 00 00 00                  	nop
-   20af8: 3c 01 00 40                  	lui	$1, 64
-   20afc: 00 30 08 2b                  	sltu	$1, $1, $16
-   20b00: 14 20 00 23                  	bnez	$1, 144 <libcheri_type_alloc+0xe0>
-   20b04: 48 03 02 bf                  	cgetnull	$c3
-   20b08: 3c 01 00 00                  	lui	$1, 0
-   20b0c: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20b10: dc 25 81 50                  	ld	$5, -32432($1)
-   20b14: d8 20 28 00                  	clc	$c1, $5, 0($ddc)
-   20b18: 48 01 08 3f                  	cgetperm	$1, $c1
-   20b1c: 30 21 00 80                  	andi	$1, $1, 128
-   20b20: 14 20 00 17                  	bnez	$1, 96 <libcheri_type_alloc+0xd0>
-   20b24: 00 00 00 00                  	nop
-   20b28: df 99 81 b0                  	ld	$25, -32336($gp)
-   20b2c: 03 20 f8 09                  	jalr	$25
-   20b30: 64 04 00 06                  	daddiu	$4, $zero, 6
-   20b34: 04 40 00 06                  	bltz	$2, 28 <libcheri_type_alloc+0xa0>
-   20b38: 00 00 00 00                  	nop
-   20b3c: 3c 01 00 00                  	lui	$1, 0
-   20b40: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20b44: dc 21 81 50                  	ld	$1, -32432($1)
-   20b48: 10 00 00 06                  	b	28 <libcheri_type_alloc+0xb4>
-   20b4c: d8 20 08 00                  	clc	$c1, $1, 0($ddc)
-   20b50: 3c 01 00 00                  	lui	$1, 0
-   20b54: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20b58: dc 21 81 50                  	ld	$1, -32432($1)
-   20b5c: 48 01 02 bf                  	cgetnull	$c1
-   20b60: f8 00 08 00                  	csc	$cnull, $1, 0($ddc)
-   20b64: 48 01 08 3f                  	cgetperm	$1, $c1
-   20b68: 30 21 00 80                  	andi	$1, $1, 128
-   20b6c: 10 20 00 0f                  	beqz	$1, 64 <libcheri_type_alloc+0xfc>
-   20b70: 00 00 00 00                  	nop
-   20b74: 48 01 08 ff                  	cgetlen	$1, $c1
-   20b78: 10 20 00 18                  	beqz	$1, 100 <libcheri_type_alloc+0x12c>
+0000000000020b08 main:
+   20b08: 67 bd ff c0                  	daddiu	$sp, $sp, -64
+   20b0c: ff bf 00 38                  	sd	$ra, 56($sp)
+   20b10: ff be 00 30                  	sd	$fp, 48($sp)
+   20b14: ff bc 00 28                  	sd	$gp, 40($sp)
+   20b18: 03 a0 f0 25                  	move	$fp, $sp
+   20b1c: 3c 01 00 02                  	lui	$1, 2
+   20b20: 00 39 08 2d                  	daddu	$1, $1, $25
+   20b24: 64 21 75 18                  	daddiu	$1, $1, 29976
+   20b28: af c0 00 24                  	sw	$zero, 36($fp)
+   20b2c: dc 22 80 50                  	ld	$2, -32688($1)
+   20b30: 64 44 08 6f                  	daddiu	$4, $2, 2159
+   20b34: dc 39 81 a8                  	ld	$25, -32344($1)
+   20b38: 00 20 e0 25                  	move	$gp, $1
+   20b3c: ff c1 00 18                  	sd	$1, 24($fp)
+   20b40: 03 20 f8 09                  	jalr	$25
+   20b44: 00 00 00 00                  	nop
+   20b48: df c1 00 18                  	ld	$1, 24($fp)
+   20b4c: dc 23 80 50                  	ld	$3, -32688($1)
+   20b50: 64 64 08 7c                  	daddiu	$4, $3, 2172
+   20b54: dc 39 81 a8                  	ld	$25, -32344($1)
+   20b58: 00 20 e0 25                  	move	$gp, $1
+   20b5c: af c2 00 14                  	sw	$2, 20($fp)
+   20b60: 03 20 f8 09                  	jalr	$25
+   20b64: 00 00 00 00                  	nop
+   20b68: df c1 00 18                  	ld	$1, 24($fp)
+   20b6c: dc 39 81 30                  	ld	$25, -32464($1)
+   20b70: 00 20 e0 25                  	move	$gp, $1
+   20b74: af c2 00 10                  	sw	$2, 16($fp)
+   20b78: 03 20 f8 09                  	jalr	$25
    20b7c: 00 00 00 00                  	nop
-   20b80: 48 01 0c 0f                  	csetoffset	$c1, $c1, $16
-   20b84: 4a 81 08 01                  	csetbounds	$c1, $c1, 1
-   20b88: 64 01 00 81                  	daddiu	$1, $zero, 129
-   20b8c: 48 03 08 4d                  	candperm	$c3, $c1, $1
-   20b90: 03 c0 e8 25                  	move	$sp, $fp
-   20b94: df b0 00 00                  	ld	$16, 0($sp)
-   20b98: df bc 00 08                  	ld	$gp, 8($sp)
-   20b9c: df be 00 10                  	ld	$fp, 16($sp)
-   20ba0: df bf 00 18                  	ld	$ra, 24($sp)
-   20ba4: 03 e0 00 08                  	jr	$ra
-   20ba8: 67 bd 00 20                  	daddiu	$sp, $sp, 32
-   20bac: 3c 01 00 00                  	lui	$1, 0
-   20bb0: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20bb4: dc 24 81 58                  	ld	$4, -32424($1)
-   20bb8: 3c 01 00 00                  	lui	$1, 0
-   20bbc: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20bc0: dc 25 81 60                  	ld	$5, -32416($1)
-   20bc4: 3c 01 00 00                  	lui	$1, 0
-   20bc8: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20bcc: dc 27 81 68                  	ld	$7, -32408($1)
-   20bd0: df 99 81 b8                  	ld	$25, -32328($gp)
-   20bd4: 03 20 f8 09                  	jalr	$25
-   20bd8: 64 06 00 50                  	daddiu	$6, $zero, 80
-   20bdc: 3c 01 00 00                  	lui	$1, 0
-   20be0: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20be4: dc 24 81 58                  	ld	$4, -32424($1)
-   20be8: 3c 01 00 00                  	lui	$1, 0
-   20bec: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20bf0: dc 25 81 60                  	ld	$5, -32416($1)
-   20bf4: 3c 01 00 00                  	lui	$1, 0
-   20bf8: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20bfc: dc 27 81 70                  	ld	$7, -32400($1)
-   20c00: df 99 81 b8                  	ld	$25, -32328($gp)
-   20c04: 03 20 f8 09                  	jalr	$25
-   20c08: 64 06 00 51                  	daddiu	$6, $zero, 81
-   20c0c: 00 00 00 00                  	nop
+   20b80: df c1 00 18                  	ld	$1, 24($fp)
+   20b84: dc 23 80 50                  	ld	$3, -32688($1)
+   20b88: 64 64 08 a4                  	daddiu	$4, $3, 2212
+   20b8c: dc 39 81 a8                  	ld	$25, -32344($1)
+   20b90: 00 20 e0 25                  	move	$gp, $1
+   20b94: 03 20 f8 09                  	jalr	$25
+   20b98: 00 00 00 00                  	nop
+   20b9c: df c1 00 18                  	ld	$1, 24($fp)
+   20ba0: dc 39 81 38                  	ld	$25, -32456($1)
+   20ba4: 00 20 e0 25                  	move	$gp, $1
+   20ba8: af c2 00 0c                  	sw	$2, 12($fp)
+   20bac: 03 20 f8 09                  	jalr	$25
+   20bb0: 00 00 00 00                  	nop
+   20bb4: df c1 00 18                  	ld	$1, 24($fp)
+   20bb8: dc 23 80 50                  	ld	$3, -32688($1)
+   20bbc: 64 64 08 55                  	daddiu	$4, $3, 2133
+   20bc0: dc 39 81 a8                  	ld	$25, -32344($1)
+   20bc4: 00 20 e0 25                  	move	$gp, $1
+   20bc8: 03 20 f8 09                  	jalr	$25
+   20bcc: 00 00 00 00                  	nop
+   20bd0: 64 01 00 00                  	daddiu	$1, $zero, 0
+   20bd4: af c2 00 08                  	sw	$2, 8($fp)
+   20bd8: 00 20 10 25                  	move	$2, $1
+   20bdc: 03 c0 e8 25                  	move	$sp, $fp
+   20be0: df bc 00 28                  	ld	$gp, 40($sp)
+   20be4: df be 00 30                  	ld	$fp, 48($sp)
+   20be8: df bf 00 38                  	ld	$ra, 56($sp)
+   20bec: 67 bd 00 40                  	daddiu	$sp, $sp, 64
+   20bf0: 03 e0 00 08                  	jr	$ra
+   20bf4: 00 00 00 00                  	nop
+   20bf8: 04 17 00 01                  	<unknown>
+   20bfc: 04 17 00 01                  	<unknown>
 
-0000000000020c10 libcheri_system_type_alloc:
-   20c10: 67 bd ff e0                  	daddiu	$sp, $sp, -32
-   20c14: ff bf 00 18                  	sd	$ra, 24($sp)
-   20c18: ff be 00 10                  	sd	$fp, 16($sp)
-   20c1c: ff bc 00 08                  	sd	$gp, 8($sp)
-   20c20: ff b0 00 00                  	sd	$16, 0($sp)
-   20c24: 03 a0 f0 25                  	move	$fp, $sp
-   20c28: 3c 01 00 02                  	lui	$1, 2
-   20c2c: 00 39 08 2d                  	daddu	$1, $1, $25
-   20c30: 64 3c 74 10                  	daddiu	$gp, $1, 29712
-   20c34: 3c 01 00 00                  	lui	$1, 0
-   20c38: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20c3c: dc 21 81 78                  	ld	$1, -32392($1)
-   20c40: 64 02 00 01                  	daddiu	$2, $zero, 1
-   20c44: d0 30 00 00                  	lld	$16, 0($1)
-   20c48: 02 02 18 2d                  	daddu	$3, $16, $2
-   20c4c: f0 23 00 00                  	scd	$3, 0($1)
-   20c50: 10 60 ff fc                  	beqz	$3, -12 <libcheri_system_type_alloc+0x34>
-   20c54: 00 00 00 00                  	nop
-   20c58: 3c 01 00 80                  	lui	$1, 128
-   20c5c: 00 30 08 2b                  	sltu	$1, $1, $16
-   20c60: 14 20 00 23                  	bnez	$1, 144 <libcheri_system_type_alloc+0xe0>
-   20c64: 48 03 02 bf                  	cgetnull	$c3
-   20c68: 3c 01 00 00                  	lui	$1, 0
-   20c6c: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20c70: dc 25 81 50                  	ld	$5, -32432($1)
-   20c74: d8 20 28 00                  	clc	$c1, $5, 0($ddc)
-   20c78: 48 01 08 3f                  	cgetperm	$1, $c1
-   20c7c: 30 21 00 80                  	andi	$1, $1, 128
-   20c80: 14 20 00 17                  	bnez	$1, 96 <libcheri_system_type_alloc+0xd0>
-   20c84: 00 00 00 00                  	nop
-   20c88: df 99 81 b0                  	ld	$25, -32336($gp)
-   20c8c: 03 20 f8 09                  	jalr	$25
-   20c90: 64 04 00 06                  	daddiu	$4, $zero, 6
-   20c94: 04 40 00 06                  	bltz	$2, 28 <libcheri_system_type_alloc+0xa0>
-   20c98: 00 00 00 00                  	nop
-   20c9c: 3c 01 00 00                  	lui	$1, 0
-   20ca0: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20ca4: dc 21 81 50                  	ld	$1, -32432($1)
-   20ca8: 10 00 00 06                  	b	28 <libcheri_system_type_alloc+0xb4>
-   20cac: d8 20 08 00                  	clc	$c1, $1, 0($ddc)
-   20cb0: 3c 01 00 00                  	lui	$1, 0
-   20cb4: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20cb8: dc 21 81 50                  	ld	$1, -32432($1)
-   20cbc: 48 01 02 bf                  	cgetnull	$c1
-   20cc0: f8 00 08 00                  	csc	$cnull, $1, 0($ddc)
-   20cc4: 48 01 08 3f                  	cgetperm	$1, $c1
-   20cc8: 30 21 00 80                  	andi	$1, $1, 128
-   20ccc: 10 20 00 0f                  	beqz	$1, 64 <libcheri_system_type_alloc+0xfc>
-   20cd0: 00 00 00 00                  	nop
-   20cd4: 48 01 08 ff                  	cgetlen	$1, $c1
-   20cd8: 10 20 00 18                  	beqz	$1, 100 <libcheri_system_type_alloc+0x12c>
-   20cdc: 00 00 00 00                  	nop
-   20ce0: 48 01 0c 0f                  	csetoffset	$c1, $c1, $16
-   20ce4: 4a 81 08 01                  	csetbounds	$c1, $c1, 1
-   20ce8: 64 01 00 81                  	daddiu	$1, $zero, 129
-   20cec: 48 03 08 4d                  	candperm	$c3, $c1, $1
-   20cf0: 03 c0 e8 25                  	move	$sp, $fp
-   20cf4: df b0 00 00                  	ld	$16, 0($sp)
-   20cf8: df bc 00 08                  	ld	$gp, 8($sp)
-   20cfc: df be 00 10                  	ld	$fp, 16($sp)
-   20d00: df bf 00 18                  	ld	$ra, 24($sp)
-   20d04: 03 e0 00 08                  	jr	$ra
-   20d08: 67 bd 00 20                  	daddiu	$sp, $sp, 32
-   20d0c: 3c 01 00 00                  	lui	$1, 0
-   20d10: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20d14: dc 24 81 58                  	ld	$4, -32424($1)
-   20d18: 3c 01 00 00                  	lui	$1, 0
-   20d1c: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20d20: dc 25 81 60                  	ld	$5, -32416($1)
-   20d24: 3c 01 00 00                  	lui	$1, 0
-   20d28: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20d2c: dc 27 81 68                  	ld	$7, -32408($1)
-   20d30: df 99 81 b8                  	ld	$25, -32328($gp)
-   20d34: 03 20 f8 09                  	jalr	$25
-   20d38: 64 06 00 50                  	daddiu	$6, $zero, 80
-   20d3c: 3c 01 00 00                  	lui	$1, 0
-   20d40: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20d44: dc 24 81 58                  	ld	$4, -32424($1)
-   20d48: 3c 01 00 00                  	lui	$1, 0
-   20d4c: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20d50: dc 25 81 60                  	ld	$5, -32416($1)
+0000000000020c00 libcheri_invoke_save_regs:
+   20c00: 67 bd ff a0                  	daddiu	$sp, $sp, -96
+   20c04: ff b0 00 00                  	sd	$16, 0($sp)
+   20c08: ff b1 00 08                  	sd	$17, 8($sp)
+   20c0c: ff b2 00 10                  	sd	$18, 16($sp)
+   20c10: ff b3 00 18                  	sd	$19, 24($sp)
+   20c14: ff b4 00 20                  	sd	$20, 32($sp)
+   20c18: ff b5 00 28                  	sd	$21, 40($sp)
+   20c1c: ff b6 00 30                  	sd	$22, 48($sp)
+   20c20: ff b7 00 38                  	sd	$23, 56($sp)
+   20c24: ff bc 00 40                  	sd	$gp, 64($sp)
+   20c28: ff be 00 48                  	sd	$fp, 72($sp)
+   20c2c: ff bf 00 50                  	sd	$ra, 80($sp)
+   20c30: ff b9 00 58                  	sd	$25, 88($sp)
+
+0000000000020c34 libcheri_invoke_save_caps:
+   20c34: 48 0b 03 7f                  	creadhwr	$c11, $chwr_ddc
+   20c38: 67 bd ff 60                  	daddiu	$sp, $sp, -160
+   20c3c: fa 2b e8 00                  	csc	$c17, $sp, 0($c11)
+   20c40: fa 4b e8 01                  	csc	$c18, $sp, 16($c11)
+   20c44: fa 6b e8 02                  	csc	$c19, $sp, 32($c11)
+   20c48: fa 8b e8 03                  	csc	$c20, $sp, 48($c11)
+   20c4c: fa ab e8 04                  	csc	$c21, $sp, 64($c11)
+   20c50: fa cb e8 05                  	csc	$c22, $sp, 80($c11)
+   20c54: fa eb e8 06                  	csc	$c23, $sp, 96($c11)
+   20c58: fb 0b e8 07                  	csc	$c24, $sp, 112($c11)
+   20c5c: fb 2b e8 08                  	csc	$c25, $sp, 128($c11)
+   20c60: fb 4b e8 09                  	csc	$c26, $sp, 144($c11)
+   20c64: 48 0b 5f 4f                  	csetoffset	$c11, $c11, $sp
+   20c68: df 8c 81 40                  	ld	$12, -32448($gp)
+   20c6c: 48 11 07 ff                  	cgetpcc	$c17
+   20c70: 48 11 8b 0f                  	csetoffset	$c17, $c17, $12
+
+0000000000020c74 libcheri_invoke_ccall:
+   20c74: 48 a1 10 01                  	dmtc2	$1, $2, 1
+   20c78: 00 00 00 00                  	nop
+
+0000000000020c7c libcheri_invoke_ccall_linkaddr:
+   20c7c: 48 1d 59 bf                  	cgetoffset	$sp, $c11
+   20c80: 48 0b 58 0f                  	csetoffset	$c11, $c11, $zero
+   20c84: 48 0b 03 bf                  	cwritehwr	$c11, $chwr_ddc
+
+0000000000020c88 libcheri_invoke_restore_caps:
+   20c88: da 2b e8 00                  	clc	$c17, $sp, 0($c11)
+   20c8c: da 4b e8 01                  	clc	$c18, $sp, 16($c11)
+   20c90: da 6b e8 02                  	clc	$c19, $sp, 32($c11)
+   20c94: da 8b e8 03                  	clc	$c20, $sp, 48($c11)
+   20c98: da ab e8 04                  	clc	$c21, $sp, 64($c11)
+   20c9c: da cb e8 05                  	clc	$c22, $sp, 80($c11)
+   20ca0: da eb e8 06                  	clc	$c23, $sp, 96($c11)
+   20ca4: db 0b e8 07                  	clc	$c24, $sp, 112($c11)
+   20ca8: db 2b e8 08                  	clc	$c25, $sp, 128($c11)
+   20cac: db 4b e8 09                  	clc	$c26, $sp, 144($c11)
+
+0000000000020cb0 libcheri_invoke_set_errno:
+   20cb0: 14 80 00 0f                  	bnez	$4, 64 <libcheri_set_errno>
+   20cb4: 67 bd 00 a0                  	daddiu	$sp, $sp, 160
+
+0000000000020cb8 libcheri_invoke_restore_regs:
+   20cb8: df b0 00 00                  	ld	$16, 0($sp)
+   20cbc: df b1 00 08                  	ld	$17, 8($sp)
+   20cc0: df b2 00 10                  	ld	$18, 16($sp)
+   20cc4: df b3 00 18                  	ld	$19, 24($sp)
+   20cc8: df b4 00 20                  	ld	$20, 32($sp)
+   20ccc: df b5 00 28                  	ld	$21, 40($sp)
+   20cd0: df b6 00 30                  	ld	$22, 48($sp)
+   20cd4: df b7 00 38                  	ld	$23, 56($sp)
+   20cd8: df bc 00 40                  	ld	$gp, 64($sp)
+   20cdc: df be 00 48                  	ld	$fp, 72($sp)
+   20ce0: df bf 00 50                  	ld	$ra, 80($sp)
+   20ce4: 67 bd 00 60                  	daddiu	$sp, $sp, 96
+
+0000000000020ce8 libcheri_invoke_return:
+   20ce8: 03 e0 00 08                  	jr	$ra
+   20cec: 00 00 00 00                  	nop
+
+0000000000020cf0 libcheri_set_errno:
+   20cf0: df b9 00 58                  	ld	$25, 88($sp)
+   20cf4: ff a4 00 58                  	sd	$4, 88($sp)
+   20cf8: 3c 01 00 02                  	lui	$1, 2
+   20cfc: 00 39 08 2d                  	daddu	$1, $1, $25
+   20d00: 64 3c 74 20                  	daddiu	$gp, $1, 29728
+   20d04: 3c 01 00 00                  	lui	$1, 0
+   20d08: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20d0c: dc 39 81 c0                  	ld	$25, -32320($1)
+   20d10: 03 20 f8 09                  	jalr	$25
+   20d14: 67 84 81 c8                  	daddiu	$4, $gp, -32312
+   20d18: df a4 00 58                  	ld	$4, 88($sp)
+   20d1c: ac 44 00 00                  	sw	$4, 0($2)
+   20d20: 64 02 ff ff                  	daddiu	$2, $zero, -1
+   20d24: 10 00 ff e4                  	b	-108 <libcheri_invoke_restore_regs>
+   20d28: 00 80 18 25                  	move	$3, $4
+   20d2c: 04 17 00 01                  	<unknown>
+
+0000000000020d30 libcheri_type_alloc:
+   20d30: 67 bd ff e0                  	daddiu	$sp, $sp, -32
+   20d34: ff bf 00 18                  	sd	$ra, 24($sp)
+   20d38: ff be 00 10                  	sd	$fp, 16($sp)
+   20d3c: ff bc 00 08                  	sd	$gp, 8($sp)
+   20d40: ff b0 00 00                  	sd	$16, 0($sp)
+   20d44: 03 a0 f0 25                  	move	$fp, $sp
+   20d48: 3c 01 00 02                  	lui	$1, 2
+   20d4c: 00 39 08 2d                  	daddu	$1, $1, $25
+   20d50: 64 3c 72 f0                  	daddiu	$gp, $1, 29424
    20d54: 3c 01 00 00                  	lui	$1, 0
    20d58: 00 3c 08 2d                  	daddu	$1, $1, $gp
-   20d5c: dc 27 81 70                  	ld	$7, -32400($1)
-   20d60: df 99 81 b8                  	ld	$25, -32328($gp)
-   20d64: 03 20 f8 09                  	jalr	$25
-   20d68: 64 06 00 51                  	daddiu	$6, $zero, 81
-   20d6c: 04 17 00 01                  	<unknown>
-
-0000000000020d70 __do_global_ctors_aux:
-   20d70: 67 bd ff e0                  	daddiu	$sp, $sp, -32
-   20d74: ff bf 00 18                  	sd	$ra, 24($sp)
-   20d78: ff be 00 10                  	sd	$fp, 16($sp)
-   20d7c: ff b0 00 08                  	sd	$16, 8($sp)
-   20d80: 03 a0 f0 25                  	move	$fp, $sp
-   20d84: 3c 01 00 02                  	lui	$1, 2
-   20d88: 00 39 08 2d                  	daddu	$1, $1, $25
-   20d8c: 64 21 72 b0                  	daddiu	$1, $1, 29360
-   20d90: dc 21 80 70                  	ld	$1, -32656($1)
-   20d94: 64 21 00 08                  	daddiu	$1, $1, 8
-   20d98: 10 00 00 04                  	b	20 <__do_global_ctors_aux+0x3c>
-   20d9c: 64 30 ff f8                  	daddiu	$16, $1, -8
-   20da0: 03 20 f8 09                  	jalr	$25
+   20d5c: dc 21 81 48                  	ld	$1, -32440($1)
+   20d60: 64 02 00 01                  	daddiu	$2, $zero, 1
+   20d64: d0 30 00 00                  	lld	$16, 0($1)
+   20d68: 02 02 18 2d                  	daddu	$3, $16, $2
+   20d6c: f0 23 00 00                  	scd	$3, 0($1)
+   20d70: 10 60 ff fc                  	beqz	$3, -12 <libcheri_type_alloc+0x34>
+   20d74: 00 00 00 00                  	nop
+   20d78: 3c 01 00 40                  	lui	$1, 64
+   20d7c: 00 30 08 2b                  	sltu	$1, $1, $16
+   20d80: 14 20 00 23                  	bnez	$1, 144 <libcheri_type_alloc+0xe0>
+   20d84: 48 03 02 bf                  	cgetnull	$c3
+   20d88: 3c 01 00 00                  	lui	$1, 0
+   20d8c: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20d90: dc 25 81 50                  	ld	$5, -32432($1)
+   20d94: d8 20 28 00                  	clc	$c1, $5, 0($ddc)
+   20d98: 48 01 08 3f                  	cgetperm	$1, $c1
+   20d9c: 30 21 00 80                  	andi	$1, $1, 128
+   20da0: 14 20 00 17                  	bnez	$1, 96 <libcheri_type_alloc+0xd0>
    20da4: 00 00 00 00                  	nop
-   20da8: 66 10 ff f8                  	daddiu	$16, $16, -8
-   20dac: de 19 00 00                  	ld	$25, 0($16)
-   20db0: 67 21 00 01                  	daddiu	$1, $25, 1
-   20db4: 2c 21 00 02                  	sltiu	$1, $1, 2
-   20db8: 10 20 ff f9                  	beqz	$1, -24 <__do_global_ctors_aux+0x30>
-   20dbc: 00 00 00 00                  	nop
-   20dc0: 03 c0 e8 25                  	move	$sp, $fp
-   20dc4: df b0 00 08                  	ld	$16, 8($sp)
-   20dc8: df be 00 10                  	ld	$fp, 16($sp)
-   20dcc: df bf 00 18                  	ld	$ra, 24($sp)
-   20dd0: 03 e0 00 08                  	jr	$ra
-   20dd4: 67 bd 00 20                  	daddiu	$sp, $sp, 32
-   20dd8: 04 17 00 01                  	<unknown>
-   20ddc: 04 17 00 01                  	<unknown>
+   20da8: df 99 81 b0                  	ld	$25, -32336($gp)
+   20dac: 03 20 f8 09                  	jalr	$25
+   20db0: 64 04 00 06                  	daddiu	$4, $zero, 6
+   20db4: 04 40 00 06                  	bltz	$2, 28 <libcheri_type_alloc+0xa0>
+   20db8: 00 00 00 00                  	nop
+   20dbc: 3c 01 00 00                  	lui	$1, 0
+   20dc0: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20dc4: dc 21 81 50                  	ld	$1, -32432($1)
+   20dc8: 10 00 00 06                  	b	28 <libcheri_type_alloc+0xb4>
+   20dcc: d8 20 08 00                  	clc	$c1, $1, 0($ddc)
+   20dd0: 3c 01 00 00                  	lui	$1, 0
+   20dd4: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20dd8: dc 21 81 50                  	ld	$1, -32432($1)
+   20ddc: 48 01 02 bf                  	cgetnull	$c1
+   20de0: f8 00 08 00                  	csc	$cnull, $1, 0($ddc)
+   20de4: 48 01 08 3f                  	cgetperm	$1, $c1
+   20de8: 30 21 00 80                  	andi	$1, $1, 128
+   20dec: 10 20 00 0f                  	beqz	$1, 64 <libcheri_type_alloc+0xfc>
+   20df0: 00 00 00 00                  	nop
+   20df4: 48 01 08 ff                  	cgetlen	$1, $c1
+   20df8: 10 20 00 18                  	beqz	$1, 100 <libcheri_type_alloc+0x12c>
+   20dfc: 00 00 00 00                  	nop
+   20e00: 48 01 0c 0f                  	csetoffset	$c1, $c1, $16
+   20e04: 4a 81 08 01                  	csetbounds	$c1, $c1, 1
+   20e08: 64 01 00 81                  	daddiu	$1, $zero, 129
+   20e0c: 48 03 08 4d                  	candperm	$c3, $c1, $1
+   20e10: 03 c0 e8 25                  	move	$sp, $fp
+   20e14: df b0 00 00                  	ld	$16, 0($sp)
+   20e18: df bc 00 08                  	ld	$gp, 8($sp)
+   20e1c: df be 00 10                  	ld	$fp, 16($sp)
+   20e20: df bf 00 18                  	ld	$ra, 24($sp)
+   20e24: 03 e0 00 08                  	jr	$ra
+   20e28: 67 bd 00 20                  	daddiu	$sp, $sp, 32
+   20e2c: 3c 01 00 00                  	lui	$1, 0
+   20e30: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20e34: dc 24 81 58                  	ld	$4, -32424($1)
+   20e38: 3c 01 00 00                  	lui	$1, 0
+   20e3c: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20e40: dc 25 81 60                  	ld	$5, -32416($1)
+   20e44: 3c 01 00 00                  	lui	$1, 0
+   20e48: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20e4c: dc 27 81 68                  	ld	$7, -32408($1)
+   20e50: df 99 81 b8                  	ld	$25, -32328($gp)
+   20e54: 03 20 f8 09                  	jalr	$25
+   20e58: 64 06 00 50                  	daddiu	$6, $zero, 80
+   20e5c: 3c 01 00 00                  	lui	$1, 0
+   20e60: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20e64: dc 24 81 58                  	ld	$4, -32424($1)
+   20e68: 3c 01 00 00                  	lui	$1, 0
+   20e6c: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20e70: dc 25 81 60                  	ld	$5, -32416($1)
+   20e74: 3c 01 00 00                  	lui	$1, 0
+   20e78: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20e7c: dc 27 81 70                  	ld	$7, -32400($1)
+   20e80: df 99 81 b8                  	ld	$25, -32328($gp)
+   20e84: 03 20 f8 09                  	jalr	$25
+   20e88: 64 06 00 51                  	daddiu	$6, $zero, 81
+   20e8c: 00 00 00 00                  	nop
+
+0000000000020e90 libcheri_system_type_alloc:
+   20e90: 67 bd ff e0                  	daddiu	$sp, $sp, -32
+   20e94: ff bf 00 18                  	sd	$ra, 24($sp)
+   20e98: ff be 00 10                  	sd	$fp, 16($sp)
+   20e9c: ff bc 00 08                  	sd	$gp, 8($sp)
+   20ea0: ff b0 00 00                  	sd	$16, 0($sp)
+   20ea4: 03 a0 f0 25                  	move	$fp, $sp
+   20ea8: 3c 01 00 02                  	lui	$1, 2
+   20eac: 00 39 08 2d                  	daddu	$1, $1, $25
+   20eb0: 64 3c 71 90                  	daddiu	$gp, $1, 29072
+   20eb4: 3c 01 00 00                  	lui	$1, 0
+   20eb8: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20ebc: dc 21 81 78                  	ld	$1, -32392($1)
+   20ec0: 64 02 00 01                  	daddiu	$2, $zero, 1
+   20ec4: d0 30 00 00                  	lld	$16, 0($1)
+   20ec8: 02 02 18 2d                  	daddu	$3, $16, $2
+   20ecc: f0 23 00 00                  	scd	$3, 0($1)
+   20ed0: 10 60 ff fc                  	beqz	$3, -12 <libcheri_system_type_alloc+0x34>
+   20ed4: 00 00 00 00                  	nop
+   20ed8: 3c 01 00 80                  	lui	$1, 128
+   20edc: 00 30 08 2b                  	sltu	$1, $1, $16
+   20ee0: 14 20 00 23                  	bnez	$1, 144 <libcheri_system_type_alloc+0xe0>
+   20ee4: 48 03 02 bf                  	cgetnull	$c3
+   20ee8: 3c 01 00 00                  	lui	$1, 0
+   20eec: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20ef0: dc 25 81 50                  	ld	$5, -32432($1)
+   20ef4: d8 20 28 00                  	clc	$c1, $5, 0($ddc)
+   20ef8: 48 01 08 3f                  	cgetperm	$1, $c1
+   20efc: 30 21 00 80                  	andi	$1, $1, 128
+   20f00: 14 20 00 17                  	bnez	$1, 96 <libcheri_system_type_alloc+0xd0>
+   20f04: 00 00 00 00                  	nop
+   20f08: df 99 81 b0                  	ld	$25, -32336($gp)
+   20f0c: 03 20 f8 09                  	jalr	$25
+   20f10: 64 04 00 06                  	daddiu	$4, $zero, 6
+   20f14: 04 40 00 06                  	bltz	$2, 28 <libcheri_system_type_alloc+0xa0>
+   20f18: 00 00 00 00                  	nop
+   20f1c: 3c 01 00 00                  	lui	$1, 0
+   20f20: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20f24: dc 21 81 50                  	ld	$1, -32432($1)
+   20f28: 10 00 00 06                  	b	28 <libcheri_system_type_alloc+0xb4>
+   20f2c: d8 20 08 00                  	clc	$c1, $1, 0($ddc)
+   20f30: 3c 01 00 00                  	lui	$1, 0
+   20f34: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20f38: dc 21 81 50                  	ld	$1, -32432($1)
+   20f3c: 48 01 02 bf                  	cgetnull	$c1
+   20f40: f8 00 08 00                  	csc	$cnull, $1, 0($ddc)
+   20f44: 48 01 08 3f                  	cgetperm	$1, $c1
+   20f48: 30 21 00 80                  	andi	$1, $1, 128
+   20f4c: 10 20 00 0f                  	beqz	$1, 64 <libcheri_system_type_alloc+0xfc>
+   20f50: 00 00 00 00                  	nop
+   20f54: 48 01 08 ff                  	cgetlen	$1, $c1
+   20f58: 10 20 00 18                  	beqz	$1, 100 <libcheri_system_type_alloc+0x12c>
+   20f5c: 00 00 00 00                  	nop
+   20f60: 48 01 0c 0f                  	csetoffset	$c1, $c1, $16
+   20f64: 4a 81 08 01                  	csetbounds	$c1, $c1, 1
+   20f68: 64 01 00 81                  	daddiu	$1, $zero, 129
+   20f6c: 48 03 08 4d                  	candperm	$c3, $c1, $1
+   20f70: 03 c0 e8 25                  	move	$sp, $fp
+   20f74: df b0 00 00                  	ld	$16, 0($sp)
+   20f78: df bc 00 08                  	ld	$gp, 8($sp)
+   20f7c: df be 00 10                  	ld	$fp, 16($sp)
+   20f80: df bf 00 18                  	ld	$ra, 24($sp)
+   20f84: 03 e0 00 08                  	jr	$ra
+   20f88: 67 bd 00 20                  	daddiu	$sp, $sp, 32
+   20f8c: 3c 01 00 00                  	lui	$1, 0
+   20f90: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20f94: dc 24 81 58                  	ld	$4, -32424($1)
+   20f98: 3c 01 00 00                  	lui	$1, 0
+   20f9c: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20fa0: dc 25 81 60                  	ld	$5, -32416($1)
+   20fa4: 3c 01 00 00                  	lui	$1, 0
+   20fa8: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20fac: dc 27 81 68                  	ld	$7, -32408($1)
+   20fb0: df 99 81 b8                  	ld	$25, -32328($gp)
+   20fb4: 03 20 f8 09                  	jalr	$25
+   20fb8: 64 06 00 50                  	daddiu	$6, $zero, 80
+   20fbc: 3c 01 00 00                  	lui	$1, 0
+   20fc0: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20fc4: dc 24 81 58                  	ld	$4, -32424($1)
+   20fc8: 3c 01 00 00                  	lui	$1, 0
+   20fcc: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20fd0: dc 25 81 60                  	ld	$5, -32416($1)
+   20fd4: 3c 01 00 00                  	lui	$1, 0
+   20fd8: 00 3c 08 2d                  	daddu	$1, $1, $gp
+   20fdc: dc 27 81 70                  	ld	$7, -32400($1)
+   20fe0: df 99 81 b8                  	ld	$25, -32328($gp)
+   20fe4: 03 20 f8 09                  	jalr	$25
+   20fe8: 64 06 00 51                  	daddiu	$6, $zero, 81
+   20fec: 04 17 00 01                  	<unknown>
+
+0000000000020ff0 __do_global_ctors_aux:
+   20ff0: 67 bd ff e0                  	daddiu	$sp, $sp, -32
+   20ff4: ff bf 00 18                  	sd	$ra, 24($sp)
+   20ff8: ff be 00 10                  	sd	$fp, 16($sp)
+   20ffc: ff b0 00 08                  	sd	$16, 8($sp)
+   21000: 03 a0 f0 25                  	move	$fp, $sp
+   21004: 3c 01 00 02                  	lui	$1, 2
+   21008: 00 39 08 2d                  	daddu	$1, $1, $25
+   2100c: 64 21 70 30                  	daddiu	$1, $1, 28720
+   21010: dc 21 80 70                  	ld	$1, -32656($1)
+   21014: 64 21 00 08                  	daddiu	$1, $1, 8
+   21018: 10 00 00 04                  	b	20 <__do_global_ctors_aux+0x3c>
+   2101c: 64 30 ff f8                  	daddiu	$16, $1, -8
+   21020: 03 20 f8 09                  	jalr	$25
+   21024: 00 00 00 00                  	nop
+   21028: 66 10 ff f8                  	daddiu	$16, $16, -8
+   2102c: de 19 00 00                  	ld	$25, 0($16)
+   21030: 67 21 00 01                  	daddiu	$1, $25, 1
+   21034: 2c 21 00 02                  	sltiu	$1, $1, 2
+   21038: 10 20 ff f9                  	beqz	$1, -24 <__do_global_ctors_aux+0x30>
+   2103c: 00 00 00 00                  	nop
+   21040: 03 c0 e8 25                  	move	$sp, $fp
+   21044: df b0 00 08                  	ld	$16, 8($sp)
+   21048: df be 00 10                  	ld	$fp, 16($sp)
+   2104c: df bf 00 18                  	ld	$ra, 24($sp)
+   21050: 03 e0 00 08                  	jr	$ra
+   21054: 67 bd 00 20                  	daddiu	$sp, $sp, 32
+   21058: 04 17 00 01                  	<unknown>
+   2105c: 04 17 00 01                  	<unknown>
 
 Disassembly of section .init:
 
-0000000000020de0 _init:
-   20de0: 67 bd ff e0                  	daddiu	$sp, $sp, -32
-   20de4: ff bf 00 18                  	sd	$ra, 24($sp)
-   20de8: ff bc 00 08                  	sd	$gp, 8($sp)
-   20dec: 3c 1c 00 02                  	lui	$gp, 2
-   20df0: 27 9c 72 40                  	addiu	$gp, $gp, 29248
-   20df4: 03 99 e0 2d                  	daddu	$gp, $gp, $25
-   20df8: 04 11 00 01                  	bal	8 <_init+0x20>
-   20dfc: 00 00 00 00                  	nop
-   20e00: 03 80 10 25                  	move	$2, $gp
-   20e04: 3c 1c 00 02                  	lui	$gp, 2
-   20e08: 27 9c 72 20                  	addiu	$gp, $gp, 29216
-   20e0c: 03 9f e0 2d                  	daddu	$gp, $gp, $ra
-   20e10: df 99 80 e8                  	ld	$25, -32536($gp)
-   20e14: 03 20 f8 09                  	jalr	$25
-   20e18: 00 00 00 00                  	nop
-   20e1c: 04 11 00 01                  	bal	8 <_init+0x44>
-   20e20: 00 00 00 00                  	nop
-   20e24: 03 80 10 25                  	move	$2, $gp
-   20e28: 3c 1c 00 02                  	lui	$gp, 2
-   20e2c: 27 9c 71 fc                  	addiu	$gp, $gp, 29180
-   20e30: 03 9f e0 2d                  	daddu	$gp, $gp, $ra
-   20e34: df 99 81 80                  	ld	$25, -32384($gp)
-   20e38: 03 20 f8 09                  	jalr	$25
-   20e3c: 00 00 00 00                  	nop
-   20e40: df bc 00 08                  	ld	$gp, 8($sp)
-   20e44: df bf 00 18                  	ld	$ra, 24($sp)
-   20e48: 03 e0 00 08                  	jr	$ra
-   20e4c: 67 bd 00 20                  	daddiu	$sp, $sp, 32
+0000000000021060 _init:
+   21060: 67 bd ff e0                  	daddiu	$sp, $sp, -32
+   21064: ff bf 00 18                  	sd	$ra, 24($sp)
+   21068: ff bc 00 08                  	sd	$gp, 8($sp)
+   2106c: 3c 1c 00 02                  	lui	$gp, 2
+   21070: 27 9c 6f c0                  	addiu	$gp, $gp, 28608
+   21074: 03 99 e0 2d                  	daddu	$gp, $gp, $25
+   21078: 04 11 00 01                  	bal	8 <_init+0x20>
+   2107c: 00 00 00 00                  	nop
+   21080: 03 80 10 25                  	move	$2, $gp
+   21084: 3c 1c 00 02                  	lui	$gp, 2
+   21088: 27 9c 6f a0                  	addiu	$gp, $gp, 28576
+   2108c: 03 9f e0 2d                  	daddu	$gp, $gp, $ra
+   21090: df 99 80 e8                  	ld	$25, -32536($gp)
+   21094: 03 20 f8 09                  	jalr	$25
+   21098: 00 00 00 00                  	nop
+   2109c: 04 11 00 01                  	bal	8 <_init+0x44>
+   210a0: 00 00 00 00                  	nop
+   210a4: 03 80 10 25                  	move	$2, $gp
+   210a8: 3c 1c 00 02                  	lui	$gp, 2
+   210ac: 27 9c 6f 7c                  	addiu	$gp, $gp, 28540
+   210b0: 03 9f e0 2d                  	daddu	$gp, $gp, $ra
+   210b4: df 99 81 80                  	ld	$25, -32384($gp)
+   210b8: 03 20 f8 09                  	jalr	$25
+   210bc: 00 00 00 00                  	nop
+   210c0: df bc 00 08                  	ld	$gp, 8($sp)
+   210c4: df bf 00 18                  	ld	$ra, 24($sp)
+   210c8: 03 e0 00 08                  	jr	$ra
+   210cc: 67 bd 00 20                  	daddiu	$sp, $sp, 32
 
 Disassembly of section .fini:
 
-0000000000020e50 _fini:
-   20e50: 67 bd ff e0                  	daddiu	$sp, $sp, -32
-   20e54: ff bf 00 18                  	sd	$ra, 24($sp)
-   20e58: ff bc 00 08                  	sd	$gp, 8($sp)
-   20e5c: 3c 1c 00 02                  	lui	$gp, 2
-   20e60: 27 9c 71 d0                  	addiu	$gp, $gp, 29136
-   20e64: 03 99 e0 2d                  	daddu	$gp, $gp, $25
-   20e68: 04 11 00 01                  	bal	8 <_fini+0x20>
-   20e6c: 00 00 00 00                  	nop
-   20e70: 03 80 10 25                  	move	$2, $gp
-   20e74: 3c 1c 00 02                  	lui	$gp, 2
-   20e78: 27 9c 71 b0                  	addiu	$gp, $gp, 29104
-   20e7c: 03 9f e0 2d                  	daddu	$gp, $gp, $ra
-   20e80: df 99 80 e0                  	ld	$25, -32544($gp)
-   20e84: 03 20 f8 09                  	jalr	$25
-   20e88: 00 00 00 00                  	nop
-   20e8c: df bc 00 08                  	ld	$gp, 8($sp)
-   20e90: df bf 00 18                  	ld	$ra, 24($sp)
-   20e94: 03 e0 00 08                  	jr	$ra
-   20e98: 67 bd 00 20                  	daddiu	$sp, $sp, 32
+00000000000210d0 _fini:
+   210d0: 67 bd ff e0                  	daddiu	$sp, $sp, -32
+   210d4: ff bf 00 18                  	sd	$ra, 24($sp)
+   210d8: ff bc 00 08                  	sd	$gp, 8($sp)
+   210dc: 3c 1c 00 02                  	lui	$gp, 2
+   210e0: 27 9c 6f 50                  	addiu	$gp, $gp, 28496
+   210e4: 03 99 e0 2d                  	daddu	$gp, $gp, $25
+   210e8: 04 11 00 01                  	bal	8 <_fini+0x20>
+   210ec: 00 00 00 00                  	nop
+   210f0: 03 80 10 25                  	move	$2, $gp
+   210f4: 3c 1c 00 02                  	lui	$gp, 2
+   210f8: 27 9c 6f 30                  	addiu	$gp, $gp, 28464
+   210fc: 03 9f e0 2d                  	daddu	$gp, $gp, $ra
+   21100: df 99 80 e0                  	ld	$25, -32544($gp)
+   21104: 03 20 f8 09                  	jalr	$25
+   21108: 00 00 00 00                  	nop
+   2110c: df bc 00 08                  	ld	$gp, 8($sp)
+   21110: df bf 00 18                  	ld	$ra, 24($sp)
+   21114: 03 e0 00 08                  	jr	$ra
+   21118: 67 bd 00 20                  	daddiu	$sp, $sp, 32
