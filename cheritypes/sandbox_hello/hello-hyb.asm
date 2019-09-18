@@ -478,17 +478,17 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	.set	nomips16
 	.ent	test_sandboxA
 test_sandboxA:                          # @test_sandboxA
-	.frame	$fp,96,$ra
+	.frame	$fp,32,$ra
 	.mask 	0x00000000,0
 	.fmask	0x00000000,0
 	.set	noreorder
 	.set	nomacro
 	.set	noat
 # %bb.0:                                # %entry
-	daddiu	$sp, $sp, -96
-	sd	$ra, 88($sp)            # 8-byte Folded Spill
-	sd	$fp, 80($sp)            # 8-byte Folded Spill
-	sd	$gp, 72($sp)            # 8-byte Folded Spill
+	daddiu	$sp, $sp, -32
+	sd	$ra, 24($sp)            # 8-byte Folded Spill
+	sd	$fp, 16($sp)            # 8-byte Folded Spill
+	sd	$gp, 8($sp)             # 8-byte Folded Spill
 	move	$fp, $sp
 	lui	$1, %hi(%neg(%gp_rel(test_sandboxA)))
 	daddu	$1, $1, $25
@@ -496,26 +496,11 @@ test_sandboxA:                          # @test_sandboxA
 	ld	$2, %got_page(sandbox_A_codecap)($1)
 	daddiu	$2, $2, %got_ofst(sandbox_A_codecap)
 	clc	$c1, $2, 0($ddc)
-	daddiu	$2, $fp, 32
-	csc	$c1, $2, 0($ddc)
-	ld	$3, %got_page(sandbox_A_datacap)($1)
-	daddiu	$3, $3, %got_ofst(sandbox_A_datacap)
-	clc	$c1, $3, 0($ddc)
-	daddiu	$3, $2, 16
-	csc	$c1, $3, 0($ddc)
-	clc	$c1, $2, 0($ddc)
-	clc	$c2, $3, 0($ddc)
-	ld	$25, %call16(libcheri_invoke)($1)
+	ld	$2, %got_page(sandbox_A_datacap)($1)
+	daddiu	$2, $2, %got_ofst(sandbox_A_datacap)
+	clc	$c2, $2, 0($ddc)
+	ld	$25, %call16(sandbox_invoke)($1)
 	daddiu	$2, $zero, 0
-	sd	$2, 24($fp)             # 8-byte Folded Spill
-	ld	$4, 24($fp)             # 8-byte Folded Reload
-	ld	$5, 24($fp)             # 8-byte Folded Reload
-	ld	$6, 24($fp)             # 8-byte Folded Reload
-	ld	$7, 24($fp)             # 8-byte Folded Reload
-	ld	$8, 24($fp)             # 8-byte Folded Reload
-	ld	$9, 24($fp)             # 8-byte Folded Reload
-	ld	$10, 24($fp)            # 8-byte Folded Reload
-	ld	$11, 24($fp)            # 8-byte Folded Reload
 	cgetnull	$c3
 	cgetnull	$c4
 	cgetnull	$c5
@@ -524,16 +509,23 @@ test_sandboxA:                          # @test_sandboxA
 	cgetnull	$c8
 	cgetnull	$c9
 	cgetnull	$c10
+	move	$4, $2
+	move	$5, $2
+	move	$6, $2
+	move	$7, $2
+	move	$8, $2
+	move	$9, $2
+	move	$10, $2
+	move	$11, $2
 	move	$gp, $1
-	sd	$1, 16($fp)             # 8-byte Folded Spill
-	.reloc .Ltmp24, R_MIPS_JALR, libcheri_invoke
+	sd	$1, 0($fp)              # 8-byte Folded Spill
+	.reloc .Ltmp24, R_MIPS_JALR, sandbox_invoke
 .Ltmp24:
 	jalr	$25
 	nop
-	ld	$1, 16($fp)             # 8-byte Folded Reload
+	ld	$1, 0($fp)              # 8-byte Folded Reload
 	ld	$25, %call16(cheritest_success)($1)
 	move	$gp, $1
-	sd	$2, 8($fp)              # 8-byte Folded Spill
 	.reloc .Ltmp25, R_MIPS_JALR, cheritest_success
 .Ltmp25:
 	jalr	$25
@@ -764,7 +756,7 @@ main:                                   # @main
 	.addrsig_sym cheritest_ccall_setup
 	.addrsig_sym libcheri_type_alloc
 	.addrsig_sym test_sandboxA
-	.addrsig_sym libcheri_invoke
+	.addrsig_sym sandbox_invoke
 	.addrsig_sym cheritest_success
 	.addrsig_sym sharedp
 	.addrsig_sym privateAp

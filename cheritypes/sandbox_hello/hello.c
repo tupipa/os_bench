@@ -171,11 +171,11 @@ cheritest_ccall_setup(void)
 void test_sandboxA( void )
 {
 
-#ifdef __CHERI_PURE_CAPABILITY__
+//#ifdef __CHERI_PURE_CAPABILITY__
 
 	sandbox_invoke(sandbox_A_codecap, sandbox_A_datacap);
 
-#else
+#if 0
 	struct cheri_object co;
 	co.co_codecap = sandbox_A_codecap;
 	co.co_datacap = sandbox_A_datacap;
