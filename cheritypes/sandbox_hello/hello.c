@@ -3,6 +3,14 @@
 #error "This code requires a CHERI-aware compiler"
 #endif
 
+/*
+
+ reference file:
+
+  /bin/cheritest/cheritest_sealcap.c
+  /bin/cheritest/cheritest_ccall.c
+  
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,22 +36,22 @@ static void *__capability sandbox_A_codecap;
 static void *__capability sandbox_A_datacap;
 
 struct sandbox_data{
-  int data __attribute__ ((aligned(16)));
-  char name[32] __attribute__ ((aligned(16)));
+  int data __attribute__ ((aligned(32)));
+  char name[32] __attribute__ ((aligned(32)));
 };
 
-struct sandbox_data shared;
-struct sandbox_data privateA;
-struct sandbox_data privateB;
+struct sandbox_data shared __attribute__ ((aligned(64)));
+struct sandbox_data privateA __attribute__ ((aligned(64)));
+struct sandbox_data privateB __attribute__ ((aligned(64)));
 
 struct sandbox_data *sharedp;
 struct sandbox_data *privateAp;
 struct sandbox_data *privateBp;
 
 void __attribute__((cheri_ccallee)) sandboxA_print(){
-  char a[32] __attribute__((aligned(16))) = "hello from sandbox A";
-  printf("%s\n", a);
-  //printf(("printing in sandbox A\n")__attribute__((aligned(16))));
+  //char a[32] __attribute__((aligned(32))) = "hello from sandbox A";
+  //printf("%s\n", a);
+  printf("printing in sandbox A\n");
   //printf("HELLO A A A A A A A A \nA \nA \nA \nA \nA \n");
   //printf("shared data: %d\n", sharedp->data);
   //printf("A private data: %d\n", privateAp->data); 
