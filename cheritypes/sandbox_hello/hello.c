@@ -128,13 +128,22 @@ cheritest_ccall_setup(void)
 	CHERI_CAP_PRINT(sandbox_A_sealcap);
 
 	sandbox_A_codecap = cheri_getpcc();
-     sandbox_A_codecap = cheri_setaddress(sandbox_A_codecap, (vaddr_t)&sandboxA_print);
+        printf("\t before set address:\n\t\t");
+	CHERI_CAP_PRINT(sandbox_A_codecap);
+        sandbox_A_codecap = cheri_setaddress(sandbox_A_codecap, (vaddr_t)&sandboxA_print);
+        printf("\t after set address:\n\t\t");
+	CHERI_CAP_PRINT(sandbox_A_codecap);
 
-     sandbox_A_codecap = cheri_andperm(sandbox_A_codecap,
+        sandbox_A_codecap = cheri_andperm(sandbox_A_codecap,
 	    CHERI_PERM_GLOBAL | CHERI_PERM_LOAD | 
 		CHERI_PERM_EXECUTE | 
 		CHERI_PERM_CCALL | 
 		CHERI_PERM_SYSCALL);
+
+        printf("\t after andperm:\n\t\t");
+	CHERI_CAP_PRINT(sandbox_A_codecap);
+
+        sandbox_A_codecap = cheri_andperm(sandbox_A_codecap, 0x00068117);
 
     printf("\t code cap created as:\n");
 	CHERI_CAP_PRINT(sandbox_A_codecap);
@@ -195,10 +204,21 @@ void test_sandboxA( void )
 
 int main(void){
 
+
+
  printf("hello world\n");
 
  printf("cheritest setup\n");
  cheritest_ccall_setup();
+
+ printf("\nthe default DDC is:\n");
+ CHERI_CAP_PRINT(cheri_getdefault());
+
+ printf("\nthe default PCC is:\n");
+ CHERI_CAP_PRINT(cheri_getpcc());
+
+ printf("\nthe default IDC is:\n");
+ CHERI_CAP_PRINT(cheri_getidc());
 
  printf("now start testing...\n");
 
