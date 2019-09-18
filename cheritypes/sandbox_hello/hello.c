@@ -110,7 +110,7 @@ cheritest_ccall_setup(void)
 
   /** sandbox A **/
 
-#ifdef __CHERI_PURE_CAPABILITY__
+//#ifdef __CHERI_PURE_CAPABILITY__
 	if (sysarch(CHERI_GET_SEALCAP, &libcheri_sealing_root) < 0)
 		libcheri_sealing_root = NULL;
 	assert((cheri_getperm(libcheri_sealing_root) & CHERI_PERM_SEAL) != 0);
@@ -118,7 +118,7 @@ cheritest_ccall_setup(void)
 
 	sandbox_A_sealcap = libcheri_sealing_root;
 
-#else
+#if 0
 
 	sandbox_A_sealcap = libcheri_type_alloc();
 	//sandbox_A_sealcap = libcheri_sealing_root;
@@ -128,8 +128,13 @@ cheritest_ccall_setup(void)
 	CHERI_CAP_PRINT(sandbox_A_sealcap);
 
 	sandbox_A_codecap = cheri_getpcc();
-	sandbox_A_codecap = cheri_setaddress(sandbox_A_codecap, (vaddr_t)&sandboxA_print);
+     sandbox_A_codecap = cheri_setaddress(sandbox_A_codecap, (vaddr_t)&sandboxA_print);
 
+     sandbox_A_codecap = cheri_andperm(sandbox_A_codecap,
+	    CHERI_PERM_GLOBAL | CHERI_PERM_LOAD | 
+		CHERI_PERM_EXECUTE | 
+		CHERI_PERM_CCALL | 
+		CHERI_PERM_SYSCALL);
 
     printf("\t code cap created as:\n");
 	CHERI_CAP_PRINT(sandbox_A_codecap);
