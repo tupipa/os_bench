@@ -128,12 +128,9 @@ cheritest_ccall_setup(void)
 	CHERI_CAP_PRINT(sandbox_A_sealcap);
 
 	sandbox_A_codecap = cheri_getpcc();
-        printf("\t before set address:\n\t\t");
-	CHERI_CAP_PRINT(sandbox_A_codecap);
         sandbox_A_codecap = cheri_setaddress(sandbox_A_codecap, (vaddr_t)&sandboxA_print);
-        printf("\t after set address:\n\t\t");
-	CHERI_CAP_PRINT(sandbox_A_codecap);
 
+#if 0
         sandbox_A_codecap = cheri_andperm(sandbox_A_codecap,
 	    CHERI_PERM_GLOBAL | CHERI_PERM_LOAD | 
 		CHERI_PERM_EXECUTE | 
@@ -142,10 +139,13 @@ cheritest_ccall_setup(void)
 
         printf("\t after andperm:\n\t\t");
 	CHERI_CAP_PRINT(sandbox_A_codecap);
-
         sandbox_A_codecap = cheri_andperm(sandbox_A_codecap, 0x00068117);
 
+#endif 
+
+
     printf("\t code cap created as:\n");
+
 	CHERI_CAP_PRINT(sandbox_A_codecap);
 
 	sandbox_A_codecap = cheri_seal(sandbox_A_codecap, sandbox_A_sealcap);
