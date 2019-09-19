@@ -59,8 +59,10 @@ void __attribute__((cheri_ccallee)) sandboxA_print(){
   privateAp->data = 1000;
   printf("A private name: %s\n", privateAp->name); 
   printf("A private data: %d\n", privateAp->data); 
+
+  privateBp->data = 1000;
+  printf("B private data: %d\n", privateBp->data);
   //printf("shared data: %d\n", sharedp->data);
-  //printf("B private data: %d\n", privateBp->data);
   //sandboxA_end:
 
 }
@@ -68,7 +70,8 @@ void __attribute__((cheri_ccallee)) sandboxA_print(){
 void sandboxB_print(){
 
   printf("printing in sandbox B\n");
-
+  privateBp->data = 2000;
+  privateAp->data = 2000;
   printf("shared data: %d\n", sharedp->data);
   printf("A private data: %d\n", privateAp->data); 
   printf("B private data: %d\n", privateBp->data);
