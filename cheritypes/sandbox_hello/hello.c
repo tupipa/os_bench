@@ -14,6 +14,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <cheri/cheri.h>
 #include <cheri/cheric.h>  // builtin wrappers
 #include <cheri/libcheri_type.h>  // libcheri type alloc()
@@ -40,9 +41,9 @@ struct sandbox_data{
   char name[32] __attribute__ ((aligned(32)));
 };
 
-struct sandbox_data shared __attribute__ ((aligned(64)));
-struct sandbox_data privateA __attribute__ ((aligned(64)));
-struct sandbox_data privateB __attribute__ ((aligned(64)));
+static struct sandbox_data shared __attribute__ ((aligned(64)));
+static struct sandbox_data privateA __attribute__ ((aligned(64)));
+static struct sandbox_data privateB __attribute__ ((aligned(64)));
 
 struct sandbox_data *sharedp;
 struct sandbox_data *privateAp;
@@ -54,15 +55,20 @@ void __attribute__((cheri_ccallee)) sandboxA_print(){
   printf("%s\n", a);
 
   printf("printing in sandbox A\n");
-  //printf("HELLO A A A A A A A A \nA \nA \nA \nA \nA \n");
+  strcpy(privateAp->name, "my name is A");
+  privateAp->data = 1000;
+  printf("A private name: %s\n", privateAp->name); 
+  printf("A private data: %d\n", privateAp->data); 
   //printf("shared data: %d\n", sharedp->data);
-  //printf("A private data: %d\n", privateAp->data); 
   //printf("B private data: %d\n", privateBp->data);
   //sandboxA_end:
+
 }
 
 void sandboxB_print(){
+
   printf("printing in sandbox B\n");
+
   printf("shared data: %d\n", sharedp->data);
   printf("A private data: %d\n", privateAp->data); 
   printf("B private data: %d\n", privateBp->data);
@@ -213,6 +219,12 @@ int main(void){
  printf("cheritest setup\n");
  cheritest_ccall_setup();
 
+ // setup sandbox data
+ privateAp = &privateA;
+ privateBp = &privateB;
+ sharedp = &shared;
+
+#if 0
  printf("\nthe default DDC is:\n");
  CHERI_CAP_PRINT(cheri_getdefault());
 
@@ -221,6 +233,7 @@ int main(void){
 
  printf("\nthe default IDC is:\n");
  CHERI_CAP_PRINT(cheri_getidc());
+#endif
 
  printf("now start testing...\n");
 
