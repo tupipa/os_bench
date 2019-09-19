@@ -568,11 +568,28 @@ test_sandboxA:                          # @test_sandboxA
 	daddiu	$1, $1, %lo(%neg(%gp_rel(test_sandboxA)))
 	ld	$2, %got_page(sandbox_A_codecap)($1)
 	daddiu	$2, $2, %got_ofst(sandbox_A_codecap)
-	clc	$c3, $2, 0($ddc)
+	clc	$c1, $2, 0($ddc)
 	ld	$2, %got_page(sandbox_A_datacap)($1)
 	daddiu	$2, $2, %got_ofst(sandbox_A_datacap)
-	clc	$c4, $2, 0($ddc)
+	clc	$c2, $2, 0($ddc)
 	ld	$25, %call16(sandbox_invoke)($1)
+	daddiu	$2, $zero, 0
+	cgetnull	$c3
+	cgetnull	$c4
+	cgetnull	$c5
+	cgetnull	$c6
+	cgetnull	$c7
+	cgetnull	$c8
+	cgetnull	$c9
+	cgetnull	$c10
+	move	$4, $2
+	move	$5, $2
+	move	$6, $2
+	move	$7, $2
+	move	$8, $2
+	move	$9, $2
+	move	$10, $2
+	move	$11, $2
 	move	$gp, $1
 	sd	$1, 0($fp)              # 8-byte Folded Spill
 	.reloc .Ltmp26, R_MIPS_JALR, sandbox_invoke

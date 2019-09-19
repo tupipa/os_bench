@@ -25,8 +25,8 @@
 extern void	sandbox_creturn(void);
 extern void	sandbox_creturn_end;
 //extern void __attribute__ ((cheri_ccallee)) sandbox_invoke(void * __capability c1, void* __capability c2);
-//extern void __attribute__ ((cheri_ccall)) sandbox_invoke(void * __capability c1, void* __capability c2);
-extern void sandbox_invoke(void * __capability c1, void* __capability c2);
+extern void __attribute__ ((cheri_ccall)) sandbox_invoke(void * __capability c1, void* __capability c2);
+//extern void sandbox_invoke(void * __capability c1, void* __capability c2);
 
 
 static void * __capability libcheri_sealing_root;
