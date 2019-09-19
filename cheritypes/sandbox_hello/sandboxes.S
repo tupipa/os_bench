@@ -59,7 +59,7 @@ sandbox_creturn_end:
 	.ent sandbox_invoke
 sandbox_invoke:
 	.frame _FRAME_STACK_REG,LIBCHERI_INVOKE_FRAME_SIZE,_FRAME_RETURN_REG;
-	
+
         /* LLM: no clear/restore the registers, 
 	 * allows it behaves just like a hardware jump but additional hardware checks
          * on object types of code and data capabilities;
@@ -68,6 +68,7 @@ sandbox_invoke:
 	 */
 	.set push;
 	.set noreorder;
+        cgetoffset $t9, $c1;
 	ccall $c1, $c2, 1;
   	nop;
 	.set pop;
