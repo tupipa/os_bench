@@ -49,7 +49,7 @@ struct sandbox_data *privateAp;
 struct sandbox_data *privateBp;
 
 //void __attribute__((cheri_ccallee)) sandboxA_print(){
-void __attribute__((cheri_ccallee)) sandboxA_print(){
+void sandboxA_print(){
   //char a[32] __attribute__((aligned(32))) = "hello from sandbox A";
   //printf("%s\n", a);
 

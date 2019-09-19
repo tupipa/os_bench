@@ -35,11 +35,6 @@ sandboxA_print:                         # @sandboxA_print
 .Ltmp0:
 	jalr	$25
 	nop
-	daddiu	$1, $zero, 0
-	sw	$2, 4($fp)              # 4-byte Folded Spill
-	move	$2, $1
-	move	$3, $1
-	cgetnull	$c3
 	move	$sp, $fp
 	ld	$gp, 8($sp)             # 8-byte Folded Reload
 	ld	$fp, 16($sp)            # 8-byte Folded Reload
