@@ -35,11 +35,11 @@ static void * __capability libcheri_sealing_root;
 
 static void *__capability sandbox_A_sealcap;
 static void *__capability sandbox_A_codecap;
-static void *__capability sandbox_A_datacap;
+static struct sandbox_data *__capability sandbox_A_datacap;
 
 static void *__capability sandbox_B_sealcap;
 static void *__capability sandbox_B_codecap;
-static void *__capability sandbox_B_datacap;
+static struct sandbox_data *__capability sandbox_B_datacap;
 
 static void *__capability sandbox_shared_datacap;
 
