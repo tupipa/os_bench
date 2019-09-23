@@ -14,6 +14,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 #include <cheri/cheri.h>
 #include <cheri/cheric.h>  // builtin wrappers
@@ -45,9 +46,9 @@ static struct sandbox_data shared __attribute__ ((aligned(64)));
 static struct sandbox_data privateA __attribute__ ((aligned(64)));
 static struct sandbox_data privateB __attribute__ ((aligned(64)));
 
-struct sandbox_data *sharedp;
-struct sandbox_data *privateAp;
-struct sandbox_data *privateBp;
+struct sandbox_data * __capability sharedp;
+struct sandbox_data * __capability privateAp;
+struct sandbox_data * __capability privateBp;
 
 void __attribute__((cheri_ccallee)) sandboxA_print(){
 //void sandboxA_print(){
@@ -55,13 +56,24 @@ void __attribute__((cheri_ccallee)) sandboxA_print(){
   printf("%s\n", a);
 
   printf("printing in sandbox A\n");
+  printf("\nthe default DDC is:\n");
+  CHERI_CAP_PRINT(cheri_getdefault());
+
+  printf("\nthe default PCC is:\n");
+  CHERI_CAP_PRINT(cheri_getpcc());
+
+  sleep(1);
+
   strcpy(privateAp->name, "my name is A");
   privateAp->data = 1000;
   printf("A private name: %s\n", privateAp->name); 
-  printf("A private data: %d\n", privateAp->data); 
+  sleep(1);
 
-  privateBp->data = 1000;
-  printf("B private data: %d\n", privateBp->data);
+  printf("A private data: %d\n", privateAp->data); 
+  sleep(1);
+
+  //privateBp->data = 1000;
+  //printf("B private data: %d\n", privateBp->data);
   //printf("shared data: %d\n", sharedp->data);
   //sandboxA_end:
 
@@ -119,9 +131,10 @@ cheritest_ccall_setup(void)
 
 	printf("begin.\n");
 
-  /** sandbox A **/
+/** sandbox A **/
 
 //#ifdef __CHERI_PURE_CAPABILITY__
+#if 0
 	if (sysarch(CHERI_GET_SEALCAP, &libcheri_sealing_root) < 0)
 		libcheri_sealing_root = NULL;
 	assert((cheri_getperm(libcheri_sealing_root) & CHERI_PERM_SEAL) != 0);
@@ -129,40 +142,29 @@ cheritest_ccall_setup(void)
 
 	sandbox_A_sealcap = libcheri_sealing_root;
 
-#if 0
+#endif
+
+#if 1
 
 	sandbox_A_sealcap = libcheri_type_alloc();
-	//sandbox_A_sealcap = libcheri_sealing_root;
+	sandbox_A_sealcap = libcheri_type_alloc();
 
 #endif
-        printf("\t seal cap created as:\n");
+        printf("\t A seal cap created as:\n");
 	CHERI_CAP_PRINT(sandbox_A_sealcap);
 
 	sandbox_A_codecap = cheri_getpcc();
         sandbox_A_codecap = cheri_setaddress(sandbox_A_codecap, (vaddr_t)&sandboxA_print);
 
-#if 0
-        sandbox_A_codecap = cheri_andperm(sandbox_A_codecap,
-	    CHERI_PERM_GLOBAL | CHERI_PERM_LOAD | 
-		CHERI_PERM_EXECUTE | 
-		CHERI_PERM_CCALL | 
-		CHERI_PERM_SYSCALL);
 
-        printf("\t after andperm:\n\t\t");
-	CHERI_CAP_PRINT(sandbox_A_codecap);
-        sandbox_A_codecap = cheri_andperm(sandbox_A_codecap, 0x00068117);
-
-#endif 
-
-
-    printf("\t code cap created as:\n");
+        printf("\t code cap created as:\n");
 
 	CHERI_CAP_PRINT(sandbox_A_codecap);
 
 	sandbox_A_codecap = cheri_seal(sandbox_A_codecap, sandbox_A_sealcap);
 
 
-    printf("\t code cap sealed as:\n");
+        printf("\t code cap sealed as:\n");
 	CHERI_CAP_PRINT(sandbox_A_codecap);
 
 
