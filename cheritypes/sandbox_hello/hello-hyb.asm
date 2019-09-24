@@ -106,31 +106,30 @@ sandboxA_print:                         # @sandboxA_print
 	jalr	$25
 	nop
 	ld	$1, 120($sp)            # 8-byte Folded Reload
-	ld	$3, %got_page(sandbox_A_datacap)($1)
-	daddiu	$3, $3, %got_ofst(sandbox_A_datacap)
+	ld	$3, %got_disp(privateAp)($1)
 	clc	$c1, $3, 0($ddc)
 	cincoffset	$c1, $c1, 32
 	ctoptr	$4, $c1, $ddc
-	ld	$3, %got_page(.L.str.4)($1)
-	daddiu	$5, $3, %got_ofst(.L.str.4)
+	ld	$5, %got_page(.L.str.4)($1)
+	daddiu	$5, $5, %got_ofst(.L.str.4)
 	ld	$25, %call16(strcpy)($1)
 	move	$gp, $1
 	sw	$2, 84($sp)             # 4-byte Folded Spill
+	sd	$3, 72($sp)             # 8-byte Folded Spill
 	.reloc .Ltmp5, R_MIPS_JALR, strcpy
 .Ltmp5:
 	jalr	$25
 	nop
-	ld	$1, 120($sp)            # 8-byte Folded Reload
-	ld	$3, %got_disp(privateAp)($1)
-	clc	$c1, $3, 0($ddc)
+	ld	$1, 72($sp)             # 8-byte Folded Reload
+	clc	$c1, $1, 0($ddc)
 	cincoffset	$c1, $c1, 32
 	ctoptr	$5, $c1, $ddc
-	ld	$4, %got_page(.L.str.5)($1)
+	ld	$3, 120($sp)            # 8-byte Folded Reload
+	ld	$4, %got_page(.L.str.5)($3)
 	daddiu	$4, $4, %got_ofst(.L.str.5)
-	ld	$25, %call16(printf)($1)
-	move	$gp, $1
-	sd	$2, 72($sp)             # 8-byte Folded Spill
-	sd	$3, 64($sp)             # 8-byte Folded Spill
+	ld	$25, %call16(printf)($3)
+	move	$gp, $3
+	sd	$2, 64($sp)             # 8-byte Folded Spill
 	.reloc .Ltmp6, R_MIPS_JALR, printf
 .Ltmp6:
 	jalr	$25
@@ -144,7 +143,7 @@ sandboxA_print:                         # @sandboxA_print
 .Ltmp7:
 	jalr	$25
 	nop
-	ld	$1, 64($sp)             # 8-byte Folded Reload
+	ld	$1, 72($sp)             # 8-byte Folded Reload
 	clc	$c1, $1, 0($ddc)
 	addiu	$6, $zero, 1000
 	csw	$6, $zero, 0($c1)
@@ -374,17 +373,17 @@ sandboxB_print:                         # @sandboxB_print
 	.set	nomips16
 	.ent	cheritest_ccall_setup
 cheritest_ccall_setup:                  # @cheritest_ccall_setup
-	.frame	$fp,80,$ra
+	.frame	$fp,96,$ra
 	.mask 	0x00000000,0
 	.fmask	0x00000000,0
 	.set	noreorder
 	.set	nomacro
 	.set	noat
 # %bb.0:                                # %entry
-	daddiu	$sp, $sp, -80
-	sd	$ra, 72($sp)            # 8-byte Folded Spill
-	sd	$fp, 64($sp)            # 8-byte Folded Spill
-	sd	$gp, 56($sp)            # 8-byte Folded Spill
+	daddiu	$sp, $sp, -96
+	sd	$ra, 88($sp)            # 8-byte Folded Spill
+	sd	$fp, 80($sp)            # 8-byte Folded Spill
+	sd	$gp, 72($sp)            # 8-byte Folded Spill
 	move	$fp, $sp
 	lui	$1, %hi(%neg(%gp_rel(cheritest_ccall_setup)))
 	daddu	$1, $1, $25
@@ -393,133 +392,311 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	daddiu	$4, $2, %got_ofst(.L.str.12)
 	ld	$25, %call16(printf)($1)
 	move	$gp, $1
-	sd	$1, 48($fp)             # 8-byte Folded Spill
+	sd	$1, 64($fp)             # 8-byte Folded Spill
 	.reloc .Ltmp19, R_MIPS_JALR, printf
 .Ltmp19:
 	jalr	$25
 	nop
-	ld	$1, 48($fp)             # 8-byte Folded Reload
-	ld	$25, %call16(libcheri_type_alloc)($1)
+	ld	$1, 64($fp)             # 8-byte Folded Reload
+	ld	$3, %got_page(libcheri_sealing_root)($1)
+	daddiu	$5, $3, %got_ofst(libcheri_sealing_root)
+	ld	$25, %call16(sysarch)($1)
+	daddiu	$4, $zero, 6
 	move	$gp, $1
-	sw	$2, 44($fp)             # 4-byte Folded Spill
-	.reloc .Ltmp20, R_MIPS_JALR, libcheri_type_alloc
+	sw	$2, 60($fp)             # 4-byte Folded Spill
+	.reloc .Ltmp20, R_MIPS_JALR, sysarch
 .Ltmp20:
 	jalr	$25
 	nop
-	ld	$1, 48($fp)             # 8-byte Folded Reload
-	ld	$3, %got_page(sandbox_A_sealcap)($1)
-	daddiu	$3, $3, %got_ofst(sandbox_A_sealcap)
-	csc	$c3, $3, 0($ddc)
-	ld	$25, %call16(libcheri_type_alloc)($1)
+	bgez	$2, .LBB2_3
+	nop
+# %bb.1:                                # %entry
+	b	.LBB2_2
+	nop
+.LBB2_2:                                # %if.then
+	ld	$1, 64($fp)             # 8-byte Folded Reload
+	ld	$2, %got_page(libcheri_sealing_root)($1)
+	daddiu	$2, $2, %got_ofst(libcheri_sealing_root)
+	csc	$cnull, $2, 0($ddc)
+	b	.LBB2_3
+	nop
+.LBB2_3:                                # %if.end
+	ld	$1, 64($fp)             # 8-byte Folded Reload
+	ld	$2, %got_page(libcheri_sealing_root)($1)
+	daddiu	$2, $2, %got_ofst(libcheri_sealing_root)
+	clc	$c1, $2, 0($ddc)
+	cgetperm	$2, $c1
+	andi	$2, $2, 128
+	beqz	$2, .LBB2_6
+	nop
+# %bb.4:                                # %if.end
+	b	.LBB2_5
+	nop
+.LBB2_5:                                # %cond.true
+	b	.LBB2_7
+	nop
+.LBB2_6:                                # %cond.false
+	ld	$1, 64($fp)             # 8-byte Folded Reload
+	ld	$2, %got_page(.L__func__.cheritest_ccall_setup)($1)
+	daddiu	$4, $2, %got_ofst(.L__func__.cheritest_ccall_setup)
+	ld	$2, %got_page(.L.str.13)($1)
+	daddiu	$5, $2, %got_ofst(.L.str.13)
+	ld	$2, %got_page(.L.str.14)($1)
+	daddiu	$7, $2, %got_ofst(.L.str.14)
+	ld	$25, %call16(__assert)($1)
+	daddiu	$6, $zero, 161
 	move	$gp, $1
-	sd	$3, 32($fp)             # 8-byte Folded Spill
-	.reloc .Ltmp21, R_MIPS_JALR, libcheri_type_alloc
+	.reloc .Ltmp21, R_MIPS_JALR, __assert
 .Ltmp21:
 	jalr	$25
 	nop
-	ld	$1, 32($fp)             # 8-byte Folded Reload
-	csc	$c3, $1, 0($ddc)
-	ld	$3, 48($fp)             # 8-byte Folded Reload
-	ld	$25, %call16(libcheri_type_alloc)($3)
-	move	$gp, $3
-	.reloc .Ltmp22, R_MIPS_JALR, libcheri_type_alloc
+.LBB2_7:                                # %cond.end
+	ld	$1, 64($fp)             # 8-byte Folded Reload
+	ld	$2, %got_page(libcheri_sealing_root)($1)
+	daddiu	$2, $2, %got_ofst(libcheri_sealing_root)
+	clc	$c1, $2, 0($ddc)
+	cgetperm	$2, $c1
+	andi	$2, $2, 512
+	beqz	$2, .LBB2_10
+	nop
+# %bb.8:                                # %cond.end
+	b	.LBB2_9
+	nop
+.LBB2_9:                                # %cond.true5
+	b	.LBB2_11
+	nop
+.LBB2_10:                               # %cond.false6
+	ld	$1, 64($fp)             # 8-byte Folded Reload
+	ld	$2, %got_page(.L__func__.cheritest_ccall_setup)($1)
+	daddiu	$4, $2, %got_ofst(.L__func__.cheritest_ccall_setup)
+	ld	$2, %got_page(.L.str.13)($1)
+	daddiu	$5, $2, %got_ofst(.L.str.13)
+	ld	$2, %got_page(.L.str.15)($1)
+	daddiu	$7, $2, %got_ofst(.L.str.15)
+	ld	$25, %call16(__assert)($1)
+	daddiu	$6, $zero, 162
+	move	$gp, $1
+	.reloc .Ltmp22, R_MIPS_JALR, __assert
 .Ltmp22:
 	jalr	$25
 	nop
-	ld	$1, 48($fp)             # 8-byte Folded Reload
-	ld	$3, %got_page(sandbox_B_sealcap)($1)
-	daddiu	$3, $3, %got_ofst(sandbox_B_sealcap)
-	csc	$c3, $3, 0($ddc)
-	ld	$25, %call16(libcheri_type_alloc)($1)
+.LBB2_11:                               # %cond.end7
+	ld	$1, 64($fp)             # 8-byte Folded Reload
+	ld	$2, %got_page(libcheri_sealing_root)($1)
+	daddiu	$2, $2, %got_ofst(libcheri_sealing_root)
+	clc	$c1, $2, 0($ddc)
+	cgetlen	$2, $c1
+	beqz	$2, .LBB2_14
+	nop
+# %bb.12:                               # %cond.end7
+	b	.LBB2_13
+	nop
+.LBB2_13:                               # %cond.true9
+	b	.LBB2_15
+	nop
+.LBB2_14:                               # %cond.false10
+	ld	$1, 64($fp)             # 8-byte Folded Reload
+	ld	$2, %got_page(.L__func__.cheritest_ccall_setup)($1)
+	daddiu	$4, $2, %got_ofst(.L__func__.cheritest_ccall_setup)
+	ld	$2, %got_page(.L.str.13)($1)
+	daddiu	$5, $2, %got_ofst(.L.str.13)
+	ld	$2, %got_page(.L.str.16)($1)
+	daddiu	$7, $2, %got_ofst(.L.str.16)
+	ld	$25, %call16(__assert)($1)
+	daddiu	$6, $zero, 163
 	move	$gp, $1
-	sd	$3, 24($fp)             # 8-byte Folded Spill
-	.reloc .Ltmp23, R_MIPS_JALR, libcheri_type_alloc
+	.reloc .Ltmp23, R_MIPS_JALR, __assert
 .Ltmp23:
 	jalr	$25
 	nop
-	ld	$1, 24($fp)             # 8-byte Folded Reload
-	csc	$c3, $1, 0($ddc)
-	ld	$3, 32($fp)             # 8-byte Folded Reload
-	clc	$c1, $3, 0($ddc)
-	cgetperm	$4, $c1
-	ori	$4, $4, 640
-	candperm	$c1, $c1, $4
-	csc	$c1, $3, 0($ddc)
-	clc	$c1, $1, 0($ddc)
-	cgetperm	$4, $c1
-	ori	$4, $4, 512
-	candperm	$c1, $c1, $4
-	csc	$c1, $1, 0($ddc)
-	cgetpcc	$c1
-	ld	$4, 48($fp)             # 8-byte Folded Reload
-	ld	$5, %got_page(sandbox_A_codecap)($4)
-	daddiu	$5, $5, %got_ofst(sandbox_A_codecap)
-	csc	$c1, $5, 0($ddc)
-	clc	$c1, $5, 0($ddc)
-	ld	$6, %got_disp(sandboxA_print)($4)
-	csetaddr	$c1, $c1, $6
-	csc	$c1, $5, 0($ddc)
-	clc	$c1, $5, 0($ddc)
-	clc	$c2, $3, 0($ddc)
-	cseal	$c1, $c1, $c2
-	csc	$c1, $5, 0($ddc)
-	ld	$5, %got_page(privateA)($4)
-	daddiu	$4, $5, %got_ofst(privateA)
-	ld	$5, 48($fp)             # 8-byte Folded Reload
-	ld	$6, %got_page(privateB)($5)
-	daddiu	$6, $6, %got_ofst(privateB)
-	ld	$7, %got_page(datacap_create)($5)
-	daddiu	$7, $7, %got_ofst(datacap_create)
-	move	$5, $6
-	move	$25, $7
-	sd	$6, 16($fp)             # 8-byte Folded Spill
-	sd	$7, 8($fp)              # 8-byte Folded Spill
-	.reloc .Ltmp24, R_MIPS_JALR, datacap_create
+.LBB2_15:                               # %cond.end11
+	ld	$1, 64($fp)             # 8-byte Folded Reload
+	ld	$2, %got_page(libcheri_sealing_root)($1)
+	daddiu	$2, $2, %got_ofst(libcheri_sealing_root)
+	clc	$c1, $2, 0($ddc)
+	ld	$2, %got_page(sandbox_A_sealcap)($1)
+	daddiu	$2, $2, %got_ofst(sandbox_A_sealcap)
+	csc	$c1, $2, 0($ddc)
+	ld	$25, %call16(libcheri_type_alloc)($1)
+	move	$gp, $1
+	sd	$2, 48($fp)             # 8-byte Folded Spill
+	.reloc .Ltmp24, R_MIPS_JALR, libcheri_type_alloc
 .Ltmp24:
 	jalr	$25
 	nop
 	ld	$1, 48($fp)             # 8-byte Folded Reload
-	ld	$3, %got_disp(privateAp)($1)
-	csc	$c3, $3, 0($ddc)
-	ld	$4, %got_page(privateDummy)($1)
-	daddiu	$5, $4, %got_ofst(privateDummy)
-	ld	$4, 16($fp)             # 8-byte Folded Reload
-	ld	$25, 8($fp)             # 8-byte Folded Reload
-	sd	$3, 0($fp)              # 8-byte Folded Spill
-	.reloc .Ltmp25, R_MIPS_JALR, datacap_create
+	csc	$c3, $1, 0($ddc)
+	ld	$2, 64($fp)             # 8-byte Folded Reload
+	ld	$25, %call16(libcheri_type_alloc)($2)
+	move	$gp, $2
+	.reloc .Ltmp25, R_MIPS_JALR, libcheri_type_alloc
 .Ltmp25:
 	jalr	$25
 	nop
 	ld	$1, 48($fp)             # 8-byte Folded Reload
-	ld	$3, %got_disp(privateBp)($1)
-	csc	$c3, $3, 0($ddc)
-	ld	$4, 0($fp)              # 8-byte Folded Reload
-	clc	$c1, $4, 0($ddc)
-	ld	$5, %got_page(sandbox_A_datacap)($1)
-	daddiu	$5, $5, %got_ofst(sandbox_A_datacap)
-	csc	$c1, $5, 0($ddc)
-	clc	$c1, $3, 0($ddc)
-	ld	$3, %got_page(sandbox_B_datacap)($1)
-	daddiu	$3, $3, %got_ofst(sandbox_B_datacap)
-	csc	$c1, $3, 0($ddc)
-	clc	$c1, $5, 0($ddc)
-	ld	$3, 32($fp)             # 8-byte Folded Reload
-	clc	$c2, $3, 0($ddc)
-	cseal	$c1, $c1, $c2
-	csc	$c1, $5, 0($ddc)
-	ld	$5, %got_page(.L.str.13)($1)
-	daddiu	$4, $5, %got_ofst(.L.str.13)
-	ld	$25, %call16(printf)($1)
-	move	$gp, $1
-	.reloc .Ltmp26, R_MIPS_JALR, printf
+	csc	$c3, $1, 0($ddc)
+	ld	$2, 64($fp)             # 8-byte Folded Reload
+	ld	$25, %call16(libcheri_type_alloc)($2)
+	move	$gp, $2
+	.reloc .Ltmp26, R_MIPS_JALR, libcheri_type_alloc
 .Ltmp26:
 	jalr	$25
 	nop
+	ld	$1, 64($fp)             # 8-byte Folded Reload
+	ld	$2, %got_page(sandbox_B_sealcap)($1)
+	daddiu	$2, $2, %got_ofst(sandbox_B_sealcap)
+	csc	$c3, $2, 0($ddc)
+	ld	$25, %call16(libcheri_type_alloc)($1)
+	move	$gp, $1
+	sd	$2, 40($fp)             # 8-byte Folded Spill
+	.reloc .Ltmp27, R_MIPS_JALR, libcheri_type_alloc
+.Ltmp27:
+	jalr	$25
+	nop
+	ld	$1, 40($fp)             # 8-byte Folded Reload
+	csc	$c3, $1, 0($ddc)
+	ld	$2, 48($fp)             # 8-byte Folded Reload
+	clc	$c1, $2, 0($ddc)
+	cgetperm	$3, $c1
+	andi	$3, $3, 512
+	beqz	$3, .LBB2_18
+	nop
+# %bb.16:                               # %cond.end11
+	b	.LBB2_17
+	nop
+.LBB2_17:                               # %cond.true18
+	b	.LBB2_19
+	nop
+.LBB2_18:                               # %cond.false19
+	ld	$1, 64($fp)             # 8-byte Folded Reload
+	ld	$2, %got_page(.L__func__.cheritest_ccall_setup)($1)
+	daddiu	$4, $2, %got_ofst(.L__func__.cheritest_ccall_setup)
+	ld	$2, %got_page(.L.str.13)($1)
+	daddiu	$5, $2, %got_ofst(.L.str.13)
+	ld	$2, %got_page(.L.str.17)($1)
+	daddiu	$7, $2, %got_ofst(.L.str.17)
+	ld	$25, %call16(__assert)($1)
+	daddiu	$6, $zero, 176
+	move	$gp, $1
+	.reloc .Ltmp28, R_MIPS_JALR, __assert
+.Ltmp28:
+	jalr	$25
+	nop
+.LBB2_19:                               # %cond.end20
+	ld	$1, 64($fp)             # 8-byte Folded Reload
+	ld	$2, %got_page(sandbox_B_sealcap)($1)
+	daddiu	$2, $2, %got_ofst(sandbox_B_sealcap)
+	clc	$c1, $2, 0($ddc)
+	cgetperm	$2, $c1
+	andi	$2, $2, 512
+	beqz	$2, .LBB2_22
+	nop
+# %bb.20:                               # %cond.end20
+	b	.LBB2_21
+	nop
+.LBB2_21:                               # %cond.true23
+	b	.LBB2_23
+	nop
+.LBB2_22:                               # %cond.false24
+	ld	$1, 64($fp)             # 8-byte Folded Reload
+	ld	$2, %got_page(.L__func__.cheritest_ccall_setup)($1)
+	daddiu	$4, $2, %got_ofst(.L__func__.cheritest_ccall_setup)
+	ld	$2, %got_page(.L.str.13)($1)
+	daddiu	$5, $2, %got_ofst(.L.str.13)
+	ld	$2, %got_page(.L.str.18)($1)
+	daddiu	$7, $2, %got_ofst(.L.str.18)
+	ld	$25, %call16(__assert)($1)
+	daddiu	$6, $zero, 177
+	move	$gp, $1
+	.reloc .Ltmp29, R_MIPS_JALR, __assert
+.Ltmp29:
+	jalr	$25
+	nop
+.LBB2_23:                               # %cond.end25
+	ld	$1, 64($fp)             # 8-byte Folded Reload
+	ld	$2, %got_page(sandbox_A_sealcap)($1)
+	daddiu	$2, $2, %got_ofst(sandbox_A_sealcap)
+	clc	$c1, $2, 0($ddc)
+	cgetperm	$3, $c1
+	ori	$3, $3, 640
+	candperm	$c1, $c1, $3
+	csc	$c1, $2, 0($ddc)
+	ld	$3, %got_page(sandbox_B_sealcap)($1)
+	daddiu	$3, $3, %got_ofst(sandbox_B_sealcap)
+	clc	$c1, $3, 0($ddc)
+	cgetperm	$4, $c1
+	ori	$4, $4, 512
+	candperm	$c1, $c1, $4
+	csc	$c1, $3, 0($ddc)
+	cgetpcc	$c1
+	ld	$3, %got_page(sandbox_A_codecap)($1)
+	daddiu	$3, $3, %got_ofst(sandbox_A_codecap)
+	csc	$c1, $3, 0($ddc)
+	clc	$c1, $3, 0($ddc)
+	ld	$4, %got_disp(sandboxA_print)($1)
+	csetaddr	$c1, $c1, $4
+	csc	$c1, $3, 0($ddc)
+	clc	$c1, $3, 0($ddc)
+	clc	$c2, $2, 0($ddc)
+	cseal	$c1, $c1, $c2
+	csc	$c1, $3, 0($ddc)
+	ld	$3, %got_page(privateA)($1)
+	daddiu	$4, $3, %got_ofst(privateA)
+	ld	$3, %got_page(privateB)($1)
+	daddiu	$3, $3, %got_ofst(privateB)
+	ld	$5, %got_page(datacap_create)($1)
+	daddiu	$5, $5, %got_ofst(datacap_create)
+	sd	$5, 32($fp)             # 8-byte Folded Spill
+	move	$5, $3
+	ld	$25, 32($fp)            # 8-byte Folded Reload
+	sd	$2, 24($fp)             # 8-byte Folded Spill
+	sd	$3, 16($fp)             # 8-byte Folded Spill
+	.reloc .Ltmp30, R_MIPS_JALR, datacap_create
+.Ltmp30:
+	jalr	$25
+	nop
+	ld	$1, 64($fp)             # 8-byte Folded Reload
+	ld	$2, %got_disp(privateAp)($1)
+	csc	$c3, $2, 0($ddc)
+	ld	$3, %got_page(privateDummy)($1)
+	daddiu	$5, $3, %got_ofst(privateDummy)
+	ld	$4, 16($fp)             # 8-byte Folded Reload
+	ld	$25, 32($fp)            # 8-byte Folded Reload
+	sd	$2, 8($fp)              # 8-byte Folded Spill
+	.reloc .Ltmp31, R_MIPS_JALR, datacap_create
+.Ltmp31:
+	jalr	$25
+	nop
+	ld	$1, 64($fp)             # 8-byte Folded Reload
+	ld	$2, %got_disp(privateBp)($1)
+	csc	$c3, $2, 0($ddc)
+	ld	$3, 8($fp)              # 8-byte Folded Reload
+	clc	$c1, $3, 0($ddc)
+	ld	$4, %got_page(sandbox_A_datacap)($1)
+	daddiu	$4, $4, %got_ofst(sandbox_A_datacap)
+	csc	$c1, $4, 0($ddc)
+	clc	$c1, $2, 0($ddc)
+	ld	$2, %got_page(sandbox_B_datacap)($1)
+	daddiu	$2, $2, %got_ofst(sandbox_B_datacap)
+	csc	$c1, $2, 0($ddc)
+	clc	$c1, $4, 0($ddc)
+	ld	$2, 24($fp)             # 8-byte Folded Reload
+	clc	$c2, $2, 0($ddc)
+	cseal	$c1, $c1, $c2
+	csc	$c1, $4, 0($ddc)
+	ld	$4, %got_page(.L.str.19)($1)
+	daddiu	$4, $4, %got_ofst(.L.str.19)
+	ld	$25, %call16(printf)($1)
+	move	$gp, $1
+	.reloc .Ltmp32, R_MIPS_JALR, printf
+.Ltmp32:
+	jalr	$25
+	nop
 	move	$sp, $fp
-	ld	$gp, 56($sp)            # 8-byte Folded Reload
-	ld	$fp, 64($sp)            # 8-byte Folded Reload
-	ld	$ra, 72($sp)            # 8-byte Folded Reload
-	daddiu	$sp, $sp, 80
+	ld	$gp, 72($sp)            # 8-byte Folded Reload
+	ld	$fp, 80($sp)            # 8-byte Folded Reload
+	ld	$ra, 88($sp)            # 8-byte Folded Reload
+	daddiu	$sp, $sp, 96
 	jr	$ra
 	nop
 	.set	at
@@ -558,8 +735,8 @@ datacap_create:                         # @datacap_create
 	daddiu	$25, $1, %got_ofst(cheri_ptrperm)
 	ori	$6, $zero, 33789
 	move	$4, $2
-	.reloc .Ltmp27, R_MIPS_JALR, cheri_ptrperm
-.Ltmp27:
+	.reloc .Ltmp33, R_MIPS_JALR, cheri_ptrperm
+.Ltmp33:
 	jalr	$25
 	nop
 	daddiu	$1, $fp, 0
@@ -626,15 +803,15 @@ test_sandboxA:                          # @test_sandboxA
 	move	$11, $2
 	move	$gp, $1
 	sd	$1, 0($fp)              # 8-byte Folded Spill
-	.reloc .Ltmp28, R_MIPS_JALR, sandbox_invoke
-.Ltmp28:
+	.reloc .Ltmp34, R_MIPS_JALR, sandbox_invoke
+.Ltmp34:
 	jalr	$25
 	nop
 	ld	$1, 0($fp)              # 8-byte Folded Reload
 	ld	$25, %call16(cheritest_success)($1)
 	move	$gp, $1
-	.reloc .Ltmp29, R_MIPS_JALR, cheritest_success
-.Ltmp29:
+	.reloc .Ltmp35, R_MIPS_JALR, cheritest_success
+.Ltmp35:
 	jalr	$25
 	nop
 	.set	at
@@ -667,13 +844,13 @@ main:                                   # @main
 	daddu	$1, $1, $25
 	daddiu	$1, $1, %lo(%neg(%gp_rel(main)))
 	sw	$zero, 36($fp)
-	ld	$2, %got_page(.L.str.14)($1)
-	daddiu	$4, $2, %got_ofst(.L.str.14)
+	ld	$2, %got_page(.L.str.20)($1)
+	daddiu	$4, $2, %got_ofst(.L.str.20)
 	ld	$25, %call16(printf)($1)
 	move	$gp, $1
 	sd	$1, 24($fp)             # 8-byte Folded Spill
-	.reloc .Ltmp30, R_MIPS_JALR, printf
-.Ltmp30:
+	.reloc .Ltmp36, R_MIPS_JALR, printf
+.Ltmp36:
 	jalr	$25
 	nop
 	ld	$1, 24($fp)             # 8-byte Folded Reload
@@ -695,47 +872,47 @@ main:                                   # @main
 	csetbounds	$c1, $c1, 64
 	ld	$3, %got_disp(sharedp)($1)
 	csc	$c1, $3, 0($ddc)
-	ld	$3, %got_page(.L.str.15)($1)
-	daddiu	$4, $3, %got_ofst(.L.str.15)
+	ld	$3, %got_page(.L.str.21)($1)
+	daddiu	$4, $3, %got_ofst(.L.str.21)
 	ld	$25, %call16(printf)($1)
 	move	$gp, $1
 	sw	$2, 20($fp)             # 4-byte Folded Spill
-	.reloc .Ltmp31, R_MIPS_JALR, printf
-.Ltmp31:
+	.reloc .Ltmp37, R_MIPS_JALR, printf
+.Ltmp37:
 	jalr	$25
 	nop
 	ld	$1, 24($fp)             # 8-byte Folded Reload
 	ld	$25, %call16(cheritest_ccall_setup)($1)
 	move	$gp, $1
 	sw	$2, 16($fp)             # 4-byte Folded Spill
-	.reloc .Ltmp32, R_MIPS_JALR, cheritest_ccall_setup
-.Ltmp32:
+	.reloc .Ltmp38, R_MIPS_JALR, cheritest_ccall_setup
+.Ltmp38:
 	jalr	$25
 	nop
 	ld	$1, 24($fp)             # 8-byte Folded Reload
-	ld	$3, %got_page(.L.str.16)($1)
-	daddiu	$4, $3, %got_ofst(.L.str.16)
+	ld	$3, %got_page(.L.str.22)($1)
+	daddiu	$4, $3, %got_ofst(.L.str.22)
 	ld	$25, %call16(printf)($1)
 	move	$gp, $1
-	.reloc .Ltmp33, R_MIPS_JALR, printf
-.Ltmp33:
+	.reloc .Ltmp39, R_MIPS_JALR, printf
+.Ltmp39:
 	jalr	$25
 	nop
 	ld	$1, 24($fp)             # 8-byte Folded Reload
 	ld	$25, %call16(test_sandboxA)($1)
 	move	$gp, $1
 	sw	$2, 12($fp)             # 4-byte Folded Spill
-	.reloc .Ltmp34, R_MIPS_JALR, test_sandboxA
-.Ltmp34:
+	.reloc .Ltmp40, R_MIPS_JALR, test_sandboxA
+.Ltmp40:
 	jalr	$25
 	nop
 	ld	$1, 24($fp)             # 8-byte Folded Reload
-	ld	$3, %got_page(.L.str.17)($1)
-	daddiu	$4, $3, %got_ofst(.L.str.17)
+	ld	$3, %got_page(.L.str.23)($1)
+	daddiu	$4, $3, %got_ofst(.L.str.23)
 	ld	$25, %call16(printf)($1)
 	move	$gp, $1
-	.reloc .Ltmp35, R_MIPS_JALR, printf
-.Ltmp35:
+	.reloc .Ltmp41, R_MIPS_JALR, printf
+.Ltmp41:
 	jalr	$25
 	nop
 	daddiu	$1, $zero, 0
@@ -782,8 +959,8 @@ cheri_ptrperm:                          # @cheri_ptrperm
 	ld	$5, 16($fp)
 	ld	$1, %got_page(cheri_ptr)($1)
 	daddiu	$25, $1, %got_ofst(cheri_ptr)
-	.reloc .Ltmp36, R_MIPS_JALR, cheri_ptr
-.Ltmp36:
+	.reloc .Ltmp42, R_MIPS_JALR, cheri_ptr
+.Ltmp42:
 	jalr	$25
 	nop
 	ld	$1, 8($fp)
@@ -867,6 +1044,8 @@ cheri_ptr:                              # @cheri_ptr
 	.asciz	"\tbase %016jx length %016jx\n"
 	.size	.L.str.3, 28
 
+	.type	privateAp,@object       # @privateAp
+	.comm	privateAp,16,16
 	.type	.L.str.4,@object        # @.str.4
 .L.str.4:
 	.asciz	"my name is A"
@@ -877,8 +1056,6 @@ cheri_ptr:                              # @cheri_ptr
 	.asciz	"A private name: %s\n"
 	.size	.L.str.5, 20
 
-	.type	privateAp,@object       # @privateAp
-	.comm	privateAp,16,16
 	.type	.L.str.6,@object        # @.str.6
 .L.str.6:
 	.asciz	"\nthe privateBp is:\n\t"
@@ -921,12 +1098,50 @@ cheri_ptr:                              # @cheri_ptr
 	.asciz	"begin.\n"
 	.size	.L.str.12, 8
 
+	.type	libcheri_sealing_root,@object # @libcheri_sealing_root
+	.local	libcheri_sealing_root
+	.comm	libcheri_sealing_root,16,16
+	.type	.L__func__.cheritest_ccall_setup,@object # @__func__.cheritest_ccall_setup
+.L__func__.cheritest_ccall_setup:
+	.asciz	"cheritest_ccall_setup"
+	.size	.L__func__.cheritest_ccall_setup, 22
+
+	.type	.L.str.13,@object       # @.str.13
+.L.str.13:
+	.asciz	"hello.c"
+	.size	.L.str.13, 8
+
+	.type	.L.str.14,@object       # @.str.14
+.L.str.14:
+	.asciz	"(cheri_getperm(libcheri_sealing_root) & CHERI_PERM_SEAL ) != 0"
+	.size	.L.str.14, 63
+
+	.type	.L.str.15,@object       # @.str.15
+.L.str.15:
+	.asciz	"(cheri_getperm(libcheri_sealing_root) & CHERI_PERM_UNSEAL ) != 0"
+	.size	.L.str.15, 65
+
+	.type	.L.str.16,@object       # @.str.16
+.L.str.16:
+	.asciz	"cheri_getlen(libcheri_sealing_root) != 0"
+	.size	.L.str.16, 41
+
 	.type	sandbox_A_sealcap,@object # @sandbox_A_sealcap
 	.local	sandbox_A_sealcap
 	.comm	sandbox_A_sealcap,16,16
 	.type	sandbox_B_sealcap,@object # @sandbox_B_sealcap
 	.local	sandbox_B_sealcap
 	.comm	sandbox_B_sealcap,16,16
+	.type	.L.str.17,@object       # @.str.17
+.L.str.17:
+	.asciz	"(cheri_getperm(sandbox_A_sealcap) & CHERI_PERM_UNSEAL ) != 0"
+	.size	.L.str.17, 61
+
+	.type	.L.str.18,@object       # @.str.18
+.L.str.18:
+	.asciz	"(cheri_getperm(sandbox_B_sealcap) & CHERI_PERM_UNSEAL ) != 0"
+	.size	.L.str.18, 61
+
 	.type	sandbox_A_codecap,@object # @sandbox_A_codecap
 	.local	sandbox_A_codecap
 	.comm	sandbox_A_codecap,16,16
@@ -939,33 +1154,33 @@ cheri_ptr:                              # @cheri_ptr
 	.type	privateDummy,@object    # @privateDummy
 	.local	privateDummy
 	.comm	privateDummy,4,64
-	.type	.L.str.13,@object       # @.str.13
-.L.str.13:
+	.type	.L.str.19,@object       # @.str.19
+.L.str.19:
 	.asciz	"done."
-	.size	.L.str.13, 6
+	.size	.L.str.19, 6
 
-	.type	.L.str.14,@object       # @.str.14
-.L.str.14:
+	.type	.L.str.20,@object       # @.str.20
+.L.str.20:
 	.asciz	"hello world\n"
-	.size	.L.str.14, 13
+	.size	.L.str.20, 13
 
 	.type	shared,@object          # @shared
 	.local	shared
 	.comm	shared,64,64
-	.type	.L.str.15,@object       # @.str.15
-.L.str.15:
+	.type	.L.str.21,@object       # @.str.21
+.L.str.21:
 	.asciz	"cheritest setup\n"
-	.size	.L.str.15, 17
+	.size	.L.str.21, 17
 
-	.type	.L.str.16,@object       # @.str.16
-.L.str.16:
+	.type	.L.str.22,@object       # @.str.22
+.L.str.22:
 	.asciz	"now start testing...\n"
-	.size	.L.str.16, 22
+	.size	.L.str.22, 22
 
-	.type	.L.str.17,@object       # @.str.17
-.L.str.17:
+	.type	.L.str.23,@object       # @.str.23
+.L.str.23:
 	.asciz	"done test with sandboxA.\n"
-	.size	.L.str.17, 26
+	.size	.L.str.23, 26
 
 
 	.ident	"clang version 9.0.0 (https://github.com/CTSRD-CHERI/llvm-project.git e914474cc8618f40fc08dd4f9a57808efcf965a6)"
@@ -976,6 +1191,8 @@ cheri_ptr:                              # @cheri_ptr
 	.addrsig_sym sleep
 	.addrsig_sym strcpy
 	.addrsig_sym cheritest_ccall_setup
+	.addrsig_sym sysarch
+	.addrsig_sym __assert
 	.addrsig_sym libcheri_type_alloc
 	.addrsig_sym datacap_create
 	.addrsig_sym test_sandboxA
@@ -988,6 +1205,7 @@ cheri_ptr:                              # @cheri_ptr
 	.addrsig_sym privateBp
 	.addrsig_sym sandbox_B_datacap
 	.addrsig_sym sharedp
+	.addrsig_sym libcheri_sealing_root
 	.addrsig_sym sandbox_A_sealcap
 	.addrsig_sym sandbox_B_sealcap
 	.addrsig_sym sandbox_A_codecap

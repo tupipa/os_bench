@@ -79,8 +79,8 @@ void __attribute__((cheri_ccallee)) sandboxA_print(){
   CHERI_CAP_PRINT(sandbox_A_datacap);
   sleep(1);
 
-  strcpy(sandbox_A_datacap->name, "my name is A"); // sandbox_A_datacap is sealed
-  //strcpy(privateAp->name, "my name is A");
+  //strcpy(sandbox_A_datacap->name, "my name is A"); // sandbox_A_datacap is sealed
+  strcpy(privateAp->name, "my name is A");
 
   printf("A private name: %s\n", privateAp->name);
 
@@ -155,10 +155,11 @@ cheritest_ccall_setup(void)
 /** sandbox A **/
 
 //#ifdef __CHERI_PURE_CAPABILITY__
-#if 0
+#if 1
     if (sysarch(CHERI_GET_SEALCAP, &libcheri_sealing_root) < 0)
         libcheri_sealing_root = NULL;
-    assert((cheri_getperm(libcheri_sealing_root) & CHERI_PERM_SEAL) != 0);
+    assert((cheri_getperm(libcheri_sealing_root) & CHERI_PERM_SEAL ) != 0);
+    assert((cheri_getperm(libcheri_sealing_root) & CHERI_PERM_UNSEAL ) != 0);
     assert(cheri_getlen(libcheri_sealing_root) != 0);
 
     sandbox_A_sealcap = libcheri_sealing_root;
@@ -171,6 +172,9 @@ cheritest_ccall_setup(void)
     sandbox_A_sealcap = libcheri_type_alloc();
     sandbox_B_sealcap = libcheri_type_alloc();
     sandbox_B_sealcap = libcheri_type_alloc();
+
+    assert((cheri_getperm(sandbox_A_sealcap) & CHERI_PERM_UNSEAL ) != 0);
+    assert((cheri_getperm(sandbox_B_sealcap) & CHERI_PERM_UNSEAL ) != 0);
 
     //printf("\t A seal cap created as:\n\t");
     //CHERI_CAP_PRINT(sandbox_A_sealcap);
