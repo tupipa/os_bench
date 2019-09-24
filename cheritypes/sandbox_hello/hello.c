@@ -183,7 +183,7 @@ cheritest_ccall_setup(void)
 
     // add perm unseal cap
     sandbox_A_sealcap = cheri_andperm(sandbox_A_sealcap, 
-            cheri_getperm(sandbox_A_sealcap) | CHERI_PERM_SEAL | CHERI_PERM_UNSEAL);
+            cheri_getperm(sandbox_A_sealcap) | CHERI_PERM_SEAL | CHERI_PERM_UNSEAL); // do nothing, since andperm is to reduce perms.
     sandbox_B_sealcap = cheri_andperm(sandbox_B_sealcap,
             cheri_getperm(sandbox_B_sealcap) | CHERI_PERM_UNSEAL);
 
