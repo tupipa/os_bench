@@ -26,8 +26,8 @@
 
 extern void    sandbox_creturn(void);
 extern void    sandbox_creturn_end;
-extern void __attribute__ ((cheri_ccallee)) sandbox_invoke(void * __capability c1, void* __capability c2);
-//extern void __attribute__ ((cheri_ccall)) sandbox_invoke(void * __capability c1, void* __capability c2);
+//extern void __attribute__ ((cheri_ccallee)) sandbox_invoke(void * __capability c1, void* __capability c2);
+extern void __attribute__ ((cheri_ccall)) sandbox_invoke(void * __capability c1, void* __capability c2);
 //extern void sandbox_invoke(void * __capability c1, void* __capability c2);
 
 
@@ -58,8 +58,8 @@ struct sandbox_data * __capability sharedp;
 struct sandbox_data * __capability privateAp;
 struct sandbox_data * __capability privateBp;
 
-//void __attribute__((cheri_ccallee)) sandboxA_print(){
-void __attribute__((cheri_ccall)) sandboxA_print(){
+void __attribute__((cheri_ccallee)) sandboxA_print(){
+//void __attribute__((cheri_ccall)) sandboxA_print(){
 //void sandboxA_print(){
   char a[32] __attribute__((aligned(32))) = "hello from sandbox A";
   printf("%s\n", a);
