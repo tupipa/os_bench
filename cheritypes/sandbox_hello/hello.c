@@ -59,26 +59,41 @@ struct sandbox_data * __capability privateAp;
 struct sandbox_data * __capability privateBp;
 
 void __attribute__((cheri_ccallee)) sandboxA_print(){
+//void __attribute__((cheri_ccall)) sandboxA_print(){
 //void sandboxA_print(){
   char a[32] __attribute__((aligned(32))) = "hello from sandbox A";
   printf("%s\n", a);
 
   //printf("printing in sandbox A\n");
 
-  //printf("\nthe PCC is:\n");
+  //printf("\nthe PCC is:\n\t");
   //CHERI_CAP_PRINT(cheri_getpcc());
   //printf("\nthe IDC is:\n");
   //CHERI_CAP_PRINT(cheri_getidc());
   //printf("\nthe DDC is:\n");
   //CHERI_CAP_PRINT(cheri_getdefault());
 
+  //printf("\nthe privateAp is:\n\t");
+  //CHERI_CAP_PRINT(privateAp);
+  printf("\nthe sandbox_A_datacap is:\n\t");
+  CHERI_CAP_PRINT(sandbox_A_datacap);
   sleep(1);
 
+  //strcpy(sandbox_A_datacap->name, "my name is A"); // sandbox_A_datacap is sealed
   strcpy(privateAp->name, "my name is A");
-  printf("A private name: %s\n", privateAp->name); 
+
+  printf("A private name: %s\n", privateAp->name);
+
+  sleep(1);
+
   privateAp->data = 1000;
 
   sleep(1);
+
+  printf("\nthe privateBp is:\n\t");
+  CHERI_CAP_PRINT(privateBp);
+  printf("\nthe sandbox_B_datacapis:\n\t");
+  CHERI_CAP_PRINT(sandbox_B_datacap);
 
   sandbox_B_datacap -> data = 1000;
   //printf("B private data: %d\n", sandbox_B_datacap->data);
