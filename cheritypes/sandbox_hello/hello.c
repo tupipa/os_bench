@@ -104,8 +104,12 @@ void __attribute__((cheri_ccallee)) sandboxA_print(){
   printf("going to overwrite private B data\n");
 #endif // DEBUG > 0
 
-  sandbox_B_datacap -> data = 1000;
-  privateBp -> data = 5000;
+  // read from sandbox B
+  privateAp -> data = privateBp -> data;
+
+  // write to sandbox B
+  //sandbox_B_datacap -> data = 1000;
+  //privateBp -> data = 5000;
 
 #if DEBUG > 0
   printf("B private data: %d\n", sandbox_B_datacap->data);

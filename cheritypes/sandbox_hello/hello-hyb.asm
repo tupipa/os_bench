@@ -29,13 +29,10 @@ sandboxA_print:                         # @sandboxA_print
 	clc	$c1, $2, 0($ddc)
 	addiu	$3, $zero, 1000
 	csw	$3, $zero, 0($c1)
-	ld	$2, %got_page(sandbox_B_datacap)($1)
-	daddiu	$2, $2, %got_ofst(sandbox_B_datacap)
-	clc	$c1, $2, 0($ddc)
-	csw	$3, $zero, 0($c1)
 	ld	$1, %got_disp(privateBp)($1)
 	clc	$c1, $1, 0($ddc)
-	addiu	$3, $zero, 5000
+	clw	$3, $zero, 0($c1)
+	clc	$c1, $2, 0($ddc)
 	csw	$3, $zero, 0($c1)
 	daddiu	$1, $zero, 0
 	move	$2, $1
@@ -225,7 +222,7 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	ld	$2, %got_page(.L.str.6)($1)
 	daddiu	$7, $2, %got_ofst(.L.str.6)
 	ld	$25, %call16(__assert)($1)
-	daddiu	$6, $zero, 174
+	daddiu	$6, $zero, 178
 	move	$gp, $1
 	.reloc .Ltmp6, R_MIPS_JALR, __assert
 .Ltmp6:
@@ -255,7 +252,7 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	ld	$2, %got_page(.L.str.7)($1)
 	daddiu	$7, $2, %got_ofst(.L.str.7)
 	ld	$25, %call16(__assert)($1)
-	daddiu	$6, $zero, 175
+	daddiu	$6, $zero, 179
 	move	$gp, $1
 	.reloc .Ltmp7, R_MIPS_JALR, __assert
 .Ltmp7:
@@ -284,7 +281,7 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	ld	$2, %got_page(.L.str.8)($1)
 	daddiu	$7, $2, %got_ofst(.L.str.8)
 	ld	$25, %call16(__assert)($1)
-	daddiu	$6, $zero, 176
+	daddiu	$6, $zero, 180
 	move	$gp, $1
 	.reloc .Ltmp8, R_MIPS_JALR, __assert
 .Ltmp8:
@@ -357,7 +354,7 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	ld	$2, %got_page(.L.str.9)($1)
 	daddiu	$7, $2, %got_ofst(.L.str.9)
 	ld	$25, %call16(__assert)($1)
-	daddiu	$6, $zero, 189
+	daddiu	$6, $zero, 193
 	move	$gp, $1
 	.reloc .Ltmp13, R_MIPS_JALR, __assert
 .Ltmp13:
@@ -387,7 +384,7 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	ld	$2, %got_page(.L.str.10)($1)
 	daddiu	$7, $2, %got_ofst(.L.str.10)
 	ld	$25, %call16(__assert)($1)
-	daddiu	$6, $zero, 190
+	daddiu	$6, $zero, 194
 	move	$gp, $1
 	.reloc .Ltmp14, R_MIPS_JALR, __assert
 .Ltmp14:
@@ -821,9 +818,6 @@ cheri_ptr:                              # @cheri_ptr
                                         # -- End function
 	.type	privateAp,@object       # @privateAp
 	.comm	privateAp,16,16
-	.type	sandbox_B_datacap,@object # @sandbox_B_datacap
-	.local	sandbox_B_datacap
-	.comm	sandbox_B_datacap,16,16
 	.type	privateBp,@object       # @privateBp
 	.comm	privateBp,16,16
 	.type	.L.str,@object          # @.str
@@ -913,6 +907,9 @@ cheri_ptr:                              # @cheri_ptr
 	.type	sandbox_A_datacap,@object # @sandbox_A_datacap
 	.local	sandbox_A_datacap
 	.comm	sandbox_A_datacap,16,16
+	.type	sandbox_B_datacap,@object # @sandbox_B_datacap
+	.local	sandbox_B_datacap
+	.comm	sandbox_B_datacap,16,16
 	.type	.L.str.11,@object       # @.str.11
 .L.str.11:
 	.asciz	"done."
@@ -958,7 +955,6 @@ cheri_ptr:                              # @cheri_ptr
 	.addrsig_sym cheri_ptrperm
 	.addrsig_sym cheri_ptr
 	.addrsig_sym privateAp
-	.addrsig_sym sandbox_B_datacap
 	.addrsig_sym privateBp
 	.addrsig_sym sharedp
 	.addrsig_sym libcheri_sealing_root
@@ -969,5 +965,6 @@ cheri_ptr:                              # @cheri_ptr
 	.addrsig_sym privateB
 	.addrsig_sym privateDummy
 	.addrsig_sym sandbox_A_datacap
+	.addrsig_sym sandbox_B_datacap
 	.addrsig_sym shared
 	.text
