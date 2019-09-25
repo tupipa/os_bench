@@ -24,6 +24,8 @@
 
 #include <machine/sysarch.h>
 
+#define DEBUG 0
+
 extern void    sandbox_creturn(void);
 extern void    sandbox_creturn_end;
 //extern void __attribute__ ((cheri_ccallee)) sandbox_invoke(void * __capability c1, void* __capability c2);
@@ -61,44 +63,55 @@ struct sandbox_data * __capability privateBp;
 void __attribute__((cheri_ccallee)) sandboxA_print(){
 //void __attribute__((cheri_ccall)) sandboxA_print(){
 //void sandboxA_print(){
+
+#if DEBUG > 0
+
   char a[32] __attribute__((aligned(32))) = "hello from sandbox A";
   printf("%s\n", a);
 
-  //printf("printing in sandbox A\n");
+  printf("\nthe PCC is:\n\t");
+  CHERI_CAP_PRINT(cheri_getpcc());
+  printf("\nthe IDC is:\n");
+  CHERI_CAP_PRINT(cheri_getidc());
+  printf("\nthe DDC is:\n");
+  CHERI_CAP_PRINT(cheri_getdefault());
 
-  //printf("\nthe PCC is:\n\t");
-  //CHERI_CAP_PRINT(cheri_getpcc());
-  //printf("\nthe IDC is:\n");
-  //CHERI_CAP_PRINT(cheri_getidc());
-  //printf("\nthe DDC is:\n");
-  //CHERI_CAP_PRINT(cheri_getdefault());
-
-  //printf("\nthe privateAp is:\n\t");
-  //CHERI_CAP_PRINT(privateAp);
+  printf("\nthe privateAp is:\n\t");
+  CHERI_CAP_PRINT(privateAp);
   printf("\nthe sandbox_A_datacap is:\n\t");
   CHERI_CAP_PRINT(sandbox_A_datacap);
+
   sleep(1);
 
   //strcpy(sandbox_A_datacap->name, "my name is A"); // sandbox_A_datacap is sealed
   strcpy(privateAp->name, "my name is A");
-
   printf("A private name: %s\n", privateAp->name);
 
   sleep(1);
 
+#endif // DEBUG > 0
+
   privateAp->data = 1000;
 
-  sleep(1);
+#if DEBUG > 0
 
+  sleep(1);
   printf("\nthe privateBp is:\n\t");
   CHERI_CAP_PRINT(privateBp);
   printf("\nthe sandbox_B_datacapis:\n\t");
   CHERI_CAP_PRINT(sandbox_B_datacap);
 
-  sandbox_B_datacap -> data = 1000;
-  //printf("B private data: %d\n", sandbox_B_datacap->data);
+  printf("going to overwrite private B data\n");
+#endif // DEBUG > 0
 
+  sandbox_B_datacap -> data = 1000;
+  privateBp -> data = 5000;
+
+#if DEBUG > 0
+  printf("B private data: %d\n", sandbox_B_datacap->data);
   //printf("shared data: %d\n", sharedp->data);
+#endif // DEBUG > 0
+
   //sandboxA_end:
 
 }
@@ -227,18 +240,19 @@ cheritest_ccall_setup(void)
     //CHERI_CAP_PRINT(sandbox_A_datacap);
 
     sandbox_A_datacap = cheri_seal(sandbox_A_datacap, sandbox_A_sealcap);
-    //sandbox_B_datacap = cheri_seal(sandbox_B_datacap, sandbox_B_sealcap);
+    sandbox_B_datacap = cheri_seal(sandbox_B_datacap, sandbox_B_sealcap);
 
     //printf("\t data cap sealed as:\n");
     //CHERI_CAP_PRINT(sandbox_A_datacap);
 
-#if 0 // TEST_TYPE_SET
+#if 1 // TEST_TYPE_SET
     //LLM: still throw exception of permit unseal violation even if the 
     // PERMI_UNSEAL is set.
     privateAp = cheri_seal(privateAp, sandbox_A_sealcap);
     privateAp = cheri_unseal(privateAp, sandbox_A_sealcap);
     privateBp = cheri_seal(privateBp, sandbox_B_sealcap);
     privateBp = cheri_unseal(privateBp, sandbox_B_sealcap);
+    sandbox_B_datacap = cheri_unseal(sandbox_B_datacap, sandbox_B_sealcap);
 #endif 
 
     printf("done.");
