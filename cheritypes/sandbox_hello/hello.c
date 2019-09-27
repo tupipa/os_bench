@@ -64,13 +64,13 @@ void __attribute__((cheri_ccallee)) sandboxA_print(){
 //void __attribute__((cheri_ccall)) sandboxA_print(){
 //void sandboxA_print(){
 
-#if 0
+#if 1
 __asm__ __volatile__ (
   "CSetDefault $c26\n\t"
   );
 #endif
 
-#if 1 // DEBUG > 0
+#if 0 // DEBUG > 0
 
   char a[32] __attribute__((aligned(32))) = "hello from sandbox A";
   printf("%s\n", a);
