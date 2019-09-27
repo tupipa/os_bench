@@ -64,7 +64,13 @@ void __attribute__((cheri_ccallee)) sandboxA_print(){
 //void __attribute__((cheri_ccall)) sandboxA_print(){
 //void sandboxA_print(){
 
-#if DEBUG > 0
+#if 0
+__asm__ __volatile__ (
+  "CSetDefault $c26\n\t"
+  );
+#endif
+
+#if 1 // DEBUG > 0
 
   char a[32] __attribute__((aligned(32))) = "hello from sandbox A";
   printf("%s\n", a);
@@ -183,8 +189,6 @@ cheritest_ccall_setup(void)
 
 #endif
 
-#if 1
-
     sandbox_A_sealcap = libcheri_type_alloc();
     sandbox_A_sealcap = libcheri_type_alloc();
     sandbox_B_sealcap = libcheri_type_alloc();
@@ -197,14 +201,14 @@ cheritest_ccall_setup(void)
     //CHERI_CAP_PRINT(sandbox_A_sealcap);
     //printf("\t B seal cap created as:\n\t");
     //CHERI_CAP_PRINT(sandbox_B_sealcap);
-
+#if 0
     // add perm unseal cap
     sandbox_A_sealcap = cheri_andperm(sandbox_A_sealcap, 
             cheri_getperm(sandbox_A_sealcap) | CHERI_PERM_SEAL | CHERI_PERM_UNSEAL); // do nothing, since andperm is to reduce perms.
     sandbox_B_sealcap = cheri_andperm(sandbox_B_sealcap,
             cheri_getperm(sandbox_B_sealcap) | CHERI_PERM_UNSEAL);
+#endif 
 
-#endif
     //printf("\t A seal cap update with PERM_UNSEAL:\n\t");
     //CHERI_CAP_PRINT(sandbox_A_sealcap);
     //printf("\t B seal cap update with PERM_UNSEAL:\n\t");
@@ -229,12 +233,14 @@ cheritest_ccall_setup(void)
     sandbox_B_datacap = privateBp;
 
 #else
-    //printf("\tcreating hybrid data cap (DDC)...\n");
-    //sandbox_A_datacap = cheri_getdefault();
-    //sandbox_A_datacap = cheri_setaddress(sandbox_A_datacap, (vaddr_t)&privateA);
+    printf("\tcreating hybrid data cap (DDC)...\n");
+    privateAp = cheri_getdefault();
+    privateAp = cheri_setaddress(privateAp, (vaddr_t)&privateA);
+    privateBp = cheri_getdefault();
+    privateBp = cheri_setaddress(privateBp, (vaddr_t)&privateB);
     //printf("\tcreating hybrid data cap...\n");
-    privateAp = datacap_create(&privateA, &privateB);
-    privateBp = datacap_create(&privateB, &privateDummy);
+    //privateAp = datacap_create(&privateA, &privateB);
+    //privateBp = datacap_create(&privateB, &privateDummy);
     sandbox_A_datacap = privateAp;
     sandbox_B_datacap = privateBp;
 
@@ -250,8 +256,7 @@ cheritest_ccall_setup(void)
     //CHERI_CAP_PRINT(sandbox_A_datacap);
 
 #if 1 // TEST_TYPE_SET
-    //LLM: still throw exception of permit unseal violation even if the 
-    // PERMI_UNSEAL is set.
+    //LLM: using seal/unseal to set types; since unseal will now not reset the type.
     privateAp = cheri_seal(privateAp, sandbox_A_sealcap);
     privateAp = cheri_unseal(privateAp, sandbox_A_sealcap);
     privateBp = cheri_seal(privateBp, sandbox_B_sealcap);
