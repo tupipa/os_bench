@@ -39,6 +39,7 @@ target triple = "cheri-unknown-freebsd"
 ; Function Attrs: noinline nounwind optnone
 define chericcallcce void @sandboxA_print() #0 {
 entry:
+  call void asm sideeffect "CSetDefault $$c26\0A\09", "~{$1}"() #4, !srcloc !3
   %0 = load %struct.sandbox_data addrspace(200)*, %struct.sandbox_data addrspace(200)** @privateAp, align 16
   %data = getelementptr inbounds %struct.sandbox_data, %struct.sandbox_data addrspace(200)* %0, i32 0, i32 0
   store i32 1000, i32 addrspace(200)* %data, align 32
@@ -101,7 +102,7 @@ cond.true:                                        ; preds = %if.end
   br label %cond.end
 
 cond.false:                                       ; preds = %if.end
-  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 184, i8* getelementptr inbounds ([63 x i8], [63 x i8]* @.str.6, i64 0, i64 0)) #4
+  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 184, i8* getelementptr inbounds ([63 x i8], [63 x i8]* @.str.6, i64 0, i64 0)) #5
   unreachable
 
 2:                                                ; No predecessors!
@@ -118,7 +119,7 @@ cond.true5:                                       ; preds = %cond.end
   br label %cond.end7
 
 cond.false6:                                      ; preds = %cond.end
-  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 185, i8* getelementptr inbounds ([65 x i8], [65 x i8]* @.str.7, i64 0, i64 0)) #4
+  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 185, i8* getelementptr inbounds ([65 x i8], [65 x i8]* @.str.7, i64 0, i64 0)) #5
   unreachable
 
 5:                                                ; No predecessors!
@@ -134,7 +135,7 @@ cond.true9:                                       ; preds = %cond.end7
   br label %cond.end11
 
 cond.false10:                                     ; preds = %cond.end7
-  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 186, i8* getelementptr inbounds ([41 x i8], [41 x i8]* @.str.8, i64 0, i64 0)) #4
+  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 186, i8* getelementptr inbounds ([41 x i8], [41 x i8]* @.str.8, i64 0, i64 0)) #5
   unreachable
 
 8:                                                ; No predecessors!
@@ -161,7 +162,7 @@ cond.true18:                                      ; preds = %cond.end11
   br label %cond.end20
 
 cond.false19:                                     ; preds = %cond.end11
-  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 197, i8* getelementptr inbounds ([61 x i8], [61 x i8]* @.str.9, i64 0, i64 0)) #4
+  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 197, i8* getelementptr inbounds ([61 x i8], [61 x i8]* @.str.9, i64 0, i64 0)) #5
   unreachable
 
 12:                                               ; No predecessors!
@@ -178,7 +179,7 @@ cond.true23:                                      ; preds = %cond.end20
   br label %cond.end25
 
 cond.false24:                                     ; preds = %cond.end20
-  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 198, i8* getelementptr inbounds ([61 x i8], [61 x i8]* @.str.10, i64 0, i64 0)) #4
+  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 198, i8* getelementptr inbounds ([61 x i8], [61 x i8]* @.str.10, i64 0, i64 0)) #5
   unreachable
 
 15:                                               ; No predecessors!
@@ -296,7 +297,7 @@ entry:
   %1 = load %struct.sandbox_data addrspace(200)*, %struct.sandbox_data addrspace(200)** @sandbox_A_datacap, align 16
   %2 = bitcast %struct.sandbox_data addrspace(200)* %1 to i8 addrspace(200)*
   call chericcallcc void @sandbox_invoke(i8 addrspace(200)* %0, i8 addrspace(200)* %2)
-  call void @cheritest_success() #4
+  call void @cheritest_success() #5
   unreachable
 }
 
@@ -326,7 +327,8 @@ attributes #0 = { noinline nounwind optnone "correctly-rounded-divide-sqrt-fp-ma
 attributes #1 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="cheri128" "target-features"="+cheri128,+chericap,+soft-float,-noabicalls" "unsafe-fp-math"="false" "use-soft-float"="true" }
 attributes #2 = { nounwind readnone }
 attributes #3 = { noreturn "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="cheri128" "target-features"="+cheri128,+chericap,+soft-float,-noabicalls" "unsafe-fp-math"="false" "use-soft-float"="true" }
-attributes #4 = { noreturn }
+attributes #4 = { nounwind }
+attributes #5 = { noreturn }
 
 !llvm.module.flags = !{!0, !1}
 !llvm.ident = !{!2}
@@ -334,3 +336,4 @@ attributes #4 = { noreturn }
 !0 = !{i32 1, !"wchar_size", i32 4}
 !1 = !{i32 7, !"PIC Level", i32 1}
 !2 = !{!"clang version 9.0.0 (https://github.com/CTSRD-CHERI/llvm-project.git e914474cc8618f40fc08dd4f9a57808efcf965a6)"}
+!3 = !{i32 2027, i32 2046}

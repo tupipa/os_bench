@@ -64,7 +64,7 @@ void __attribute__((cheri_ccallee)) sandboxA_print(){
 //void __attribute__((cheri_ccall)) sandboxA_print(){
 //void sandboxA_print(){
 
-#if 0
+#if 1
 __asm__ __volatile__ (
   "CSetDefault $c26\n\t"
   );
