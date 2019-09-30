@@ -51,6 +51,7 @@ compile-pure: $(SRC) asm-pure
 	$(CLANG) -v $(OPTS_PURE) $(SRC) -o hello.exe
 
 compile-hyb: $(SRC) asm-hyb
+	$(CLANG) -v $(OPTS_HYB) $(SRC) -S -emit-llvm
 	$(CLANG) -v $(OPTS_HYB) $(SRC) -o hello.exe
 
 
