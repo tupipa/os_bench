@@ -21,48 +21,14 @@
 #include <cheri/libcheri_type.h>  // libcheri type alloc()
 #include <cheri/libcheri_invoke.h>  // libcheri invoke prototype
 #include "cheritest.h"
+#include "util.h"
+#include "hello.h"
 
 #include <machine/sysarch.h>
 
 #define DEBUG 0
 
-extern void    sandbox_creturn(void);
-extern void    sandbox_creturn_end;
-//extern void __attribute__ ((cheri_ccallee)) sandbox_invoke(void * __capability c1, void* __capability c2);
-extern void __attribute__ ((cheri_ccall)) sandbox_invoke(void * __capability c1, void* __capability c2);
-//extern void sandbox_invoke(void * __capability c1, void* __capability c2);
-
-
-static void * __capability libcheri_sealing_root;
-
-static void *__capability sandbox_A_sealcap;
-static void *__capability sandbox_A_codecap;
-static struct sandbox_data *__capability sandbox_A_datacap;
-
-static void *__capability sandbox_B_sealcap;
-static void *__capability sandbox_B_codecap;
-static struct sandbox_data *__capability sandbox_B_datacap;
-
-static void *__capability sandbox_shared_datacap;
-
-struct sandbox_data{
-  int data __attribute__ ((aligned(32)));
-  char name[32] __attribute__ ((aligned(32)));
-};
-
-static struct sandbox_data shared __attribute__ ((aligned(64)));
-static struct sandbox_data privateA __attribute__ ((aligned(64)));
-static struct sandbox_data privateB __attribute__ ((aligned(64)));
-static int privateDummy __attribute__ ((aligned(64)));
-
-// bare capability without sealing/unsealing
-struct sandbox_data * __capability sharedp;
-struct sandbox_data * __capability privateAp;
-struct sandbox_data * __capability privateBp;
-
-void __attribute__((cheri_ccallee)) sandboxA_print(){
-//void __attribute__((cheri_ccall)) sandboxA_print(){
-//void sandboxA_print(){
+void sandboxA_print(){
 
 #if 1
 __asm__ __volatile__ (
@@ -75,23 +41,12 @@ __asm__ __volatile__ (
   char a[32] __attribute__((aligned(32))) = "hello from sandbox A";
   printf("%s\n", a);
 
-  printf("\nthe PCC is:\n\t");
-  CHERI_CAP_PRINT(cheri_getpcc());
-  printf("\nthe IDC is:\n");
-  CHERI_CAP_PRINT(cheri_getidc());
-  printf("\nthe DDC is:\n");
-  CHERI_CAP_PRINT(cheri_getdefault());
+  PRINT_PCC_IDC_DDC;
 
   printf("\nthe privateAp is:\n\t");
   CHERI_CAP_PRINT(privateAp);
   printf("\nthe sandbox_A_datacap is:\n\t");
   CHERI_CAP_PRINT(sandbox_A_datacap);
-
-  sleep(1);
-
-  //strcpy(sandbox_A_datacap->name, "my name is A"); // sandbox_A_datacap is sealed
-  strcpy(privateAp->name, "my name is A");
-  printf("A private name: %s\n", privateAp->name);
 
   sleep(1);
 

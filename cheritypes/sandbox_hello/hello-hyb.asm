@@ -234,7 +234,7 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	ld	$2, %got_page(.L.str.6)($1)
 	daddiu	$7, $2, %got_ofst(.L.str.6)
 	ld	$25, %call16(__assert)($1)
-	daddiu	$6, $zero, 184
+	daddiu	$6, $zero, 139
 	move	$gp, $1
 	.reloc .Ltmp6, R_MIPS_JALR, __assert
 .Ltmp6:
@@ -264,7 +264,7 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	ld	$2, %got_page(.L.str.7)($1)
 	daddiu	$7, $2, %got_ofst(.L.str.7)
 	ld	$25, %call16(__assert)($1)
-	daddiu	$6, $zero, 185
+	daddiu	$6, $zero, 140
 	move	$gp, $1
 	.reloc .Ltmp7, R_MIPS_JALR, __assert
 .Ltmp7:
@@ -293,7 +293,7 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	ld	$2, %got_page(.L.str.8)($1)
 	daddiu	$7, $2, %got_ofst(.L.str.8)
 	ld	$25, %call16(__assert)($1)
-	daddiu	$6, $zero, 186
+	daddiu	$6, $zero, 141
 	move	$gp, $1
 	.reloc .Ltmp8, R_MIPS_JALR, __assert
 .Ltmp8:
@@ -366,7 +366,7 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	ld	$2, %got_page(.L.str.9)($1)
 	daddiu	$7, $2, %got_ofst(.L.str.9)
 	ld	$25, %call16(__assert)($1)
-	daddiu	$6, $zero, 197
+	daddiu	$6, $zero, 152
 	move	$gp, $1
 	.reloc .Ltmp13, R_MIPS_JALR, __assert
 .Ltmp13:
@@ -396,7 +396,7 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	ld	$2, %got_page(.L.str.10)($1)
 	daddiu	$7, $2, %got_ofst(.L.str.10)
 	ld	$25, %call16(__assert)($1)
-	daddiu	$6, $zero, 198
+	daddiu	$6, $zero, 153
 	move	$gp, $1
 	.reloc .Ltmp14, R_MIPS_JALR, __assert
 .Ltmp14:
