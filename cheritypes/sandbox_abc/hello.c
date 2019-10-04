@@ -252,11 +252,14 @@ cheritest_ccall_setup(void)
 #endif 
 
 #if 1
-    printf("\tcreating data cap (DDC)...\n");
-    privateAp = cheri_getdefault();
+    printf("\tcreating data cap (IDC)...\n");
+    CHERI_CAP_PRINT(cheri_getidc());
+    // privateAp = cheri_getdefault();
+    privateAp = cheri_getidc();
     privateAp = cheri_setaddress(privateAp, (vaddr_t)&privateA);
 
-    privateBp = cheri_getdefault();
+    // privateBp = cheri_getdefault();
+    privateBp = cheri_getidc();
     privateBp = cheri_setaddress(privateBp, (vaddr_t)&privateB);
     //printf("\tcreating hybrid data cap...\n");
     //privateAp = datacap_create(&privateA, &privateB);
@@ -266,8 +269,8 @@ cheritest_ccall_setup(void)
 
 #endif // __CHERI_PURE_CAPABILITY__
 
-    printf("\t data cap created as:\n\t");
-    CHERI_CAP_PRINT(sandbox_A_datacap);
+    // printf("\t data cap created as:\n\t");
+    // CHERI_CAP_PRINT(sandbox_A_datacap);
 
     sandbox_A_datacap = cheri_seal(sandbox_A_datacap, sandbox_A_sealcap);
     sandbox_B_datacap = cheri_seal(sandbox_B_datacap, sandbox_B_sealcap);
