@@ -310,16 +310,16 @@ sandboxB_subprint:                      # @sandboxB_subprint
 	.set	nomips16
 	.ent	cheritest_ccall_setup
 cheritest_ccall_setup:                  # @cheritest_ccall_setup
-	.frame	$c24,144,$c17
+	.frame	$c24,176,$c17
 	.mask 	0x00000000,0
 	.fmask	0x00000000,0
 	.set	noreorder
 	.set	nomacro
 	.set	noat
 # %bb.0:                                # %entry
-	cincoffset	$c11, $c11, -144
-	csc	$c24, $zero, 128($c11)  # 16-byte Folded Spill
-	csc	$c17, $zero, 112($c11)  # 16-byte Folded Spill
+	cincoffset	$c11, $c11, -176
+	csc	$c24, $zero, 160($c11)  # 16-byte Folded Spill
+	csc	$c17, $zero, 144($c11)  # 16-byte Folded Spill
 	cincoffset	$c24, $c11, $zero
 	lui	$1, %hi(%neg(%captab_rel(cheritest_ccall_setup)))
 	daddiu	$1, $1, %lo(%neg(%captab_rel(cheritest_ccall_setup)))
@@ -328,15 +328,15 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	clcbi	$c3, %captab20(.L.str.4)($c1)
 	clcbi	$c12, %capcall20(printf)($c1)
 	cgetnull	$c13
-	csc	$c1, $zero, 96($c24)    # 16-byte Folded Spill
+	csc	$c1, $zero, 128($c24)   # 16-byte Folded Spill
 	cjalr	$c12, $c17
 	nop
-	clc	$c1, $zero, 96($c24)    # 16-byte Folded Reload
+	clc	$c1, $zero, 128($c24)   # 16-byte Folded Reload
 	clcbi	$c3, %captab20(libcheri_sealing_root)($c1)
 	clcbi	$c12, %capcall20(sysarch)($c1)
 	daddiu	$4, $zero, 6
 	cgetnull	$c13
-	csw	$2, $zero, 92($c24)     # 4-byte Folded Spill
+	csw	$2, $zero, 124($c24)    # 4-byte Folded Spill
 	cjalr	$c12, $c17
 	nop
 	bgez	$2, .LBB4_3
@@ -345,13 +345,13 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	b	.LBB4_2
 	nop
 .LBB4_2:                                # %if.then
-	clc	$c1, $zero, 96($c24)    # 16-byte Folded Reload
+	clc	$c1, $zero, 128($c24)   # 16-byte Folded Reload
 	clcbi	$c2, %captab20(libcheri_sealing_root)($c1)
 	csc	$cnull, $zero, 0($c2)
 	b	.LBB4_3
 	nop
 .LBB4_3:                                # %if.end
-	clc	$c1, $zero, 96($c24)    # 16-byte Folded Reload
+	clc	$c1, $zero, 128($c24)   # 16-byte Folded Reload
 	clcbi	$c2, %captab20(libcheri_sealing_root)($c1)
 	clc	$c2, $zero, 0($c2)
 	cgetperm	$1, $c2
@@ -365,17 +365,17 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	b	.LBB4_7
 	nop
 .LBB4_6:                                # %cond.false
-	clc	$c1, $zero, 96($c24)    # 16-byte Folded Reload
+	clc	$c1, $zero, 128($c24)   # 16-byte Folded Reload
 	clcbi	$c3, %captab20(.L__func__.cheritest_ccall_setup)($c1)
 	clcbi	$c4, %captab20(.L.str.5)($c1)
 	clcbi	$c5, %captab20(.L.str.6)($c1)
 	clcbi	$c12, %capcall20(__assert)($c1)
-	daddiu	$4, $zero, 205
+	daddiu	$4, $zero, 206
 	cgetnull	$c13
 	cjalr	$c12, $c17
 	nop
 .LBB4_7:                                # %cond.end
-	clc	$c1, $zero, 96($c24)    # 16-byte Folded Reload
+	clc	$c1, $zero, 128($c24)   # 16-byte Folded Reload
 	clcbi	$c2, %captab20(libcheri_sealing_root)($c1)
 	clc	$c2, $zero, 0($c2)
 	cgetperm	$1, $c2
@@ -389,17 +389,17 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	b	.LBB4_11
 	nop
 .LBB4_10:                               # %cond.false6
-	clc	$c1, $zero, 96($c24)    # 16-byte Folded Reload
+	clc	$c1, $zero, 128($c24)   # 16-byte Folded Reload
 	clcbi	$c3, %captab20(.L__func__.cheritest_ccall_setup)($c1)
 	clcbi	$c4, %captab20(.L.str.5)($c1)
 	clcbi	$c5, %captab20(.L.str.7)($c1)
 	clcbi	$c12, %capcall20(__assert)($c1)
-	daddiu	$4, $zero, 206
+	daddiu	$4, $zero, 207
 	cgetnull	$c13
 	cjalr	$c12, $c17
 	nop
 .LBB4_11:                               # %cond.end7
-	clc	$c1, $zero, 96($c24)    # 16-byte Folded Reload
+	clc	$c1, $zero, 128($c24)   # 16-byte Folded Reload
 	clcbi	$c2, %captab20(libcheri_sealing_root)($c1)
 	clc	$c2, $zero, 0($c2)
 	cgetlen	$1, $c2
@@ -412,51 +412,51 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	b	.LBB4_15
 	nop
 .LBB4_14:                               # %cond.false10
-	clc	$c1, $zero, 96($c24)    # 16-byte Folded Reload
+	clc	$c1, $zero, 128($c24)   # 16-byte Folded Reload
 	clcbi	$c3, %captab20(.L__func__.cheritest_ccall_setup)($c1)
 	clcbi	$c4, %captab20(.L.str.5)($c1)
 	clcbi	$c5, %captab20(.L.str.8)($c1)
 	clcbi	$c12, %capcall20(__assert)($c1)
-	daddiu	$4, $zero, 207
+	daddiu	$4, $zero, 208
 	cgetnull	$c13
 	cjalr	$c12, $c17
 	nop
 .LBB4_15:                               # %cond.end11
-	clc	$c1, $zero, 96($c24)    # 16-byte Folded Reload
+	clc	$c1, $zero, 128($c24)   # 16-byte Folded Reload
 	clcbi	$c2, %captab20(libcheri_sealing_root)($c1)
 	clc	$c2, $zero, 0($c2)
 	clcbi	$c3, %captab20(sandbox_A_sealcap)($c1)
 	csc	$c2, $zero, 0($c3)
 	clcbi	$c12, %capcall20(libcheri_type_alloc)($c1)
 	cgetnull	$c13
-	csc	$c3, $zero, 64($c24)    # 16-byte Folded Spill
+	csc	$c3, $zero, 96($c24)    # 16-byte Folded Spill
 	cjalr	$c12, $c17
 	nop
-	clc	$c1, $zero, 64($c24)    # 16-byte Folded Reload
+	clc	$c1, $zero, 96($c24)    # 16-byte Folded Reload
 	csc	$c3, $zero, 0($c1)
-	clc	$c2, $zero, 96($c24)    # 16-byte Folded Reload
-	clcbi	$c12, %capcall20(libcheri_type_alloc)($c2)
-	cgetnull	$c13
-	cjalr	$c12, $c17
-	nop
-	clc	$c1, $zero, 64($c24)    # 16-byte Folded Reload
-	csc	$c3, $zero, 0($c1)
-	clc	$c2, $zero, 96($c24)    # 16-byte Folded Reload
+	clc	$c2, $zero, 128($c24)   # 16-byte Folded Reload
 	clcbi	$c12, %capcall20(libcheri_type_alloc)($c2)
 	cgetnull	$c13
 	cjalr	$c12, $c17
 	nop
 	clc	$c1, $zero, 96($c24)    # 16-byte Folded Reload
+	csc	$c3, $zero, 0($c1)
+	clc	$c2, $zero, 128($c24)   # 16-byte Folded Reload
+	clcbi	$c12, %capcall20(libcheri_type_alloc)($c2)
+	cgetnull	$c13
+	cjalr	$c12, $c17
+	nop
+	clc	$c1, $zero, 128($c24)   # 16-byte Folded Reload
 	clcbi	$c2, %captab20(sandbox_B_sealcap)($c1)
 	csc	$c3, $zero, 0($c2)
 	clcbi	$c12, %capcall20(libcheri_type_alloc)($c1)
 	cgetnull	$c13
-	csc	$c2, $zero, 48($c24)    # 16-byte Folded Spill
+	csc	$c2, $zero, 80($c24)    # 16-byte Folded Spill
 	cjalr	$c12, $c17
 	nop
-	clc	$c1, $zero, 48($c24)    # 16-byte Folded Reload
+	clc	$c1, $zero, 80($c24)    # 16-byte Folded Reload
 	csc	$c3, $zero, 0($c1)
-	clc	$c2, $zero, 64($c24)    # 16-byte Folded Reload
+	clc	$c2, $zero, 96($c24)    # 16-byte Folded Reload
 	clc	$c3, $zero, 0($c2)
 	cgetperm	$1, $c3
 	andi	$1, $1, 512
@@ -469,17 +469,17 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	b	.LBB4_19
 	nop
 .LBB4_18:                               # %cond.false19
-	clc	$c1, $zero, 96($c24)    # 16-byte Folded Reload
+	clc	$c1, $zero, 128($c24)   # 16-byte Folded Reload
 	clcbi	$c3, %captab20(.L__func__.cheritest_ccall_setup)($c1)
 	clcbi	$c4, %captab20(.L.str.5)($c1)
 	clcbi	$c5, %captab20(.L.str.9)($c1)
 	clcbi	$c12, %capcall20(__assert)($c1)
-	daddiu	$4, $zero, 218
+	daddiu	$4, $zero, 219
 	cgetnull	$c13
 	cjalr	$c12, $c17
 	nop
 .LBB4_19:                               # %cond.end20
-	clc	$c1, $zero, 96($c24)    # 16-byte Folded Reload
+	clc	$c1, $zero, 128($c24)   # 16-byte Folded Reload
 	clcbi	$c2, %captab20(sandbox_B_sealcap)($c1)
 	clc	$c2, $zero, 0($c2)
 	cgetperm	$1, $c2
@@ -493,18 +493,18 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	b	.LBB4_23
 	nop
 .LBB4_22:                               # %cond.false24
-	clc	$c1, $zero, 96($c24)    # 16-byte Folded Reload
+	clc	$c1, $zero, 128($c24)   # 16-byte Folded Reload
 	clcbi	$c3, %captab20(.L__func__.cheritest_ccall_setup)($c1)
 	clcbi	$c4, %captab20(.L.str.5)($c1)
 	clcbi	$c5, %captab20(.L.str.10)($c1)
 	clcbi	$c12, %capcall20(__assert)($c1)
-	daddiu	$4, $zero, 219
+	daddiu	$4, $zero, 220
 	cgetnull	$c13
 	cjalr	$c12, $c17
 	nop
 .LBB4_23:                               # %cond.end25
 	cgetpcc	$c1
-	clc	$c2, $zero, 96($c24)    # 16-byte Folded Reload
+	clc	$c2, $zero, 128($c24)   # 16-byte Folded Reload
 	clcbi	$c3, %captab20(sandbox_A_codecap)($c2)
 	csc	$c1, $zero, 0($c3)
 	clc	$c1, $zero, 0($c3)
@@ -514,77 +514,129 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	csc	$c1, $zero, 0($c3)
 	clc	$c1, $zero, 0($c3)
 	clcbi	$c4, %captab20(sandbox_A_sealcap)($c2)
-	clc	$c5, $zero, 0($c4)
-	cseal	$c1, $c1, $c5
+	clc	$c4, $zero, 0($c4)
+	cseal	$c1, $c1, $c4
 	csc	$c1, $zero, 0($c3)
-	clcbi	$c3, %captab20(privateA)($c2)
-	clcbi	$c1, %captab20(privateB)($c2)
-	clcbi	$c12, %capcall20(datacap_create)($c2)
-	csc	$c4, $zero, 32($c24)    # 16-byte Folded Spill
-	cmove	$c4, $c1
+	clcbi	$c3, %captab20(.L.str.11)($c2)
+	clcbi	$c12, %capcall20(printf)($c2)
 	cgetnull	$c13
-	csc	$c1, $zero, 16($c24)    # 16-byte Folded Spill
 	cjalr	$c12, $c17
 	nop
-	clc	$c1, $zero, 96($c24)    # 16-byte Folded Reload
-	clcbi	$c2, %captab20(privateAp)($c1)
-	csc	$c3, $zero, 0($c2)
-	clcbi	$c12, %capcall20(datacap_create)($c1)
-	clcbi	$c4, %captab20(privateDummy)($c1)
-	clc	$c3, $zero, 16($c24)    # 16-byte Folded Reload
-	cgetnull	$c13
-	csc	$c2, $zero, 0($c24)     # 16-byte Folded Spill
-	cjalr	$c12, $c17
-	nop
-	clc	$c1, $zero, 96($c24)    # 16-byte Folded Reload
-	clcbi	$c2, %captab20(privateBp)($c1)
-	csc	$c3, $zero, 0($c2)
-	clc	$c3, $zero, 0($c24)     # 16-byte Folded Reload
+	creadhwr	$c1, $chwr_ddc
+	clc	$c2, $zero, 128($c24)   # 16-byte Folded Reload
+	clcbi	$c3, %captab20(privateAp)($c2)
+	csc	$c1, $zero, 0($c3)
 	clc	$c4, $zero, 0($c3)
-	clcbi	$c5, %captab20(sandbox_A_datacap)($c1)
-	csc	$c4, $zero, 0($c5)
-	clc	$c4, $zero, 0($c2)
-	clcbi	$c6, %captab20(sandbox_B_datacap)($c1)
-	csc	$c4, $zero, 0($c6)
-	clc	$c4, $zero, 0($c5)
-	clc	$c7, $zero, 32($c24)    # 16-byte Folded Reload
-	clc	$c8, $zero, 0($c7)
-	cseal	$c4, $c4, $c8
-	csc	$c4, $zero, 0($c5)
-	clc	$c4, $zero, 0($c6)
+	clcbi	$c5, %captab20(privateA)($c2)
+	cgetaddr	$1, $c5
+	csetaddr	$c4, $c4, $1
+	csc	$c4, $zero, 0($c3)
+	clcbi	$c4, %captab20(privateBp)($c2)
+	csc	$c1, $zero, 0($c4)
+	clc	$c1, $zero, 0($c4)
+	clcbi	$c5, %captab20(privateB)($c2)
+	cgetaddr	$1, $c5
+	csetaddr	$c1, $c1, $1
+	csc	$c1, $zero, 0($c4)
+	clc	$c1, $zero, 0($c3)
+	clcbi	$c3, %captab20(sandbox_A_datacap)($c2)
+	csc	$c1, $zero, 0($c3)
+	clc	$c1, $zero, 0($c4)
+	clcbi	$c3, %captab20(sandbox_B_datacap)($c2)
+	csc	$c1, $zero, 0($c3)
+	clcbi	$c12, %capcall20(printf)($c2)
+	clcbi	$c3, %captab20(.L.str.12)($c2)
+	cgetnull	$c13
+	csw	$2, $zero, 76($c24)     # 4-byte Folded Spill
+	cjalr	$c12, $c17
+	nop
+	b	.LBB4_24
+	nop
+.LBB4_24:                               # %do.body
+	clc	$c1, $zero, 128($c24)   # 16-byte Folded Reload
+	clcbi	$c2, %captab20(sandbox_A_datacap)($c1)
+	clc	$c3, $zero, 0($c2)
+	cgettag	$1, $c3
+	cgetsealed	$2, $c3
+	cgetperm	$3, $c3
+	cgettype	$4, $c3
+	cmove	$c3, $c11
+	csd	$1, $zero, 0($c3)
+	csd	$4, $zero, 24($c3)
+	csd	$3, $zero, 16($c3)
+	csd	$2, $zero, 8($c3)
+	csetbounds	$c3, $c3, 32
+	ori	$1, $zero, 65495
+	candperm	$c13, $c3, $1
+	clcbi	$c3, %captab20(.L.str.13)($c1)
+	clcbi	$c12, %capcall20(printf)($c1)
+	csc	$c2, $zero, 48($c24)    # 16-byte Folded Spill
+	csd	$1, $zero, 40($c24)     # 8-byte Folded Spill
+	cjalr	$c12, $c17
+	nop
+	clc	$c1, $zero, 48($c24)    # 16-byte Folded Reload
+	clc	$c2, $zero, 0($c1)
+	cgetbase	$1, $c2
+	cgetlen	$3, $c2
+	cmove	$c2, $c11
+	csd	$1, $zero, 0($c2)
+	csd	$3, $zero, 8($c2)
+	clc	$c3, $zero, 128($c24)   # 16-byte Folded Reload
+	clcbi	$c12, %capcall20(printf)($c3)
+	csetbounds	$c2, $c2, 16
+	cld	$1, $zero, 40($c24)     # 8-byte Folded Reload
+	candperm	$c13, $c2, $1
+	clcbi	$c3, %captab20(.L.str.14)($c3)
+	csw	$2, $zero, 36($c24)     # 4-byte Folded Spill
+	cjalr	$c12, $c17
+	nop
+	b	.LBB4_25
+	nop
+.LBB4_25:                               # %do.end
+	clc	$c1, $zero, 128($c24)   # 16-byte Folded Reload
+	clcbi	$c2, %captab20(sandbox_A_datacap)($c1)
+	clc	$c3, $zero, 0($c2)
+	clcbi	$c4, %captab20(sandbox_A_sealcap)($c1)
+	clc	$c5, $zero, 0($c4)
+	cseal	$c3, $c3, $c5
+	csc	$c3, $zero, 0($c2)
+	clcbi	$c2, %captab20(sandbox_B_datacap)($c1)
+	clc	$c3, $zero, 0($c2)
 	clcbi	$c5, %captab20(sandbox_B_sealcap)($c1)
-	clc	$c8, $zero, 0($c5)
-	cseal	$c4, $c4, $c8
-	csc	$c4, $zero, 0($c6)
+	clc	$c6, $zero, 0($c5)
+	cseal	$c3, $c3, $c6
+	csc	$c3, $zero, 0($c2)
+	clcbi	$c3, %captab20(privateAp)($c1)
+	clc	$c6, $zero, 0($c3)
+	clc	$c7, $zero, 0($c4)
+	cseal	$c6, $c6, $c7
+	csc	$c6, $zero, 0($c3)
+	clc	$c6, $zero, 0($c3)
+	clc	$c4, $zero, 0($c4)
+	cunseal	$c4, $c6, $c4
+	csc	$c4, $zero, 0($c3)
+	clcbi	$c3, %captab20(privateBp)($c1)
 	clc	$c4, $zero, 0($c3)
-	clc	$c8, $zero, 0($c7)
-	cseal	$c4, $c4, $c8
+	clc	$c6, $zero, 0($c5)
+	cseal	$c4, $c4, $c6
 	csc	$c4, $zero, 0($c3)
 	clc	$c4, $zero, 0($c3)
-	clc	$c8, $zero, 0($c7)
-	cunseal	$c4, $c4, $c8
+	clc	$c6, $zero, 0($c5)
+	cunseal	$c4, $c4, $c6
 	csc	$c4, $zero, 0($c3)
-	clc	$c4, $zero, 0($c2)
-	clc	$c8, $zero, 0($c5)
-	cseal	$c4, $c4, $c8
-	csc	$c4, $zero, 0($c2)
-	clc	$c4, $zero, 0($c2)
-	clc	$c8, $zero, 0($c5)
-	cunseal	$c4, $c4, $c8
-	csc	$c4, $zero, 0($c2)
-	clc	$c2, $zero, 0($c6)
+	clc	$c3, $zero, 0($c2)
 	clc	$c4, $zero, 0($c5)
-	cunseal	$c2, $c2, $c4
-	csc	$c2, $zero, 0($c6)
-	clcbi	$c3, %captab20(.L.str.11)($c1)
+	cunseal	$c3, $c3, $c4
+	csc	$c3, $zero, 0($c2)
+	clcbi	$c3, %captab20(.L.str.15)($c1)
 	clcbi	$c12, %capcall20(printf)($c1)
 	cgetnull	$c13
 	cjalr	$c12, $c17
 	nop
 	cincoffset	$c11, $c24, $zero
-	clc	$c17, $zero, 112($c11)  # 16-byte Folded Reload
-	clc	$c24, $zero, 128($c11)  # 16-byte Folded Reload
-	cincoffset	$c11, $c11, 144
+	clc	$c17, $zero, 144($c11)  # 16-byte Folded Reload
+	clc	$c24, $zero, 160($c11)  # 16-byte Folded Reload
+	cincoffset	$c11, $c11, 176
 	cjr	$c17
 	nop
 	.set	at
@@ -593,62 +645,6 @@ cheritest_ccall_setup:                  # @cheritest_ccall_setup
 	.end	cheritest_ccall_setup
 .Lfunc_end4:
 	.size	cheritest_ccall_setup, .Lfunc_end4-cheritest_ccall_setup
-                                        # -- End function
-	.p2align	3               # -- Begin function datacap_create
-	.type	datacap_create,@function
-	.set	nomicromips
-	.set	nomips16
-	.ent	datacap_create
-datacap_create:                         # @datacap_create
-	.frame	$c24,112,$c17
-	.mask 	0x00000000,0
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	.set	noat
-# %bb.0:                                # %entry
-	cincoffset	$c11, $c11, -112
-	csc	$c24, $zero, 96($c11)   # 16-byte Folded Spill
-	csc	$c17, $zero, 80($c11)   # 16-byte Folded Spill
-	cincoffset	$c24, $c11, $zero
-	lui	$1, %hi(%neg(%captab_rel(datacap_create)))
-	daddiu	$1, $1, %lo(%neg(%captab_rel(datacap_create)))
-	cincoffset	$c26, $c12, $1
-	cmove	$c1, $c26
-	cincoffset	$c2, $c24, 64
-	csetbounds	$c2, $c2, 16
-	cincoffset	$c5, $c24, 48
-	csetbounds	$c5, $c5, 16
-	cincoffset	$c6, $c24, 32
-	csetbounds	$c6, $c6, 16
-	csc	$c3, $zero, 0($c2)
-	csc	$c4, $zero, 0($c5)
-	clcbi	$c3, %captab20(.L.str.16)($c1)
-	clcbi	$c12, %capcall20(printf)($c1)
-	cgetnull	$c13
-	csc	$c2, $zero, 16($c24)    # 16-byte Folded Spill
-	csc	$c6, $zero, 0($c24)     # 16-byte Folded Spill
-	cjalr	$c12, $c17
-	nop
-	clc	$c1, $zero, 16($c24)    # 16-byte Folded Reload
-	clc	$c2, $zero, 0($c1)
-	ori	$1, $zero, 33149
-	candperm	$c2, $c2, $1
-	clc	$c3, $zero, 0($c24)     # 16-byte Folded Reload
-	csc	$c2, $zero, 0($c3)
-	clc	$c3, $zero, 0($c3)
-	cincoffset	$c11, $c24, $zero
-	clc	$c17, $zero, 80($c11)   # 16-byte Folded Reload
-	clc	$c24, $zero, 96($c11)   # 16-byte Folded Reload
-	cincoffset	$c11, $c11, 112
-	cjr	$c17
-	nop
-	.set	at
-	.set	macro
-	.set	reorder
-	.end	datacap_create
-.Lfunc_end5:
-	.size	datacap_create, .Lfunc_end5-datacap_create
                                         # -- End function
 	.globl	test_sandboxA           # -- Begin function test_sandboxA
 	.p2align	3
@@ -709,8 +705,8 @@ test_sandboxA:                          # @test_sandboxA
 	.set	macro
 	.set	reorder
 	.end	test_sandboxA
-.Lfunc_end6:
-	.size	test_sandboxA, .Lfunc_end6-test_sandboxA
+.Lfunc_end5:
+	.size	test_sandboxA, .Lfunc_end5-test_sandboxA
                                         # -- End function
 	.globl	main                    # -- Begin function main
 	.p2align	3
@@ -738,7 +734,7 @@ main:                                   # @main
 	csetbounds	$c2, $c2, 4
 	addiu	$2, $zero, 0
 	csw	$zero, $zero, 0($c2)
-	clcbi	$c3, %captab20(.L.str.12)($c1)
+	clcbi	$c3, %captab20(.L.str.16)($c1)
 	clcbi	$c12, %capcall20(printf)($c1)
 	cgetnull	$c13
 	csc	$c1, $zero, 32($c24)    # 16-byte Folded Spill
@@ -756,7 +752,7 @@ main:                                   # @main
 	clcbi	$c3, %captab20(shared)($c1)
 	csc	$c3, $zero, 0($c2)
 	clcbi	$c12, %capcall20(printf)($c1)
-	clcbi	$c3, %captab20(.L.str.13)($c1)
+	clcbi	$c3, %captab20(.L.str.17)($c1)
 	cgetnull	$c13
 	csw	$2, $zero, 24($c24)     # 4-byte Folded Spill
 	cjalr	$c12, $c17
@@ -769,7 +765,7 @@ main:                                   # @main
 	nop
 	clc	$c1, $zero, 32($c24)    # 16-byte Folded Reload
 	clcbi	$c12, %capcall20(printf)($c1)
-	clcbi	$c3, %captab20(.L.str.14)($c1)
+	clcbi	$c3, %captab20(.L.str.18)($c1)
 	cgetnull	$c13
 	cjalr	$c12, $c17
 	nop
@@ -781,7 +777,7 @@ main:                                   # @main
 	nop
 	clc	$c1, $zero, 32($c24)    # 16-byte Folded Reload
 	clcbi	$c12, %capcall20(printf)($c1)
-	clcbi	$c3, %captab20(.L.str.15)($c1)
+	clcbi	$c3, %captab20(.L.str.19)($c1)
 	cgetnull	$c13
 	cjalr	$c12, $c17
 	nop
@@ -798,8 +794,8 @@ main:                                   # @main
 	.set	macro
 	.set	reorder
 	.end	main
-.Lfunc_end7:
-	.size	main, .Lfunc_end7-main
+.Lfunc_end6:
+	.size	main, .Lfunc_end6-main
                                         # -- End function
 	.type	privateAp,@object       # @privateAp
 	.comm	privateAp,16,16
@@ -880,53 +876,65 @@ main:                                   # @main
 	.type	sandbox_A_codecap,@object # @sandbox_A_codecap
 	.local	sandbox_A_codecap
 	.comm	sandbox_A_codecap,16,16
+	.type	.L.str.11,@object       # @.str.11
+.L.str.11:
+	.asciz	"\tcreating data cap (DDC)...\n"
+	.size	.L.str.11, 29
+
 	.type	privateA,@object        # @privateA
 	.local	privateA
 	.comm	privateA,64,64
 	.type	privateB,@object        # @privateB
 	.local	privateB
 	.comm	privateB,64,64
-	.type	privateDummy,@object    # @privateDummy
-	.local	privateDummy
-	.comm	privateDummy,4,64
 	.type	sandbox_A_datacap,@object # @sandbox_A_datacap
 	.local	sandbox_A_datacap
 	.comm	sandbox_A_datacap,16,16
 	.type	sandbox_B_datacap,@object # @sandbox_B_datacap
 	.local	sandbox_B_datacap
 	.comm	sandbox_B_datacap,16,16
-	.type	.L.str.11,@object       # @.str.11
-.L.str.11:
-	.asciz	"done."
-	.size	.L.str.11, 6
-
 	.type	.L.str.12,@object       # @.str.12
 .L.str.12:
+	.asciz	"\t data cap created as:\n\t"
+	.size	.L.str.12, 25
+
+	.type	.L.str.13,@object       # @.str.13
+.L.str.13:
+	.asciz	"tag %ju s %ju perms %08jx type %016jx\n"
+	.size	.L.str.13, 39
+
+	.type	.L.str.14,@object       # @.str.14
+.L.str.14:
+	.asciz	"\tbase %016jx length %016jx\n"
+	.size	.L.str.14, 28
+
+	.type	.L.str.15,@object       # @.str.15
+.L.str.15:
+	.asciz	"done."
+	.size	.L.str.15, 6
+
+	.type	.L.str.16,@object       # @.str.16
+.L.str.16:
 	.asciz	"hello world\n"
-	.size	.L.str.12, 13
+	.size	.L.str.16, 13
 
 	.type	shared,@object          # @shared
 	.local	shared
 	.comm	shared,64,64
-	.type	.L.str.13,@object       # @.str.13
-.L.str.13:
+	.type	.L.str.17,@object       # @.str.17
+.L.str.17:
 	.asciz	"cheritest setup\n"
-	.size	.L.str.13, 17
+	.size	.L.str.17, 17
 
-	.type	.L.str.14,@object       # @.str.14
-.L.str.14:
+	.type	.L.str.18,@object       # @.str.18
+.L.str.18:
 	.asciz	"now start testing...\n"
-	.size	.L.str.14, 22
+	.size	.L.str.18, 22
 
-	.type	.L.str.15,@object       # @.str.15
-.L.str.15:
+	.type	.L.str.19,@object       # @.str.19
+.L.str.19:
 	.asciz	"done test with sandboxA.\n"
-	.size	.L.str.15, 26
-
-	.type	.L.str.16,@object       # @.str.16
-.L.str.16:
-	.asciz	"\tpure cap...\n"
-	.size	.L.str.16, 14
+	.size	.L.str.19, 26
 
 
 	.ident	"clang version 9.0.0 (https://github.com/CTSRD-CHERI/llvm-project.git e914474cc8618f40fc08dd4f9a57808efcf965a6)"
@@ -938,7 +946,6 @@ main:                                   # @main
 	.addrsig_sym sysarch
 	.addrsig_sym __assert
 	.addrsig_sym libcheri_type_alloc
-	.addrsig_sym datacap_create
 	.addrsig_sym test_sandboxA
 	.addrsig_sym sandbox_invoke
 	.addrsig_sym cheritest_success
@@ -951,7 +958,6 @@ main:                                   # @main
 	.addrsig_sym sandbox_A_codecap
 	.addrsig_sym privateA
 	.addrsig_sym privateB
-	.addrsig_sym privateDummy
 	.addrsig_sym sandbox_A_datacap
 	.addrsig_sym sandbox_B_datacap
 	.addrsig_sym shared
