@@ -1,9 +1,9 @@
 /* reference file bin/cheritest/cheritest_sandbox.S */
 
 
-	.set noreorder	/* Preserve nops, allow instructions in b-d 
+    .set noreorder    /* Preserve nops, allow instructions in b-d 
 slots. */
-	.set noat	/* Don't use $at automatically. */
+    .set noat    /* Don't use $at automatically. */
 
 /*
  * Landing code within a sandbox.  Various versions with varying levels 
@@ -11,23 +11,23 @@ of
  * technical and moral complexity.
  */
 
-	/*
-	 * Sandbox code that simply performs creturn immediately.
-	 * Position-independent, no memory access.
-	 */
-	.text
-	.type sandbox_creturn,@function
-	.global sandbox_creturn
-	.ent sandbox_creturn
+    /*
+     * Sandbox code that simply performs creturn immediately.
+     * Position-independent, no memory access.
+     */
+    .text
+    .type sandbox_creturn,@function
+    .global sandbox_creturn
+    .ent sandbox_creturn
 sandbox_creturn:
 
-	creturn
-	.end sandbox_creturn
+    creturn
+    .end sandbox_creturn
 
-	.global sandbox_creturn_end
+    .global sandbox_creturn_end
 sandbox_creturn_end:
-	.size sandbox_creturn, sandbox_creturn_end - sandbox_creturn
-	.size sandbox_creturn_end, 0
+    .size sandbox_creturn, sandbox_creturn_end - sandbox_creturn
+    .size sandbox_creturn_end, 0
 
 
 /* reference file: lib/libcheri/mips/libcheri_invoke_cabi.S */
@@ -50,32 +50,32 @@ sandbox_creturn_end:
 
 #define LIBCHERI_INVOKE_FRAME_SIZE (11*CHERICAP_SIZE + 96)
 
-	/*
-	 * baremetal code to invoke a sandbox, without compiler support
-	 */
-	.text
-	.type sandbox_invoke,@function
-	.global sandbox_invoke
-	.ent sandbox_invoke
+    /*
+     * baremetal code to invoke a sandbox, without compiler support
+     */
+    .text
+    .type sandbox_invoke,@function
+    .global sandbox_invoke
+    .ent sandbox_invoke
 sandbox_invoke:
-	.frame _FRAME_STACK_REG,LIBCHERI_INVOKE_FRAME_SIZE,_FRAME_RETURN_REG;
+    .frame _FRAME_STACK_REG,LIBCHERI_INVOKE_FRAME_SIZE,_FRAME_RETURN_REG;
 
         /* LLM: no clear/restore the registers, 
-	 * allows it behaves just like a hardware jump but additional hardware checks
+     * allows it behaves just like a hardware jump but additional hardware checks
          * on object types of code and data capabilities;
-	 * ideally, all code should be called in this way with its data/code capability 
-	 * specified.
-	 */
-	.set push;
-	.set noreorder;
-        cgetoffset $t9, $c1;
-	ccall $c1, $c2, 1;
-  	nop;
-	.set pop;
-	.end sandbox_invoke
+     * ideally, all code should be called in this way with its data/code capability 
+     * specified.
+     */
+    .set push;
+    .set noreorder;
+    cgetoffset $t9, $c1;
+    ccall $c1, $c2, 1;
+    nop;
+    .set pop;
+    .end sandbox_invoke
 
-	.global sandbox_invoke_end
+    .global sandbox_invoke_end
 sandbox_invoke_end:
-	.size sandbox_invoke, sandbox_invoke_end - sandbox_invoke
-	.size sandbox_invoke_end, 0
+    .size sandbox_invoke, sandbox_invoke_end - sandbox_invoke
+    .size sandbox_invoke_end, 0
 
