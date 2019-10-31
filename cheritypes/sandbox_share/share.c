@@ -36,7 +36,7 @@
 
 void sandboxA_print(){
 
-#if 0
+#if 1
 
 /* IDC $c26 (0x0 - 0x0000008000000000) does not work for 
           stack pointer (0x7ffffefaa0) 
