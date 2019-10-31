@@ -36,7 +36,7 @@
 
 void sandboxA_print(){
 
-#if 1
+#if 0
 __asm__ __volatile__ (
   "CSetDefault $c26\n\t"
   );

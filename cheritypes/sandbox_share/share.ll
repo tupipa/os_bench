@@ -41,7 +41,6 @@ target triple = "cheri-unknown-freebsd"
 ; Function Attrs: noinline nounwind optnone
 define chericcallcce void @sandboxA_print() #0 {
 entry:
-  call void asm sideeffect "CSetDefault $$c26\0A\09", "~{$1}"() #4, !srcloc !3
   %0 = load %struct.sandbox_data addrspace(200)*, %struct.sandbox_data addrspace(200)** @privateAp, align 16
   %data = getelementptr inbounds %struct.sandbox_data, %struct.sandbox_data addrspace(200)* %0, i32 0, i32 0
   store i32 1000, i32 addrspace(200)* %data, align 32
@@ -57,7 +56,7 @@ entry:
 ; Function Attrs: noinline nounwind optnone
 define void @sandboxA_subprint() #0 {
 entry:
-  call void asm sideeffect "CSetDefault $$c26\0A\09", "~{$1}"() #4, !srcloc !4
+  call void asm sideeffect "CSetDefault $$c26\0A\09", "~{$1}"() #4, !srcloc !3
   %0 = load %struct.sandbox_data addrspace(200)*, %struct.sandbox_data addrspace(200)** @privateAp, align 16
   %data = getelementptr inbounds %struct.sandbox_data, %struct.sandbox_data addrspace(200)* %0, i32 0, i32 0
   store i32 1111, i32 addrspace(200)* %data, align 32
@@ -413,5 +412,4 @@ attributes #5 = { noreturn }
 !0 = !{i32 1, !"wchar_size", i32 4}
 !1 = !{i32 7, !"PIC Level", i32 1}
 !2 = !{!"clang version 9.0.0 (https://github.com/CTSRD-CHERI/llvm-project.git e914474cc8618f40fc08dd4f9a57808efcf965a6)"}
-!3 = !{i32 785, i32 804}
-!4 = !{i32 1795, i32 1814}
+!3 = !{i32 1795, i32 1814}

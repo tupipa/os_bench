@@ -25,30 +25,18 @@ sandboxA_print:                         # @sandboxA_print
 	lui	$1, %hi(%neg(%gp_rel(sandboxA_print)))
 	daddu	$1, $1, $25
 	daddiu	$1, $1, %lo(%neg(%gp_rel(sandboxA_print)))
-	sd	$1, 0($fp)              # 8-byte Folded Spill
-	#APP
-	.set	push
-	.set	at
-	.set	macro
-	.set	reorder
-
-	cwritehwr	$c26, $chwr_ddc
-
-
-	.set	pop
-	#NO_APP
-	ld	$2, 0($fp)              # 8-byte Folded Reload
-	ld	$3, %got_disp(privateAp)($2)
-	clc	$c1, $3, 0($ddc)
-	addiu	$1, $zero, 1000
-	csw	$1, $zero, 0($c1)
-	ld	$4, %got_disp(privateBp)($2)
-	clc	$c1, $4, 0($ddc)
-	clw	$1, $zero, 0($c1)
-	clc	$c1, $3, 0($ddc)
-	csw	$1, $zero, 0($c1)
-	daddiu	$3, $zero, 0
-	move	$2, $3
+	ld	$2, %got_disp(privateAp)($1)
+	clc	$c1, $2, 0($ddc)
+	addiu	$3, $zero, 1000
+	csw	$3, $zero, 0($c1)
+	ld	$1, %got_disp(privateBp)($1)
+	clc	$c1, $1, 0($ddc)
+	clw	$3, $zero, 0($c1)
+	clc	$c1, $2, 0($ddc)
+	csw	$3, $zero, 0($c1)
+	daddiu	$1, $zero, 0
+	move	$2, $1
+	move	$3, $1
 	cgetnull	$c3
 	move	$sp, $fp
 	ld	$fp, 8($sp)             # 8-byte Folded Reload
