@@ -446,7 +446,7 @@ Disassembly of section .text:
    2068c: dc 22 80 50                  	ld	$2, -32688($1)
    20690: 64 47 08 3a                  	daddiu	$7, $2, 2106
    20694: dc 39 81 a8                  	ld	$25, -32344($1)
-   20698: 64 06 00 b8                  	daddiu	$6, $zero, 184
+   20698: 64 06 00 8b                  	daddiu	$6, $zero, 139
    2069c: 00 20 e0 25                  	move	$gp, $1
    206a0: 03 20 f8 09                  	jalr	$25
    206a4: 00 00 00 00                  	nop
@@ -470,7 +470,7 @@ Disassembly of section .text:
    206ec: dc 22 80 50                  	ld	$2, -32688($1)
    206f0: 64 47 08 ca                  	daddiu	$7, $2, 2250
    206f4: dc 39 81 a8                  	ld	$25, -32344($1)
-   206f8: 64 06 00 b9                  	daddiu	$6, $zero, 185
+   206f8: 64 06 00 8c                  	daddiu	$6, $zero, 140
    206fc: 00 20 e0 25                  	move	$gp, $1
    20700: 03 20 f8 09                  	jalr	$25
    20704: 00 00 00 00                  	nop
@@ -493,7 +493,7 @@ Disassembly of section .text:
    20748: dc 22 80 50                  	ld	$2, -32688($1)
    2074c: 64 47 07 c3                  	daddiu	$7, $2, 1987
    20750: dc 39 81 a8                  	ld	$25, -32344($1)
-   20754: 64 06 00 ba                  	daddiu	$6, $zero, 186
+   20754: 64 06 00 8d                  	daddiu	$6, $zero, 141
    20758: 00 20 e0 25                  	move	$gp, $1
    2075c: 03 20 f8 09                  	jalr	$25
    20760: 00 00 00 00                  	nop
@@ -552,7 +552,7 @@ Disassembly of section .text:
    20834: dc 22 80 50                  	ld	$2, -32688($1)
    20838: 64 47 07 72                  	daddiu	$7, $2, 1906
    2083c: dc 39 81 a8                  	ld	$25, -32344($1)
-   20840: 64 06 00 c5                  	daddiu	$6, $zero, 197
+   20840: 64 06 00 98                  	daddiu	$6, $zero, 152
    20844: 00 20 e0 25                  	move	$gp, $1
    20848: 03 20 f8 09                  	jalr	$25
    2084c: 00 00 00 00                  	nop
@@ -576,7 +576,7 @@ Disassembly of section .text:
    20894: dc 22 80 50                  	ld	$2, -32688($1)
    20898: 64 47 09 0b                  	daddiu	$7, $2, 2315
    2089c: dc 39 81 a8                  	ld	$25, -32344($1)
-   208a0: 64 06 00 c6                  	daddiu	$6, $zero, 198
+   208a0: 64 06 00 99                  	daddiu	$6, $zero, 153
    208a4: 00 20 e0 25                  	move	$gp, $1
    208a8: 03 20 f8 09                  	jalr	$25
    208ac: 00 00 00 00                  	nop

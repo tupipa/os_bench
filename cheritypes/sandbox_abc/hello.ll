@@ -53,6 +53,22 @@ entry:
 }
 
 ; Function Attrs: noinline nounwind optnone
+define void @sandboxA_subprint() #0 {
+entry:
+  call void asm sideeffect "CSetDefault $$c26\0A\09", "~{$1}"() #4, !srcloc !4
+  %0 = load %struct.sandbox_data addrspace(200)*, %struct.sandbox_data addrspace(200)** @privateAp, align 16
+  %data = getelementptr inbounds %struct.sandbox_data, %struct.sandbox_data addrspace(200)* %0, i32 0, i32 0
+  store i32 1111, i32 addrspace(200)* %data, align 32
+  %1 = load %struct.sandbox_data addrspace(200)*, %struct.sandbox_data addrspace(200)** @privateBp, align 16
+  %data1 = getelementptr inbounds %struct.sandbox_data, %struct.sandbox_data addrspace(200)* %1, i32 0, i32 0
+  %2 = load i32, i32 addrspace(200)* %data1, align 32
+  %3 = load %struct.sandbox_data addrspace(200)*, %struct.sandbox_data addrspace(200)** @privateAp, align 16
+  %data2 = getelementptr inbounds %struct.sandbox_data, %struct.sandbox_data addrspace(200)* %3, i32 0, i32 0
+  store i32 %2, i32 addrspace(200)* %data2, align 32
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone
 define void @sandboxB_print() #0 {
 entry:
   %call = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([23 x i8], [23 x i8]* @.str, i64 0, i64 0))
@@ -80,6 +96,31 @@ entry:
 declare signext i32 @printf(i8*, ...) #1
 
 ; Function Attrs: noinline nounwind optnone
+define void @sandboxB_subprint() #0 {
+entry:
+  %call = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([23 x i8], [23 x i8]* @.str, i64 0, i64 0))
+  %0 = load %struct.sandbox_data addrspace(200)*, %struct.sandbox_data addrspace(200)** @privateBp, align 16
+  %data = getelementptr inbounds %struct.sandbox_data, %struct.sandbox_data addrspace(200)* %0, i32 0, i32 0
+  store i32 2000, i32 addrspace(200)* %data, align 32
+  %1 = load %struct.sandbox_data addrspace(200)*, %struct.sandbox_data addrspace(200)** @privateAp, align 16
+  %data1 = getelementptr inbounds %struct.sandbox_data, %struct.sandbox_data addrspace(200)* %1, i32 0, i32 0
+  store i32 2000, i32 addrspace(200)* %data1, align 32
+  %2 = load %struct.sandbox_data addrspace(200)*, %struct.sandbox_data addrspace(200)** @sharedp, align 16
+  %data2 = getelementptr inbounds %struct.sandbox_data, %struct.sandbox_data addrspace(200)* %2, i32 0, i32 0
+  %3 = load i32, i32 addrspace(200)* %data2, align 32
+  %call3 = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.1, i64 0, i64 0), i32 signext %3)
+  %4 = load %struct.sandbox_data addrspace(200)*, %struct.sandbox_data addrspace(200)** @privateAp, align 16
+  %data4 = getelementptr inbounds %struct.sandbox_data, %struct.sandbox_data addrspace(200)* %4, i32 0, i32 0
+  %5 = load i32, i32 addrspace(200)* %data4, align 32
+  %call5 = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([20 x i8], [20 x i8]* @.str.2, i64 0, i64 0), i32 signext %5)
+  %6 = load %struct.sandbox_data addrspace(200)*, %struct.sandbox_data addrspace(200)** @privateBp, align 16
+  %data6 = getelementptr inbounds %struct.sandbox_data, %struct.sandbox_data addrspace(200)* %6, i32 0, i32 0
+  %7 = load i32, i32 addrspace(200)* %data6, align 32
+  %call7 = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([20 x i8], [20 x i8]* @.str.3, i64 0, i64 0), i32 signext %7)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone
 define void @cheritest_ccall_setup() #0 {
 entry:
   %call = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.4, i64 0, i64 0))
@@ -102,7 +143,7 @@ cond.true:                                        ; preds = %if.end
   br label %cond.end
 
 cond.false:                                       ; preds = %if.end
-  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 139, i8* getelementptr inbounds ([63 x i8], [63 x i8]* @.str.6, i64 0, i64 0)) #5
+  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 205, i8* getelementptr inbounds ([63 x i8], [63 x i8]* @.str.6, i64 0, i64 0)) #5
   unreachable
 
 2:                                                ; No predecessors!
@@ -119,7 +160,7 @@ cond.true5:                                       ; preds = %cond.end
   br label %cond.end7
 
 cond.false6:                                      ; preds = %cond.end
-  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 140, i8* getelementptr inbounds ([65 x i8], [65 x i8]* @.str.7, i64 0, i64 0)) #5
+  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 206, i8* getelementptr inbounds ([65 x i8], [65 x i8]* @.str.7, i64 0, i64 0)) #5
   unreachable
 
 5:                                                ; No predecessors!
@@ -135,7 +176,7 @@ cond.true9:                                       ; preds = %cond.end7
   br label %cond.end11
 
 cond.false10:                                     ; preds = %cond.end7
-  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 141, i8* getelementptr inbounds ([41 x i8], [41 x i8]* @.str.8, i64 0, i64 0)) #5
+  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 207, i8* getelementptr inbounds ([41 x i8], [41 x i8]* @.str.8, i64 0, i64 0)) #5
   unreachable
 
 8:                                                ; No predecessors!
@@ -162,7 +203,7 @@ cond.true18:                                      ; preds = %cond.end11
   br label %cond.end20
 
 cond.false19:                                     ; preds = %cond.end11
-  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 152, i8* getelementptr inbounds ([61 x i8], [61 x i8]* @.str.9, i64 0, i64 0)) #5
+  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 218, i8* getelementptr inbounds ([61 x i8], [61 x i8]* @.str.9, i64 0, i64 0)) #5
   unreachable
 
 12:                                               ; No predecessors!
@@ -179,7 +220,7 @@ cond.true23:                                      ; preds = %cond.end20
   br label %cond.end25
 
 cond.false24:                                     ; preds = %cond.end20
-  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 153, i8* getelementptr inbounds ([61 x i8], [61 x i8]* @.str.10, i64 0, i64 0)) #5
+  call void @__assert(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @__func__.cheritest_ccall_setup, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.5, i64 0, i64 0), i32 signext 219, i8* getelementptr inbounds ([61 x i8], [61 x i8]* @.str.10, i64 0, i64 0)) #5
   unreachable
 
 15:                                               ; No predecessors!
@@ -337,3 +378,4 @@ attributes #5 = { noreturn }
 !1 = !{i32 7, !"PIC Level", i32 1}
 !2 = !{!"clang version 9.0.0 (https://github.com/CTSRD-CHERI/llvm-project.git e914474cc8618f40fc08dd4f9a57808efcf965a6)"}
 !3 = !{i32 632, i32 651}
+!4 = !{i32 1642, i32 1661}
