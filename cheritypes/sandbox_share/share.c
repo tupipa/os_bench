@@ -37,12 +37,16 @@
 void sandboxA_print(){
 
 #if 0
+
+/* IDC $c26 (0x0 - 0x0000008000000000) does not work for 
+          stack pointer (0x7ffffefaa0) 
+*/
 __asm__ __volatile__ (
   "CSetDefault $c26\n\t"
   );
 #endif
 
-#if 0 // DEBUG > 0
+#if 1 // DEBUG > 0
 
   char a[32] __attribute__((aligned(32))) = "hello from sandbox A";
   printf("%s\n", a);
