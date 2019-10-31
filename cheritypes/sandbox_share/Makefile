@@ -1,4 +1,3 @@
-
 CHERI_OUTPUT = /root/cheri/output
 CHERI_SRC = /root/cheri/cheribsd
 SDK_DIR = $(CHERI_OUTPUT)/sdk
@@ -35,13 +34,13 @@ OPTS_PURE = $(OPT_SYSROOT_PURE) $(OPTS) -mabi=purecap
 #OPTS_PURE = $(OPTS)
 OPTS_HYB = $(OPT_SYSROOT_HYB) $(OPTS)
 
-SRC = util.c sandboxes.S share.c
+TARGET_BIN = share
+
+SRC = util.c sandboxes.S $(TARGET_BIN).c
 
 SSH_PORT_PURE ?= 8023
 SSH_PORT_HYB ?= 8022
 SSH_SERVER = root@localhost
-
-TARGET_BIN = share
 
 all: hyb
 

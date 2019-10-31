@@ -16,6 +16,8 @@
 
 */
 
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -25,48 +27,14 @@
 #include <cheri/libcheri_type.h>  // libcheri type alloc()
 #include <cheri/libcheri_invoke.h>  // libcheri invoke prototype
 #include "cheritest.h"
+#include "util.h"
+#include "hello.h"
 
 #include <machine/sysarch.h>
 
 #define DEBUG 0
 
-extern void    sandbox_creturn(void);
-extern void    sandbox_creturn_end;
-//extern void __attribute__ ((cheri_ccallee)) sandbox_invoke(void * __capability c1, void* __capability c2);
-extern void __attribute__ ((cheri_ccall)) sandbox_invoke(void * __capability c1, void* __capability c2);
-//extern void sandbox_invoke(void * __capability c1, void* __capability c2);
-
-
-static void * __capability libcheri_sealing_root;
-
-static void *__capability sandbox_A_sealcap;
-static void *__capability sandbox_A_codecap;
-static struct sandbox_data *__capability sandbox_A_datacap;
-
-static void *__capability sandbox_B_sealcap;
-static void *__capability sandbox_B_codecap;
-static struct sandbox_data *__capability sandbox_B_datacap;
-
-static void *__capability sandbox_shared_datacap;
-
-struct sandbox_data{
-  int data __attribute__ ((aligned(32)));
-  char name[32] __attribute__ ((aligned(32)));
-};
-
-static struct sandbox_data shared __attribute__ ((aligned(64)));
-static struct sandbox_data privateA __attribute__ ((aligned(64)));
-static struct sandbox_data privateB __attribute__ ((aligned(64)));
-static int privateDummy __attribute__ ((aligned(64)));
-
-// bare capability without sealing/unsealing
-struct sandbox_data * __capability sharedp;
-struct sandbox_data * __capability privateAp;
-struct sandbox_data * __capability privateBp;
-
-void __attribute__((cheri_ccallee)) sandboxA_print(){
-//void __attribute__((cheri_ccall)) sandboxA_print(){
-//void sandboxA_print(){
+void sandboxA_print(){
 
 #if 1
 __asm__ __volatile__ (
@@ -79,23 +47,12 @@ __asm__ __volatile__ (
   char a[32] __attribute__((aligned(32))) = "hello from sandbox A";
   printf("%s\n", a);
 
-  printf("\nthe PCC is:\n\t");
-  CHERI_CAP_PRINT(cheri_getpcc());
-  printf("\nthe IDC is:\n");
-  CHERI_CAP_PRINT(cheri_getidc());
-  printf("\nthe DDC is:\n");
-  CHERI_CAP_PRINT(cheri_getdefault());
+  PRINT_PCC_IDC_DDC;
 
   printf("\nthe privateAp is:\n\t");
   CHERI_CAP_PRINT(privateAp);
   printf("\nthe sandbox_A_datacap is:\n\t");
   CHERI_CAP_PRINT(sandbox_A_datacap);
-
-  sleep(1);
-
-  //strcpy(sandbox_A_datacap->name, "my name is A"); // sandbox_A_datacap is sealed
-  strcpy(privateAp->name, "my name is A");
-  printf("A private name: %s\n", privateAp->name);
 
   sleep(1);
 
@@ -130,7 +87,73 @@ __asm__ __volatile__ (
 
 }
 
+
+void sandboxA_subprint(){
+
+#if 1
+__asm__ __volatile__ (
+  "CSetDefault $c26\n\t"
+  );
+#endif
+
+#if 0 // DEBUG > 0
+
+  char a[32] __attribute__((aligned(32))) = "hello from sandbox A";
+  printf("%s\n", a);
+
+  PRINT_PCC_IDC_DDC;
+
+  printf("\nthe privateAp is:\n\t");
+  CHERI_CAP_PRINT(privateAp);
+  printf("\nthe sandbox_A_datacap is:\n\t");
+  CHERI_CAP_PRINT(sandbox_A_datacap);
+
+  sleep(1);
+
+#endif // DEBUG > 0
+
+  privateAp->data = 1111;
+
+#if DEBUG > 0
+
+  sleep(1);
+  printf("\nthe privateBp is:\n\t");
+  CHERI_CAP_PRINT(privateBp);
+  printf("\nthe sandbox_B_datacapis:\n\t");
+  CHERI_CAP_PRINT(sandbox_B_datacap);
+
+  printf("going to overwrite private B data\n");
+#endif // DEBUG > 0
+
+  // read from sandbox B
+  privateAp -> data = privateBp -> data;
+
+  // write to sandbox B
+  //sandbox_B_datacap -> data = 1000;
+  //privateBp -> data = 5000;
+
+#if DEBUG > 0
+  printf("B private data: %d\n", sandbox_B_datacap->data);
+  //printf("shared data: %d\n", sharedp->data);
+#endif // DEBUG > 0
+
+  //sandboxA_end:
+
+}
+
+
 void sandboxB_print(){
+
+  printf("printing in sandbox B\n");
+  privateBp->data = 2000;
+  privateAp->data = 2000;
+  printf("shared data: %d\n", sharedp->data);
+  printf("A private data: %d\n", privateAp->data); 
+  printf("B private data: %d\n", privateBp->data);
+  //sandboxB_end:
+}
+
+void sandboxB_subprint(){
 
   printf("printing in sandbox B\n");
   privateBp->data = 2000;
@@ -150,8 +173,9 @@ datacap_create(void *sandbox_base, void *sandbox_end)
     //printf("creating data cap...\n");
 
 #ifdef __CHERI_PURE_CAPABILITY__
-    printf("\tpure cap...\n");
+    printf("\tpure cap...\n\t sandbox_base: \n\t");
     (void)sandbox_end;
+    CHERI_CAP_PRINT(sandbox_base);
     datacap = cheri_andperm(sandbox_base,
         CHERI_PERM_GLOBAL | CHERI_PERM_LOAD | CHERI_PERM_STORE |
         CHERI_PERM_LOAD_CAP | CHERI_PERM_STORE_CAP |
@@ -179,7 +203,7 @@ cheritest_ccall_setup(void)
 
     printf("begin.\n");
 
-/** sandbox A **/
+/** sandbox A and B **/
 
 //#ifdef __CHERI_PURE_CAPABILITY__
 #if 1
@@ -201,22 +225,17 @@ cheritest_ccall_setup(void)
     assert((cheri_getperm(sandbox_A_sealcap) & CHERI_PERM_UNSEAL ) != 0);
     assert((cheri_getperm(sandbox_B_sealcap) & CHERI_PERM_UNSEAL ) != 0);
 
-    //printf("\t A seal cap created as:\n\t");
-    //CHERI_CAP_PRINT(sandbox_A_sealcap);
-    //printf("\t B seal cap created as:\n\t");
-    //CHERI_CAP_PRINT(sandbox_B_sealcap);
-#if 0
-    // add perm unseal cap
-    sandbox_A_sealcap = cheri_andperm(sandbox_A_sealcap, 
-            cheri_getperm(sandbox_A_sealcap) | CHERI_PERM_SEAL | CHERI_PERM_UNSEAL); // do nothing, since andperm is to reduce perms.
-    sandbox_B_sealcap = cheri_andperm(sandbox_B_sealcap,
-            cheri_getperm(sandbox_B_sealcap) | CHERI_PERM_UNSEAL);
-#endif 
+#if DEBUG > 0 
+    printf("\t A seal cap created as:\n\t");
+    CHERI_CAP_PRINT(sandbox_A_sealcap);
+    printf("\t B seal cap created as:\n\t");
+    CHERI_CAP_PRINT(sandbox_B_sealcap);
 
-    //printf("\t A seal cap update with PERM_UNSEAL:\n\t");
-    //CHERI_CAP_PRINT(sandbox_A_sealcap);
-    //printf("\t B seal cap update with PERM_UNSEAL:\n\t");
-    //CHERI_CAP_PRINT(sandbox_B_sealcap);
+    printf("\t A seal cap update with PERM_UNSEAL:\n\t");
+    CHERI_CAP_PRINT(sandbox_A_sealcap);
+    printf("\t B seal cap update with PERM_UNSEAL:\n\t");
+    CHERI_CAP_PRINT(sandbox_B_sealcap);
+#endif // DEBUG
 
     sandbox_A_codecap = cheri_getpcc();
     sandbox_A_codecap = cheri_setaddress(sandbox_A_codecap, (vaddr_t)&sandboxA_print);
@@ -228,19 +247,25 @@ cheritest_ccall_setup(void)
     //CHERI_CAP_PRINT(sandbox_A_codecap);
 
 
-#ifdef __CHERI_PURE_CAPABILITY__
+#if 0
+// #ifdef __CHERI_PURE_CAPABILITY__
     //    printf("\tcreating pure data cap...\n");
     //sandbox_A_datacap = cheri_getidc();
     privateAp = datacap_create(&privateA, &privateB);
     privateBp = datacap_create(&privateB, &privateDummy);
     sandbox_A_datacap = privateAp;
     sandbox_B_datacap = privateBp;
+#endif 
 
-#else
-    printf("\tcreating hybrid data cap (DDC)...\n");
-    privateAp = cheri_getdefault();
+#if 1
+    printf("\tcreating data cap (IDC)...\n");
+    CHERI_CAP_PRINT(cheri_getidc());
+    // privateAp = cheri_getdefault();
+    privateAp = cheri_getidc();
     privateAp = cheri_setaddress(privateAp, (vaddr_t)&privateA);
-    privateBp = cheri_getdefault();
+
+    // privateBp = cheri_getdefault();
+    privateBp = cheri_getidc();
     privateBp = cheri_setaddress(privateBp, (vaddr_t)&privateB);
     //printf("\tcreating hybrid data cap...\n");
     //privateAp = datacap_create(&privateA, &privateB);
@@ -250,8 +275,8 @@ cheritest_ccall_setup(void)
 
 #endif // __CHERI_PURE_CAPABILITY__
 
-    //printf("\t data cap created as:\n\t");
-    //CHERI_CAP_PRINT(sandbox_A_datacap);
+    // printf("\t data cap created as:\n\t");
+    // CHERI_CAP_PRINT(sandbox_A_datacap);
 
     sandbox_A_datacap = cheri_seal(sandbox_A_datacap, sandbox_A_sealcap);
     sandbox_B_datacap = cheri_seal(sandbox_B_datacap, sandbox_B_sealcap);
@@ -326,4 +351,5 @@ int main(void){
  return 0;
 
 }
+
 
