@@ -1,6 +1,13 @@
+TARGET_BIN = pass_test
+PASS_NAME = privilegeDataTrack
+
 CHERI_OUTPUT = /root/cheri/output
 CHERI_SRC = /root/cheri/cheribsd
 SDK_DIR = $(CHERI_OUTPUT)/sdk
+
+LLVM_BUILD_DIR = /root/cheri/build/llvm-project-build
+PASS_LIB_SO = $(LLVM_BUILD_DIR)/lib/LLVMPrivilegeDataTrack.so
+
 
 CHERIBSD_PURE_ROOT256 = $(CHERI_OUTPUT)/rootfs-purecap256
 CHERIBSD_PURE_ROOT128 = $(CHERI_OUTPUT)/rootfs-purecap128
@@ -10,6 +17,7 @@ CHERIBSD_HYB_ROOT128 = $(CHERI_OUTPUT)/rootfs128
 CLANG = $(SDK_DIR)/bin/clang
 CXX = $(SDK_DIR)/bin/clang++
 OBJDUMP = $(SDK_DIR)/bin/cheri-unknown-freebsd-objdump
+OPT = $(SDK_DIR)/bin/opt
 
 SYSROOT_PURE = $(CHERIBSD_PURE_ROOT128)
 SYSROOT_HYB = $(CHERIBSD_HYB_ROOT128)
@@ -34,20 +42,24 @@ OPTS_PURE = $(OPT_SYSROOT_PURE) $(OPTS) -mabi=purecap
 #OPTS_PURE = $(OPTS)
 OPTS_HYB = $(OPT_SYSROOT_HYB) $(OPTS)
 
-TARGET_BIN = pass_test
 
-SRC = util.c sandboxes.S $(TARGET_BIN).c
+
+#SRC = util.c sandboxes.S $(TARGET_BIN).c
+SRC = $(TARGET_BIN).c
 
 SSH_PORT_PURE ?= 8023
 SSH_PORT_HYB ?= 8022
 SSH_SERVER = root@localhost
 
-all: hyb
+all: opt
 
 pure: compile-pure disas-pure send-pure
 
 hyb: compile-hyb disas-hyb send-hyb
 
+
+opt: compile-hyb
+	$(OPT) -load $(PASS_LIB_SO) -$(PASS_NAME) < $(TARGET_BIN).ll > /dev/null
 
 compile-pure: $(SRC) asm-pure
 	$(CLANG) -v $(OPTS_PURE) $(SRC) -o $(TARGET_BIN).exe
