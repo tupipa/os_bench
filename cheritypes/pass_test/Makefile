@@ -1,5 +1,5 @@
 TARGET_BIN = pass_test
-PASS_NAME = privilegeDataTrack
+PASS_NAME = privilegeDataTrack2
 
 CHERI_OUTPUT = /root/cheri/output
 CHERI_SRC = /root/cheri/cheribsd
@@ -23,6 +23,9 @@ SYSROOT_PURE = $(CHERIBSD_PURE_ROOT128)
 SYSROOT_HYB = $(CHERIBSD_HYB_ROOT128)
 #SYSROOT_HYB = $(CHERIBSD_HYB_ROOT256)
 
+##########################################################
+# Compile options for PURE and HYB mode
+
 OPT_SYSROOT_PURE = --sysroot=$(SYSROOT_PURE)
 OPT_SYSROOT_HYB = --sysroot=$(SYSROOT_HYB)
 
@@ -34,6 +37,7 @@ OPT_LIBS = -lcheri
 OPTS = $(OPT_TOOLCHAIN) $(OPT_TARGET) 
 OPTS += $(OPT_INC)
 OPTS += $(OPT_LIBS)
+OPTS += -Xclang -load -Xclang $(PASS_LIB_SO)
 
 #OPT_COMPILE = -Wl,-z,notext -fPIC
 #OPTS += $(OPT_COMPILE)
@@ -59,7 +63,7 @@ hyb: compile-hyb disas-hyb send-hyb
 
 
 opt: compile-hyb
-	$(OPT) -load $(PASS_LIB_SO) -$(PASS_NAME) < $(TARGET_BIN).ll > /dev/null
+	$(OPT) -load $(PASS_LIB_SO) -$(PASS_NAME) < $(TARGET_BIN).ll > $(TARGET_BIN)-out.bc
 
 compile-pure: $(SRC) asm-pure
 	$(CLANG) -v $(OPTS_PURE) $(SRC) -o $(TARGET_BIN).exe
