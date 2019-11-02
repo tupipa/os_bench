@@ -34,7 +34,7 @@ thread_t thread01 = {01, 0 };
 pcb_t pcb01 = {0,0,0};
 
 
-void init_struct(){
+__attribute__((noinline)) void init_struct(){
 
     pcb01.pcb_td1 = &thread01;
 
@@ -68,6 +68,6 @@ int main(void){
     init_struct();
 
     use_struct();
-    
+
 }
 
