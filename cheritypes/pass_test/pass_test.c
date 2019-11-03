@@ -33,7 +33,7 @@ struct __attribute__((packed)) pcb {
     struct thread *pcb_td1;
     struct thread *pcb_td2;
     int pcb_int;
-};
+} __attribute__((aligned(2)));
 
 __attribute__((privilege_level(0))) thread_t thread01 = {01, 0 };
 
