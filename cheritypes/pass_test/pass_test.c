@@ -39,6 +39,8 @@ __attribute__((privilege_level(0))) thread_t thread01 = {01, 0 };
 
 PRIV_DATA pcb_t pcb01 = {0,0,0};
 
+const pcb_t pcb03 = {&thread01,&thread01,111};
+
 
 PRIV CHERI_CALLEE void init_struct(){
 
@@ -56,14 +58,13 @@ PRIV CHERI_CALLEE void init_struct(){
 
 }
 
-PRIV_FUNC void use_struct(){
+PRIV_FUNC void use_struct ( pcb_t * pcb ) {
 
-
-    printf("the pcb 01 struct contains 2 thread structs: \n");
+    printf("the pcb struct contains 2 thread structs: \n");
     printf("the first thread struct: \n");
-    printf("\tthread addr: 0x%p \n", pcb01.pcb_td1 );
-    printf("\ttd_int: %d \n", pcb01.pcb_td1 -> td_int);
-    printf("\tpcb addr: 0x%p \n", pcb01.pcb_td1 -> td_pcb);
+    printf("\tthread addr: 0x%p \n", pcb->pcb_td1 );
+    printf("\ttd_int: %d \n", pcb->pcb_td1 -> td_int);
+    printf("\tpcb addr: 0x%p \n", pcb->pcb_td1 -> td_pcb);
 
 }
 
@@ -73,7 +74,8 @@ int main(void){
 
     init_struct();
 
-    use_struct();
+    use_struct(&pcb01);
+    use_struct(&pcb03);
 
 }
 

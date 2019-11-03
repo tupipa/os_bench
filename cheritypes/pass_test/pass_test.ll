@@ -8,7 +8,8 @@ target triple = "cheri-unknown-freebsd"
 
 @thread01 = global %struct.thread { i32 1, %struct.pcb* null }, align 8
 @pcb01 = global %struct.pcb zeroinitializer, align 2
-@.str = private unnamed_addr constant [47 x i8] c"the pcb 01 struct contains 2 thread structs: \0A\00", align 1
+@pcb03 = constant %struct.pcb <{ %struct.thread* @thread01, %struct.thread* @thread01, i32 111 }>, align 2
+@.str = private unnamed_addr constant [44 x i8] c"the pcb struct contains 2 thread structs: \0A\00", align 1
 @.str.1 = private unnamed_addr constant [27 x i8] c"the first thread struct: \0A\00", align 1
 @.str.2 = private unnamed_addr constant [21 x i8] c"\09thread addr: 0x%p \0A\00", align 1
 @.str.3 = private unnamed_addr constant [14 x i8] c"\09td_int: %d \0A\00", align 1
@@ -38,20 +39,28 @@ entry:
 declare noalias i8* @malloc(i64 zeroext) #1
 
 ; Function Attrs: noinline nounwind optnone privilege_function
-define void @use_struct() #0 {
+define void @use_struct(%struct.pcb* %pcb) #0 {
 entry:
-  %call = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([47 x i8], [47 x i8]* @.str, i64 0, i64 0))
+  %pcb.addr = alloca %struct.pcb*, align 8
+  store %struct.pcb* %pcb, %struct.pcb** %pcb.addr, align 8
+  %call = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([44 x i8], [44 x i8]* @.str, i64 0, i64 0))
   %call1 = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([27 x i8], [27 x i8]* @.str.1, i64 0, i64 0))
-  %0 = load %struct.thread*, %struct.thread** getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 0), align 2
-  %call2 = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([21 x i8], [21 x i8]* @.str.2, i64 0, i64 0), %struct.thread* %0)
-  %1 = load %struct.thread*, %struct.thread** getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 0), align 2
-  %td_int = getelementptr inbounds %struct.thread, %struct.thread* %1, i32 0, i32 0
-  %2 = load i32, i32* %td_int, align 8
-  %call3 = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([14 x i8], [14 x i8]* @.str.3, i64 0, i64 0), i32 signext %2)
-  %3 = load %struct.thread*, %struct.thread** getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 0), align 2
-  %td_pcb = getelementptr inbounds %struct.thread, %struct.thread* %3, i32 0, i32 1
-  %4 = load %struct.pcb*, %struct.pcb** %td_pcb, align 8
-  %call4 = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([18 x i8], [18 x i8]* @.str.4, i64 0, i64 0), %struct.pcb* %4)
+  %0 = load %struct.pcb*, %struct.pcb** %pcb.addr, align 8
+  %pcb_td1 = getelementptr inbounds %struct.pcb, %struct.pcb* %0, i32 0, i32 0
+  %1 = load %struct.thread*, %struct.thread** %pcb_td1, align 2
+  %call2 = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([21 x i8], [21 x i8]* @.str.2, i64 0, i64 0), %struct.thread* %1)
+  %2 = load %struct.pcb*, %struct.pcb** %pcb.addr, align 8
+  %pcb_td13 = getelementptr inbounds %struct.pcb, %struct.pcb* %2, i32 0, i32 0
+  %3 = load %struct.thread*, %struct.thread** %pcb_td13, align 2
+  %td_int = getelementptr inbounds %struct.thread, %struct.thread* %3, i32 0, i32 0
+  %4 = load i32, i32* %td_int, align 8
+  %call4 = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([14 x i8], [14 x i8]* @.str.3, i64 0, i64 0), i32 signext %4)
+  %5 = load %struct.pcb*, %struct.pcb** %pcb.addr, align 8
+  %pcb_td15 = getelementptr inbounds %struct.pcb, %struct.pcb* %5, i32 0, i32 0
+  %6 = load %struct.thread*, %struct.thread** %pcb_td15, align 2
+  %td_pcb = getelementptr inbounds %struct.thread, %struct.thread* %6, i32 0, i32 1
+  %7 = load %struct.pcb*, %struct.pcb** %td_pcb, align 8
+  %call6 = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([18 x i8], [18 x i8]* @.str.4, i64 0, i64 0), %struct.pcb* %7)
   ret void
 }
 
@@ -62,7 +71,8 @@ define signext i32 @main() #3 {
 entry:
   %call = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.5, i64 0, i64 0))
   call chericcallcce void @init_struct()
-  call void @use_struct()
+  call void @use_struct(%struct.pcb* @pcb01)
+  call void @use_struct(%struct.pcb* @pcb03)
   ret i32 0
 }
 
