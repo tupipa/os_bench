@@ -4,10 +4,10 @@ target datalayout = "E-m:e-pf200:128:128:128:64-i8:8:32-i16:16:32-i64:64-n32:64-
 target triple = "cheri-unknown-freebsd"
 
 %struct.thread = type { i32, %struct.pcb* }
-%struct.pcb = type { %struct.thread*, %struct.thread*, i32 }
+%struct.pcb = type <{ %struct.thread*, %struct.thread*, i32 }>
 
 @thread01 = global %struct.thread { i32 1, %struct.pcb* null }, align 8
-@pcb01 = global %struct.pcb zeroinitializer, align 8
+@pcb01 = global %struct.pcb zeroinitializer, align 1
 @.str = private unnamed_addr constant [47 x i8] c"the pcb 01 struct contains 2 thread structs: \0A\00", align 1
 @.str.1 = private unnamed_addr constant [27 x i8] c"the first thread struct: \0A\00", align 1
 @.str.2 = private unnamed_addr constant [21 x i8] c"\09thread addr: 0x%p \0A\00", align 1
@@ -18,17 +18,17 @@ target triple = "cheri-unknown-freebsd"
 ; Function Attrs: noinline nounwind optnone privilege_function
 define chericcallcce void @init_struct() #0 {
 entry:
-  store %struct.thread* @thread01, %struct.thread** getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 0), align 8
-  store i32 1000, i32* getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 2), align 8
+  store %struct.thread* @thread01, %struct.thread** getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 0), align 1
+  store i32 1000, i32* getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 2), align 1
   %call = call noalias i8* @malloc(i64 zeroext 16) #4
   %0 = bitcast i8* %call to %struct.thread*
-  store %struct.thread* %0, %struct.thread** getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 1), align 8
+  store %struct.thread* %0, %struct.thread** getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 1), align 1
   store i32 100, i32* getelementptr inbounds (%struct.thread, %struct.thread* @thread01, i32 0, i32 0), align 8
   store %struct.pcb* @pcb01, %struct.pcb** getelementptr inbounds (%struct.thread, %struct.thread* @thread01, i32 0, i32 1), align 8
-  %1 = load %struct.thread*, %struct.thread** getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 1), align 8
+  %1 = load %struct.thread*, %struct.thread** getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 1), align 1
   %td_int = getelementptr inbounds %struct.thread, %struct.thread* %1, i32 0, i32 0
   store i32 200, i32* %td_int, align 8
-  %2 = load %struct.thread*, %struct.thread** getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 1), align 8
+  %2 = load %struct.thread*, %struct.thread** getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 1), align 1
   %td_pcb = getelementptr inbounds %struct.thread, %struct.thread* %2, i32 0, i32 1
   store %struct.pcb* @pcb01, %struct.pcb** %td_pcb, align 8
   ret void
@@ -42,13 +42,13 @@ define void @use_struct() #0 {
 entry:
   %call = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([47 x i8], [47 x i8]* @.str, i64 0, i64 0))
   %call1 = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([27 x i8], [27 x i8]* @.str.1, i64 0, i64 0))
-  %0 = load %struct.thread*, %struct.thread** getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 0), align 8
+  %0 = load %struct.thread*, %struct.thread** getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 0), align 1
   %call2 = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([21 x i8], [21 x i8]* @.str.2, i64 0, i64 0), %struct.thread* %0)
-  %1 = load %struct.thread*, %struct.thread** getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 0), align 8
+  %1 = load %struct.thread*, %struct.thread** getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 0), align 1
   %td_int = getelementptr inbounds %struct.thread, %struct.thread* %1, i32 0, i32 0
   %2 = load i32, i32* %td_int, align 8
   %call3 = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([14 x i8], [14 x i8]* @.str.3, i64 0, i64 0), i32 signext %2)
-  %3 = load %struct.thread*, %struct.thread** getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 0), align 8
+  %3 = load %struct.thread*, %struct.thread** getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 0), align 1
   %td_pcb = getelementptr inbounds %struct.thread, %struct.thread* %3, i32 0, i32 1
   %4 = load %struct.pcb*, %struct.pcb** %td_pcb, align 8
   %call4 = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([18 x i8], [18 x i8]* @.str.4, i64 0, i64 0), %struct.pcb* %4)

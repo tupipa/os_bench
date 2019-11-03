@@ -29,7 +29,7 @@ struct thread {
     struct pcb *td_pcb;
 };
 
-struct pcb {
+struct __attribute__((packed)) pcb {
     struct thread *pcb_td1;
     struct thread *pcb_td2;
     int pcb_int;
