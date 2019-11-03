@@ -14,6 +14,12 @@
 #include <unistd.h>
 #include <string.h>
 
+#define PRIV_LEVEL(n) __attribute__((privilege_level(n)))
+#define PRIV_FUNC __attribute__((privilege_function))
+#define PRIV_DATA __attribute__((privilege_data))
+//#define PRIV PRIV_LEVEL(0)
+#define PRIV PRIV_FUNC
+#define CHERI_CALLEE __attribute__((cheri_ccallee))
 
 typedef struct pcb pcb_t;
 typedef struct thread thread_t;
@@ -29,12 +35,12 @@ struct pcb {
     int pcb_int;
 };
 
-thread_t thread01 = {01, 0 };
+__attribute__((privilege_level(0))) thread_t thread01 = {01, 0 };
 
-pcb_t pcb01 = {0,0,0};
+PRIV_DATA pcb_t pcb01 = {0,0,0};
 
 
-__attribute__((noinline)) void init_struct(){
+PRIV CHERI_CALLEE void init_struct(){
 
     pcb01.pcb_td1 = &thread01;
 
@@ -50,7 +56,7 @@ __attribute__((noinline)) void init_struct(){
 
 }
 
-void use_struct(){
+PRIV_FUNC void use_struct(){
 
 
     printf("the pcb 01 struct contains 2 thread structs: \n");

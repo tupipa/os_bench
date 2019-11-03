@@ -15,12 +15,12 @@ target triple = "cheri-unknown-freebsd"
 @.str.4 = private unnamed_addr constant [18 x i8] c"\09pcb addr: 0x%p \0A\00", align 1
 @.str.5 = private unnamed_addr constant [17 x i8] c"hello pass_test\0A\00", align 1
 
-; Function Attrs: noinline nounwind optnone
-define void @init_struct() #0 {
+; Function Attrs: noinline nounwind optnone privilege_function
+define chericcallcce void @init_struct() #0 {
 entry:
   store %struct.thread* @thread01, %struct.thread** getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 0), align 8
   store i32 1000, i32* getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 2), align 8
-  %call = call noalias i8* @malloc(i64 zeroext 16) #3
+  %call = call noalias i8* @malloc(i64 zeroext 16) #4
   %0 = bitcast i8* %call to %struct.thread*
   store %struct.thread* %0, %struct.thread** getelementptr inbounds (%struct.pcb, %struct.pcb* @pcb01, i32 0, i32 1), align 8
   store i32 100, i32* getelementptr inbounds (%struct.thread, %struct.thread* @thread01, i32 0, i32 0), align 8
@@ -37,7 +37,7 @@ entry:
 ; Function Attrs: allocsize(0)
 declare noalias i8* @malloc(i64 zeroext) #1
 
-; Function Attrs: noinline nounwind optnone
+; Function Attrs: noinline nounwind optnone privilege_function
 define void @use_struct() #0 {
 entry:
   %call = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([47 x i8], [47 x i8]* @.str, i64 0, i64 0))
@@ -58,22 +58,23 @@ entry:
 declare signext i32 @printf(i8*, ...) #2
 
 ; Function Attrs: noinline nounwind optnone
-define signext i32 @main() #0 {
+define signext i32 @main() #3 {
 entry:
   %call = call signext i32 (i8*, ...) @printf(i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.5, i64 0, i64 0))
-  call void @init_struct()
+  call chericcallcce void @init_struct()
   call void @use_struct()
   ret i32 0
 }
 
-attributes #0 = { noinline nounwind optnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="cheri128" "target-features"="+cheri128,+chericap,+soft-float,-noabicalls" "unsafe-fp-math"="false" "use-soft-float"="true" }
+attributes #0 = { noinline nounwind optnone privilege_function "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="cheri128" "target-features"="+cheri128,+chericap,+soft-float,-noabicalls" "unsafe-fp-math"="false" "use-soft-float"="true" }
 attributes #1 = { allocsize(0) "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="cheri128" "target-features"="+cheri128,+chericap,+soft-float,-noabicalls" "unsafe-fp-math"="false" "use-soft-float"="true" }
 attributes #2 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="cheri128" "target-features"="+cheri128,+chericap,+soft-float,-noabicalls" "unsafe-fp-math"="false" "use-soft-float"="true" }
-attributes #3 = { allocsize(0) }
+attributes #3 = { noinline nounwind optnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="cheri128" "target-features"="+cheri128,+chericap,+soft-float,-noabicalls" "unsafe-fp-math"="false" "use-soft-float"="true" }
+attributes #4 = { allocsize(0) }
 
 !llvm.module.flags = !{!0, !1}
 !llvm.ident = !{!2}
 
 !0 = !{i32 1, !"wchar_size", i32 4}
 !1 = !{i32 7, !"PIC Level", i32 1}
-!2 = !{!"clang version 10.0.0 (git@github.com:tupipa/llvm-project.git 2d43bf4e37c38d2c153151a37cc67190e8c18631)"}
+!2 = !{!"clang version 10.0.0 (git@github.com:tupipa/llvm-project.git 949685b0bf9c1536e5038d8ca1fc0a4e56efe342)"}

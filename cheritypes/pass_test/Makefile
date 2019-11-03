@@ -68,9 +68,10 @@ opt: compile-hyb
 compile-pure: $(SRC) asm-pure
 	$(CLANG) -v $(OPTS_PURE) $(SRC) -o $(TARGET_BIN).exe
 
-compile-hyb: $(SRC) asm-hyb
+#compile-hyb: $(SRC) asm-hyb
+compile-hyb: $(SRC)
 	$(CLANG) -v $(OPTS_HYB) $(SRC) -S -emit-llvm
-	$(CLANG) -v $(OPTS_HYB) $(SRC) -o $(TARGET_BIN).exe
+#	$(CLANG) -v $(OPTS_HYB) $(SRC) -o $(TARGET_BIN).exe
 
 
 asm-pure:
