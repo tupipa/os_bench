@@ -17,7 +17,7 @@ CHERIBSD_HYB_ROOT128 = $(CHERI_OUTPUT)/rootfs128
 CLANG = $(SDK_DIR)/bin/clang
 CXX = $(SDK_DIR)/bin/clang++
 OBJDUMP = $(SDK_DIR)/bin/cheri-unknown-freebsd-objdump
-OPT = $(SDK_DIR)/bin/opt
+LLVM_OPT = $(SDK_DIR)/bin/opt
 
 SYSROOT_PURE = $(CHERIBSD_PURE_ROOT128)
 SYSROOT_HYB = $(CHERIBSD_HYB_ROOT128)
@@ -34,7 +34,7 @@ OPT_TOOLCHAIN = -B$(SDK_DIR)
 
 OPT_LIBS = -lcheri
 
-OPTS = $(OPT_TOOLCHAIN) $(OPT_TARGET) 
+OPTS = -g $(OPT_TOOLCHAIN) $(OPT_TARGET) 
 OPTS += $(OPT_INC)
 OPTS += $(OPT_LIBS)
 OPTS += -Xclang -load -Xclang $(PASS_LIB_SO)
@@ -63,7 +63,7 @@ hyb: compile-hyb disas-hyb send-hyb
 
 
 opt: compile-hyb
-	$(OPT) -load $(PASS_LIB_SO) -$(PASS_NAME) < $(TARGET_BIN).ll > $(TARGET_BIN)-out.bc
+	$(LLVM_OPT) -load $(PASS_LIB_SO) -$(PASS_NAME) < $(TARGET_BIN).ll > $(TARGET_BIN)-out.bc
 
 compile-pure: $(SRC) asm-pure
 	$(CLANG) -v $(OPTS_PURE) $(SRC) -o $(TARGET_BIN).exe
@@ -71,7 +71,7 @@ compile-pure: $(SRC) asm-pure
 #compile-hyb: $(SRC) asm-hyb
 compile-hyb: $(SRC)
 	$(CLANG) -v $(OPTS_HYB) $(SRC) -S -emit-llvm
-#	$(CLANG) -v $(OPTS_HYB) $(SRC) -o $(TARGET_BIN).exe
+	$(CLANG) -v $(OPTS_HYB) $(SRC) -o $(TARGET_BIN).exe
 
 
 asm-pure:
