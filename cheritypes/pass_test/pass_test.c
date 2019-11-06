@@ -36,7 +36,7 @@
 typedef struct pcb pcb_t;
 typedef struct thread thread_t;
 
-struct thread {
+struct PRIV_DATA thread {
     int td_int; 
     struct pcb *td_pcb;
 };
@@ -44,26 +44,31 @@ struct thread {
 struct __attribute__((packed)) pcb {
     struct thread *pcb_td1;
     struct thread *pcb_td2;
+    struct thread *pcb_td3;
     int pcb_int;
 } __attribute__((aligned(2)));
 
-__attribute__((privilege_level(0))) thread_t thread01 = {01, 0 };
+__attribute__((privilege_level(0))) thread_t thread_global01 = {01, 0 };
 
-PRIV_DATA pcb_t pcb01 = {0,0,0};
+PRIV_DATA pcb_t pcb_global01 = {0,0,0};
 
-const pcb_t pcb03 = {&thread01,&thread01,111};
+const pcb_t pcb_global02 = {&thread_global01,&thread_global01,&thread_global01,111};
 
+static PRIV_LEVEL(0) pcb_t pcb_global03_static = {0,0,0};
 
 PRIV_FUNC CHERI_CALLEE void init_struct(PRIV_DATA pcb_t *pcb){
 
-    pcb->pcb_td1 = &thread01;
+    static PRIV_DATA thread_t thread_local_static = {02, 0};
+
+    pcb->pcb_td1 = &thread_global01;
+    pcb->pcb_td3 = &thread_local_static;
 
     pcb->pcb_int = 1000;
 
     pcb->pcb_td2 = (thread_t *) malloc(sizeof(thread_t));
 
-    thread01.td_int = 100;
-    thread01.td_pcb = pcb;
+    thread_global01.td_int = 100;
+    thread_global01.td_pcb = pcb;
 
     pcb->pcb_td2->td_int = 200;
     pcb->pcb_td2->td_pcb = pcb;
@@ -82,16 +87,17 @@ void use_struct ( const pcb_t * pcb ) {
 
 int main(void){
 
-    PRIV_DATA pcb_t pcb00;
+    PRIV_DATA pcb_t pcb_local;
 
-    init_struct(&pcb00);
+    init_struct(&pcb_local);
 
     printf("hello pass_test\n");
 
-    init_struct(&pcb01);
+    init_struct(&pcb_global01);
+    init_struct(&pcb_global03_static);
 
-    use_struct(&pcb01);
-    use_struct(&pcb03);
+    use_struct(&pcb_global01);
+    use_struct(&pcb_global02);
 
 }
 
