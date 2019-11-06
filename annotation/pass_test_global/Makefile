@@ -1,4 +1,4 @@
-TARGET_BIN = pass_test
+TARGET_BIN = pass_test_global
 PASS_NAME = privilegeDataTrack2
 
 CHERI_OUTPUT = /root/cheri/output

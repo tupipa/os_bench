@@ -1,5 +1,5 @@
-; ModuleID = 'pass_test.c'
-source_filename = "pass_test.c"
+; ModuleID = 'pass_test_global.c'
+source_filename = "pass_test_global.c"
 target datalayout = "E-m:e-pf200:128:128:128:64-i8:8:32-i16:16:32-i64:64-n32:64-S128"
 target triple = "cheri-unknown-freebsd"
 
@@ -119,8 +119,8 @@ attributes #7 = { allocsize(0) }
 
 !0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
 !1 = distinct !DIGlobalVariable(name: "thread_global01", scope: !2, file: !3, line: 51, type: !7, isLocal: false, isDefinition: true)
-!2 = distinct !DICompileUnit(language: DW_LANG_C99, file: !3, producer: "clang version 10.0.0 (git@github.com:tupipa/llvm-project.git 9961f53ccedd77dd4bbf14a1d64f94f9458d5415)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, enums: !4, retainedTypes: !5, globals: !21, nameTableKind: None)
-!3 = !DIFile(filename: "pass_test.c", directory: "/root/cheri/os_bench/cheritypes/pass_test")
+!2 = distinct !DICompileUnit(language: DW_LANG_C99, file: !3, producer: "clang version 10.0.0 (git@github.com:tupipa/llvm-project.git 9e31d0f74fc4044bda230398bb7252abf2b4cd24)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, enums: !4, retainedTypes: !5, globals: !21, nameTableKind: None)
+!3 = !DIFile(filename: "pass_test_global.c", directory: "/root/cheri/os_bench/annotation/pass_test_global")
 !4 = !{}
 !5 = !{!6}
 !6 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !7, size: 64)
@@ -157,7 +157,7 @@ attributes #7 = { allocsize(0) }
 !37 = !{i32 2, !"Debug Info Version", i32 3}
 !38 = !{i32 1, !"wchar_size", i32 4}
 !39 = !{i32 7, !"PIC Level", i32 1}
-!40 = !{!"clang version 10.0.0 (git@github.com:tupipa/llvm-project.git 9961f53ccedd77dd4bbf14a1d64f94f9458d5415)"}
+!40 = !{!"clang version 10.0.0 (git@github.com:tupipa/llvm-project.git 9e31d0f74fc4044bda230398bb7252abf2b4cd24)"}
 !41 = !DILocalVariable(name: "pcb", arg: 1, scope: !30, file: !3, line: 59, type: !33)
 !42 = !DILocation(line: 59, column: 58, scope: !30)
 !43 = !DILocation(line: 63, column: 5, scope: !30)
