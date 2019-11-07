@@ -20,6 +20,7 @@
 #define PRIV_LEVEL(n) __attribute__((privilege_level(n)))
 #define PRIV_FUNC __attribute__((privilege_function))
 #define PRIV_DATA __attribute__((privilege_data))
+#define PRIV_DATA_ANT __attribute__((annotate("priv_data")))
 //#define PRIV PRIV_LEVEL(0)
 #define PRIV PRIV_FUNC
 #define CHERI_CALLEE __attribute__((cheri_ccallee))
@@ -28,6 +29,7 @@
 #define PRIV_LEVEL(n)
 #define PRIV_FUNC
 #define PRIV_DATA
+#define PRIV_DATA_ANT
 #define PRIV PRIV_FUNC
 #define CHERI_CALLEE
 
@@ -75,7 +77,7 @@ void init_struct(PRIV_DATA pcb_t *pcb){
 
 }
 
-void use_struct ( const pcb_t * pcb ) {
+void use_struct ( PRIV_DATA_ANT const pcb_t * pcb ) {
 
     printf("the pcb struct contains 2 thread structs: \n");
     printf("the first thread struct: \n");
