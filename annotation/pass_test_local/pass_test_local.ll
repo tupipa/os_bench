@@ -117,7 +117,7 @@ attributes #5 = { allocsize(0) }
 
 !0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
 !1 = distinct !DIGlobalVariable(name: "thread_global01", scope: !2, file: !3, line: 48, type: !7, isLocal: false, isDefinition: true)
-!2 = distinct !DICompileUnit(language: DW_LANG_C99, file: !3, producer: "clang version 10.0.0 (git@github.com:tupipa/llvm-project.git 3602e0c04c1d36addf79ef218f1ecb5d4bc93fea)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, enums: !4, retainedTypes: !5, globals: !21, nameTableKind: None)
+!2 = distinct !DICompileUnit(language: DW_LANG_C99, file: !3, producer: "clang version 10.0.0 (git@github.com:tupipa/llvm-project.git e5f226ce7037a0f8477ae024f7f594c0157d8175)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, enums: !4, retainedTypes: !5, globals: !21, nameTableKind: None)
 !3 = !DIFile(filename: "pass_test_local.c", directory: "/root/cheri/os_bench/annotation/pass_test_local")
 !4 = !{}
 !5 = !{!6}
@@ -155,7 +155,7 @@ attributes #5 = { allocsize(0) }
 !37 = !{i32 2, !"Debug Info Version", i32 3}
 !38 = !{i32 1, !"wchar_size", i32 4}
 !39 = !{i32 7, !"PIC Level", i32 1}
-!40 = !{!"clang version 10.0.0 (git@github.com:tupipa/llvm-project.git 3602e0c04c1d36addf79ef218f1ecb5d4bc93fea)"}
+!40 = !{!"clang version 10.0.0 (git@github.com:tupipa/llvm-project.git e5f226ce7037a0f8477ae024f7f594c0157d8175)"}
 !41 = !DILocalVariable(name: "pcb", arg: 1, scope: !30, file: !3, line: 57, type: !33)
 !42 = !DILocation(line: 57, column: 25, scope: !30)
 !43 = !DILocation(line: 62, column: 5, scope: !30)
