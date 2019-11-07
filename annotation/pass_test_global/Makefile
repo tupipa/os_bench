@@ -98,7 +98,8 @@ run:
 	#ssh $(SSH_SERVER) -p $(SSH_PORT_PURE) /root/$(TARGET_BIN).exe
 
 clean:
-	rm *.exe *.asm *.disas
+	rm -f *.exe *.asm *.disas *.bc *.ll
+
 
 
 
