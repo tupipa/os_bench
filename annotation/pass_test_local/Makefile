@@ -50,6 +50,7 @@ OPTS_HYB = $(OPT_SYSROOT_HYB) $(OPTS)
 
 #SRC = util.c sandboxes.S $(TARGET_BIN).c
 SRC = $(TARGET_BIN).c
+SRC_LL = $(TARGET_BIN).ll
 
 SSH_PORT_PURE ?= 8023
 SSH_PORT_HYB ?= 8022
@@ -72,6 +73,7 @@ compile-pure: $(SRC) asm-pure
 compile-hyb: $(SRC)
 	$(CLANG) -v $(OPTS_HYB) $(SRC) -S -emit-llvm
 	$(CLANG) -v $(OPTS_HYB) $(SRC) -o $(TARGET_BIN).exe
+	$(CLANG) -v $(OPTS_HYB) $(SRC_LL) -o $(TARGET_BIN).ll.exe
 
 
 asm-pure:

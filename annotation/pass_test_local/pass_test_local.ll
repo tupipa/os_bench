@@ -9,7 +9,7 @@ target triple = "cheri-unknown-freebsd"
 @thread_global01 = global %struct.thread { i32 1, %struct.pcb* null }, align 8, !dbg !0
 @pcb_global01 = global %struct.pcb zeroinitializer, align 8, !dbg !22
 @pcb_global02 = constant %struct.pcb { %struct.thread* @thread_global01, %struct.thread* @thread_global01, %struct.thread* @thread_global01, i32 111 }, align 8, !dbg !25
-@init_struct.thread_local_static = internal global %struct.thread { i32 2, %struct.pcb* null }, align 8, !dbg !28
+@init_struct.thread_local_static = internal global %struct.thread { i32 2, %struct.pcb* null }, align 8, !dbg !28 #0
 @.str = private unnamed_addr constant [44 x i8] c"the pcb struct contains 2 thread structs: \0A\00", align 1
 @.str.1 = private unnamed_addr constant [27 x i8] c"the first thread struct: \0A\00", align 1
 @.str.2 = private unnamed_addr constant [21 x i8] c"\09thread addr: 0x%p \0A\00", align 1
@@ -19,7 +19,7 @@ target triple = "cheri-unknown-freebsd"
 @pcb_global03_static = internal global %struct.pcb zeroinitializer, align 8, !dbg !34
 
 ; Function Attrs: noinline nounwind optnone
-define void @init_struct(%struct.pcb* %pcb) #0 !dbg !30 {
+define void @init_struct(%struct.pcb* %pcb) #1 !dbg !30 {
 entry:
   %pcb.addr = alloca %struct.pcb*, align 8
   store %struct.pcb* %pcb, %struct.pcb** %pcb.addr, align 8
@@ -33,7 +33,7 @@ entry:
   %2 = load %struct.pcb*, %struct.pcb** %pcb.addr, align 8, !dbg !49
   %pcb_int = getelementptr inbounds %struct.pcb, %struct.pcb* %2, i32 0, i32 3, !dbg !50
   store i32 1000, i32* %pcb_int, align 8, !dbg !51
-  %call = call noalias i8* @malloc(i64 zeroext 16) #4, !dbg !52
+  %call = call noalias i8* @malloc(i64 zeroext 16) #5, !dbg !52
   %3 = bitcast i8* %call to %struct.thread*, !dbg !53
   %4 = load %struct.pcb*, %struct.pcb** %pcb.addr, align 8, !dbg !54
   %pcb_td2 = getelementptr inbounds %struct.pcb, %struct.pcb* %4, i32 0, i32 1, !dbg !55
@@ -56,13 +56,13 @@ entry:
 }
 
 ; Function Attrs: nounwind readnone speculatable willreturn
-declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
+declare void @llvm.dbg.declare(metadata, metadata, metadata) #2
 
 ; Function Attrs: allocsize(0)
-declare noalias i8* @malloc(i64 zeroext) #2
+declare noalias i8* @malloc(i64 zeroext) #3
 
 ; Function Attrs: noinline nounwind optnone
-define void @use_struct(%struct.pcb* %pcb) #0 !dbg !70 {
+define void @use_struct(%struct.pcb* %pcb) #1 !dbg !70 {
 entry:
   %pcb.addr = alloca %struct.pcb*, align 8
   store %struct.pcb* %pcb, %struct.pcb** %pcb.addr, align 8
@@ -88,10 +88,10 @@ entry:
   ret void, !dbg !89
 }
 
-declare signext i32 @printf(i8*, ...) #3
+declare signext i32 @printf(i8*, ...) #4
 
 ; Function Attrs: noinline nounwind optnone
-define signext i32 @main() #0 !dbg !90 {
+define signext i32 @main() #1 !dbg !90 {
 entry:
   %pcb_local = alloca %struct.pcb, align 8
   call void @llvm.dbg.declare(metadata %struct.pcb* %pcb_local, metadata !93, metadata !DIExpression()), !dbg !94
@@ -104,11 +104,12 @@ entry:
   ret i32 0, !dbg !101
 }
 
-attributes #0 = { noinline nounwind optnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="cheri128" "target-features"="+cheri128,+chericap,+soft-float,-noabicalls" "unsafe-fp-math"="false" "use-soft-float"="true" }
-attributes #1 = { nounwind readnone speculatable willreturn }
-attributes #2 = { allocsize(0) "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="cheri128" "target-features"="+cheri128,+chericap,+soft-float,-noabicalls" "unsafe-fp-math"="false" "use-soft-float"="true" }
-attributes #3 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="cheri128" "target-features"="+cheri128,+chericap,+soft-float,-noabicalls" "unsafe-fp-math"="false" "use-soft-float"="true" }
-attributes #4 = { allocsize(0) }
+attributes #0 = { privilege_data }
+attributes #1 = { noinline nounwind optnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="cheri128" "target-features"="+cheri128,+chericap,+soft-float,-noabicalls" "unsafe-fp-math"="false" "use-soft-float"="true" }
+attributes #2 = { nounwind readnone speculatable willreturn }
+attributes #3 = { allocsize(0) "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="cheri128" "target-features"="+cheri128,+chericap,+soft-float,-noabicalls" "unsafe-fp-math"="false" "use-soft-float"="true" }
+attributes #4 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="cheri128" "target-features"="+cheri128,+chericap,+soft-float,-noabicalls" "unsafe-fp-math"="false" "use-soft-float"="true" }
+attributes #5 = { allocsize(0) }
 
 !llvm.dbg.cu = !{!2}
 !llvm.module.flags = !{!36, !37, !38, !39}
@@ -116,7 +117,7 @@ attributes #4 = { allocsize(0) }
 
 !0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
 !1 = distinct !DIGlobalVariable(name: "thread_global01", scope: !2, file: !3, line: 48, type: !7, isLocal: false, isDefinition: true)
-!2 = distinct !DICompileUnit(language: DW_LANG_C99, file: !3, producer: "clang version 10.0.0 (git@github.com:tupipa/llvm-project.git 9e31d0f74fc4044bda230398bb7252abf2b4cd24)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, enums: !4, retainedTypes: !5, globals: !21, nameTableKind: None)
+!2 = distinct !DICompileUnit(language: DW_LANG_C99, file: !3, producer: "clang version 10.0.0 (git@github.com:tupipa/llvm-project.git 3602e0c04c1d36addf79ef218f1ecb5d4bc93fea)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, enums: !4, retainedTypes: !5, globals: !21, nameTableKind: None)
 !3 = !DIFile(filename: "pass_test_local.c", directory: "/root/cheri/os_bench/annotation/pass_test_local")
 !4 = !{}
 !5 = !{!6}
@@ -154,7 +155,7 @@ attributes #4 = { allocsize(0) }
 !37 = !{i32 2, !"Debug Info Version", i32 3}
 !38 = !{i32 1, !"wchar_size", i32 4}
 !39 = !{i32 7, !"PIC Level", i32 1}
-!40 = !{!"clang version 10.0.0 (git@github.com:tupipa/llvm-project.git 9e31d0f74fc4044bda230398bb7252abf2b4cd24)"}
+!40 = !{!"clang version 10.0.0 (git@github.com:tupipa/llvm-project.git 3602e0c04c1d36addf79ef218f1ecb5d4bc93fea)"}
 !41 = !DILocalVariable(name: "pcb", arg: 1, scope: !30, file: !3, line: 57, type: !33)
 !42 = !DILocation(line: 57, column: 25, scope: !30)
 !43 = !DILocation(line: 62, column: 5, scope: !30)
