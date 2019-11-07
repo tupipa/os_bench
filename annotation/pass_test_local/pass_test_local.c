@@ -56,8 +56,8 @@ static pcb_t pcb_global03_static = {0,0,0};
 //void init_struct(PRIV_DATA pcb_t *pcb){
 void init_struct(pcb_t *pcb){
 
-    //static PRIV_DATA thread_t thread_local_static = {02, 0};
-    static thread_t thread_local_static = {02, 0};
+    static PRIV_DATA thread_t thread_local_static = {02, 0};
+    //static thread_t thread_local_static = {02, 0};
 
     pcb->pcb_td1 = &thread_global01;
     pcb->pcb_td3 = &thread_local_static;
